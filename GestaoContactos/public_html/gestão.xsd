@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://xml.netbeans.org/schema/TP.AvC" targetNamespace="http://xml.netbeans.org/schema/TP.AvC" elementFormDefault="qualified">
+    <xsd:element name="Contacts">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="Contact" type="tns:ContactType" maxOccurs="unbounded"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:simpleType name="TelephoneType">
+    <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="P">
+            <xsd:annotation>
+                <xsd:documentation>Personal</xsd:documentation>
+            </xsd:annotation>
+        </xsd:enumeration>
+        <xsd:enumeration value="W">
+            <xsd:annotation>
+                <xsd:documentation>Work</xsd:documentation>
+            </xsd:annotation>
+        </xsd:enumeration>
+        <xsd:enumeration value="O">
+            <xsd:annotation>
+                <xsd:documentation>Other</xsd:documentation>
+            </xsd:annotation>
+        </xsd:enumeration>
+    </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="ContactGroupType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="FR">
+               <xsd:annotation>
+                    <xsd:documentation>Friend</xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
+            <xsd:enumeration value="T">
+                <xsd:annotation>
+                  <xsd:documentation>Work</xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
+            <xsd:enumeration value="FA">
+               <xsd:annotation>
+                   <xsd:documentation>Family</xsd:documentation>
+               </xsd:annotation>
+            </xsd:enumeration>
+            <xsd:enumeration value="O">
+                <xsd:annotation>
+                    <xsd:documentation>Other</xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="SocialNetworkType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="F">
+                <xsd:annotation>
+                    <xsd:documentation>Facebook</xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
+            <xsd:enumeration value="G">
+                <xsd:annotation>
+                        <xsd:documentation>Google+</xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
+            <xsd:enumeration value="L">
+                <xsd:annotation>
+                    <xsd:documentation>LinkedIn</xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
+            <xsd:enumeration value="I">
+                <xsd:annotation>
+                    <xsd:documentation>Instagram</xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
+            <xsd:enumeration value="O">
+                <xsd:annotation>
+                    <xsd:documentation>Other</xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:complexType name="ContactType">
+        <xsd:sequence>
+            <xsd:element name="Name" type="xsd:string"/>
+            <xsd:element name="Email" type="xsd:string"/>
+            <xsd:element name="Telephone" maxOccurs="5">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="Country" type="xsd:string"/>
+                            <xsd:element name="PhoneNumber" type="xsd:string"/>
+                        </xsd:sequence>
+                    <xsd:attribute name="Type" type="tns:TelephoneType"/>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="BirthDate" type="xsd:date"/>
+            <xsd:element name="SocialNetwork" minOccurs="0" maxOccurs="unbounded">
+                <xsd:complexType>
+                    <xsd:simpleContent>
+                        <xsd:extension base="xsd:anyURI">
+                            <xsd:attribute name="Type" type="tns:SocialNetworkType" use="required"/>
+                        </xsd:extension>
+                    </xsd:simpleContent>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="Obs" type="xsd:string" minOccurs="0"/>
+        </xsd:sequence>
+        <xsd:attribute name="Group" type="tns:ContactGroupType"/>
+        <xsd:attribute name="IsFavorite" type="xsd:boolean"/>
+    </xsd:complexType>
+</xsd:schema>

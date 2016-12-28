@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Adicionar Contacto</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="JS/Adicionar.js" type="text/javascript"></script>
+        <link href="styles/Adicionar.css" rel="stylesheet" type="text/css" id="link"/>
+    </head>
+    <body>
+        <h1>A minha Agenda</h1>
+        <h2>Adicionar Contactos</h2>
+        <p>
+            <label for="Nome">Nome: </label><input type="text" name="Nome" required="required" id="Nome"><span id = "UserError" class="inputMessageErrorHidden">Nome inválido</span>
+        </p>
+        <p>
+            <label for="Email">Email: </label><input id="Email" type="email" name="Email" placeholder="exemplo@exemplo.com"><span id = "PassError" class="inputMessageErrorHidden">Email inválido</span>
+        </p>
+        <p>Telefone: </p>
+        <div>
+            <p>
+        <label for="Pais">Pais: </label>
+            <select name="Pais" id="Pais">
+                <option value="+351">Portugal (+351)</option>
+                <option value="+34">Espanha (+34)</option>
+                <option value="+55">Brasil (+55)</option>
+                <option value="+33">França (+33)</option>
+                <option value="+41">Suiça (+41)</option>
+                <option value="+49">Alemanha (+49)</option>
+                <option value="+44">Inglaterra (+44)</option>
+                <option value="+1">Estados Unidos (+1)</option>
+                <option value="+31">Holanda (+31)</option>
+                <option value="+244">Angola (+244)</option>
+            </select>
+        </p>
+        <p>
+            <label for="Numero">Número: </label><input id="Numero" type="tel" name="Numero" placeholder="91X XXX XXX">
+        </p>
+        <p>
+            <label for="Tipo">Tipo: </label>
+                <select name="Tipo" id="Tipo">
+                   <option value="Pessoal">Pessoal</option>
+                   <option value="Trabalho">Trabalho</option>
+                   <option value="Outro">Outro</option>
+                </select>
+        </p>
+        </div>
+        <form>Birthday: <input type="date" name="bday" id="DOB"></form>
+        <p>Redes Sociais: </p>
+        <div>
+            <p>
+                <label for="Facebook">Facebook: </label><input id="Facebook" type="text" name="Facebook" placeholder="facebook.com/exemplo">
+            </p>
+            <p>
+                <label for="Google">Google+: </label><input id="Google" type="text" name="Google" placeholder="plus.google.com/XXXXX">
+            </p>
+            <p>
+                <label for="LinkedIn">LinkedIn: </label><input id="LinkedIn" type="text" name="LinkedIn" placeholder="linkedin.com/exemplo">
+            </p>
+            <p>
+                <label for="Instagram">Instagram: </label><input id="Instagram" type="text" name="Instagram" placeholder="instagram.com/exemplo">
+            </p>
+            <p>
+                <label for="Outro">Outro: </label><input id="Outro" type="text" name="Outro">
+            </p>
+        </div>
+        <p>
+            <label for="Obs">Observações: </label><input id="Obs" type="text" name="Obs">
+        </p>
+        <form>
+            <input type="checkbox" name="Amigos" value="Amigos" id="Amigos">Amigos<br>
+        </form>
+        <form>
+            <input type="checkbox" name="Trabalho" value="Trabalho" id="Trabalho">Trabalho<br>
+        </form>
+        <form>
+            <input type="checkbox" name="Familia" value="Familia" id="Familia">Familia<br>
+        </form>
+        <form>
+            <input type="checkbox" name="Outro" value="Outro" id="Outro">Outro 
+        </form>
+        <form>
+            <input type="checkbox" name="Favorito" value="Fav" id="Fav"> Adicionar aos Favoritos 
+        </form>
+              
+        
+        <button id="Enviar">Enviar</button>
+        
+        
+        <label for="cor">Cor: </label>
+            <select name="cor" id="cor">
+                <option value="cornsilk">Quase Branco</option>
+                <option value="bisque">Cor creme mas não</option>
+                <option value="burlywood">Bronzeado</option>
+                <option value="peachpuff">Cor de Rosinha</option>
+            </select>
+        <div id="Erro"></div>
+    </body>
+</html>
+
+
+<!--action="demo_form.asp0"-->

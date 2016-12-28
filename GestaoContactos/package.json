@@ -1,0 +1,8 @@
+{
+    "name": "Gest_o_de_Contactos",
+    "version": "1.0.0",
+    "keywords": ["util", "functional", "server", "client", "browser"],
+    "author": "tania",
+    "contributors": [],
+    "dependencies": {}
+}
