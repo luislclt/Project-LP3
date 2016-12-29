@@ -6,11 +6,27 @@ and open the template in the editor.
 -->
 <html>
     <head>
-        <title>TODO supply a title</title>
+        <title>Listar Favoritos</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="JS/ListarFavoritos.js" type="text/javascript"></script>
+        <link href="styles/ListarFavoritos.css" rel="stylesheet" type="text/css" id="link"/>
     </head>
     <body>
-        <div>TODO write content</div>
+        <h1>A minha Agenda</h1>
+        <h2>Listar Favoritos</h2>
+        <div id="VoltarB"></div>
+        <div id="Contactos">
+            <article></article>
+        </div>
+        <label for="cor">Cor: </label>
+            <select name="cor" id="cor">
+                <option id ="cornsilk" value="cornsilk">Quase Branco</option>
+                <option id ="bisque" value="bisque">Cor creme mas não</option>
+                <option id ="burlywood" value="burlywood">Bronzeado</option>
+                <option id ="peachpuff" value="peachpuff">Cor de Rosinha</option>
+            </select>
+        <button id="Voltar">Voltar</button>
+        <div id="Erro"></div>
     </body>
 </html>

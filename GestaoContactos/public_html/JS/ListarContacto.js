@@ -6,6 +6,7 @@
 
 var Contactos = [];
 
+
 function alterar(){
     var cor = document.getElementById('cor');
     var link = document.getElementById('link');
@@ -104,7 +105,9 @@ function ListarContacto (pos) {
         if (Contactos[pos].Trabalho == "sim") var Trabalhot=document.createTextNode("Trabalho"); else var Trabalhot=document.createTextNode("");
         if (Contactos[pos].Familia == "sim") var Familiat=document.createTextNode("Familia"); else var Familiat=document.createTextNode("");
         if (Contactos[pos].OutroGrupo == "sim") var OutroGrupot=document.createTextNode("Outro"); else var OutroGrupot=document.createTextNode("");
-        if (Contactos[pos].Fav == "sim") var Favt=document.createTextNode("Favorito"); else var Favt=document.createTextNode("");
+        if (Contactos[pos].Fav == "sim"){
+            var Favt=document.createTextNode("Favorito");
+        }else var Favt=document.createTextNode("");
         
          alert("Depois Grupos: --");
         
