@@ -34,6 +34,7 @@ function alterar(){
     guardarLocalStorage();
 }
 
+
 function CorFundo(){
     var cor = document.getElementById('cor');
     var link = document.getElementById('link');
@@ -58,11 +59,13 @@ function CorFundo(){
     }
 }
 
+
 function guardarLocalStorage(){
     var s = JSON.stringify(Contactos);
     localStorage.setItem('contacto', s);              //guardar os albuns
     localStorage.setItem('fundo',fundo);
 }
+
 
 function ListarContacto (pos) {
     alert(Contactos[pos].nome);
@@ -81,6 +84,7 @@ function ListarContacto (pos) {
     alert(Contactos[pos].Fav);
 }
 
+
 function isFavorito () {
     var i;
     var checkedValue = null; 
@@ -90,28 +94,22 @@ function isFavorito () {
       }
 }
 
+
 function AdicionarContacto() {
-        
-        alert("3");
         var nome = document.getElementById('Nome');
         var telefone = document.getElementById('Numero');
         var aux=0;
         for (var i=0; i<Contactos.length; i++){
-            alert("4");
             if (telefone.value === Contactos[i].numero){
-                alert("5");
                 alert("Número já existe!");
                 aux=1;
             }
             if (nome.value === Contactos[i].nome){
-                alert("6");
                 alert("Nome já existe!");
                 aux=1;
             }
         }
-        alert("6");
-        if (aux == 0){  
-            alert("7");
+        if (aux == 0){
             var email = document.getElementById('Email');
             var pais = document.getElementById('Pais');
             var tipo = document.getElementById('Tipo');
@@ -124,23 +122,20 @@ function AdicionarContacto() {
             var obs = document.getElementById('Obs');
             var grupo = document.getElementById('Grupo');
             var fav = document.getElementById('Fav');
-            alert("8");
             Contactos.push({nome: nome.value, email: email.value, pais: pais.value, telefone: telefone.value, tipo: tipo.value, DOB: DOB.value, Facebook: facebook.value, Google: google.value, LinkedIn: linkedIn.value, Instagram: instagram.value, Outro: outro.value, Obs: obs.value, Grupo: Grupos[0], Fav: fav});
-            alert("9");
             ListarContacto(Contactos.length-1);
             
             guardarLocalStorage();
         }else{
-            alert("asfhlernf");
+            alert("Impossivel adicionar Contacto");
         }
 }
+
 
 function AbrirLocalStorage() {
     if (localStorage.contacto != null){
         Contactos = JSON.parse(localStorage.contacto);
-        fundo= localStorage.fundo;
-        alert("2");
-        AdicionarContacto();
+        fundo = localStorage.fundo;
     }else{
         var vazio=document.createTextNode("Impossível adicionar Contactos");
         var erro= document.getElementById("Erro");
@@ -148,6 +143,8 @@ function AbrirLocalStorage() {
         erro.appendChild(vazio);
     }
 }
+
+
 function validarCampoNumero(inputNumero){ // verifica se o Campo Nome esta vazio
     if (inputNumero.value === ""){ // Esta Vazio
         inputNumero.className = "inputError"; //Span //campo vazio -- só de inputInvalido
@@ -159,6 +156,7 @@ function validarCampoNumero(inputNumero){ // verifica se o Campo Nome esta vazio
     }
     return true; // Aceitou este Campo
 }
+
 
 function validarCampoNome(inputNome){ // verifica se o Campo Nome esta vazio
     if (inputNome.value === ""){ // Esta Vazio
@@ -195,6 +193,7 @@ function validacaoEmail(field) {
 }
 */
 
+
 function validarCampoEmail(inputEmail) {
     usuario = inputEmail.value.substring(0, inputEmail.value.indexOf("@"));
     dominio = inputEmail.value.substring(inputEmail.value.indexOf("@")+ 1, inputEmail.value.length);
@@ -217,7 +216,6 @@ function validarCampoEmail(inputEmail) {
 }
 
 
-
 function VerificaCampos(){ // verifica se os campos estao vazios
     var flag = 0;
     var inputNome = document.getElementById('Nome'); // recebe o parametro do input Nome 
@@ -238,12 +236,8 @@ function VerificaCampos(){ // verifica se os campos estao vazios
     if (validarCampoNome(inputNome)===true && validarCampoEmail(inputEmail)===true && validarCampoNumero(inputNumero)===true){
     //if(flag == 2){    
         AbrirLocalStorage();
+        AdicionarContacto();
     }
-        
-    
-    
-    //adicionarComentario(inputNome.value);
-    
 }
 
 function init(){
@@ -254,7 +248,7 @@ function init(){
     
     var btnEnviar = document.getElementById('Enviar');
     btnEnviar.addEventListener('click', VerificaCampos);
-
+    
 }
 
 document.addEventListener('DOMContentLoaded', init);
