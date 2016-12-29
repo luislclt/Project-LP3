@@ -67,28 +67,6 @@ function guardarLocalStorage(){
 }
 
 
-function ListarContacto (pos) {
-    
-    alert(Contactos[pos].nome);
-    alert(Contactos[pos].email);
-    alert(Contactos[pos].pais);
-    alert(Contactos[pos].telefone);
-    alert(Contactos[pos].tipo);
-    alert(Contactos[pos].DOB);
-    alert(Contactos[pos].Facebook);
-    alert(Contactos[pos].Google);
-    alert(Contactos[pos].LinkedIn);
-    alert(Contactos[pos].Instagram);
-    alert(Contactos[pos].OutraRede);
-    alert(Contactos[pos].Obs);
-    if (Contactos[pos].Amigos.checked) alert("Amigos");
-    if (Contactos[pos].Trabalho.checked) alert("Trabalho");
-    if (Contactos[pos].Familia.checked) alert("Familia");
-    if (Contactos[pos].OutroGrupo.checked) alert("Outro");
-    if (Contactos[pos].Fav.checked) alert("Favorito");
-}
-
-
 function isFavorito () {
     var i;
     var checkedValue = null; 
@@ -131,6 +109,7 @@ function AdicionarContacto() {
             var outroGrupo = document.getElementById('OutroGrupo');
             var fav = document.getElementById('Fav');
             Contactos.push({nome: nome.value, email: email.value, pais: pais.value, telefone: telefone.value, tipo: tipo.value, DOB: DOB.value, Facebook: facebook.value, Google: google.value, LinkedIn: linkedIn.value, Instagram: instagram.value, OutraRede: outrarede.value, Obs: obs.value, Amigos: amigos, Trabalho: trabalho, Familia: familia, OutroGrupo: outroGrupo, Fav: fav});
+            window.location.href="TodosContactos.html";
             ListarContacto(Contactos.length-1);
             
             guardarLocalStorage();
