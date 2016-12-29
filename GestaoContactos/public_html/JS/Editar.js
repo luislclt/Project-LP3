@@ -62,99 +62,8 @@ function guardarLocalStorage(){
     localStorage.setItem('fundo',fundo);
 }
 
-function ListarContacto (pos) {
-        
-        var artigo=document.createElement("article");
-        
-        var nome=document.createElement("p");
-        var email=document.createElement("p");
-        var telefone=document.createElement("p");
-        var tipo=document.createElement("p");
-        var DOB=document.createElement("p");
-        var Facebook=document.createElement("p");
-        var Google=document.createElement("p");
-        var LinkedIn=document.createElement("p");
-        var Instagram=document.createElement("p");
-        var OutraRede=document.createElement("p");
-        var Obs=document.createElement("p");
-        var Amigos=document.createElement("p");
-        var Trabalho=document.createElement("p");
-        var Familia=document.createElement("p");
-        var OutroGrupo=document.createElement("p");
-        var Fav=document.createElement("p");
-        
-        nome.id=Contactos[pos].nome;
-        
-        var nomet=document.createTextNode(Contactos[pos].nome);
-        var emailt=document.createTextNode(Contactos[pos].email);
-        var telefonet=document.createTextNode(Contactos[pos].telefone);
-        var tipot=document.createTextNode(Contactos[pos].tipo);
-        var DOBt=document.createTextNode(Contactos[pos].DOB);
-        var Facebookt=document.createTextNode(Contactos[pos].Facebook);
-        var Googlet=document.createTextNode(Contactos[pos].Google);
-        var LinkedInt=document.createTextNode(Contactos[pos].LinkedIn);
-        var Instagramt=document.createTextNode(Contactos[pos].Instagram);
-        var OutraRedet=document.createTextNode(Contactos[pos].OutraRede);
-        var Obst=document.createTextNode(Contactos[pos].Obs);
-        
-        alert("Grupos: --");
-    
-    
-        if (Contactos[pos].Amigos == "sim") var Amigost=document.createTextNode("Amigos"); else var Amigost=document.createTextNode("");
-        if (Contactos[pos].Trabalho == "sim") var Trabalhot=document.createTextNode("Trabalho"); else var Trabalhot=document.createTextNode("");
-        if (Contactos[pos].Familia == "sim") var Familiat=document.createTextNode("Familia"); else var Familiat=document.createTextNode("");
-        if (Contactos[pos].OutroGrupo == "sim") var OutroGrupot=document.createTextNode("Outro"); else var OutroGrupot=document.createTextNode("");
-        if (Contactos[pos].Fav == "sim"){
-            var Favt=document.createTextNode("Favorito");
-        }else var Favt=document.createTextNode("");
-        
-         alert("Depois Grupos: --");
-        
-        nome.appendChild(nomet);
-        email.appendChild(emailt);
-        telefone.appendChild(telefonet);
-        tipo.appendChild(tipot);
-        DOB.appendChild(DOBt);
-        Facebook.appendChild(Facebookt);
-        Google.appendChild(Googlet);
-        LinkedIn.appendChild(LinkedInt);
-        Instagram.appendChild(Instagramt);
-        OutraRede.appendChild(OutraRedet);
-        Obs.appendChild(Obst);
-        Amigos.appendChild(Amigost);
-        Trabalho.appendChild(Trabalhot);
-        Familia.appendChild(Familiat);
-        OutroGrupo.appendChild(OutroGrupot);
-        Fav.appendChild(Favt);
-        
-        artigo.appendChild(nome);
-        artigo.appendChild(email);
-        artigo.appendChild(telefone);
-        artigo.appendChild(tipo);
-        artigo.appendChild(DOB);
-        artigo.appendChild(Facebook);
-        artigo.appendChild(Google);
-        artigo.appendChild(LinkedIn);
-        artigo.appendChild(Instagram);
-        artigo.appendChild(OutraRede);
-        artigo.appendChild(Obs);
-        artigo.appendChild(Amigos);
-        artigo.appendChild(Trabalho);
-        artigo.appendChild(Familia);
-        artigo.appendChild(OutroGrupo);
-        artigo.appendChild(Fav);
-        
-        
-        document.getElementById('Contacto').appendChild(artigo);
-        
-        var btnVoltar = document.getElementById('Voltar');
-        btnVoltar.addEventListener('click', Voltar);
-    
-    alert("Adicionado com Sucesso!");
-    
-}
 
-function AdicionarContacto() {
+function EditarContacto() {
         var nome = document.getElementById('Nome');
         var telefone = document.getElementById('Numero');
         var aux=0;
@@ -195,11 +104,11 @@ function AdicionarContacto() {
             Contactos[indice]=({nome: nome.value, email: email.value, pais: pais.value, telefone: telefone.value, tipo: tipo.value, DOB: DOB.value, Facebook: facebook.value, Google: google.value, LinkedIn: linkedIn.value, Instagram: instagram.value, OutraRede: outrarede.value, Obs: obs.value, Amigos: amigos, Trabalho: trabalho, Familia: familia, OutroGrupo: outroGrupo, Fav: fav});
             alert("outra window -- ok");
             
-            ListarContacto (indice);
+            window.location.href="ListarEditar.html";
 
             guardarLocalStorage();
         }else{
-            alert("Impossivel adicionar Contacto");
+            alert("Impossivel editar Contacto");
         }
 }
 
@@ -270,7 +179,7 @@ function VerificaCampos(){ // verifica se os campos estao vazios
     //if(flag == 2){   
         alert("valida -- ok");
         AbrirLocalStorage();
-        AdicionarContacto();
+        EditarContacto();
     }
 }
 
