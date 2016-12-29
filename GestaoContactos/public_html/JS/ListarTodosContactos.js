@@ -210,6 +210,10 @@ function ListarContactos () {
     }
 }
 
+function Voltar(){
+    window.location.href="index.html";
+}
+
 function AbrirLocalStorage() {
     if (localStorage.contacto != null){
         Contactos = JSON.parse(localStorage.contacto);
@@ -226,6 +230,10 @@ function AbrirLocalStorage() {
 function init(){
     AbrirLocalStorage();
     CorFundo();
+    var btnVoltar = document.getElementById('Voltar');
+    btnVoltar.addEventListener('click', Voltar);
+    var btnVoltarB = document.getElementById('Voltarb');
+    btnVoltarB.addEventListener('click', Voltar);
     var color = document.getElementById('cor');
     color.addEventListener('change', alterar);   
 }
