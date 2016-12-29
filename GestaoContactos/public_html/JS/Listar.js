@@ -109,6 +109,7 @@ function editarContacto(){
     var x = this.parentNode.getElementsByTagName("p")[0].getAttribute("id"); 
     var indice = ObterIndice(Contactos,x);
     guardarLocalStorageContact(indice);
+    window.location.href="Editar.html";
 }
 
 function ListarContactos () {
