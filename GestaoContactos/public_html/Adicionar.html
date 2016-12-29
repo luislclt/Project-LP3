@@ -16,16 +16,16 @@ and open the template in the editor.
         <h1>A minha Agenda</h1>
         <h2>Adicionar Contactos</h2>
         <p>
-            <label for="Nome">Nome: </label><input type="text" name="Nome" required="required" id="Nome"><span id = "UserError" class="inputMessageErrorHidden">Nome inválido</span>
+            <label for="Nome">Nome: </label><input id="Nome" type="text" name="Nome" required="required"><span id = "inputNomeInvalido" class="inputMessageErrorHidden"> Nome Vazio!</span><span id = "NomeRepetido" class="inputMessageErrorHidden">Nome já existe!</span>
         </p>
         <p>
-            <label for="Email">Email: </label><input id="Email" type="email" name="Email" placeholder="exemplo@exemplo.com"><span id = "PassError" class="inputMessageErrorHidden">Email inválido</span>
+            <label for="Email">Email: </label><input id="Email" type="email" name="Email" placeholder="exemplo@exemplo.com"><span id = "EmailError" class="inputMessageErrorHidden">Email inválido</span>
         </p>
         <p>Telefone: </p>
         <div>
             <p>
         <label for="Pais">Pais: </label>
-            <select name="Pais" id="Pais">
+            <select id="Pais" name="Pais" >
                 <option value="+351">Portugal (+351)</option>
                 <option value="+34">Espanha (+34)</option>
                 <option value="+55">Brasil (+55)</option>
@@ -39,18 +39,18 @@ and open the template in the editor.
             </select>
         </p>
         <p>
-            <label for="Numero">Número: </label><input id="Numero" type="tel" name="Numero" placeholder="91X XXX XXX">
+            <label for="Numero">Número: </label><input id="Numero" type="tel" name="Numero" placeholder="9XX XXX XXX"><span id = "inputNumeroInvalido" class="inputMessageErrorHidden"> Número Vazio!</span>
         </p>
         <p>
             <label for="Tipo">Tipo: </label>
-                <select name="Tipo" id="Tipo">
+                <select id="Tipo" name="Tipo" >
                    <option value="Pessoal">Pessoal</option>
                    <option value="Trabalho">Trabalho</option>
                    <option value="Outro">Outro</option>
                 </select>
         </p>
         </div>
-        <form>Birthday: <input type="date" name="bday" id="DOB"></form>
+        <form>Birthday: <input id="DOB" type="date" name="bday" ></form>
         <p>Redes Sociais: </p>
         <div>
             <p>
@@ -73,19 +73,19 @@ and open the template in the editor.
             <label for="Obs">Observações: </label><input id="Obs" type="text" name="Obs">
         </p>
         <form>
-            <input type="checkbox" name="Amigos" value="Amigos" id="Amigos">Amigos<br>
+            <input id="Amigos" type="checkbox" name="Amigos" value="Amigos" >Amigos<br>
         </form>
         <form>
-            <input type="checkbox" name="Trabalho" value="Trabalho" id="Trabalho">Trabalho<br>
+            <input id="Trabalho" type="checkbox" name="Trabalho" value="Trabalho" >Trabalho<br>
         </form>
         <form>
-            <input type="checkbox" name="Familia" value="Familia" id="Familia">Familia<br>
+            <input id="Familia" type="checkbox" name="Familia" value="Familia" >Familia<br>
         </form>
         <form>
-            <input type="checkbox" name="Outro" value="Outro" id="Outro">Outro 
+            <input id="Outro" type="checkbox" name="Outro" value="Outro" >Outro 
         </form>
         <form>
-            <input type="checkbox" name="Favorito" value="Fav" id="Fav"> Adicionar aos Favoritos 
+            <input id="Fav" type="checkbox" name="Favorito" value="Fav" > Adicionar aos Favoritos 
         </form>
               
         
@@ -93,7 +93,7 @@ and open the template in the editor.
         
         
         <label for="cor">Cor: </label>
-            <select name="cor" id="cor">
+            <select id="cor" name="cor" >
                 <option value="cornsilk">Quase Branco</option>
                 <option value="bisque">Cor creme mas não</option>
                 <option value="burlywood">Bronzeado</option>

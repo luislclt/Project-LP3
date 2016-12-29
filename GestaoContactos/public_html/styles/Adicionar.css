@@ -11,3 +11,14 @@ body {
     background-color: cornsilk;
 }
 
+.inputError{
+    border: 2px solid red;
+}
+
+.inputMessageError{
+    display: inline;
+}
+
+.inputMessageErrorHidden{
+    display: none;
+}
