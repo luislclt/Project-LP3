@@ -7,7 +7,7 @@
 
 var Contactos = [];
 
-var Grupos = [];
+var X = [];
 
 function alterar(){
     var cor = document.getElementById('cor');
@@ -68,6 +68,7 @@ function guardarLocalStorage(){
 
 
 function ListarContacto (pos) {
+    
     alert(Contactos[pos].nome);
     alert(Contactos[pos].email);
     alert(Contactos[pos].pais);
@@ -78,10 +79,13 @@ function ListarContacto (pos) {
     alert(Contactos[pos].Google);
     alert(Contactos[pos].LinkedIn);
     alert(Contactos[pos].Instagram);
-    alert(Contactos[pos].Outro);
+    alert(Contactos[pos].OutraRede);
     alert(Contactos[pos].Obs);
-    alert(Contactos[pos].Grupo);
-    alert(Contactos[pos].Fav);
+    if (Contactos[pos].Amigos.checked) alert("Amigos");
+    if (Contactos[pos].Trabalho.checked) alert("Trabalho");
+    if (Contactos[pos].Familia.checked) alert("Familia");
+    if (Contactos[pos].OutroGrupo.checked) alert("Outro");
+    if (Contactos[pos].Fav.checked) alert("Favorito");
 }
 
 
@@ -99,6 +103,7 @@ function AdicionarContacto() {
         var nome = document.getElementById('Nome');
         var telefone = document.getElementById('Numero');
         var aux=0;
+        
         for (var i=0; i<Contactos.length; i++){
             if (telefone.value === Contactos[i].numero){
                 alert("Número já existe!");
@@ -118,11 +123,14 @@ function AdicionarContacto() {
             var google = document.getElementById('Google');
             var linkedIn = document.getElementById('LinkedIn');
             var instagram = document.getElementById('Instagram');
-            var outro = document.getElementById('Outro');
+            var outrarede = document.getElementById('OutraRede');
             var obs = document.getElementById('Obs');
-            var grupo = document.getElementById('Grupo');
+            var amigos = document.getElementById('Amigos');
+            var trabalho = document.getElementById('Trabalho');
+            var familia = document.getElementById('Familia');
+            var outroGrupo = document.getElementById('OutroGrupo');
             var fav = document.getElementById('Fav');
-            Contactos.push({nome: nome.value, email: email.value, pais: pais.value, telefone: telefone.value, tipo: tipo.value, DOB: DOB.value, Facebook: facebook.value, Google: google.value, LinkedIn: linkedIn.value, Instagram: instagram.value, Outro: outro.value, Obs: obs.value, Grupo: Grupos[0], Fav: fav});
+            Contactos.push({nome: nome.value, email: email.value, pais: pais.value, telefone: telefone.value, tipo: tipo.value, DOB: DOB.value, Facebook: facebook.value, Google: google.value, LinkedIn: linkedIn.value, Instagram: instagram.value, OutraRede: outrarede.value, Obs: obs.value, Amigos: amigos, Trabalho: trabalho, Familia: familia, OutroGrupo: outroGrupo, Fav: fav});
             ListarContacto(Contactos.length-1);
             
             guardarLocalStorage();
@@ -171,29 +179,6 @@ function validarCampoNome(inputNome){ // verifica se o Campo Nome esta vazio
 }
 
 
-/*
-function validacaoEmail(field) {
-    usuario = field.value.substring(0, field.value.indexOf("@"));
-    dominio = field.value.substring(field.value.indexOf("@")+ 1, field.value.length);
-
-    if (field.value === ""){
-        alert("E-mail valido");
-        return true; //(usuario.length ==0) && (dominio.length ==0) && (usuario.search("@")!=-1) && (dominio.search("@")!=-1) && (usuario.search(" ")!=-1) && (dominio.search(" ")!=-1) && (dominio.search(".")==-1) && (dominio.indexOf(".") ==0) && (dominio.lastIndexOf(".") > dominio.length - 1)
-    } 
-    else 
-        if ((usuario.length >=1) && (dominio.length >=3) && (usuario.search("@")==-1) && (dominio.search("@")==-1) && (usuario.search(" ")==-1) && (dominio.search(" ")==-1) && (dominio.search(".")!=-1) && (dominio.indexOf(".") >=1) && (dominio.lastIndexOf(".") < dominio.length - 1)){
-                    document.getElementById("msgemail").innerHTML="E-mail válido";
-                    alert("E-mail valido");
-                    return true;
-        }else{
-            document.getElementById("msgemail").innerHTML="<font color='red'>E-mail inválido </font>";
-            alert("E-mail invalido");
-            return false;
-        }
-}
-*/
-
-
 function validarCampoEmail(inputEmail) {
     usuario = inputEmail.value.substring(0, inputEmail.value.indexOf("@"));
     dominio = inputEmail.value.substring(inputEmail.value.indexOf("@")+ 1, inputEmail.value.length);
@@ -234,11 +219,13 @@ function VerificaCampos(){ // verifica se os campos estao vazios
     }*/
     
     if (validarCampoNome(inputNome)===true && validarCampoEmail(inputEmail)===true && validarCampoNumero(inputNumero)===true){
-    //if(flag == 2){    
+    //if(flag == 2){   
+        alert("valida -- ok");
         AbrirLocalStorage();
         AdicionarContacto();
     }
 }
+
 
 function init(){
     AbrirLocalStorage();
