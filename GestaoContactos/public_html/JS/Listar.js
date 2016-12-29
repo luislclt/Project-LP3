@@ -62,6 +62,13 @@ function guardarLocalStorage(){
     localStorage.setItem('fundo',fundo);
 }
 
+function guardarLocalStorageContact(indice){
+    var s = JSON.stringify(Contactos);
+    localStorage.setItem('contacto', s);              //guardar os albuns
+    localStorage.setItem('fundo',fundo);
+    localStorage.setItem('indice',indice);
+}
+
 function OrdenarContactos(a, b) {
     if(a.nome>b.nome){
          return 1;
@@ -99,8 +106,9 @@ function editarContacto(){
     //guardarLocalStorage(this.parentNode);
     //this.parentNode;
     //var a = Contactos.indexOf(this.parentElement.id);
-    alert(this.parentElement);
-    guardarLocalStorage();
+    var x = this.parentNode.getElementsByTagName("p")[0].getAttribute("id"); 
+    var indice = ObterIndice(Contactos,x);
+    guardarLocalStorageContact(indice);
 }
 
 function ListarContactos () {
