@@ -14,10 +14,10 @@ and open the template in the editor.
     </head>
     <body>
         <h1>A minha Agenda</h1>
-        <h2>Editar contacto</h2>
+        <h2>Editar Contactos</h2>
         <p>
             <label for="Nome">Nome: </label><input id="Nome" type="text" name="Nome" required="required"><span id = "inputNomeInvalido" class="inputMessageErrorHidden"> Nome Vazio!</span><span id = "NomeRepetido" class="inputMessageErrorHidden">Nome já existe!</span>
-        </p>
+        </p>        
         <p>
             <label for="Email">Email: </label><input id="Email" type="email" name="Email" placeholder="exemplo@exemplo.com"><span id = "inputEmailInvalido" class="inputMessageErrorHidden">Email inválido</span>
         </p>
@@ -67,24 +67,19 @@ and open the template in the editor.
                 <label for="Instagram">Instagram: </label><input id="Instagram" type="text" name="Instagram" placeholder="instagram.com/exemplo">
             </p>
             <p>
-                <label for="Outro">Outro: </label><input id="Outro" type="text" name="Outro">
+                <label for="OutraRede">Outro: </label><input id="OutraRede" type="text" name="OutraRede">
             </p>
         </div>
         <p>
             <label for="Obs">Observações: </label><input id="Obs" type="text" name="Obs">
         </p>
         <form>
-            <input id="Amigos" type="checkbox" name="Amigos" value="Amigos" >Amigos<br>
+            <input id="Amigos" type="checkbox" name="Grupo" value="Amigos" >Amigos<br>
+            <input id="Trabalho" type="checkbox" name="Grupo" value="Trabalho" >Trabalho<br>
+            <input id="Familia" type="checkbox" name="Grupo" value="Familia" >Familia<br>
+            <input id="OutroGrupo" type="checkbox" name="Grupo" value="Outro" >Outro
         </form>
-        <form>
-            <input id="Trabalho" type="checkbox" name="Trabalho" value="Trabalho" >Trabalho<br>
-        </form>
-        <form>
-            <input id="Familia" type="checkbox" name="Familia" value="Familia" >Familia<br>
-        </form>
-        <form>
-            <input id="Outro" type="checkbox" name="Outro" value="Outro" >Outro 
-        </form>
+
         <form>
             <input id="Fav" type="checkbox" name="Favorito" value="Fav" > Adicionar aos Favoritos 
         </form>
@@ -93,13 +88,13 @@ and open the template in the editor.
         <button id="Enviar">Enviar</button>
         
         
-        
         <label for="cor">Cor: </label>
-            <select name="cor" id="cor">
+            <select id="cor" name="cor" >
                 <option id ="cornsilk" value="cornsilk">Quase Branco</option>
                 <option id ="bisque" value="bisque">Cor creme mas não</option>
                 <option id ="burlywood" value="burlywood">Bronzeado</option>
                 <option id ="peachpuff" value="peachpuff">Cor de Rosinha</option>
             </select>
+        <div id="Erro"></div>
     </body>
 </html>

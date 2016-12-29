@@ -127,9 +127,12 @@ function ListarContactos () {
         var Google=document.createElement("p");
         var LinkedIn=document.createElement("p");
         var Instagram=document.createElement("p");
-        var Outro=document.createElement("p");
+        var OutraRede=document.createElement("p");
         var Obs=document.createElement("p");
-        var Grupo=document.createElement("p");
+        var amigos=document.createElement("p");
+        var trabalho=document.createElement("p");
+        var familia=document.createElement("p");
+        var outroGrupo=document.createElement("p");
         var Fav=document.createElement("p");
         var Espaco=document.createElement("p");
         
@@ -144,9 +147,12 @@ function ListarContactos () {
         var Googlet=document.createTextNode(Contactos[i].Google);
         var LinkedInt=document.createTextNode(Contactos[i].LinkedIn);
         var Instagramt=document.createTextNode(Contactos[i].Instagram);
-        var Outrot=document.createTextNode(Contactos[i].Outro);
+        var OutraRedet=document.createTextNode(Contactos[i].OutraRede);
         var Obst=document.createTextNode(Contactos[i].Obs);
-        var Grupot=document.createTextNode(Contactos[i].Grupo);
+        var amigost=document.createTextNode(Contactos[i].Amigos);
+        var trabalhot=document.createTextNode(Contactos[i].Trabalho);
+        var familiat=document.createTextNode(Contactos[i].Familia);
+        var outroGrupot=document.createTextNode(Contactos[i].OutroGrupo);
         var Favt=document.createTextNode(Contactos[i].Fav);
         var Espacot=document.createTextNode("************************");
         
@@ -159,9 +165,12 @@ function ListarContactos () {
         Google.appendChild(Googlet);
         LinkedIn.appendChild(LinkedInt);
         Instagram.appendChild(Instagramt);
-        Outro.appendChild(Outrot);
+        OutraRede.appendChild(OutraRedet);
         Obs.appendChild(Obst);
-        Grupo.appendChild(Grupot);
+        amigos.appendChild(amigost);
+        trabalho.appendChild(trabalhot);
+        familia.appendChild(familiat);
+        outroGrupo.appendChild(outroGrupot);
         Fav.appendChild(Favt);
         Espaco.appendChild(Espacot);
         
@@ -174,9 +183,12 @@ function ListarContactos () {
         artigo.appendChild(Google);
         artigo.appendChild(LinkedIn);
         artigo.appendChild(Instagram);
-        artigo.appendChild(Outro);
+        artigo.appendChild(OutraRede);
         artigo.appendChild(Obs);
-        artigo.appendChild(Grupo);
+        artigo.appendChild(amigos);
+        artigo.appendChild(trabalho);
+        artigo.appendChild(familia);
+        artigo.appendChild(outroGrupo);
         artigo.appendChild(Fav);
         
         
