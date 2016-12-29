@@ -29,6 +29,7 @@ function alterar(){
             }
         }
     }
+    guardarLocalStorage();
 }
 
 function CorFundo(){
