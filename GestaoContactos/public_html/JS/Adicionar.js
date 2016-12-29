@@ -7,8 +7,6 @@
 
 var Contactos = [];
 
-var X = [];
-
 function alterar(){
     var cor = document.getElementById('cor');
     var link = document.getElementById('link');
@@ -66,22 +64,11 @@ function guardarLocalStorage(){
     localStorage.setItem('fundo',fundo);
 }
 
-
-function isFavorito () {
-    var i;
-    var checkedValue = null; 
-    var inputElements = document.getElementById('Fav');
-        if(inputElements[i].checked){
-           checkedValue = inputElements[i].value;
-      }
-}
-
-
 function AdicionarContacto() {
         var nome = document.getElementById('Nome');
         var telefone = document.getElementById('Numero');
         var aux=0;
-        
+        alert("AdicionarContacto -- ok");
         for (var i=0; i<Contactos.length; i++){
             if (telefone.value === Contactos[i].numero){
                 alert("Número já existe!");
@@ -109,8 +96,10 @@ function AdicionarContacto() {
             var outroGrupo = document.getElementById('OutroGrupo');
             var fav = document.getElementById('Fav');
             Contactos.push({nome: nome.value, email: email.value, pais: pais.value, telefone: telefone.value, tipo: tipo.value, DOB: DOB.value, Facebook: facebook.value, Google: google.value, LinkedIn: linkedIn.value, Instagram: instagram.value, OutraRede: outrarede.value, Obs: obs.value, Amigos: amigos, Trabalho: trabalho, Familia: familia, OutroGrupo: outroGrupo, Fav: fav});
-            window.location.href="TodosContactos.html";
-            ListarContacto(Contactos.length-1);
+            alert("outra window -- ok");
+        
+            window.location.href="ListarContacto.html";
+            //ListarContacto(Contactos.length-1);
             
             guardarLocalStorage();
         }else{
@@ -123,6 +112,7 @@ function AbrirLocalStorage() {
     if (localStorage.contacto != null){
         Contactos = JSON.parse(localStorage.contacto);
         fundo = localStorage.fundo;
+        alert("storage -- ok");
     }else{
         var vazio=document.createTextNode("Impossível adicionar Contactos");
         var erro= document.getElementById("Erro");
