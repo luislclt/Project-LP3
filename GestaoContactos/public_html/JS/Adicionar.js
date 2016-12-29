@@ -95,6 +95,17 @@ function AdicionarContacto() {
             var familia = document.getElementById('Familia');
             var outroGrupo = document.getElementById('OutroGrupo');
             var fav = document.getElementById('Fav');
+            
+            if (amigos.checked) amigos = "sim"; else amigos = "nao";
+            if (trabalho.checked) trabalho = "sim"; else trabalho = "nao";
+            if (familia.checked) familia = "sim"; else familia = "nao";
+            if (outroGrupo.checked) outroGrupo = "sim"; else outroGrupo = "nao";
+            if (fav.checked) fav = "sim"; else fav = "nao";
+
+            
+            
+            
+            
             Contactos.push({nome: nome.value, email: email.value, pais: pais.value, telefone: telefone.value, tipo: tipo.value, DOB: DOB.value, Facebook: facebook.value, Google: google.value, LinkedIn: linkedIn.value, Instagram: instagram.value, OutraRede: outrarede.value, Obs: obs.value, Amigos: amigos, Trabalho: trabalho, Familia: familia, OutroGrupo: outroGrupo, Fav: fav});
             alert("outra window -- ok");
         

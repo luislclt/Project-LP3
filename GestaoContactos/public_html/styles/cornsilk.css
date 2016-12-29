@@ -11,3 +11,15 @@ and open the template in the editor.
 body {
     background-color: cornsilk;
 }
+
+.inputError{
+    border: 2px solid red;
+}
+
+.inputMessageError{
+    display: inline;
+}
+
+.inputMessageErrorHidden{
+    display: none;
+}

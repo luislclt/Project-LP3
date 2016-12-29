@@ -57,6 +57,11 @@ function CorFundo(){
 }
 
 
+function Voltar(){
+    window.location.href="index.html";
+}
+
+
 function ListarContacto (pos) {
         
         var artigo=document.createElement("article");
@@ -91,11 +96,17 @@ function ListarContacto (pos) {
         var Instagramt=document.createTextNode(Contactos[pos].Instagram);
         var OutraRedet=document.createTextNode(Contactos[pos].OutraRede);
         var Obst=document.createTextNode(Contactos[pos].Obs);
-        var Amigost=document.createTextNode(Contactos[pos].Amigos);
-        var Trabalhot=document.createTextNode(Contactos[pos].Trabalho);
-        var Familiat=document.createTextNode(Contactos[pos].Familia);
-        var OutroGrupot=document.createTextNode(Contactos[pos].OutroGrupo);
-        var Favt=document.createTextNode(Contactos[pos].Fav);
+        
+        alert("Grupos: --");
+    
+    
+        if (Contactos[pos].Amigos == "sim") var Amigost=document.createTextNode("Amigos"); else var Amigost=document.createTextNode("");
+        if (Contactos[pos].Trabalho == "sim") var Trabalhot=document.createTextNode("Trabalho"); else var Trabalhot=document.createTextNode("");
+        if (Contactos[pos].Familia == "sim") var Familiat=document.createTextNode("Familia"); else var Familiat=document.createTextNode("");
+        if (Contactos[pos].OutroGrupo == "sim") var OutroGrupot=document.createTextNode("Outro"); else var OutroGrupot=document.createTextNode("");
+        if (Contactos[pos].Fav == "sim") var Favt=document.createTextNode("Favorito"); else var Favt=document.createTextNode("");
+        
+         alert("Depois Grupos: --");
         
         nome.appendChild(nomet);
         email.appendChild(emailt);
@@ -141,10 +152,6 @@ function ListarContacto (pos) {
     
 }
 
-
-function Voltar(){
-    window.location.href="index.html";
-}
 
 function AbrirLocalStorage() {
     if (localStorage.contacto != null){
