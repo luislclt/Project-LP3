@@ -127,6 +127,7 @@ function validarCampoNumero(inputNumero){ // verifica se o Campo Nome esta vazio
         inputNumero.className = ""; // Default
         document.getElementById('inputNumeroInvalido').className = "inputMessageErrorHidden"; // Esconde a menssagem Erro
     }
+    alert("validarCampoNumero -- 4");
     return true; // Aceitou este Campo
 }
 
@@ -139,28 +140,81 @@ function validarCampoNome(inputNome){ // verifica se o Campo Nome esta vazio
         inputNome.className = ""; // Default
         document.getElementById('inputNomeInvalido').className = "inputMessageErrorHidden"; // Esconde a menssagem Erro
     }
+    alert("validarCampoNome -- 2");
     return true; // Aceitou este Campo
 }
 
+
+/*
+function validacaoEmail(field) {
+    usuario = field.value.substring(0, field.value.indexOf("@"));
+    dominio = field.value.substring(field.value.indexOf("@")+ 1, field.value.length);
+
+    if (field.value === ""){
+        alert("E-mail valido");
+        return true; //(usuario.length ==0) && (dominio.length ==0) && (usuario.search("@")!=-1) && (dominio.search("@")!=-1) && (usuario.search(" ")!=-1) && (dominio.search(" ")!=-1) && (dominio.search(".")==-1) && (dominio.indexOf(".") ==0) && (dominio.lastIndexOf(".") > dominio.length - 1)
+    } 
+    else 
+        if ((usuario.length >=1) && (dominio.length >=3) && (usuario.search("@")==-1) && (dominio.search("@")==-1) && (usuario.search(" ")==-1) && (dominio.search(" ")==-1) && (dominio.search(".")!=-1) && (dominio.indexOf(".") >=1) && (dominio.lastIndexOf(".") < dominio.length - 1)){
+                    document.getElementById("msgemail").innerHTML="E-mail válido";
+                    alert("E-mail valido");
+                    return true;
+        }else{
+            document.getElementById("msgemail").innerHTML="<font color='red'>E-mail inválido </font>";
+            alert("E-mail invalido");
+            return false;
+        }
+}
+*/
+
+function validarCampoEmail(inputEmail) {
+    alert("validarCampoEmail -- 3");
+    usuario = inputEmail.value.substring(0, inputEmail.value.indexOf("@"));
+    dominio = inputEmail.value.substring(inputEmail.value.indexOf("@")+ 1, inputEmail.value.length);
+alert("validarCampoEmail -- 3.1");
+    if (inputEmail.value === ""){
+        inputEmail.className = ""; // Default
+        document.getElementById('inputEmailInvalido').className = "inputMessageErrorHidden"; // Esconde a menssagem Erro
+        alert("validarCampoEmail -- 3 -- vazio");
+        return true;
+    } 
+    else 
+        if ((usuario.length >=1) && (dominio.length >=3) && (usuario.search("@")==-1) && (dominio.search("@")==-1) && (usuario.search(" ")==-1) && (dominio.search(" ")==-1) && (dominio.search(".")!=-1) && (dominio.indexOf(".") >=1) && (dominio.lastIndexOf(".") < dominio.length - 1)){
+                    inputEmail.className = ""; // Default
+                    document.getElementById('inputEmailInvalido').className = "inputMessageErrorHidden"; // Esconde a menssagem Erro
+                    alert("validarCampoEmail -- 3 -- ok");
+                    return true;
+        }else{
+        inputEmail.className = "inputError"; //Span //campo vazio -- só de inputInvalido
+        document.getElementById('inputEmailInvalido').className = "inputMessageError"; // Mostra o Span Error
+        
+            return false;
+        }
+}
+
+
+
 function VerificaCampos(){ // verifica se os campos estao vazios
-    
+    alert("2 - VerificaCampos");
     var flag = 0;
     var inputNome = document.getElementById('Nome'); // recebe o parametro do input Nome 
-    
     var inputNumero = document.getElementById('Numero'); // recebe o parametro do input Numero
+    var inputEmail = document.getElementById('Email'); // recebe o parametro do input Email
     
-    while(flag == 0){
+    /*while(flag == 0 || flag == 1 || flag == 2){
+        alert("2 - flag=0");
+        if (validarCampoNome(inputNome)===true) flag++, alert("2 - flag=1"); // flag = 1
         
-        if (validarCampoNome(inputNome)===true) flag++; // flag = 1
-        else if (validarCampoNumero(inputNumero)===true) flag++; // flag = 2
+        else if (validarCampoNumero(inputNumero)===true) flag++, alert("2 - flag=2"); // flag = 2
         
+        else if (validarCampoNumero(inputEmail)===true) flag++, alert("2 - flag=3"); // flag = 3
         else flag = -1; // sai do ciclo mas sem sucesso
         
-    }
+    }*/
     
-    //if (validarCampoNome(inputNome)===true && validarCampoNumero(inputNumero)===true){
-    if(flag == 2){    
-        
+    if (validarCampoNome(inputNome)===true && validarCampoEmail(inputEmail)===true && validarCampoNumero(inputNumero)===true){
+    //if(flag == 2){    
+        alert("2 - flag=2");
         AbrirLocalStorage();
         
     }
@@ -179,18 +233,7 @@ function init(){
     alert("1 - init");
     var btnEnviar = document.getElementById('Enviar');
     btnEnviar.addEventListener('click', VerificaCampos);
-    
-    /*
-    var nome = document.getElementById('Nome');
-    var nometmp;
-    
-    if (validarNome(nome)===true){
-        nometmp = nome.value;
-    }
-    
-    adicionarContacto(nometmp);
-    AbrirLocalStorage
-    */
+
 }
 
 document.addEventListener('DOMContentLoaded', init);
