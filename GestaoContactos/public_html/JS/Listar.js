@@ -54,7 +54,14 @@ function ObterIndice(array, value) {
 function removerContacto(){
     var x = this.parentNode.getElementsByTagName("p")[0].getAttribute("id"); 
     var indice = ObterIndice(Contactos,x);
-    alert(indice);  
+    alert(indice);
+    if (indice > -1) {
+        Contactos.splice(indice, 1);
+        window.location.reload();
+    }else{
+        alert("erro ao remover!!");
+    }
+    
     //this.parentNode.remove();
     guardarLocalStorage();
 }
