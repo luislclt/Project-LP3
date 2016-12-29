@@ -6,8 +6,6 @@
 
 var Contactos = [];
 
-var X = [];
-
 function alterar(){
     var cor = document.getElementById('cor');
     var link = document.getElementById('link');
@@ -33,6 +31,7 @@ function alterar(){
     guardarLocalStorage();
 }
 
+
 function CorFundo(){
     var cor = document.getElementById('cor');
     var link = document.getElementById('link');
@@ -57,20 +56,18 @@ function CorFundo(){
     }
 }
 
-function isFavorito () {
-    var i;
-    var checkedValue = null; 
-    var inputElements = document.getElementById('Fav');
-        if(inputElements[i].checked){
-           checkedValue = inputElements[i].value;
-      }
+
+function guardarLocalStorage(){
+    var s = JSON.stringify(Contactos);
+    localStorage.setItem('contacto', s);              //guardar os albuns
+    localStorage.setItem('fundo',fundo);
 }
 
 function AdicionarContacto() {
         var nome = document.getElementById('Nome');
         var telefone = document.getElementById('Numero');
         var aux=0;
-        
+        alert("AdicionarContacto -- ok");
         for (var i=0; i<Contactos.length; i++){
             if (telefone.value === Contactos[i].numero){
                 alert("Número já existe!");
@@ -97,9 +94,17 @@ function AdicionarContacto() {
             var familia = document.getElementById('Familia');
             var outroGrupo = document.getElementById('OutroGrupo');
             var fav = document.getElementById('Fav');
-            Contactos[index]={nome: nome.value, email: email.value, pais: pais.value, telefone: telefone.value, tipo: tipo.value, DOB: DOB.value, Facebook: facebook.value, Google: google.value, LinkedIn: linkedIn.value, Instagram: instagram.value, OutraRede: outrarede.value, Obs: obs.value, Amigos: amigos, Trabalho: trabalho, Familia: familia, OutroGrupo: outroGrupo, Fav: fav});
-            window.location.href="TodosContactos.html";
-            ListarContacto(Contactos.length-1);
+            
+            if (amigos.checked) amigos = "sim"; else amigos = "nao";
+            if (trabalho.checked) trabalho = "sim"; else trabalho = "nao";
+            if (familia.checked) familia = "sim"; else familia = "nao";
+            if (outroGrupo.checked) outroGrupo = "sim"; else outroGrupo = "nao";
+            if (fav.checked) fav = "sim"; else fav = "nao";
+            
+            Contactos[indice]=({nome: nome.value, email: email.value, pais: pais.value, telefone: telefone.value, tipo: tipo.value, DOB: DOB.value, Facebook: facebook.value, Google: google.value, LinkedIn: linkedIn.value, Instagram: instagram.value, OutraRede: outrarede.value, Obs: obs.value, Amigos: amigos, Trabalho: trabalho, Familia: familia, OutroGrupo: outroGrupo, Fav: fav});
+            alert("outra window -- ok");
+            
+            
             
             guardarLocalStorage();
         }else{
@@ -116,12 +121,6 @@ function AbrirLocalStorage() {
         fundo= localStorage.fundo;
         indice=localStorage.indice;
     }
-}
-
-function guardarLocalStorage(){
-    var s = JSON.stringify(Contactos);
-    localStorage.setItem('contacto', s);              //guardar os albuns
-    localStorage.setItem('fundo',fundo);
 }
 
 function validarCampoNumero(inputNumero){ // verifica se o Campo Nome esta vazio
@@ -149,6 +148,7 @@ function validarCampoNome(inputNome){ // verifica se o Campo Nome esta vazio
     return true; // Aceitou este Campo
 }
 
+
 function validarCampoEmail(inputEmail) {
     usuario = inputEmail.value.substring(0, inputEmail.value.indexOf("@"));
     dominio = inputEmail.value.substring(inputEmail.value.indexOf("@")+ 1, inputEmail.value.length);
@@ -170,11 +170,23 @@ function validarCampoEmail(inputEmail) {
         }
 }
 
+
 function VerificaCampos(){ // verifica se os campos estao vazios
     var flag = 0;
     var inputNome = document.getElementById('Nome'); // recebe o parametro do input Nome 
     var inputNumero = document.getElementById('Numero'); // recebe o parametro do input Numero
     var inputEmail = document.getElementById('Email'); // recebe o parametro do input Email
+    
+    /*while(flag == 0 || flag == 1 || flag == 2){
+        alert("2 - flag=0");
+        if (validarCampoNome(inputNome)===true) flag++, alert("2 - flag=1"); // flag = 1
+        
+        else if (validarCampoNumero(inputNumero)===true) flag++, alert("2 - flag=2"); // flag = 2
+        
+        else if (validarCampoNumero(inputEmail)===true) flag++, alert("2 - flag=3"); // flag = 3
+        else flag = -1; // sai do ciclo mas sem sucesso
+        
+    }*/
     
     if (validarCampoNome(inputNome)===true && validarCampoEmail(inputEmail)===true && validarCampoNumero(inputNumero)===true){
     //if(flag == 2){   
@@ -191,8 +203,8 @@ function init(){
     var color = document.getElementById('cor');
     color.addEventListener('change', alterar);
     
-    guardarLocalStorage();
-    
+    var btnEnviar = document.getElementById('Enviar');
+    btnEnviar.addEventListener('click', VerificaCampos);   
 }
 
 document.addEventListener('DOMContentLoaded', init);
