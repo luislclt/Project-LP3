@@ -89,17 +89,21 @@ function ObterIndice(array, value) {
 }
 
 function removerContacto(){
-    var x = this.parentNode.getElementsByTagName("p")[0].getAttribute("id"); 
-    var indice = ObterIndice(Contactos,x);
-    if (indice > -1) {
-        Contactos.splice(indice, 1);
-        window.location.reload();
-    }else{
-        alert("erro ao remover!!");
+    var conf=confirm ("Tem a certeza que deseja remover?");
+    if(conf==true){
+        var x = this.parentNode.getElementsByTagName("p")[0].getAttribute("id"); 
+        var indice = ObterIndice(Contactos,x);
+        if (indice > -1) {
+            Contactos.splice(indice, 1);
+            window.location.reload();
+        }else{
+            alert("erro ao remover!!");
+        }
+    
+        //this.parentNode.remove();
+        guardarLocalStorage();
     }
     
-    //this.parentNode.remove();
-    guardarLocalStorage();
 }
 
 function editarContacto(){
@@ -208,6 +212,13 @@ function ListarContactos () {
         
         artigo.appendChild(Espaco);
     }
+    if(Contactos.length>0){
+        var btnVoltarB=document.createElement("button");
+        var btnText=document.createTextNode("Voltar");
+        btnVoltarB.appendChild(btnText);
+        btnVoltarB.addEventListener('click', Voltar);
+        document.getElementById("VoltarB").appendChild(btnVoltarB);
+    } 
 }
 
 function Voltar(){
@@ -232,8 +243,6 @@ function init(){
     CorFundo();
     var btnVoltar = document.getElementById('Voltar');
     btnVoltar.addEventListener('click', Voltar);
-    var btnVoltarB = document.getElementById('Voltarb');
-    btnVoltarB.addEventListener('click', Voltar);
     var color = document.getElementById('cor');
     color.addEventListener('change', alterar);   
 }
