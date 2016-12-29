@@ -42,10 +42,19 @@ function OrdenarContactos(a, b) {
     return 0;
 }
 
+function ObterIndice(array, value) {
+    for(var i = 0; i < array.length; i += 1) {
+        if(array[i].nome === value) {
+            return i;
+        }
+    }
+    return -1;
+}
+
 function removerContacto(){
-    
-    
-    
+    var x = this.parentNode.getElementsByTagName("p")[0].getAttribute("id"); 
+    var indice = ObterIndice(Contactos,x);
+    alert(indice);  
     //this.parentNode.remove();
     guardarLocalStorage();
 }
@@ -77,6 +86,8 @@ function ListarContactos () {
         var Grupo=document.createElement("p");
         var Fav=document.createElement("p");
         var Espaco=document.createElement("p");
+        
+        nome.id=Contactos[i].nome;
         
         var nomet=document.createTextNode(Contactos[i].nome);
         var emailt=document.createTextNode(Contactos[i].email);
