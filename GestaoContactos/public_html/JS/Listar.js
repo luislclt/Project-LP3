@@ -11,15 +11,43 @@ function alterar(){
     var cor = document.getElementById('cor');
     var link = document.getElementById('link');
     if (cor.value == 'cornsilk'){
+        fundo='cornsilk';
         link.href="styles/cornsilk.css";
     }else{
         if(cor.value == 'bisque'){
+            fundo='bisque';
             link.href="styles/bisque.css";
         }else{
             if(cor.value == 'burlywood'){
+                fundo='burlywood';
                 link.href="styles/burlywood.css";
             }else{
                 if(cor.value == 'peachpuff'){
+                    fundo='peachpuff';
+                    link.href="styles/peachpuff.css";
+                }
+            }
+        }
+    }
+}
+
+function CorFundo(){
+    var cor = document.getElementById('cor');
+    var link = document.getElementById('link');
+    if (fundo == 'cornsilk'){
+       document.getElementById(fundo).selected="selected";
+        link.href="styles/cornsilk.css";
+    }else{
+        if(fundo == 'bisque'){
+           document.getElementById(fundo).selected="selected";
+           link.href="styles/bisque.css";
+        }else{
+            if(fundo == 'burlywood'){
+                document.getElementById(fundo).selected="selected";
+                link.href="styles/burlywood.css";
+            }else{
+                if(fundo == 'peachpuff'){
+                    document.getElementById(fundo).selected="selected";
                     link.href="styles/peachpuff.css";
                 }
             }
@@ -30,6 +58,7 @@ function alterar(){
 function guardarLocalStorage(){
     var s = JSON.stringify(Contactos);
     localStorage.setItem('contacto', s);              //guardar os albuns
+    localStorage.setItem('fundo',fundo);
 }
 
 function OrdenarContactos(a, b) {
@@ -54,7 +83,6 @@ function ObterIndice(array, value) {
 function removerContacto(){
     var x = this.parentNode.getElementsByTagName("p")[0].getAttribute("id"); 
     var indice = ObterIndice(Contactos,x);
-    alert(indice);
     if (indice > -1) {
         Contactos.splice(indice, 1);
         window.location.reload();
@@ -71,6 +99,7 @@ function editarContacto(){
     //this.parentNode;
     //var a = Contactos.indexOf(this.parentElement.id);
     alert(this.parentElement);
+    guardarLocalStorage();
 }
 
 function ListarContactos () {
@@ -162,6 +191,7 @@ function ListarContactos () {
 function AbrirLocalStorage() {
     if (localStorage.contacto != null){
         Contactos = JSON.parse(localStorage.contacto);
+        fundo= localStorage.fundo;
         ListarContactos();
     }else{
         var vazio=document.createTextNode("Não existem Contactos");
@@ -172,9 +202,9 @@ function AbrirLocalStorage() {
 }
 
 function init(){
-    var color = document.getElementById('cor');
-    color.addEventListener('change', alterar);
     AbrirLocalStorage();
+    CorFundo();
+    var color = document.getElementById('cor');
+    color.addEventListener('change', alterar);   
 }
-
 document.addEventListener('DOMContentLoaded', init);
