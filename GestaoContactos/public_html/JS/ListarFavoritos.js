@@ -81,7 +81,9 @@ function ObterIndice(array, value) {
     return -1;
 }
 
-function removerFavorito(){
+function removerFavorito(btnremove){
+    
+    btnremove.src="Images/estrelaOff.png";
     var conf=confirm ("Tem a certeza que deseja remover dos Favoritos?");
     if(conf==true){
         var x = this.parentNode.getElementsByTagName("p")[0].getAttribute("id"); 
@@ -116,7 +118,6 @@ function VerificarExisteFavoritos(){
         document.getElementById("VoltarB").appendChild(btnVoltarB);
     }
 }
-
 
 
 function ListarContactos () {
@@ -205,10 +206,12 @@ function ListarContactos () {
 
             document.getElementById('Contactos').appendChild(artigo);
 
-            var btnremove = document.createElement('button');
+            var btnremove = document.createElement('input');
             btnremove.src="Images/estrelaOn.png";
+            btnremove.type="image";
             //btnremove.innerHTML = 'Remover';
             btnremove.addEventListener('click', removerFavorito);
+            
             artigo.appendChild(btnremove);
 
             artigo.appendChild(Espaco);
