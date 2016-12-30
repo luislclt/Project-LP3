@@ -3,6 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
+/*
+ * 
+ * Inicia a pagina Web
+ * Com a cor de fundo guardada na localStorage
+ */
+
 /*
 var contacto1 = {nome:"Joao",email:"joao@sapo.pt", pais:"+351", telefone:'91719372', tipo:"Pessoal", DOB:"2000-12-20", Facebook: "", Google: "", LinkedIn: "", Instagram: "", Outro: "", Obs: "", Grupo: "", Fav:""};
 var contacto2 = {nome:"joca",email:"joca@sapo.pt", pais:"+35", telefone:'035145', tipo:"Pessoal", DOB:"2000-12-20", Facebook: "", Google: "", LinkedIn: "", Instagram: "", Outro: "", Obs: "", Grupo: "", Fav:""};
@@ -10,85 +17,87 @@ var contacto3 = {nome:"Joana",email:"jj@gmail.pt", pais:"+69", telefone:'0353314
 
 var Contactos = [contacto1, contacto2, contacto3];
 */
-var Contactos = [];
+var Contactos = []; // struct Contactos
+var CorFundo;
 
-function alterar(){
+/* alterar()
+ * Verifica a cor e altera o link para o css correspondente
+ */
+function Alterar(){
     var cor = document.getElementById('cor');
     var link = document.getElementById('link');
+    
     if (cor.value == 'cornsilk'){
-        fundo='cornsilk';
+        CorFundo ='cornsilk';
         link.href="styles/cornsilk.css";
-    }else{
-        if(cor.value == 'bisque'){
-            fundo='bisque';
-            link.href="styles/bisque.css";
-        }else{
-            if(cor.value == 'burlywood'){
-                fundo='burlywood';
-                link.href="styles/burlywood.css";
-            }else{
-                if(cor.value == 'peachpuff'){
-                    fundo='peachpuff';
-                    link.href="styles/peachpuff.css";
-                }
-            }
-        }
+        
+    }else if(cor.value == 'bisque'){
+        CorFundo ='bisque';
+        link.href="styles/bisque.css";
+        
+    }else if(cor.value == 'burlywood'){
+        CorFundo ='burlywood';
+        link.href="styles/burlywood.css";
+        
+    }else if(cor.value == 'peachpuff'){
+        CorFundo ='peachpuff';
+        link.href="styles/peachpuff.css";
     }
-    guardarLocalStorage();
+    //guardarLocalStorage();
+    localStorage.setItem('fundo', CorFundo);
 }
 
-function CorFundo(){
+function SelectedCorFundo(){
     var cor = document.getElementById('cor');
     var link = document.getElementById('link');
-    if (fundo == 'cornsilk'){
-       document.getElementById(fundo).selected="selected";
+    
+    if (CorFundo == 'cornsilk'){
+        document.getElementById(CorFundo).selected="selected";
         link.href="styles/cornsilk.css";
-    }else{
-        if(fundo == 'bisque'){
-           document.getElementById(fundo).selected="selected";
-           link.href="styles/bisque.css";
-        }else{
-            if(fundo == 'burlywood'){
-                document.getElementById(fundo).selected="selected";
-                link.href="styles/burlywood.css";
-            }else{
-                if(fundo == 'peachpuff'){
-                    document.getElementById(fundo).selected="selected";
-                    link.href="styles/peachpuff.css";
-                }
-            }
-        }
+        
+    }else if(CorFundo == 'bisque'){
+        document.getElementById(CorFundo).selected="selected";
+        link.href="styles/bisque.css";
+        
+    }else if(CorFundo == 'burlywood'){
+        document.getElementById(CorFundo).selected="selected";
+        link.href="styles/burlywood.css";
+        
+    }else if(CorFundo == 'peachpuff'){
+        document.getElementById(CorFundo).selected="selected";
+        link.href="styles/peachpuff.css";
+        
     }
 }
 
 function guardarLocalStorage(){
     var s = JSON.stringify(Contactos);
     localStorage.setItem('contacto', s);              //guardar os albuns
-    localStorage.setItem('fundo',fundo);
+    localStorage.setItem('fundo', CorFundo);
 }
 
 function AbrirLocalStorage() {
     if (localStorage.contacto != null){
         Contactos = JSON.parse(localStorage.contacto);
-        fundo= localStorage.fundo;
+    }
+    if(localStorage.fundo != null){
+        CorFundo = localStorage.fundo;
     }else{
-        fundo= localStorage.fundo;
+        //CorFundo = localStorage.fundo;
+        CorFundo = 'cornsilk'; //DEFAULT
     }
 }
 
 function init(){
     
     AbrirLocalStorage();
-    CorFundo();
+    SelectedCorFundo();
     var color = document.getElementById('cor');
-    color.addEventListener('change', alterar);
+    color.addEventListener('change', Alterar);
     
-    guardarLocalStorage();
     
-    for(var i=0; i<=Contactos.length;i++){
-        
-    }
+    guardarLocalStorage(); // Guardar Contactos & corFundo Default
     
 }
 
-document.addEventListener('DOMContentLoaded', init);        //inicializa
+document.addEventListener('DOMContentLoaded', init); //inicializa
