@@ -6,90 +6,84 @@
 
 
 var Contactos = [];
+var CorFundo;
 
-function alterar(){
+function Alterar(){
     var cor = document.getElementById('cor');
-    var link = document.getElementById('link');
+    
     if (cor.value == 'cornsilk'){
-        fundo='cornsilk';
-        link.href="styles/cornsilk.css";
-    }else{
-        if(cor.value == 'bisque'){
-            fundo='bisque';
-            link.href="styles/bisque.css";
-        }else{
-            if(cor.value == 'burlywood'){
-                fundo='burlywood';
-                link.href="styles/burlywood.css";
-            }else{
-                if(cor.value == 'peachpuff'){
-                    fundo='peachpuff';
-                    link.href="styles/peachpuff.css";
-                }
-            }
-        }
+        CorFundo ='cornsilk';
+        document.body.style.backgroundColor = 'cornsilk';
+        
+    }else if(cor.value == 'bisque'){
+        CorFundo ='bisque';
+        document.body.style.backgroundColor = 'bisque';
+        
+    }else if(cor.value == 'burlywood'){
+        CorFundo ='burlywood';
+        document.body.style.backgroundColor = 'burlywood';
+        
+    }else if(cor.value == 'peachpuff'){
+        CorFundo ='peachpuff';
+        document.body.style.backgroundColor = 'peachpuff';
     }
-    guardarLocalStorage();
+    localStorage.setItem('fundo', CorFundo);
 }
 
-function CorFundo(){
+function SelectedCorFundo(){
     var cor = document.getElementById('cor');
-    var link = document.getElementById('link');
-    if (fundo == 'cornsilk'){
-       document.getElementById(fundo).selected="selected";
-        link.href="styles/cornsilk.css";
-    }else{
-        if(fundo == 'bisque'){
-           document.getElementById(fundo).selected="selected";
-           link.href="styles/bisque.css";
-        }else{
-            if(fundo == 'burlywood'){
-                document.getElementById(fundo).selected="selected";
-                link.href="styles/burlywood.css";
-            }else{
-                if(fundo == 'peachpuff'){
-                    document.getElementById(fundo).selected="selected";
-                    link.href="styles/peachpuff.css";
-                }
-            }
-        }
+    
+    if (CorFundo == 'cornsilk'){
+        document.getElementById(CorFundo).selected="selected";
+        document.body.style.backgroundColor = 'cornsilk';
+        
+    }else if(CorFundo == 'bisque'){
+        document.getElementById(CorFundo).selected="selected";
+        document.body.style.backgroundColor = 'bisque';
+        
+    }else if(CorFundo == 'burlywood'){
+        document.getElementById(CorFundo).selected="selected";
+        document.body.style.backgroundColor = 'burlywood';
+        
+    }else if(CorFundo == 'peachpuff'){
+        document.getElementById(CorFundo).selected="selected";
+        document.body.style.backgroundColor = 'peachpuff';
+        
     }
 }
 
 function guardarLocalStorage(){
     var s = JSON.stringify(Contactos);
-    localStorage.setItem('contacto', s);              //guardar os albuns
-    localStorage.setItem('fundo',fundo);
+    localStorage.setItem('contacto', s); //guardar 
 }
 
 function guardarLocalStorageContact(indice){
     var s = JSON.stringify(Contactos);
-    localStorage.setItem('contacto', s);              //guardar os albuns
-    localStorage.setItem('fundo',fundo);
+    localStorage.setItem('contacto', s); //guardar 
     localStorage.setItem('indice',indice);
 }
 
 function OrdenarContactos(a, b) {
     if(a.nome>b.nome){
-         return 1;
+         return 1; // a maior
     }
     if(a.nome<b.nome){
-         return -1;
+         return -1; // b maior
     }
-    return 0;
+    return 0; // igual
 }
 
 function ObterIndice(array, value) {
     for(var i = 0; i < array.length; i += 1) {
         if(array[i].nome === value) {
-            return i;
+            return i; // retorna posicao
         }
     }
-    return -1;
+    return -1; // nao encontrou value
 }
 
 function removerContacto(){
-    var conf=confirm ("Tem a certeza que deseja remover?");
+    var conf=confirm ("Tem a certeza que deseja remover?"); // usa confirm
     if(conf==true){
         var x = this.parentNode.getElementsByTagName("p")[0].getAttribute("id"); 
         var indice = ObterIndice(Contactos,x);
@@ -97,7 +91,10 @@ function removerContacto(){
             Contactos.splice(indice, 1);
             window.location.reload();
         }else{
-            alert("erro ao remover!!");
+            var MenssagemErro=document.createTextNode("Erro ao remover Contacto!");
+            var Erro = document.getElementById("Erro");
+            Erro.appendChild(MenssagemErro); // Escreve MenssagemErro no <div>
+            console.log(Erro);
         }
     
         //this.parentNode.remove();
@@ -112,7 +109,7 @@ function editarContacto(){
     //var a = Contactos.indexOf(this.parentElement.id);
     var x = this.parentNode.getElementsByTagName("p")[0].getAttribute("id"); 
     var indice = ObterIndice(Contactos,x);
-    guardarLocalStorageContact(indice);
+    guardarLocalStorageContact(indice); // guarda indice a editar
     window.location.href="Editar.html";
 }
 
@@ -122,21 +119,25 @@ function AdicionarFavoritos() {
     var indice = ObterIndice(Contactos,x);
     if (Contactos[indice].Fav == "sim") {
         Contactos[indice].Fav = "nao";
-        alert("Removido dos Favoritos com Sucesso!");
+        //alert("Removido dos Favoritos com Sucesso!");
+        console.log("Removido dos Favoritos com Sucesso!");
         window.location.reload();
     }else{
         Contactos[indice].Fav = "sim";
-        alert("Adicionado aos Favoritos com Sucesso!");
+        //alert("Adicionado aos Favoritos com Sucesso!");
+        console.log("Adicionado aos Favoritos com Sucesso!");
         window.location.reload();
     }
         
     guardarLocalStorage();
 }
 
-function ListarContactos () {
-        Contactos.sort(OrdenarContactos);
+function ListarContactos(){
+    
+    Contactos.sort(OrdenarContactos);
         
-    for (var i=0; i<=Contactos.length-1;i++){
+    for (var i=0; i<=Contactos.length-1; i++){
+        
         var artigo=document.createElement("article");
         
         var nome=document.createElement("p");
@@ -181,7 +182,7 @@ function ListarContactos () {
         }else var Favtext=document.createTextNode("");
         
         
-        var Espacotext=document.createTextNode("************************");
+        var Espacotext = document.createTextNode("************************");
         
         nome.appendChild(nometext);
         email.appendChild(emailtext);
@@ -256,22 +257,28 @@ function Voltar(){
 function AbrirLocalStorage() {
     if (localStorage.contacto != null){
         Contactos = JSON.parse(localStorage.contacto);
-        fundo= localStorage.fundo;
         ListarContactos();
     }else{
-        var vazio=document.createTextNode("Não existem Contactos");
-        var erro= document.getElementById("Erro");
-        alert(erro);
-        erro.appendChild(vazio);
+        var MenssagemErro=document.createTextNode("Não existem Contactos");
+        var Erro = document.getElementById("Erro");
+        Erro.appendChild(MenssagemErro); // Escreve MenssagemErro no <div>
+        console.log(Erro);
+    }
+    if(localStorage.fundo != null){
+        CorFundo = localStorage.fundo;
+    }else{
+        CorFundo = 'cornsilk'; //DEFAULT
     }
 }
 
 function init(){
     AbrirLocalStorage();
-    CorFundo();
+    SelectedCorFundo();
+    var color = document.getElementById('cor');
+    color.addEventListener('change', Alterar);
+    
     var btnVoltar = document.getElementById('Voltar');
     btnVoltar.addEventListener('click', Voltar);
-    var color = document.getElementById('cor');
-    color.addEventListener('change', alterar);   
+       
 }
 document.addEventListener('DOMContentLoaded', init);

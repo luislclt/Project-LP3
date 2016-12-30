@@ -133,8 +133,7 @@ function ListarContacto (pos) {
     
     document.getElementById('Contacto').appendChild(artigo);
     
-    console.log("Adicionado com Sucesso!");
-    alert("Adicionado com Sucesso!");
+    console.log("Listado com Sucesso!");
     
 }
 

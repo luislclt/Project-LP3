@@ -6,60 +6,55 @@
 
 
 var Contactos = [];
+var CorFundo;
 
-function alterar(){
+function Alterar(){
     var cor = document.getElementById('cor');
-    var link = document.getElementById('link');
+    
     if (cor.value == 'cornsilk'){
-        fundo='cornsilk';
-        link.href="styles/cornsilk.css";
-    }else{
-        if(cor.value == 'bisque'){
-            fundo='bisque';
-            link.href="styles/bisque.css";
-        }else{
-            if(cor.value == 'burlywood'){
-                fundo='burlywood';
-                link.href="styles/burlywood.css";
-            }else{
-                if(cor.value == 'peachpuff'){
-                    fundo='peachpuff';
-                    link.href="styles/peachpuff.css";
-                }
-            }
-        }
+        CorFundo ='cornsilk';
+        document.body.style.backgroundColor = 'cornsilk';
+        
+    }else if(cor.value == 'bisque'){
+        CorFundo ='bisque';
+        document.body.style.backgroundColor = 'bisque';
+        
+    }else if(cor.value == 'burlywood'){
+        CorFundo ='burlywood';
+        document.body.style.backgroundColor = 'burlywood';
+        
+    }else if(cor.value == 'peachpuff'){
+        CorFundo ='peachpuff';
+        document.body.style.backgroundColor = 'peachpuff';
     }
-    guardarLocalStorage();
+    localStorage.setItem('fundo', CorFundo);
 }
 
-function CorFundo(){
+function SelectedCorFundo(){
     var cor = document.getElementById('cor');
-    var link = document.getElementById('link');
-    if (fundo == 'cornsilk'){
-       document.getElementById(fundo).selected="selected";
-        link.href="styles/cornsilk.css";
-    }else{
-        if(fundo == 'bisque'){
-           document.getElementById(fundo).selected="selected";
-           link.href="styles/bisque.css";
-        }else{
-            if(fundo == 'burlywood'){
-                document.getElementById(fundo).selected="selected";
-                link.href="styles/burlywood.css";
-            }else{
-                if(fundo == 'peachpuff'){
-                    document.getElementById(fundo).selected="selected";
-                    link.href="styles/peachpuff.css";
-                }
-            }
-        }
+    
+    if (CorFundo == 'cornsilk'){
+        document.getElementById(CorFundo).selected="selected";
+        document.body.style.backgroundColor = 'cornsilk';
+        
+    }else if(CorFundo == 'bisque'){
+        document.getElementById(CorFundo).selected="selected";
+        document.body.style.backgroundColor = 'bisque';
+        
+    }else if(CorFundo == 'burlywood'){
+        document.getElementById(CorFundo).selected="selected";
+        document.body.style.backgroundColor = 'burlywood';
+        
+    }else if(CorFundo == 'peachpuff'){
+        document.getElementById(CorFundo).selected="selected";
+        document.body.style.backgroundColor = 'peachpuff';
+        
     }
 }
 
 function guardarLocalStorage(){
     var s = JSON.stringify(Contactos);
-    localStorage.setItem('contacto', s);              //guardar os albuns
-    localStorage.setItem('fundo',fundo);
+    localStorage.setItem('contacto', s); //Contactos
 }
 
 function OrdenarFavoritos(a, b) {
@@ -225,7 +220,6 @@ function Voltar(){
 function AbrirLocalStorage() {
     if (localStorage.contacto != null){
         Contactos = JSON.parse(localStorage.contacto);
-        fundo= localStorage.fundo;
         ListarContactos();
     }else{
         var vazio=document.createTextNode("Não existem Contactos");
@@ -233,14 +227,21 @@ function AbrirLocalStorage() {
         alert(erro);
         erro.appendChild(vazio);
     }
+    if(localStorage.fundo != null){
+        CorFundo = localStorage.fundo;
+    }else{
+        CorFundo = 'cornsilk'; //DEFAULT
+    }
 }
 
 function init(){
+    
     AbrirLocalStorage();
-    CorFundo();
+    SelectedCorFundo();
+    var color = document.getElementById('cor');
+    color.addEventListener('change', Alterar);
+    
     var btnVoltar = document.getElementById('Voltar');
     btnVoltar.addEventListener('click', Voltar);
-    var color = document.getElementById('cor');
-    color.addEventListener('change', alterar);   
 }
 document.addEventListener('DOMContentLoaded', init);
