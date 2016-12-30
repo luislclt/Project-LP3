@@ -217,7 +217,7 @@ function Voltar(){
 
 function MudaEstrela(){
     var fav = document.getElementById('Fav');
-    if (fav.checked) document.getElementById("estrela").src="Images/estrelaOn.png"; else document.getElementById("estrela").src="Images/estrelaOff.png";
+    if (fav.checked) document.getElementById("estrela").src="Images/estrelaOff.png"; else document.getElementById("estrela").src="Images/estrelaOn.png";
 }
 
 function init(){
