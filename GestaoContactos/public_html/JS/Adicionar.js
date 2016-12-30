@@ -215,6 +215,11 @@ function Voltar(){
     window.location.href="index.html";
 }
 
+function MudaEstrela(){
+    var fav = document.getElementById('Fav');
+    if (fav.checked) document.getElementById("estrela").src="Images/estrelaOn.png"; else document.getElementById("estrela").src="Images/estrelaOff.png";
+}
+
 function init(){
     
     AbrirLocalStorage();
@@ -227,6 +232,9 @@ function init(){
     
     var btnVoltar = document.getElementById('Voltar');
     btnVoltar.addEventListener('click', Voltar);
+    
+    var btnEstrela = document.getElementById("estrela");
+    btnEstrela.addEventListener('click', MudaEstrela);
     
 }
 
