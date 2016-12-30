@@ -70,26 +70,16 @@ function ListarContacto(pos){
     document.getElementById('LinkedIn').value=Contactos[pos].LinkedIn;
     document.getElementById('Instagram').value=Contactos[pos].Instagram;
     document.getElementById('OutraRede').value=Contactos[pos].OutraRede;
-    document.getElementById('Obs').value=Contactos[pos].Obs; 
-    
-    var nome=document.createElement("p");
-    var email=document.createElement("p");
-    var telefone=document.createElement("p");
-    var tipo=document.createElement("p");
-    var DOB=document.createElement("p");
-    var Facebook=document.createElement("p");
-    var Google=document.createElement("p");
-    var LinkedIn=document.createElement("p");
-    var Instagram=document.createElement("p");
-    var OutraRede=document.createElement("p");
-    var Obs=document.createElement("p");
-    var Amigos=document.createElement("p");
-    var Trabalho=document.createElement("p");
-    var Familia=document.createElement("p");
-    var OutroGrupo=document.createElement("p");
-    var Fav=document.createElement("p");
+    document.getElementById('Obs').value=Contactos[pos].Obs;
+    document.getElementById('')
+    if (Contactos[pos].Amigos == "sim") document.getElementById('Amigos').checked=true; else document.getElementById('Amigos').checked=false;
+    if (Contactos[pos].Trabalho == "sim") document.getElementById('Trabalho').checked=true; else document.getElementById('Trabalho').checked=false;
+    if (Contactos[pos].Familia == "sim") document.getElementById('Familia').checked=true; else document.getElementById('Familia').checked=false;
+    if (Contactos[pos].OutroGrupo == "sim") document.getElementById('OutroGrupo').checked=true; else document.getElementById('OutroGrupo').checked=false;
+    if (Contactos[pos].Fav == "sim"){
+        document.getElementById('Fav').checked=true;
+    }else document.getElementById('Fav').checked=false;   
         
-    nome.id=Contactos[pos].nome;
         
     var nomet=document.createTextNode(Contactos[pos].nome);
     var emailt=document.createTextNode(Contactos[pos].email);
@@ -102,8 +92,6 @@ function ListarContacto(pos){
     var Instagramt=document.createTextNode(Contactos[pos].Instagram);
     var OutraRedet=document.createTextNode(Contactos[pos].OutraRede);
     var Obst=document.createTextNode(Contactos[pos].Obs);
-        
-    alert("Grupos: --");
     
     
     if (Contactos[pos].Amigos == "sim") var Amigost=document.createTextNode("Amigos"); else var Amigost=document.createTextNode("");
