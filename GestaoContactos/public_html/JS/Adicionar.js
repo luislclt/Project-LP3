@@ -6,129 +6,135 @@
 
 
 var Contactos = [];
+var CorFundo;
 
-function alterar(){
+function Alterar(){
     var cor = document.getElementById('cor');
-    var link = document.getElementById('link');
+    
     if (cor.value == 'cornsilk'){
-        fundo='cornsilk';
-        link.href="styles/cornsilk.css";
-    }else{
-        if(cor.value == 'bisque'){
-            fundo='bisque';
-            link.href="styles/bisque.css";
-        }else{
-            if(cor.value == 'burlywood'){
-                fundo='burlywood';
-                link.href="styles/burlywood.css";
-            }else{
-                if(cor.value == 'peachpuff'){
-                    fundo='peachpuff';
-                    link.href="styles/peachpuff.css";
-                }
-            }
-        }
+        CorFundo ='cornsilk';
+        document.body.style.backgroundColor = 'cornsilk';
+        
+    }else if(cor.value == 'bisque'){
+        CorFundo ='bisque';
+        document.body.style.backgroundColor = 'bisque';
+        
+    }else if(cor.value == 'burlywood'){
+        CorFundo ='burlywood';
+        document.body.style.backgroundColor = 'burlywood';
+        
+    }else if(cor.value == 'peachpuff'){
+        CorFundo ='peachpuff';
+        document.body.style.backgroundColor = 'peachpuff';
     }
-    guardarLocalStorage();
+    localStorage.setItem('fundo', CorFundo);
 }
 
 
-function CorFundo(){
+function SelectedCorFundo(){
     var cor = document.getElementById('cor');
-    var link = document.getElementById('link');
-    if (fundo == 'cornsilk'){
-       document.getElementById(fundo).selected="selected";
-        link.href="styles/cornsilk.css";
-    }else{
-        if(fundo == 'bisque'){
-           document.getElementById(fundo).selected="selected";
-           link.href="styles/bisque.css";
-        }else{
-            if(fundo == 'burlywood'){
-                document.getElementById(fundo).selected="selected";
-                link.href="styles/burlywood.css";
-            }else{
-                if(fundo == 'peachpuff'){
-                    document.getElementById(fundo).selected="selected";
-                    link.href="styles/peachpuff.css";
-                }
-            }
-        }
+    
+    if (CorFundo == 'cornsilk'){
+        document.getElementById(CorFundo).selected="selected";
+        document.body.style.backgroundColor = 'cornsilk';
+        
+    }else if(CorFundo == 'bisque'){
+        document.getElementById(CorFundo).selected="selected";
+        document.body.style.backgroundColor = 'bisque';
+        
+    }else if(CorFundo == 'burlywood'){
+        document.getElementById(CorFundo).selected="selected";
+        document.body.style.backgroundColor = 'burlywood';
+        
+    }else if(CorFundo == 'peachpuff'){
+        document.getElementById(CorFundo).selected="selected";
+        document.body.style.backgroundColor = 'peachpuff';
+        
     }
 }
 
 
 function guardarLocalStorage(){
     var s = JSON.stringify(Contactos);
-    localStorage.setItem('contacto', s);              //guardar os albuns
-    localStorage.setItem('fundo',fundo);
+    localStorage.setItem('contacto', s); //guardar os albuns
 }
 
 function AdicionarContacto() {
-        var nome = document.getElementById('Nome');
-        var telefone = document.getElementById('Numero');
-        var aux=0;
-        alert("AdicionarContacto -- ok");
-        for (var i=0; i<Contactos.length; i++){
-            if (telefone.value === Contactos[i].numero){
-                alert("Número já existe!");
-                aux=1;
-            }
-            if (nome.value === Contactos[i].nome){
-                alert("Nome já existe!");
-                aux=1;
-            }
+    
+    var nome = document.getElementById('Nome');
+    var telefone = document.getElementById('Numero');
+    var aux=0;
+    
+    alert("AdicionarContacto -- ok");
+    
+    for (var i=0; i<Contactos.length; i++){
+        if (telefone.value === Contactos[i].numero){
+            console.log("Número já existe!");
+            alert("Número já existe!");
+            aux=1;
         }
-        if (aux == 0){
-            var email = document.getElementById('Email');
-            var pais = document.getElementById('Pais');
-            var tipo = document.getElementById('Tipo');
-            var DOB = document.getElementById('DOB');
-            var facebook = document.getElementById('Facebook');
-            var google = document.getElementById('Google');
-            var linkedIn = document.getElementById('LinkedIn');
-            var instagram = document.getElementById('Instagram');
-            var outrarede = document.getElementById('OutraRede');
-            var obs = document.getElementById('Obs');
-            var amigos = document.getElementById('Amigos');
-            var trabalho = document.getElementById('Trabalho');
-            var familia = document.getElementById('Familia');
-            var outroGrupo = document.getElementById('OutroGrupo');
-            var fav = document.getElementById('Fav');
-            
-            if (amigos.checked) amigos = "sim"; else amigos = "nao";
-            if (trabalho.checked) trabalho = "sim"; else trabalho = "nao";
-            if (familia.checked) familia = "sim"; else familia = "nao";
-            if (outroGrupo.checked) outroGrupo = "sim"; else outroGrupo = "nao";
-            if (fav.checked) fav = "sim"; else fav = "nao";
-
-            
-            
-            
-            
-            Contactos.push({nome: nome.value, email: email.value, pais: pais.value, telefone: telefone.value, tipo: tipo.value, DOB: DOB.value, Facebook: facebook.value, Google: google.value, LinkedIn: linkedIn.value, Instagram: instagram.value, OutraRede: outrarede.value, Obs: obs.value, Amigos: amigos, Trabalho: trabalho, Familia: familia, OutroGrupo: outroGrupo, Fav: fav});
-            alert("outra window -- ok");
+        if (nome.value === Contactos[i].nome){
+            console.log("Nome já existe!");
+            alert("Nome já existe!");
+            aux=1;
+        }
+    }
+    
+    if (aux == 0){
         
-            window.location.href="ListarContacto.html";
-            //ListarContacto(Contactos.length-1);
+        var email = document.getElementById('Email');
+        var pais = document.getElementById('Pais');
+        var tipo = document.getElementById('Tipo');
+        var DOB = document.getElementById('DOB');
+        var facebook = document.getElementById('Facebook');
+        var google = document.getElementById('Google');
+        var linkedIn = document.getElementById('LinkedIn');
+        var instagram = document.getElementById('Instagram');
+        var outrarede = document.getElementById('OutraRede');
+        var obs = document.getElementById('Obs');
+        var amigos = document.getElementById('Amigos');
+        var trabalho = document.getElementById('Trabalho');
+        var familia = document.getElementById('Familia');
+        var outroGrupo = document.getElementById('OutroGrupo');
+        var fav = document.getElementById('Fav');
+        
+        if (amigos.checked) amigos = "sim"; else amigos = "nao";
+        if (trabalho.checked) trabalho = "sim"; else trabalho = "nao";
+        if (familia.checked) familia = "sim"; else familia = "nao";
+        if (outroGrupo.checked) outroGrupo = "sim"; else outroGrupo = "nao";
+        if (fav.checked) fav = "sim"; else fav = "nao";
+        
+        Contactos.push({nome: nome.value, email: email.value, pais: pais.value, telefone: telefone.value, tipo: tipo.value, DOB: DOB.value, Facebook: facebook.value, Google: google.value, LinkedIn: linkedIn.value, Instagram: instagram.value, OutraRede: outrarede.value, Obs: obs.value, Amigos: amigos, Trabalho: trabalho, Familia: familia, OutroGrupo: outroGrupo, Fav: fav});
+        alert("outra window -- ok");
+        
+        window.location.href="ListarContacto.html";
+        //ListarContacto(Contactos.length-1);
             
-            guardarLocalStorage();
-        }else{
-            alert("Impossivel adicionar Contacto");
-        }
+        guardarLocalStorage();
+        
+    }else{
+        var MenssagemErro=document.createTextNode("Impossível adicionar Contactos");
+        var Erro = document.getElementById("Erro");
+        Erro.appendChild(MenssagemErro); // Escreve MenssagemErro no <div>
+        console.log(Erro);
+    }
 }
-
 
 function AbrirLocalStorage() {
     if (localStorage.contacto != null){
         Contactos = JSON.parse(localStorage.contacto);
-        fundo = localStorage.fundo;
-        alert("storage -- ok");
+        //fundo = localStorage.fundo;
+        console.log("storage -- ok");
     }else{
-        var vazio=document.createTextNode("Impossível adicionar Contactos");
-        var erro= document.getElementById("Erro");
-        alert(erro);
-        erro.appendChild(vazio);
+        var MenssagemErro=document.createTextNode("Impossível adicionar Contactos");
+        var Erro = document.getElementById("Erro");
+        Erro.appendChild(MenssagemErro); // Escreve MenssagemErro no <div>
+        console.log(Erro);
+    }
+    if(localStorage.fundo != null){
+        CorFundo = localStorage.fundo;
+    }else{
+        CorFundo = 'cornsilk'; //DEFAULT
     }
 }
 
@@ -145,7 +151,6 @@ function validarCampoNumero(inputNumero){ // verifica se o Campo Nome esta vazio
     return true; // Aceitou este Campo
 }
 
-
 function validarCampoNome(inputNome){ // verifica se o Campo Nome esta vazio
     if (inputNome.value === ""){ // Esta Vazio
         inputNome.className = "inputError"; //Span //campo vazio -- só de inputInvalido
@@ -158,7 +163,6 @@ function validarCampoNome(inputNome){ // verifica se o Campo Nome esta vazio
     return true; // Aceitou este Campo
 }
 
-
 function validarCampoEmail(inputEmail) {
     usuario = inputEmail.value.substring(0, inputEmail.value.indexOf("@"));
     dominio = inputEmail.value.substring(inputEmail.value.indexOf("@")+ 1, inputEmail.value.length);
@@ -167,19 +171,19 @@ function validarCampoEmail(inputEmail) {
         document.getElementById('inputEmailInvalido').className = "inputMessageErrorHidden"; // Esconde a menssagem Erro
         return true;
     } 
-    else 
-        if ((usuario.length >=1) && (dominio.length >=3) && (usuario.search("@")==-1) && (dominio.search("@")==-1) && (usuario.search(" ")==-1) && (dominio.search(" ")==-1) && (dominio.search(".")!=-1) && (dominio.indexOf(".") >=1) && (dominio.lastIndexOf(".") < dominio.length - 1)){
-                    inputEmail.className = ""; // Default
-                    document.getElementById('inputEmailInvalido').className = "inputMessageErrorHidden"; // Esconde a menssagem Erro
-                    return true;
-        }else{
+    else if ((usuario.length >=1) && (dominio.length >=3) && (usuario.search("@")==-1) && (dominio.search("@")==-1) && (usuario.search(" ")==-1) && (dominio.search(" ")==-1) && (dominio.search(".")!=-1) && (dominio.indexOf(".") >=1) && (dominio.lastIndexOf(".") < dominio.length - 1)){
+        
+        inputEmail.className = ""; // Default
+        document.getElementById('inputEmailInvalido').className = "inputMessageErrorHidden"; // Esconde a menssagem Erro
+        return true;
+        
+    }else{
+        
         inputEmail.className = "inputError"; //Span //campo vazio -- só de inputInvalido
         document.getElementById('inputEmailInvalido').className = "inputMessageError"; // Mostra o Span Error
-        
-            return false;
-        }
+        return false;
+    }
 }
-
 
 function VerificaCampos(){ // verifica se os campos estao vazios
     var flag = 0;
@@ -206,15 +210,23 @@ function VerificaCampos(){ // verifica se os campos estao vazios
     }
 }
 
+function Voltar(){
+    
+    window.location.href="index.html";
+}
 
 function init(){
+    
     AbrirLocalStorage();
-    CorFundo();
+    SelectedCorFundo();
     var color = document.getElementById('cor');
-    color.addEventListener('change', alterar);
+    color.addEventListener('change', Alterar);
     
     var btnEnviar = document.getElementById('Enviar');
     btnEnviar.addEventListener('click', VerificaCampos);
+    
+    var btnVoltar = document.getElementById('Voltar');
+    btnVoltar.addEventListener('click', Voltar);
     
 }
 

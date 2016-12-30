@@ -5,59 +5,54 @@
  */
 
 var Contactos = [];
-
-function alterar(){
+var CorFundo;
+        
+function Alterar(){
     var cor = document.getElementById('cor');
-    var link = document.getElementById('link');
+    
     if (cor.value == 'cornsilk'){
-        fundo='cornsilk';
-        link.href="styles/cornsilk.css";
-    }else{
-        if(cor.value == 'bisque'){
-            fundo='bisque';
-            link.href="styles/bisque.css";
-        }else{
-            if(cor.value == 'burlywood'){
-                fundo='burlywood';
-                link.href="styles/burlywood.css";
-            }else{
-                if(cor.value == 'peachpuff'){
-                    fundo='peachpuff';
-                    link.href="styles/peachpuff.css";
-                }
-            }
-        }
+        CorFundo ='cornsilk';
+        document.body.style.backgroundColor = 'cornsilk';
+        
+    }else if(cor.value == 'bisque'){
+        CorFundo ='bisque';
+        document.body.style.backgroundColor = 'bisque';
+        
+    }else if(cor.value == 'burlywood'){
+        CorFundo ='burlywood';
+        document.body.style.backgroundColor = 'burlywood';
+        
+    }else if(cor.value == 'peachpuff'){
+        CorFundo ='peachpuff';
+        document.body.style.backgroundColor = 'peachpuff';
     }
-    guardarLocalStorage();
+    localStorage.setItem('fundo', CorFundo);
 }
 
-function CorFundo(){
+function SelectedCorFundo(){
     var cor = document.getElementById('cor');
-    var link = document.getElementById('link');
-    if (fundo == 'cornsilk'){
-       document.getElementById(fundo).selected="selected";
-        link.href="styles/cornsilk.css";
-    }else{
-        if(fundo == 'bisque'){
-           document.getElementById(fundo).selected="selected";
-           link.href="styles/bisque.css";
-        }else{
-            if(fundo == 'burlywood'){
-                document.getElementById(fundo).selected="selected";
-                link.href="styles/burlywood.css";
-            }else{
-                if(fundo == 'peachpuff'){
-                    document.getElementById(fundo).selected="selected";
-                    link.href="styles/peachpuff.css";
-                }
-            }
-        }
+    
+    if (CorFundo == 'cornsilk'){
+        document.getElementById(CorFundo).selected="selected";
+        document.body.style.backgroundColor = 'cornsilk';
+        
+    }else if(CorFundo == 'bisque'){
+        document.getElementById(CorFundo).selected="selected";
+        document.body.style.backgroundColor = 'bisque';
+        
+    }else if(CorFundo == 'burlywood'){
+        document.getElementById(CorFundo).selected="selected";
+        document.body.style.backgroundColor = 'burlywood';
+        
+    }else if(CorFundo == 'peachpuff'){
+        document.getElementById(CorFundo).selected="selected";
+        document.body.style.backgroundColor = 'peachpuff';
+        
     }
 }
-
 
 function ListarContacto(pos){
-        
+    
     var artigo=document.createElement("article");
     
     document.getElementById('Nome').value=Contactos[pos].nome;
@@ -71,46 +66,36 @@ function ListarContacto(pos){
     document.getElementById('Instagram').value=Contactos[pos].Instagram;
     document.getElementById('OutraRede').value=Contactos[pos].OutraRede;
     document.getElementById('Obs').value=Contactos[pos].Obs;
+    
     if(Contactos[pos].pais=="+351"){
         document.getElementById('Portugal').selected="selected";
-    }else{
-        if(Contactos[pos].pais=="+34"){
-            document.getElementById('Espanha').selected="selected";
-        }else{
-            if(Contactos[pos].pais=="+55"){
-                document.getElementById('Brazil').selected="selected";
-            }else{
-                if(Contactos[pos].pais=="+33"){
-                    document.getElementById('frança').selected="selected";
-                }else{
-                    if(Contactos[pos].pais=="+41"){
-                        document.getElementById('Suica').selected="selected";
-                    }else{
-                        if(Contactos[pos].pais=="+49"){
-                            document.getElementById('Alemanha').selected="selected";
-                        }else{
-                            if(Contactos[pos].pais=="+44"){
-                                document.getElementById('Inglaterra').selected="selected";
-                            }else{
-                                if(Contactos[pos].pais=="+1"){
-                                    document.getElementById('EstadosUnidos').selected="selected";
-                                }else{
-                                    if(Contactos[pos].pais=="+31"){
-                                        document.getElementById('Holanda').selected="selected";
-                                    }else{
-                                        if(Contactos[pos].pais=="+244"){
-                                            document.getElementById('Angola').selected="selected";
-                                        }else{
         
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
+    }else if(Contactos[pos].pais=="+34"){
+        document.getElementById('Espanha').selected="selected";
+        
+    }else if(Contactos[pos].pais=="+55"){
+        document.getElementById('Brazil').selected="selected";
+        
+    }else if(Contactos[pos].pais=="+33"){
+        document.getElementById('frança').selected="selected";
+        
+    }else if(Contactos[pos].pais=="+41"){
+        document.getElementById('Suica').selected="selected";
+        
+    }else if(Contactos[pos].pais=="+49"){
+        document.getElementById('Alemanha').selected="selected";
+        
+    }else if(Contactos[pos].pais=="+44"){
+        document.getElementById('Inglaterra').selected="selected";
+        
+    }else if(Contactos[pos].pais=="+1"){
+        document.getElementById('EstadosUnidos').selected="selected";
+        
+    }else if(Contactos[pos].pais=="+31"){
+        document.getElementById('Holanda').selected="selected";
+        
+    }else if(Contactos[pos].pais=="+244"){
+        document.getElementById('Angola').selected="selected";
     }
         
     if (Contactos[pos].Amigos == "sim") document.getElementById('Amigos').checked=true; else document.getElementById('Amigos').checked=false;
@@ -120,15 +105,13 @@ function ListarContacto(pos){
     if (Contactos[pos].Fav == "sim"){
         document.getElementById('Fav').checked=true;
     }else document.getElementById('Fav').checked=false;   
-          
+    
 }
 
 function guardarLocalStorage(){
     var s = JSON.stringify(Contactos);
-    localStorage.setItem('contacto', s);              //guardar os albuns
-    localStorage.setItem('fundo',fundo);
+    localStorage.setItem('contacto', s); //Editar
 }
-
 
 function EditarContacto() {
         var nome = document.getElementById('Nome');
@@ -169,26 +152,35 @@ function EditarContacto() {
             if (fav.checked) fav = "sim"; else fav = "nao";
             
             Contactos[indice]=({nome: nome.value, email: email.value, pais: pais.value, telefone: telefone.value, tipo: tipo.value, DOB: DOB.value, Facebook: facebook.value, Google: google.value, LinkedIn: linkedIn.value, Instagram: instagram.value, OutraRede: outrarede.value, Obs: obs.value, Amigos: amigos, Trabalho: trabalho, Familia: familia, OutroGrupo: outroGrupo, Fav: fav});
+            localStorage.setItem('indice', -1);
             guardarLocalStorage();
-            window.location.href="ListarTodosContactos.html";
+            Voltar();
         }else{
-            alert("Impossivel editar Contacto");
+            
+            //localStorage.setItem('indice', -1);
+            var MenssagemErro=document.createTextNode("Impossivel editar Contacto");
+            var Erro = document.getElementById("Erro");
+            Erro.appendChild(MenssagemErro); // Escreve MenssagemErro no <div>
+            console.log(Erro);
         }
 }
 
 function AbrirLocalStorage() {
     if (localStorage.contacto != null){
         Contactos = JSON.parse(localStorage.contacto);
-        fundo= localStorage.fundo;
         indice=localStorage.indice;
     }else{
-        fundo= localStorage.fundo;
-        indice=localStorage.indice;
+        var MenssagemErro=document.createTextNode("Impossivel editar Contacto");
+        var Erro = document.getElementById("Erro");
+        Erro.appendChild(MenssagemErro); // Escreve MenssagemErro no <div>
+        console.log(Erro);
     }
-}
-
-function Voltar(){
-    window.location.href="ListarTodosContactos.html";
+    
+    if(localStorage.fundo != null){
+        CorFundo = localStorage.fundo;
+    }else{
+        CorFundo = 'cornsilk'; //DEFAULT
+    }
 }
 
 function validarCampoNumero(inputNumero){ // verifica se o Campo Nome esta vazio
@@ -202,7 +194,6 @@ function validarCampoNumero(inputNumero){ // verifica se o Campo Nome esta vazio
     }
     return true; // Aceitou este Campo
 }
-
 
 function validarCampoNome(inputNome){ // verifica se o Campo Nome esta vazio
     if (inputNome.value === ""){ // Esta Vazio
@@ -251,18 +242,24 @@ function VerificaCampos(){ // verifica se os campos estao vazios
     }
 }
 
+function Voltar(){
+    window.location.href="ListarTodosContactos.html";
+}
+
 function init(){
     
     AbrirLocalStorage();
-    CorFundo();
-    ListarContacto(indice);
+    SelectedCorFundo();
     var color = document.getElementById('cor');
-    color.addEventListener('change', alterar);
+    color.addEventListener('change', Alterar);
+    
+    ListarContacto(indice);
     
     var btnVoltar = document.getElementById('Voltar');
     btnVoltar.addEventListener('click', Voltar);
-    var btnEnviar = document.getElementById('Enviar');
-    btnEnviar.addEventListener('click', VerificaCampos);   
+    
+    var btnEditar = document.getElementById('Editar');
+    btnEditar.addEventListener('click', VerificaCampos);   
 }
 
 document.addEventListener('DOMContentLoaded', init);
