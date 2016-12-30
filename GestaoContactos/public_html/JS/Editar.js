@@ -250,11 +250,8 @@ function Voltar(){
 }
 
 function MudaEstrela(){
-    if(document.getElementById("estrela").checked==true){
-        document.getElementById("estrela").src="Images/estrelaOn.png";
-    }else{
-        document.getElementById("estrela").src="Images/estrelaOff.png";
-    }
+    var fav = document.getElementById('Fav');
+    if (fav.checked) document.getElementById("estrela").src="Images/estrelaOn.png"; else document.getElementById("estrela").src="Images/estrelaOff.png";
 }
 
 function init(){
@@ -274,7 +271,6 @@ function init(){
     
     var btnEstrela = document.getElementById("estrela");
     btnEstrela.addEventListener('click', MudaEstrela);
-    btnEstrela.addEventListener('change', MudaEstrela);
 }
 
 document.addEventListener('DOMContentLoaded', init);
