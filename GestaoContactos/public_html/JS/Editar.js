@@ -104,8 +104,11 @@ function ListarContacto(pos){
     if (Contactos[pos].OutroGrupo == "sim") document.getElementById('OutroGrupo').checked=true; else document.getElementById('OutroGrupo').checked=false;
     if (Contactos[pos].Fav == "sim"){
         document.getElementById('Fav').checked=true;
-    }else document.getElementById('Fav').checked=false;   
-    
+        document.getElementById('estrela').src="Images/estrelaOn.png";
+    }else{ 
+        document.getElementById('Fav').checked=false;
+        document.getElementById('estrela').src="Images/estrelaOff.png";
+    }
 }
 
 function guardarLocalStorage(){
@@ -246,6 +249,14 @@ function Voltar(){
     window.location.href="ListarTodosContactos.html";
 }
 
+function MudaEstrela(){
+    if(document.getElementById("estrela").checked==true){
+        document.getElementById("estrela").src="Images/estrelaOn.png";
+    }else{
+        document.getElementById("estrela").src="Images/estrelaOff.png";
+    }
+}
+
 function init(){
     
     AbrirLocalStorage();
@@ -260,6 +271,10 @@ function init(){
     
     var btnEditar = document.getElementById('Editar');
     btnEditar.addEventListener('click', VerificaCampos);   
+    
+    var btnEstrela = document.getElementById("estrela");
+    btnEstrela.addEventListener('click', MudaEstrela);
+    btnEstrela.addEventListener('change', MudaEstrela);
 }
 
 document.addEventListener('DOMContentLoaded', init);

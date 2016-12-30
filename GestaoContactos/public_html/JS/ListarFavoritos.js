@@ -82,8 +82,6 @@ function ObterIndice(array, value) {
 }
 
 function removerFavorito(btnremove){
-    
-    btnremove.src="Images/estrelaOff.png";
     var conf=confirm ("Tem a certeza que deseja remover dos Favoritos?");
     if(conf==true){
         var x = this.parentNode.getElementsByTagName("p")[0].getAttribute("id"); 
