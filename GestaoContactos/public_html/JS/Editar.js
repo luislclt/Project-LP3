@@ -71,7 +71,48 @@ function ListarContacto(pos){
     document.getElementById('Instagram').value=Contactos[pos].Instagram;
     document.getElementById('OutraRede').value=Contactos[pos].OutraRede;
     document.getElementById('Obs').value=Contactos[pos].Obs;
-    document.getElementById('')
+    if(Contactos[pos].pais=="+351"){
+        document.getElementById('Portugal').selected="selected";
+    }else{
+        if(Contactos[pos].pais=="+34"){
+            document.getElementById('Espanha').selected="selected";
+        }else{
+            if(Contactos[pos].pais=="+55"){
+                document.getElementById('Brazil').selected="selected";
+            }else{
+                if(Contactos[pos].pais=="+33"){
+                    document.getElementById('frança').selected="selected";
+                }else{
+                    if(Contactos[pos].pais=="+41"){
+                        document.getElementById('Suica').selected="selected";
+                    }else{
+                        if(Contactos[pos].pais=="+49"){
+                            document.getElementById('Alemanha').selected="selected";
+                        }else{
+                            if(Contactos[pos].pais=="+44"){
+                                document.getElementById('Inglaterra').selected="selected";
+                            }else{
+                                if(Contactos[pos].pais=="+1"){
+                                    document.getElementById('EstadosUnidos').selected="selected";
+                                }else{
+                                    if(Contactos[pos].pais=="+31"){
+                                        document.getElementById('Holanda').selected="selected";
+                                    }else{
+                                        if(Contactos[pos].pais=="+244"){
+                                            document.getElementById('Angola').selected="selected";
+                                        }else{
+        
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+        
     if (Contactos[pos].Amigos == "sim") document.getElementById('Amigos').checked=true; else document.getElementById('Amigos').checked=false;
     if (Contactos[pos].Trabalho == "sim") document.getElementById('Trabalho').checked=true; else document.getElementById('Trabalho').checked=false;
     if (Contactos[pos].Familia == "sim") document.getElementById('Familia').checked=true; else document.getElementById('Familia').checked=false;
