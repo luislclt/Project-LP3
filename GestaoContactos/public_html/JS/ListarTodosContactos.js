@@ -117,13 +117,16 @@ function AdicionarFavoritos() {
     
     var x = this.parentNode.getElementsByTagName("p")[0].getAttribute("id"); 
     var indice = ObterIndice(Contactos,x);
+    var btnfavorito = document.createElement('input');
     if (Contactos[indice].Fav == "sim") {
         Contactos[indice].Fav = "nao";
+        btnfavorito.src="Images/estrelaOff.png";
         //alert("Removido dos Favoritos com Sucesso!");
         console.log("Removido dos Favoritos com Sucesso!");
         window.location.reload();
     }else{
         Contactos[indice].Fav = "sim";
+        btnfavorito.src="Images/estrelaOn.png";
         //alert("Adicionado aos Favoritos com Sucesso!");
         console.log("Adicionado aos Favoritos com Sucesso!");
         window.location.reload();
@@ -157,7 +160,7 @@ function ListarContactos(){
         var outroGrupo=document.createElement("p");
         var Fav=document.createElement("p");
         var Espaco=document.createElement("p");
-        
+      
         nome.id=Contactos[i].nome;
         
         var nometext=document.createTextNode("Nome: " + Contactos[i].nome);
@@ -201,7 +204,7 @@ function ListarContactos(){
         outroGrupo.appendChild(OutroGrupotext);
         Fav.appendChild(Favtext);
         Espaco.appendChild(Espacotext);
-        
+         
         artigo.appendChild(nome);
         artigo.appendChild(email);
         artigo.appendChild(telefone);
@@ -232,7 +235,13 @@ function ListarContactos(){
         btnedita.addEventListener('click', editarContacto);
         artigo.appendChild(btnedita);
         
-        var btnfavorito = document.createElement('button');
+        var btnfavorito = document.createElement('input');
+        btnfavorito.type="image";
+        if(Contactos[i].Fav == "sim"){
+            btnfavorito.src="Images/estrelaOn.png";
+        }else{
+            btnfavorito.src="Images/estrelaOff.png";
+        }
         btnfavorito.innerHTML = 'Favorito';
         btnfavorito.addEventListener('click', AdicionarFavoritos);
         
