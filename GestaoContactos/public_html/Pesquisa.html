@@ -6,11 +6,34 @@ and open the template in the editor.
 -->
 <html>
     <head>
-        <title>TODO supply a title</title>
+        <title>Pesquisar Contacto</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="styles/Pesquisa.css" rel="stylesheet" type="text/css" id="link"/>
+        <script src="JS/Pesquisa.js" type="text/javascript"></script>
     </head>
     <body>
-        <div>TODO write content</div>
+        <h1>A minha Agenda</h1>
+        <h2>Pesquisar Contacto</h2>
+        <div id="VoltarB"></div>
+        <div id="Pesquisar">
+            <article>
+                <p>
+                    <label for="Nome">Nome: </label><input id="Nome" type="text" name="Nome" required="required"><span id = "inputNomeInvalido" class="inputMessageErrorHidden"> Nome Vazio!</span><span id = "NomeRepetido" class="inputMessageErrorHidden">Nome já existe!</span>
+                </p>
+                <p>
+                    <label for="Numero">Número: </label><input id="Numero" type="tel" name="Numero" placeholder="9XX XXX XXX"><span id = "inputNumeroInvalido" class="inputMessageErrorHidden"> Número Vazio!</span>
+                </p>
+            </article>
+        </div>
+        <label for="cor">Cor: </label>
+            <select name="cor" id="cor">
+                <option id ="cornsilk" value="cornsilk">Quase Branco</option>
+                <option id ="bisque" value="bisque">Creme</option>
+                <option id ="burlywood" value="burlywood">Bronzeado</option>
+                <option id ="peachpuff" value="peachpuff">Rosinha</option>
+            </select>
+        <button id="Voltar">Voltar</button>
+        <div id="Erro"></div>
     </body>
 </html>
