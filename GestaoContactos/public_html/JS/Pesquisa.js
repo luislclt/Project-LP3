@@ -7,6 +7,8 @@
 var Contactos = [];
 var CorFundo;
 
+var posicao;
+
 function Alterar(){
     var cor = document.getElementById('cor');
     
@@ -137,7 +139,7 @@ function validarCampoNome(inputNome){ // verifica se o Campo Nome esta vazio
         return true; // Aceitou este Campo
     }
 }
-
+/*
 function VerificaCampos(){ // verifica se os campos estao vazios
     var inputNome = document.getElementById('Nome'); // recebe o parametro do input Nome 
     var inputNumero = document.getElementById('Numero'); // recebe o parametro do input Numero
@@ -152,8 +154,26 @@ function VerificaCampos(){ // verifica se os campos estao vazios
         }
     }
 }
+*/
+function VerificaCampos(){ // verifica se os campos estao vazios
+    
+    var inputpesquisa = document.getElementById('pesquisa'); // recebe o parametro do input Nome 
+    
+    if (validarCampoNome(inputpesquisa)===true){
+        AbrirLocalStorage();
+        var resultadonome = PesquisarNome(inputpesquisa);
+    }else{
+    if (validarCampoNumero(inputpesquisa)===true){
+        AbrirLocalStorage();
+        var resultadonumero = PesquisarNumero(inputpesquisa);
+    }
+    }
+    if(resultadonome===false && resultadonumero=== false) alert("Este Contacto não existe!");
+    
+}
 
 function ListarContacto(pos){
+    
     
     var artigo=document.createElement("article");
         
@@ -251,38 +271,48 @@ function ListarContacto(pos){
     btnfavorito.innerHTML = 'Favorito';
     btnfavorito.addEventListener('click', AdicionarFavoritos);
     artigo.appendChild(btnfavorito);
+    
+    
 
 }
 
 function PesquisarNome(nome){
     
-    var flag = 0;
     Contactos.sort(OrdenarContactos);
     for (var i=0; i<=Contactos.length-1; i++){
         if (nome.value == Contactos[i].nome){
-            flag = 1;
+            //flag = 1;
+            
+            if(i == posicao) return false;
+            else{
+                posicao=i;
             ListarContacto(i);
-            //window.location.href="ListarContactoPesquisa.html";
+            return true;
+        }
         }
     }
-    if (flag==0) alert("Esse nome nao existe!");
+    return false;
  
 }
 
 function PesquisarNumero(numero){
     
-    var flag = 0;
     Contactos.sort(OrdenarContactos);
     for (var i=0; i<=Contactos.length-1; i++){
         if (numero.value == Contactos[i].telefone){
-            flag = 1;
+            
+            if(i == posicao) return false;
+            else{
+                posicao=i;
             ListarContacto(i);
-            //window.location.href="ListarContactoPesquisa.html";
+            return true;
+        }
         }
     }
-    if (flag==0) alert("Esse numero nao existe!");
+    return false;
  
 }
+
 
 function Voltar(){
     window.location.href="index.html";
@@ -302,6 +332,7 @@ function AbrirLocalStorage() {
     }else{
         CorFundo = 'cornsilk'; //DEFAULT
     }
+    
 }
 
 function init(){
@@ -315,6 +346,7 @@ function init(){
     
     var btnEnviar = document.getElementById('Enviar');
     btnEnviar.addEventListener('click', VerificaCampos);
+    
 }
 
 document.addEventListener('DOMContentLoaded', init);
