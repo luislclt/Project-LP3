@@ -56,6 +56,86 @@ function CorFundo(){
 }
 
 
+function ListarContacto(pos){
+        
+    var artigo=document.createElement("article");
+    
+    document.getElementById('Nome').value=Contactos[pos].nome;
+    document.getElementById('Email').value=Contactos[pos].email;
+    document.getElementById('Numero').value=Contactos[pos].telefone;
+    document.getElementById('Tipo').value=Contactos[pos].tipo;
+    document.getElementById('DOB').value=Contactos[pos].DOB;
+    document.getElementById('Facebook').value=Contactos[pos].Facebook;
+    document.getElementById('Google').value=Contactos[pos].Google;
+    document.getElementById('LinkedIn').value=Contactos[pos].LinkedIn;
+    document.getElementById('Instagram').value=Contactos[pos].Instagram;
+    document.getElementById('OutraRede').value=Contactos[pos].OutraRede;
+    document.getElementById('Obs').value=Contactos[pos].Obs; 
+    
+    var nome=document.createElement("p");
+    var email=document.createElement("p");
+    var telefone=document.createElement("p");
+    var tipo=document.createElement("p");
+    var DOB=document.createElement("p");
+    var Facebook=document.createElement("p");
+    var Google=document.createElement("p");
+    var LinkedIn=document.createElement("p");
+    var Instagram=document.createElement("p");
+    var OutraRede=document.createElement("p");
+    var Obs=document.createElement("p");
+    var Amigos=document.createElement("p");
+    var Trabalho=document.createElement("p");
+    var Familia=document.createElement("p");
+    var OutroGrupo=document.createElement("p");
+    var Fav=document.createElement("p");
+        
+    nome.id=Contactos[pos].nome;
+        
+    var nomet=document.createTextNode(Contactos[pos].nome);
+    var emailt=document.createTextNode(Contactos[pos].email);
+    var telefonet=document.createTextNode(Contactos[pos].telefone);
+    var tipot=document.createTextNode(Contactos[pos].tipo);
+    var DOBt=document.createTextNode(Contactos[pos].DOB);
+    var Facebookt=document.createTextNode(Contactos[pos].Facebook);
+    var Googlet=document.createTextNode(Contactos[pos].Google);
+    var LinkedInt=document.createTextNode(Contactos[pos].LinkedIn);
+    var Instagramt=document.createTextNode(Contactos[pos].Instagram);
+    var OutraRedet=document.createTextNode(Contactos[pos].OutraRede);
+    var Obst=document.createTextNode(Contactos[pos].Obs);
+        
+    alert("Grupos: --");
+    
+    
+    if (Contactos[pos].Amigos == "sim") var Amigost=document.createTextNode("Amigos"); else var Amigost=document.createTextNode("");
+    if (Contactos[pos].Trabalho == "sim") var Trabalhot=document.createTextNode("Trabalho"); else var Trabalhot=document.createTextNode("");
+    if (Contactos[pos].Familia == "sim") var Familiat=document.createTextNode("Familia"); else var Familiat=document.createTextNode("");
+    if (Contactos[pos].OutroGrupo == "sim") var OutroGrupot=document.createTextNode("Outro"); else var OutroGrupot=document.createTextNode("");
+    if (Contactos[pos].Fav == "sim"){
+        var Favt=document.createTextNode("Favorito");
+    }else var Favt=document.createTextNode("");
+        
+    alert("Depois Grupos: --");
+        
+    nome.appendChild(nomet);
+    email.appendChild(emailt);
+    telefone.appendChild(telefonet);
+    tipo.appendChild(tipot);
+    DOB.appendChild(DOBt);
+    Facebook.appendChild(Facebookt);
+    Google.appendChild(Googlet);
+    LinkedIn.appendChild(LinkedInt);
+    Instagram.appendChild(Instagramt);
+    OutraRede.appendChild(OutraRedet);
+    Obs.appendChild(Obst);
+    Amigos.appendChild(Amigost);
+    Trabalho.appendChild(Trabalhot);
+    Familia.appendChild(Familiat);
+    OutroGrupo.appendChild(OutroGrupot);
+    Fav.appendChild(Favt);
+   
+    
+}
+
 function guardarLocalStorage(){
     var s = JSON.stringify(Contactos);
     localStorage.setItem('contacto', s);              //guardar os albuns
@@ -187,6 +267,7 @@ function init(){
     
     AbrirLocalStorage();
     CorFundo();
+    ListarContacto(indice);
     var color = document.getElementById('cor');
     color.addEventListener('change', alterar);
     
