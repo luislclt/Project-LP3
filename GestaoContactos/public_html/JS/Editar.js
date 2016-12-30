@@ -256,21 +256,27 @@ function MudaEstrela(){
 
 function init(){
     
-    AbrirLocalStorage();
-    SelectedCorFundo();
-    var color = document.getElementById('cor');
-    color.addEventListener('change', Alterar);
+    if( localStorage.indice != null && localStorage.indice != -1 && localStorage.contacto.length-1 >= 0 ){
+        
+        AbrirLocalStorage();
+        SelectedCorFundo();
+        var color = document.getElementById('cor');
+        color.addEventListener('change', Alterar);
+
+        ListarContacto(indice);
+
+        var btnVoltar = document.getElementById('Voltar');
+        btnVoltar.addEventListener('click', Voltar);
+
+        var btnEditar = document.getElementById('Editar');
+        btnEditar.addEventListener('click', VerificaCampos);   
+
+        var btnEstrela = document.getElementById("estrela");
+        btnEstrela.addEventListener('click', MudaEstrela);
+        
+    }else window.location.href="index.html";
     
-    ListarContacto(indice);
     
-    var btnVoltar = document.getElementById('Voltar');
-    btnVoltar.addEventListener('click', Voltar);
-    
-    var btnEditar = document.getElementById('Editar');
-    btnEditar.addEventListener('click', VerificaCampos);   
-    
-    var btnEstrela = document.getElementById("estrela");
-    btnEstrela.addEventListener('click', MudaEstrela);
 }
 
 document.addEventListener('DOMContentLoaded', init);

@@ -160,15 +160,20 @@ function Voltar(){
 
 function init(){
     
-    AbrirLocalStorage();
-    SelectedCorFundo();
-    var color = document.getElementById('cor');
-    color.addEventListener('change', Alterar);
-    
-    ListarContacto(Contactos.length-1);
-    
-    var btnVoltar = document.getElementById('Voltar');
-    btnVoltar.addEventListener('click', Voltar);
+    var Contactos = JSON.parse(localStorage.contacto);
+    if(localStorage.contacto!= null && Contactos.length > 0){
+        
+        AbrirLocalStorage();
+        SelectedCorFundo();
+        var color = document.getElementById('cor');
+        color.addEventListener('change', Alterar);
+
+        ListarContacto(Contactos.length-1);
+
+        var btnVoltar = document.getElementById('Voltar');
+        btnVoltar.addEventListener('click', Voltar);
+        
+    }else window.location.href="index.html";
     
 }
 

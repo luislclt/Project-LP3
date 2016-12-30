@@ -152,18 +152,13 @@ function ListarContactos () {
             var OutraRedet=document.createTextNode(Contactos[i].OutraRede);
             var Obst=document.createTextNode(Contactos[i].Obs);
             
-            alert("4");
-            
             if (Contactos[i].Amigos == "sim") var Amigost=document.createTextNode("Amigos"); else var Amigost=document.createTextNode("");
             if (Contactos[i].Trabalho == "sim") var Trabalhot=document.createTextNode("Trabalho"); else var Trabalhot=document.createTextNode("");
             if (Contactos[i].Familia == "sim") var Familiat=document.createTextNode("Familia"); else var Familiat=document.createTextNode("");
             if (Contactos[i].OutroGrupo == "sim") var OutroGrupot=document.createTextNode("Outro"); else var OutroGrupot=document.createTextNode("");
             
-            
             var Espacot=document.createTextNode("************************");
             
-            alert("5");
-
             nome.appendChild(nomet);
             email.appendChild(emailt);
             telefone.appendChild(telefonet);

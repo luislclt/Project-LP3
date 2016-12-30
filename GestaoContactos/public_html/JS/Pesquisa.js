@@ -173,6 +173,7 @@ function ListarContacto(pos){
     var Familia=document.createElement("p");
     var OutroGrupo=document.createElement("p");
     var Fav=document.createElement("p");
+    var Espaco=document.createElement("p");
     
     nome.id=Contactos[pos].nome;
         
@@ -196,7 +197,9 @@ function ListarContacto(pos){
     if (Contactos[pos].Fav == "sim"){
         var Favtext=document.createTextNode("Favorito");
     }else var Favtext=document.createTextNode("");
-       
+    
+    var Espacotext = document.createTextNode("************************");
+    
     nome.appendChild(nometext);
     email.appendChild(emailtext);
     telefone.appendChild(telefonetext);
@@ -213,6 +216,7 @@ function ListarContacto(pos){
     Familia.appendChild(Familiatext);
     OutroGrupo.appendChild(OutroGrupotext);
     Fav.appendChild(Favtext);
+    Espaco.appendChild(Espacotext);
     
     artigo.appendChild(nome);
     artigo.appendChild(email);
