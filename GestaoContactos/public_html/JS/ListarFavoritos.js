@@ -206,7 +206,8 @@ function ListarContactos () {
             document.getElementById('Contactos').appendChild(artigo);
 
             var btnremove = document.createElement('button');
-            btnremove.innerHTML = 'Remover';
+            btnremove.src="Images/estrelaOn.png";
+            //btnremove.innerHTML = 'Remover';
             btnremove.addEventListener('click', removerFavorito);
             artigo.appendChild(btnremove);
 
