@@ -79,49 +79,7 @@ function ListarContacto(pos){
     if (Contactos[pos].Fav == "sim"){
         document.getElementById('Fav').checked=true;
     }else document.getElementById('Fav').checked=false;   
-        
-        
-    var nomet=document.createTextNode(Contactos[pos].nome);
-    var emailt=document.createTextNode(Contactos[pos].email);
-    var telefonet=document.createTextNode(Contactos[pos].telefone);
-    var tipot=document.createTextNode(Contactos[pos].tipo);
-    var DOBt=document.createTextNode(Contactos[pos].DOB);
-    var Facebookt=document.createTextNode(Contactos[pos].Facebook);
-    var Googlet=document.createTextNode(Contactos[pos].Google);
-    var LinkedInt=document.createTextNode(Contactos[pos].LinkedIn);
-    var Instagramt=document.createTextNode(Contactos[pos].Instagram);
-    var OutraRedet=document.createTextNode(Contactos[pos].OutraRede);
-    var Obst=document.createTextNode(Contactos[pos].Obs);
-    
-    
-    if (Contactos[pos].Amigos == "sim") var Amigost=document.createTextNode("Amigos"); else var Amigost=document.createTextNode("");
-    if (Contactos[pos].Trabalho == "sim") var Trabalhot=document.createTextNode("Trabalho"); else var Trabalhot=document.createTextNode("");
-    if (Contactos[pos].Familia == "sim") var Familiat=document.createTextNode("Familia"); else var Familiat=document.createTextNode("");
-    if (Contactos[pos].OutroGrupo == "sim") var OutroGrupot=document.createTextNode("Outro"); else var OutroGrupot=document.createTextNode("");
-    if (Contactos[pos].Fav == "sim"){
-        var Favt=document.createTextNode("Favorito");
-    }else var Favt=document.createTextNode("");
-        
-    alert("Depois Grupos: --");
-        
-    nome.appendChild(nomet);
-    email.appendChild(emailt);
-    telefone.appendChild(telefonet);
-    tipo.appendChild(tipot);
-    DOB.appendChild(DOBt);
-    Facebook.appendChild(Facebookt);
-    Google.appendChild(Googlet);
-    LinkedIn.appendChild(LinkedInt);
-    Instagram.appendChild(Instagramt);
-    OutraRede.appendChild(OutraRedet);
-    Obs.appendChild(Obst);
-    Amigos.appendChild(Amigost);
-    Trabalho.appendChild(Trabalhot);
-    Familia.appendChild(Familiat);
-    OutroGrupo.appendChild(OutroGrupot);
-    Fav.appendChild(Favt);
-   
-    
+          
 }
 
 function guardarLocalStorage(){
@@ -137,11 +95,11 @@ function EditarContacto() {
         var aux=0;
         alert("AdicionarContacto -- ok");
         for (var i=0; i<Contactos.length; i++){
-            if (telefone.value === Contactos[i].numero){
+            if (telefone.value === Contactos[i].numero && i!=indice){
                 alert("Número já existe!");
                 aux=1;
             }
-            if (nome.value === Contactos[i].nome){
+            if (nome.value === Contactos[i].nome && i!=indice){
                 alert("Nome já existe!");
                 aux=1;
             }
@@ -170,11 +128,8 @@ function EditarContacto() {
             if (fav.checked) fav = "sim"; else fav = "nao";
             
             Contactos[indice]=({nome: nome.value, email: email.value, pais: pais.value, telefone: telefone.value, tipo: tipo.value, DOB: DOB.value, Facebook: facebook.value, Google: google.value, LinkedIn: linkedIn.value, Instagram: instagram.value, OutraRede: outrarede.value, Obs: obs.value, Amigos: amigos, Trabalho: trabalho, Familia: familia, OutroGrupo: outroGrupo, Fav: fav});
-            alert("outra window -- ok");
-            
-            window.location.href="ListarEditar.html";
-
             guardarLocalStorage();
+            window.location.href="ListarTodosContactos.html";
         }else{
             alert("Impossivel editar Contacto");
         }
@@ -189,6 +144,10 @@ function AbrirLocalStorage() {
         fundo= localStorage.fundo;
         indice=localStorage.indice;
     }
+}
+
+function Voltar(){
+    window.location.href="ListarTodosContactos.html";
 }
 
 function validarCampoNumero(inputNumero){ // verifica se o Campo Nome esta vazio
@@ -259,6 +218,8 @@ function init(){
     var color = document.getElementById('cor');
     color.addEventListener('change', alterar);
     
+    var btnVoltar = document.getElementById('Voltar');
+    btnVoltar.addEventListener('click', Voltar);
     var btnEnviar = document.getElementById('Enviar');
     btnEnviar.addEventListener('click', VerificaCampos);   
 }
