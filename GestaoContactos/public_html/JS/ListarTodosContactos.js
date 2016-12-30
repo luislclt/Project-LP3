@@ -116,6 +116,23 @@ function editarContacto(){
     window.location.href="Editar.html";
 }
 
+function AdicionarFavoritos() {
+    
+    var x = this.parentNode.getElementsByTagName("p")[0].getAttribute("id"); 
+    var indice = ObterIndice(Contactos,x);
+    if (Contactos[indice].Fav == "sim") {
+        Contactos[indice].Fav = "nao";
+        alert("Removido dos Favoritos com Sucesso!");
+        window.location.reload();
+    }else{
+        Contactos[indice].Fav = "sim";
+        alert("Adicionado aos Favoritos com Sucesso!");
+        window.location.reload();
+    }
+        
+    guardarLocalStorage();
+}
+
 function ListarContactos () {
         Contactos.sort(OrdenarContactos);
         
@@ -142,41 +159,47 @@ function ListarContactos () {
         
         nome.id=Contactos[i].nome;
         
-        var nomet=document.createTextNode(Contactos[i].nome);
-        var emailt=document.createTextNode(Contactos[i].email);
-        var telefonet=document.createTextNode(Contactos[i].telefone);
-        var tipot=document.createTextNode(Contactos[i].tipo);
-        var DOBt=document.createTextNode(Contactos[i].DOB);
-        var Facebookt=document.createTextNode(Contactos[i].Facebook);
-        var Googlet=document.createTextNode(Contactos[i].Google);
-        var LinkedInt=document.createTextNode(Contactos[i].LinkedIn);
-        var Instagramt=document.createTextNode(Contactos[i].Instagram);
-        var OutraRedet=document.createTextNode(Contactos[i].OutraRede);
-        var Obst=document.createTextNode(Contactos[i].Obs);
-        var amigost=document.createTextNode(Contactos[i].Amigos);
-        var trabalhot=document.createTextNode(Contactos[i].Trabalho);
-        var familiat=document.createTextNode(Contactos[i].Familia);
-        var outroGrupot=document.createTextNode(Contactos[i].OutroGrupo);
-        var Favt=document.createTextNode(Contactos[i].Fav);
-        var Espacot=document.createTextNode("************************");
+        var nometext=document.createTextNode("Nome: " + Contactos[i].nome);
+        if (Contactos[i].email == "") var emailtext=document.createTextNode(Contactos[i].email); else var emailtext=document.createTextNode("Email: " + Contactos[i].email);
+        var telefonetext=document.createTextNode("Contacto: " + Contactos[i].telefone);
+        if (Contactos[i].tipo == "") var tipotext=document.createTextNode(Contactos[i].tipo); else var tipotext=document.createTextNode("Tipo de Contacto: " + Contactos[i].tipo);
+        if (Contactos[i].DOB == "") var DOBtext=document.createTextNode(Contactos[i].DOB); else var DOBtext=document.createTextNode("Data de Nascimento: " + Contactos[i].DOB);
+        if (Contactos[i].Facebook == "") var Facebooktext=document.createTextNode(Contactos[i].Facebook); else var Facebooktext=document.createTextNode("Facebook: " + Contactos[i].Facebook);
+        if (Contactos[i].Google == "") var Googletext=document.createTextNode(Contactos[i].Google); else var Googletext=document.createTextNode("Google+: " + Contactos[i].Google);
+        if (Contactos[i].LinkedIn == "") var LinkedIntext=document.createTextNode(Contactos[i].LinkedIn); else var LinkedIntext=document.createTextNode("LinkedIn: " + Contactos[i].LinkedIn);
+        if (Contactos[i].Instagram == "") var Instagramtext=document.createTextNode(Contactos[i].Instagram); else var Instagramtext=document.createTextNode("Instagram: " + Contactos[i].Instagram);
+        if (Contactos[i].OutraRede == "") var OutraRedetext=document.createTextNode(Contactos[i].OutraRede); else var OutraRedetext=document.createTextNode("Outro: " + Contactos[i].OutraRede);
+        if (Contactos[i].Obs == "") var Obstext=document.createTextNode(Contactos[i].Obs); else var Obstext=document.createTextNode("Observações: " + Contactos[i].Obs);
         
-        nome.appendChild(nomet);
-        email.appendChild(emailt);
-        telefone.appendChild(telefonet);
-        tipo.appendChild(tipot);
-        DOB.appendChild(DOBt);
-        Facebook.appendChild(Facebookt);
-        Google.appendChild(Googlet);
-        LinkedIn.appendChild(LinkedInt);
-        Instagram.appendChild(Instagramt);
-        OutraRede.appendChild(OutraRedet);
-        Obs.appendChild(Obst);
-        amigos.appendChild(amigost);
-        trabalho.appendChild(trabalhot);
-        familia.appendChild(familiat);
-        outroGrupo.appendChild(outroGrupot);
-        Fav.appendChild(Favt);
-        Espaco.appendChild(Espacot);
+        
+        if (Contactos[i].Amigos == "sim") var Amigostext=document.createTextNode("Grupo: Amigos"); else var Amigostext=document.createTextNode("");
+        if (Contactos[i].Trabalho == "sim") var Trabalhotext=document.createTextNode("Grupo: Trabalho"); else var Trabalhotext=document.createTextNode("");
+        if (Contactos[i].Familia == "sim") var Familiatext=document.createTextNode("Grupo: Familia"); else var Familiatext=document.createTextNode("");
+        if (Contactos[i].OutroGrupo == "sim") var OutroGrupotext=document.createTextNode("Grupo: Outro"); else var OutroGrupotext=document.createTextNode("");
+        if (Contactos[i].Fav == "sim"){
+            var Favtext=document.createTextNode("Favorito");
+        }else var Favtext=document.createTextNode("");
+        
+        
+        var Espacotext=document.createTextNode("************************");
+        
+        nome.appendChild(nometext);
+        email.appendChild(emailtext);
+        telefone.appendChild(telefonetext);
+        tipo.appendChild(tipotext);
+        DOB.appendChild(DOBtext);
+        Facebook.appendChild(Facebooktext);
+        Google.appendChild(Googletext);
+        LinkedIn.appendChild(LinkedIntext);
+        Instagram.appendChild(Instagramtext);
+        OutraRede.appendChild(OutraRedetext);
+        Obs.appendChild(Obstext);
+        amigos.appendChild(Amigostext);
+        trabalho.appendChild(Trabalhotext);
+        familia.appendChild(Familiatext);
+        outroGrupo.appendChild(OutroGrupotext);
+        Fav.appendChild(Favtext);
+        Espaco.appendChild(Espacotext);
         
         artigo.appendChild(nome);
         artigo.appendChild(email);
@@ -208,7 +231,12 @@ function ListarContactos () {
         btnedita.addEventListener('click', editarContacto);
         artigo.appendChild(btnedita);
         
+        var btnfavorito = document.createElement('button');
+        btnfavorito.innerHTML = 'Favorito';
+        btnfavorito.addEventListener('click', AdicionarFavoritos);
         
+        
+        artigo.appendChild(btnfavorito);
         
         artigo.appendChild(Espaco);
     }
