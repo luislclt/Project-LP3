@@ -295,6 +295,36 @@ function PesquisarNome(nome){
  
 }
 
+/*
+(adicionar no inicio do codigo: var ContactosVistos=[];) 
+
+function PesquisarNome(nome){
+    
+    Contactos.sort(OrdenarContactos);
+    for (var i=0; i<=Contactos.length-1; i++){
+        if (Contactos[i].nome.search(nome.value)!=-1){
+            //flag = 1;
+            var flagNomeListado=0;
+            for(var j=0; j<=ContactosVistos.length-1; j++){
+                if(ContactosVistos[j].nome == Contactos[i].nome){
+                    flagNomeListado=1;
+                }
+            }
+            if(flagNomeListado==1) return false;
+            else{
+            ContactosVistos.push({nome: Contactos[i].nome});
+            ListarContacto(i);
+            
+            }
+            //return true;
+        }
+    }
+    return false;
+ 
+}
+ */
+
+
 function PesquisarNumero(numero){
     
     Contactos.sort(OrdenarContactos);
