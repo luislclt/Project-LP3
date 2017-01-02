@@ -91,3 +91,7 @@ nav#menu > ul> li > p >a:hover, nav#menu > ul> li > p >a:focus, nav#menu > ul> l
     -webkit-transform: scale(1.1) rotate(4deg);
     transform: scale(1.1) rotate(4deg);  
 }
+
+nav#menu {
+      position: fixed;
+}
