@@ -8,10 +8,6 @@ and open the template in the editor.
     Author     : tania
 */
 
-body {
-    /*background-color: red;*/
-}
-
 .inputError{
     border: 2px solid red;
 }
