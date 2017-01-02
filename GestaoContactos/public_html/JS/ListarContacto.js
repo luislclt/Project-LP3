@@ -167,7 +167,7 @@ function AbrirLocalStorage() {
 function init(){
     
     var Contactos = JSON.parse(localStorage.contacto);
-    if(localStorage.contacto!= null && Contactos.length > 0){
+    if(localStorage.contacto!= null && localStorage.contacto != "[]" && localStorage.indice != -1 ){ //&& Contactos.length > 0
         
         AbrirLocalStorage();
         SelectedCorFundo();
@@ -175,6 +175,7 @@ function init(){
         color.addEventListener('change', Alterar);
 
         ListarContacto(Contactos.length-1);
+        
         
     }else window.location.href="index.html";
     

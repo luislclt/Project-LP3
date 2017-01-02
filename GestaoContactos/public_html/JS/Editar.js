@@ -263,7 +263,7 @@ function MudaEstrela(){
 
 function init(){
     
-    if( localStorage.indice != null && localStorage.indice != -1 && localStorage.contacto.length-1 >= 0 ){
+    if( localStorage.contacto!= null && localStorage.contacto != "[]" && localStorage.indice != -1 && localStorage.contacto.length-1 >= 0 ){
         
         AbrirLocalStorage();
         SelectedCorFundo();

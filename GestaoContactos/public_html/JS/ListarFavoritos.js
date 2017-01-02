@@ -200,7 +200,7 @@ function ListarContactos () {
 }
 
 function AbrirLocalStorage() {
-    if (localStorage.contacto != null){
+    if (localStorage.contacto != null && localStorage.contacto != "[]"){
         Contactos = JSON.parse(localStorage.contacto);
         ListarContactos();
     }else{
