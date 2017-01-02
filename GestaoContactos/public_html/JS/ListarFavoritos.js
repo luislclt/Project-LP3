@@ -10,29 +10,23 @@ var CorFundo;
 
 function Alterar(){
     var cor = document.getElementById('cor');
-    //var link = document.getElementById('link');
     
     if (cor.value == 'cornsilk'){
         CorFundo ='cornsilk';
         document.getElementsByTagName("body")[0].style.background="-webkit-linear-gradient(left, #FFF8DC, #A0522D)";
-        //link.href="styles/cornsilk.css";
         
     }else if(cor.value == 'bisque'){
         CorFundo ='bisque';
         document.getElementsByTagName("body")[0].style.background="-webkit-linear-gradient(left, #FFE4C4, #FFA54F)";
-        //link.href="styles/bisque.css";
         
     }else if(cor.value == 'burlywood'){
         CorFundo ='burlywood';
         document.getElementsByTagName("body")[0].style.background="-webkit-linear-gradient(left, #FFD39B, #8B7355)";
-        //link.href="styles/burlywood.css";
         
     }else if(cor.value == 'peachpuff'){
         CorFundo ='peachpuff';
         document.getElementsByTagName("body")[0].style.background="-webkit-linear-gradient(left, #FFDAB9, #D2691E)";
-        //link.href="styles/peachpuff.css";
     }
-    //guardarLocalStorage();
     localStorage.setItem('fundo', CorFundo);
 }
 
@@ -43,29 +37,24 @@ function SelectedCorFundo(){
     if (CorFundo == 'cornsilk'){
         document.getElementById(CorFundo).selected="selected";
         document.getElementsByTagName("body")[0].style.background="-webkit-linear-gradient(left, #FFF8DC, #A0522D)";
-        //link.href="styles/cornsilk.css";
         
     }else if(CorFundo == 'bisque'){
         document.getElementById(CorFundo).selected="selected";
         document.getElementsByTagName("body")[0].style.background="-webkit-linear-gradient(left, #FFE4C4, #FFA54F)";
-        //link.href="styles/bisque.css";
         
     }else if(CorFundo == 'burlywood'){
         document.getElementById(CorFundo).selected="selected";
         document.getElementsByTagName("body")[0].style.background="-webkit-linear-gradient(left, #FFD39B, #8B7355)";
-        //link.href="styles/burlywood.css";
         
     }else if(CorFundo == 'peachpuff'){
         document.getElementById(CorFundo).selected="selected";
         document.getElementsByTagName("body")[0].style.background="-webkit-linear-gradient(left, #FFDAB9, #D2691E)";
-        //link.href="styles/peachpuff.css";
-        
     }
 }
 
 function guardarLocalStorage(){
     var s = JSON.stringify(Contactos);
-    localStorage.setItem('contacto', s); //Contactos
+    localStorage.setItem('contacto', s);
 }
 
 function OrdenarFavoritos(a, b) {
@@ -87,22 +76,19 @@ function ObterIndice(array, value) {
     return -1;
 }
 
-function removerFavorito(btnremove){
+function removerFavorito(){
     var conf=confirm ("Tem a certeza que deseja remover dos Favoritos?");
     if(conf==true){
         var x = this.parentNode.getElementsByTagName("p")[0].getAttribute("id"); 
         var indice = ObterIndice(Contactos,x);
         if (indice > -1) {
             Contactos[indice].Fav = "nao";
-            VerificarExisteFavoritos();
             window.location.reload();
         }else{
             alert("erro ao remover!!");
         }
         guardarLocalStorage();
-        
     }
-    
 }
 
 function ListarContactos () {
@@ -130,7 +116,6 @@ function ListarContactos () {
             var Espaco=document.createElement("p");
 
             nome.id=Contactos[i].nome;
-            alert("3");
 
             var nomet=document.createTextNode(Contactos[i].nome);
             var emailt=document.createTextNode(Contactos[i].email);
@@ -189,7 +174,6 @@ function ListarContactos () {
             var btnremove = document.createElement('input');
             btnremove.src="Images/estrelaOn.png";
             btnremove.type="image";
-            //btnremove.innerHTML = 'Remover';
             btnremove.addEventListener('click', removerFavorito);
             
             artigo.appendChild(btnremove);
@@ -212,16 +196,14 @@ function AbrirLocalStorage() {
     if(localStorage.fundo != null){
         CorFundo = localStorage.fundo;
     }else{
-        CorFundo = 'cornsilk'; //DEFAULT
+        CorFundo = 'cornsilk';
     }
 }
 
 function init(){
-    
     AbrirLocalStorage();
     SelectedCorFundo();
     var color = document.getElementById('cor');
     color.addEventListener('change', Alterar);
-    
 }
 document.addEventListener('DOMContentLoaded', init);
