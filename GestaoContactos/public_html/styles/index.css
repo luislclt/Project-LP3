@@ -54,11 +54,28 @@ nav#menu > ul> li >a:hover, nav#menu > ul> li >a:focus, nav#menu > ul> li >a:act
     transform: scale(1.1) rotate(4deg);  
 }
 
-label > select{
-    margin-right: 80%;
-    list-style-type: none;
+label select{
+   display:none;
+   margin-left: 60%;
 }
 
 label{
-    margin-left: 80%;
+    margin-left: 60%;
+}
+
+footer {
+    text-decoration: none;
+    color: black;
+    padding-bottom: 5px;
+    text-align: left;
+    position: absolute;
+    bottom:0px;
+    margin-left: 50%;
+    width: 600px;
+}
+
+footer p {
+    margin-left: 10%;
+    list-style-type: none;
+
 }

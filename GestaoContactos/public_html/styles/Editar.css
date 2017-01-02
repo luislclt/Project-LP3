@@ -52,3 +52,12 @@ h2{
     color: black;
     font-family: ChunkFive;
 }
+
+label[for=cor] > select{
+    margin-right: 80%;
+    list-style-type: none;
+}
+
+label[for=cor]{
+    margin-left: 80%;
+}
