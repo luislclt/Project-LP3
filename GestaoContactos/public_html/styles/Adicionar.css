@@ -27,3 +27,37 @@ input[type=checkbox][id=Fav] {
 :checked+img {
   border: 2px solid red;
 }
+
+@font-face {
+    font-family: ChunkFive;
+    src: url(../Font/Chunkfive.otf);
+}
+
+@font-face {
+    font-family: Roboto;
+    src: url(../Font/Roboto-Black.ttf);
+}
+
+body{
+    font-family: Roboto;
+}
+
+h1{
+    color: darkslategray;
+    font-family: ChunkFive;
+    text-align: center;
+}
+
+h2{
+    color: black;
+    font-family: ChunkFive;
+}
+
+label[for=cor] > select{
+    margin-right: 80%;
+    list-style-type: none;
+}
+
+label[for=cor]{
+    margin-left: 80%;
+}

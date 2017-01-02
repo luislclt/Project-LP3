@@ -81,7 +81,7 @@ function ListarContacto (pos) {
     var Trabalho=document.createElement("p");
     var Familia=document.createElement("p");
     var OutroGrupo=document.createElement("p");
-    var Fav=document.createElement("p");
+    var Fav=document.createElement("img");
     
     nome.id=Contactos[pos].nome;
     
@@ -103,9 +103,9 @@ function ListarContacto (pos) {
     if (Contactos[pos].Familia == "sim") var Familiat=document.createTextNode("Familia"); else var Familiat=document.createTextNode("");
     if (Contactos[pos].OutroGrupo == "sim") var OutroGrupot=document.createTextNode("Outro"); else var OutroGrupot=document.createTextNode("");
     if (Contactos[pos].Fav == "sim"){
-        var Favt=document.createTextNode("Favorito");
+        Fav.src="Images/estrelaOn.png";
         
-    }else var Favt=document.createTextNode("");
+    }else Fav.src="Images/estrelaOff.png";
     
         
     nome.appendChild(nomet);
@@ -123,7 +123,6 @@ function ListarContacto (pos) {
     Trabalho.appendChild(Trabalhot);
     Familia.appendChild(Familiat);
     OutroGrupo.appendChild(OutroGrupot);
-    Fav.appendChild(Favt);
     
     artigo.appendChild(nome);
     artigo.appendChild(email);
