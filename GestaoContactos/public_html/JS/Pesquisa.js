@@ -354,11 +354,6 @@ function PesquisarNumero(numero){
  
 }
 
-
-function Voltar(){
-    window.location.href="index.html";
-}
-
 function AbrirLocalStorage() {
     if (localStorage.contacto != null){
         Contactos = JSON.parse(localStorage.contacto);
@@ -381,9 +376,6 @@ function init(){
     SelectedCorFundo();
     var color = document.getElementById('cor');
     color.addEventListener('change', Alterar);
-    
-    var btnVoltar = document.getElementById('Voltar');
-    btnVoltar.addEventListener('click', Voltar);
     
     var btnEnviar = document.getElementById('Enviar');
     btnEnviar.addEventListener('click', VerificaCampos);

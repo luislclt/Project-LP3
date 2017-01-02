@@ -14,86 +14,94 @@ and open the template in the editor.
     </head>
     <body>
         <h1>A minha Agenda</h1>
-        <h2>Editar Contactos</h2>
-        <p>
-            <label for="Nome">Nome: </label><input id="Nome" type="text" name="Nome" required="required"><span id = "inputNomeInvalido" class="inputMessageErrorHidden"> Nome Vazio!</span><span id = "NomeRepetido" class="inputMessageErrorHidden">Nome já existe!</span>
-        </p>        
-        <p>
-            <label for="Email">Email: </label><input id="Email" type="email" name="Email" placeholder="exemplo@exemplo.com"><span id = "inputEmailInvalido" class="inputMessageErrorHidden">Email inválido</span>
-        </p>
-        
-        <p>Telefone: </p>
-        <div>
+        <nav id="menu">
+            <ul>
+                <li><a href="Adicionar.html">Adicionar Contacto</a></li>
+                <li><a href="ListarTodosContactos.html">Listar Contactos</a></li>
+                <li><a href="ListarFavoritos.html">Favoritos</a></li>
+                <li><a href="Pesquisa.html">Pesquisa</a></li>
+                <li><p><a href="index.html">Voltar</a></p></li>
+            </ul>
+        </nav>
+        <div id="conteudo">
+            <h2>Editar Contactos</h2>
             <p>
-        <label for="Pais">Pais: </label>
-            <select id="Pais" name="Pais" >
-                <option id="Portugal" value="+351">Portugal (+351)</option>
-                <option id="Espanha" value="+34">Espanha (+34)</option>
-                <option id="Brazil" value="+55">Brasil (+55)</option>
-                <option id="frança" value="+33">França (+33)</option>
-                <option id="Suica" value="+41">Suiça (+41)</option>
-                <option id="Alemanha" value="+49">Alemanha (+49)</option>
-                <option id="Inglaterra" value="+44">Inglaterra (+44)</option>
-                <option id="EstadosUnidos" value="+1">Estados Unidos (+1)</option>
-                <option id="Holanda" value="+31">Holanda (+31)</option>
-                <option id="Angola" value="+244">Angola (+244)</option>
-            </select>
-        </p>
-        <p>
-            <label for="Numero">Número: </label><input id="Numero" type="tel" name="Numero" placeholder="9XX XXX XXX"><span id = "inputNumeroInvalido" class="inputMessageErrorHidden"> Número Vazio!</span>
-        </p>
-        <p>
-            <label for="Tipo">Tipo: </label>
-                <select id="Tipo" name="Tipo" >
-                   <option value="Pessoal">Pessoal</option>
-                   <option value="Trabalho">Trabalho</option>
-                   <option value="Outro">Outro</option>
-                </select>
-        </p>
-        </div>
-        <form>Birthday: <input id="DOB" type="date" name="bday" ></form>
-        <p>Redes Sociais: </p>
-        <div>
+                <label for="Nome">Nome: </label><input id="Nome" type="text" name="Nome" required="required"><span id = "inputNomeInvalido" class="inputMessageErrorHidden"> Nome Vazio!</span><span id = "NomeRepetido" class="inputMessageErrorHidden">Nome já existe!</span>
+            </p>        
             <p>
-                <label for="Facebook">Facebook: </label><input id="Facebook" type="text" name="Facebook" placeholder="facebook.com/exemplo">
+                <label for="Email">Email: </label><input id="Email" type="email" name="Email" placeholder="exemplo@exemplo.com"><span id = "inputEmailInvalido" class="inputMessageErrorHidden">Email inválido</span>
             </p>
-            <p>
-                <label for="Google">Google+: </label><input id="Google" type="text" name="Google" placeholder="plus.google.com/XXXXX">
-            </p>
-            <p>
-                <label for="LinkedIn">LinkedIn: </label><input id="LinkedIn" type="text" name="LinkedIn" placeholder="linkedin.com/exemplo">
-            </p>
-            <p>
-                <label for="Instagram">Instagram: </label><input id="Instagram" type="text" name="Instagram" placeholder="instagram.com/exemplo">
-            </p>
-            <p>
-                <label for="OutraRede">Outro: </label><input id="OutraRede" type="text" name="OutraRede">
-            </p>
-        </div>
-        <p>
-            <label for="Obs">Observações: </label><input id="Obs" type="text" name="Obs">
-        </p>
-        <form>
-            <input id="Amigos" type="checkbox" name="Grupo" value="Amigos" >Amigos<br>
-            <input id="Trabalho" type="checkbox" name="Grupo" value="Trabalho" >Trabalho<br>
-            <input id="Familia" type="checkbox" name="Grupo" value="Familia" >Familia<br>
-            <input id="OutroGrupo" type="checkbox" name="Grupo" value="Outro" >Outro
-        </form>
 
-        <form>
-            <label>
-                <img src="Images/estrelaOff.png" id="estrela" alt="NO"/>
-                <input id="Fav" type="checkbox" name="Favorito" value="Fav" >Adicionar aos Favoritos
-            </label>
-        </form>
-              
-        <button id="Voltar">Voltar</button>
-        <button id="Editar">Editar</button>
-        
-        <div id="Contacto">
-            <article></article>
+            <p>Telefone: </p>
+            <div>
+                <p>
+            <label for="Pais">Pais: </label>
+                <select id="Pais" name="Pais" >
+                    <option id="Portugal" value="+351">Portugal (+351)</option>
+                    <option id="Espanha" value="+34">Espanha (+34)</option>
+                    <option id="Brazil" value="+55">Brasil (+55)</option>
+                    <option id="frança" value="+33">França (+33)</option>
+                    <option id="Suica" value="+41">Suiça (+41)</option>
+                    <option id="Alemanha" value="+49">Alemanha (+49)</option>
+                    <option id="Inglaterra" value="+44">Inglaterra (+44)</option>
+                    <option id="EstadosUnidos" value="+1">Estados Unidos (+1)</option>
+                    <option id="Holanda" value="+31">Holanda (+31)</option>
+                    <option id="Angola" value="+244">Angola (+244)</option>
+                </select>
+            </p>
+            <p>
+                <label for="Numero">Número: </label><input id="Numero" type="tel" name="Numero" placeholder="9XX XXX XXX"><span id = "inputNumeroInvalido" class="inputMessageErrorHidden"> Número Vazio!</span>
+            </p>
+            <p>
+                <label for="Tipo">Tipo: </label>
+                    <select id="Tipo" name="Tipo" >
+                       <option value="Pessoal">Pessoal</option>
+                       <option value="Trabalho">Trabalho</option>
+                       <option value="Outro">Outro</option>
+                    </select>
+            </p>
+            </div>
+            <form>Birthday: <input id="DOB" type="date" name="bday" ></form>
+            <p>Redes Sociais: </p>
+            <div>
+                <p>
+                    <label for="Facebook">Facebook: </label><input id="Facebook" type="text" name="Facebook" placeholder="facebook.com/exemplo">
+                </p>
+                <p>
+                    <label for="Google">Google+: </label><input id="Google" type="text" name="Google" placeholder="plus.google.com/XXXXX">
+                </p>
+                <p>
+                    <label for="LinkedIn">LinkedIn: </label><input id="LinkedIn" type="text" name="LinkedIn" placeholder="linkedin.com/exemplo">
+                </p>
+                <p>
+                    <label for="Instagram">Instagram: </label><input id="Instagram" type="text" name="Instagram" placeholder="instagram.com/exemplo">
+                </p>
+                <p>
+                    <label for="OutraRede">Outro: </label><input id="OutraRede" type="text" name="OutraRede">
+                </p>
+            </div>
+            <p>
+                <label for="Obs">Observações: </label><input id="Obs" type="text" name="Obs">
+            </p>
+            <form>
+                <input id="Amigos" type="checkbox" name="Grupo" value="Amigos" >Amigos<br>
+                <input id="Trabalho" type="checkbox" name="Grupo" value="Trabalho" >Trabalho<br>
+                <input id="Familia" type="checkbox" name="Grupo" value="Familia" >Familia<br>
+                <input id="OutroGrupo" type="checkbox" name="Grupo" value="Outro" >Outro
+            </form>
+
+            <form>
+                <label>
+                    <img src="Images/estrelaOff.png" id="estrela" alt="NO"/>
+                    <input id="Fav" type="checkbox" name="Favorito" value="Fav" >Adicionar aos Favoritos
+                </label>
+            </form>
+            <button id="Editar">Editar</button>
+
+            <div id="Contacto">
+                <article></article>
+            </div>
         </div>
-        
         <label for="cor">Cor: </label>
             <select id="cor" name="cor" >
                 <option id ="cornsilk" value="cornsilk">Quase Branco</option>

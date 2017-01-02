@@ -220,11 +220,6 @@ function VerificaCampos(){ // verifica se os campos estao vazios
     }
 }
 
-function Voltar(){
-    
-    window.location.href="index.html";
-}
-
 function MudaEstrela(){
     var fav = document.getElementById('Fav');
     if (fav.checked) document.getElementById("estrela").src="Images/estrelaOff.png"; else document.getElementById("estrela").src="Images/estrelaOn.png";
@@ -239,9 +234,6 @@ function init(){
     
     var btnEnviar = document.getElementById('Enviar');
     btnEnviar.addEventListener('click', VerificaCampos);
-    
-    var btnVoltar = document.getElementById('Voltar');
-    btnVoltar.addEventListener('click', Voltar);
     
     var btnEstrela = document.getElementById("estrela");
     btnEstrela.addEventListener('click', MudaEstrela);

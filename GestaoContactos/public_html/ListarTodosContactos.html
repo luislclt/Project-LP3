@@ -14,15 +14,23 @@ and open the template in the editor.
     </head>
     <body>
         <h1>A minha Agenda</h1>
-        <h2>Listar Todos os Contactos</h2>
-        <div id="VoltarB"></div>
-        <div id="Contactos">
-            <article></article>
+        <nav id="menu">
+            <ul>
+                <li><a href="Adicionar.html">Adicionar Contacto</a></li>
+                <li><a href="ListarTodosContactos.html">Listar Contactos</a></li>
+                <li><a href="ListarFavoritos.html">Favoritos</a></li>
+                <li><a href="Pesquisa.html">Pesquisa</a></li>
+                <li><p><a href="index.html">Voltar</a></p></li>
+            </ul>
+        </nav>
+        <div id="conteudo">
+            <h2>Listar Todos os Contactos</h2>
+            <div id="Contactos">
+                <article></article>
+            </div>
+
+            <div id="Erro"></div>
         </div>
-        
-        <button id="Voltar">Voltar</button>
-         
-        <div id="Erro"></div>
         <footer>
             <label for="cor">Cor: </label>
             <select name="cor" id="cor">

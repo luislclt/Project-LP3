@@ -79,3 +79,15 @@ footer p {
     list-style-type: none;
 
 }
+
+img{
+    text-decoration: none;
+    color: black;
+    padding-bottom: 5px;
+    text-align: left;
+    position: absolute;
+    bottom:0px;
+    margin-left: 30%;
+    margin-bottom: 5%;
+    width: 200px;
+}

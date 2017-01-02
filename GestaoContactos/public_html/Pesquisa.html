@@ -14,30 +14,29 @@ and open the template in the editor.
     </head>
     <body>
         <h1>A minha Agenda</h1>
-        <h2>Pesquisar Contacto</h2>
-        <div id="VoltarB"></div>
-        <div id="Pesquisar">
-            <article>
-                <!--
-                <p>
-                    <label for="Nome">Nome: </label><input id="Nome" type="text" name="Nome" required="required">
-                </p>
-                
-                <p>
-                    <label for="Numero">Número: </label><input id="Numero" type="tel" name="Numero" placeholder="9XX XXX XXX">
-                </p>
-                -->
-                <p>
-                    <label for="pesquisa">Pesquisa: </label><input id="pesquisa" type="text" name="pesquisa" required="required">
-                </p>
-            </article>
+        <nav id="menu">
+            <ul>
+                <li><a href="Adicionar.html">Adicionar Contacto</a></li>
+                <li><a href="ListarTodosContactos.html">Listar Contactos</a></li>
+                <li><a href="ListarFavoritos.html">Favoritos</a></li>
+                <li><a href="Pesquisa.html">Pesquisa</a></li>
+                <li><p><a href="index.html">Voltar</a></p></li>
+            </ul>
+        </nav>
+        <div id="conteudo">
+            <h2>Pesquisar Contacto</h2>
+            <div id="Pesquisar">
+                <article>
+                    <p>
+                        <label for="pesquisa">Pesquisa: </label><input id="pesquisa" type="text" name="pesquisa" required="required">
+                    </p>
+                </article>
+            </div>
+            <div id="Apresentar"></div>
+            <button id="Enviar">Enviar</button>
+
+            <div id="Erro"></div>
         </div>
-        <div id="Apresentar"></div>
-        
-        <button id="Voltar">Voltar</button>
-        <button id="Enviar">Enviar</button>
-        
-        <div id="Erro"></div>
         <footer>
             <label for="cor">Cor: </label>
             <select name="cor" id="cor">

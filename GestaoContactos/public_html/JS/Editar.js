@@ -168,7 +168,7 @@ function EditarContacto() {
             Contactos[indice]=({nome: nome.value, email: email.value, pais: pais.value, telefone: telefone.value, tipo: tipo.value, DOB: DOB.value, Facebook: facebook.value, Google: google.value, LinkedIn: linkedIn.value, Instagram: instagram.value, OutraRede: outrarede.value, Obs: obs.value, Amigos: amigos, Trabalho: trabalho, Familia: familia, OutroGrupo: outroGrupo, Fav: fav});
             localStorage.setItem('indice', -1);
             guardarLocalStorage();
-            Voltar();
+            window.location.href="ListarTodosContactos.html";
         }else{
             
             //localStorage.setItem('indice', -1);
@@ -256,10 +256,6 @@ function VerificaCampos(){ // verifica se os campos estao vazios
     }
 }
 
-function Voltar(){
-    window.location.href="ListarTodosContactos.html";
-}
-
 function MudaEstrela(){
     var fav = document.getElementById('Fav');
     if (fav.checked) document.getElementById("estrela").src="Images/estrelaOff.png"; else document.getElementById("estrela").src="Images/estrelaOn.png";
@@ -275,9 +271,6 @@ function init(){
         color.addEventListener('change', Alterar);
 
         ListarContacto(indice);
-
-        var btnVoltar = document.getElementById('Voltar');
-        btnVoltar.addEventListener('click', Voltar);
 
         var btnEditar = document.getElementById('Editar');
         btnEditar.addEventListener('click', VerificaCampos);   

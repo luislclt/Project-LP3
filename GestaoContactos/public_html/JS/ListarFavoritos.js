@@ -105,25 +105,6 @@ function removerFavorito(btnremove){
     
 }
 
-
-function VerificarExisteFavoritos(){
-    
-    var aux=0;
-    for(var i=0; i<=Contactos.length-1;i++){
-        if(Contactos[i].Fav == "sim"){
-            aux=1;
-        }
-    }
-    if(aux==1){
-        var btnVoltarB=document.createElement("button");
-        var btnText=document.createTextNode("Voltar");
-        btnVoltarB.appendChild(btnText);
-        btnVoltarB.addEventListener('click', Voltar);
-        document.getElementById("VoltarB").appendChild(btnVoltarB);
-    }
-}
-
-
 function ListarContactos () {
     Contactos.sort(OrdenarFavoritos);
     
@@ -216,11 +197,6 @@ function ListarContactos () {
             artigo.appendChild(Espaco);
         }
     }
-    VerificarExisteFavoritos();
-}
-
-function Voltar(){
-    window.location.href="index.html";
 }
 
 function AbrirLocalStorage() {
@@ -247,7 +223,5 @@ function init(){
     var color = document.getElementById('cor');
     color.addEventListener('change', Alterar);
     
-    var btnVoltar = document.getElementById('Voltar');
-    btnVoltar.addEventListener('click', Voltar);
 }
 document.addEventListener('DOMContentLoaded', init);

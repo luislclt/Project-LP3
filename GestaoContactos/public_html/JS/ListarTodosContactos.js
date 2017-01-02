@@ -253,17 +253,6 @@ function ListarContactos(){
         
         artigo.appendChild(Espaco);
     }
-    if(Contactos.length>0){
-        var btnVoltarB=document.createElement("button");
-        var btnText=document.createTextNode("Voltar");
-        btnVoltarB.appendChild(btnText);
-        btnVoltarB.addEventListener('click', Voltar);
-        document.getElementById("VoltarB").appendChild(btnVoltarB);
-    } 
-}
-
-function Voltar(){
-    window.location.href="index.html";
 }
 
 function AbrirLocalStorage() {
@@ -288,9 +277,5 @@ function init(){
     SelectedCorFundo();
     var color = document.getElementById('cor');
     color.addEventListener('change', Alterar);
-    
-    var btnVoltar = document.getElementById('Voltar');
-    btnVoltar.addEventListener('click', Voltar);
-       
 }
 document.addEventListener('DOMContentLoaded', init);

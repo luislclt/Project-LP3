@@ -164,10 +164,6 @@ function AbrirLocalStorage() {
     }
 }
 
-function Voltar(){
-    window.location.href="index.html";
-}
-
 function init(){
     
     var Contactos = JSON.parse(localStorage.contacto);
@@ -179,9 +175,6 @@ function init(){
         color.addEventListener('change', Alterar);
 
         ListarContacto(Contactos.length-1);
-
-        var btnVoltar = document.getElementById('Voltar');
-        btnVoltar.addEventListener('click', Voltar);
         
     }else window.location.href="index.html";
     
