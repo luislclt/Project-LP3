@@ -7,33 +7,29 @@
 var Contactos = [];
 var CorFundo;
 
+var ContactosVistos = [];
 var posicao;
+//var flag=0;
 
 function Alterar(){
     var cor = document.getElementById('cor');
-    //var link = document.getElementById('link');
     
     if (cor.value == 'cornsilk'){
         CorFundo ='cornsilk';
         document.getElementsByTagName("body")[0].style.background="-webkit-linear-gradient(left, #FFF8DC, #A0522D)";
-        //link.href="styles/cornsilk.css";
         
     }else if(cor.value == 'bisque'){
         CorFundo ='bisque';
         document.getElementsByTagName("body")[0].style.background="-webkit-linear-gradient(left, #FFE4C4, #FFA54F)";
-        //link.href="styles/bisque.css";
         
     }else if(cor.value == 'burlywood'){
         CorFundo ='burlywood';
         document.getElementsByTagName("body")[0].style.background="-webkit-linear-gradient(left, #FFD39B, #8B7355)";
-        //link.href="styles/burlywood.css";
         
     }else if(cor.value == 'peachpuff'){
         CorFundo ='peachpuff';
         document.getElementsByTagName("body")[0].style.background="-webkit-linear-gradient(left, #FFDAB9, #D2691E)";
-        //link.href="styles/peachpuff.css";
     }
-    //guardarLocalStorage();
     localStorage.setItem('fundo', CorFundo);
 }
 
@@ -44,26 +40,20 @@ function SelectedCorFundo(){
     if (CorFundo == 'cornsilk'){
         document.getElementById(CorFundo).selected="selected";
         document.getElementsByTagName("body")[0].style.background="-webkit-linear-gradient(left, #FFF8DC, #A0522D)";
-        //link.href="styles/cornsilk.css";
         
     }else if(CorFundo == 'bisque'){
         document.getElementById(CorFundo).selected="selected";
         document.getElementsByTagName("body")[0].style.background="-webkit-linear-gradient(left, #FFE4C4, #FFA54F)";
-        //link.href="styles/bisque.css";
         
     }else if(CorFundo == 'burlywood'){
         document.getElementById(CorFundo).selected="selected";
         document.getElementsByTagName("body")[0].style.background="-webkit-linear-gradient(left, #FFD39B, #8B7355)";
-        //link.href="styles/burlywood.css";
         
     }else if(CorFundo == 'peachpuff'){
         document.getElementById(CorFundo).selected="selected";
         document.getElementsByTagName("body")[0].style.background="-webkit-linear-gradient(left, #FFDAB9, #D2691E)";
-        //link.href="styles/peachpuff.css";
-        
     }
 }
-
 
 function guardarLocalStorage(){
     var s = JSON.stringify(Contactos);
@@ -96,7 +86,7 @@ function ObterIndice(array, value) {
 }
 
 function removerContacto(){
-    var conf=confirm ("Tem a certeza que deseja remover?"); // confirm
+    var conf=confirm ("Tem a certeza que deseja remover?");
     if(conf==true){
         var x = this.parentNode.getElementsByTagName("p")[0].getAttribute("id"); 
         var indice = ObterIndice(Contactos,x);
@@ -118,19 +108,16 @@ function editarContacto(){
 }
 
 function AdicionarFavoritos() {
-    
     var x = this.parentNode.getElementsByTagName("p")[0].getAttribute("id"); 
     var indice = ObterIndice(Contactos,x);
     if (Contactos[indice].Fav == "sim") {
         Contactos[indice].Fav = "nao";
         console.log("Removido dos Favoritos com Sucesso!");
         window.location.reload();
-        //ListarContacto(indice);
     }else{
         Contactos[indice].Fav = "sim";
         console.log("Adicionado aos Favoritos com Sucesso!");
         window.location.reload();
-        
     }
     guardarLocalStorage();
 }
@@ -150,44 +137,48 @@ function validarCampoNome(inputNome){ // verifica se o Campo Nome esta vazio
         return true; // Aceitou este Campo
     }
 }
-/*
-function VerificaCampos(){ // verifica se os campos estao vazios
-    var inputNome = document.getElementById('Nome'); // recebe o parametro do input Nome 
-    var inputNumero = document.getElementById('Numero'); // recebe o parametro do input Numero
-    
-    if (validarCampoNome(inputNome)===true && validarCampoNumero(inputNumero)===false){
-        AbrirLocalStorage();
-        PesquisarNome(inputNome);
-    }else{
-        if (validarCampoNome(inputNome)===false && validarCampoNumero(inputNumero)===true){
-            AbrirLocalStorage();
-            PesquisarNumero(inputNumero);
-        }
-    }
-}
-*/
-function VerificaCampos(){ // verifica se os campos estao vazios
-    
-    var inputpesquisa = document.getElementById('pesquisa'); // recebe o parametro do input Nome 
+
+function VerificaCampos(inputpesquisa){ // verifica se os campos estao vazios
+    //window.location.reload();
+    //if(localStorage.InputCampo == null || localStorage.InputCampo == -1) inputpesquisa = document.getElementById('pesquisa'); // recebe o parametro do input Nome 
     
     if (validarCampoNome(inputpesquisa)===true){
         AbrirLocalStorage();
         var resultadonome = PesquisarNome(inputpesquisa);
-    }else{
-    if (validarCampoNumero(inputpesquisa)===true){
-        AbrirLocalStorage();
-        var resultadonumero = PesquisarNumero(inputpesquisa);
-    }
-    }
-    if(resultadonome===false && resultadonumero=== false) alert("Este Contacto não existe!");
-    
-}
-
-function ListarContacto(pos){
-    
-    
-    var artigo=document.createElement("article");
+        if(resultadonome === true){
+            
+            state++;
+            console.log("state++ "+state);
+        }
         
+        //if(resultadonome === false) state1++;
+    }else{
+        if (validarCampoNumero(inputpesquisa)===true){
+            AbrirLocalStorage();
+            var resultadonumero = PesquisarNumero(inputpesquisa);
+            if(resultadonumero === true){
+                state++;
+                console.log("state++ "+state);
+            }
+            //if(resultadonumero === false) state1++;
+        }
+    }
+    if(resultadonome===false && resultadonumero=== false){
+        alert("Este Contacto não existe!");
+        state1++;
+        console.log("state message Error: "+state);
+        
+    } 
+}
+/*
+function ListarContacto(pos){
+    window.location.href="ListarContacto.html";
+}
+*/
+function ListarContacto(pos){
+    //window.location.reload();
+    var artigo=document.getElementById("contacto");
+
     var nome=document.createElement("p");
     var email=document.createElement("p");
     var telefone=document.createElement("p");
@@ -206,28 +197,28 @@ function ListarContacto(pos){
     var Fav=document.createElement("p");
     var Espaco=document.createElement("p");
     
-    nome.id=Contactos[pos].nome;
+    //nome.id=Contactos[pos].nome;
         
     var nometext=document.createTextNode("Nome: " + Contactos[pos].nome);
-    if (Contactos[pos].email == "") var emailtext=document.createTextNode(Contactos[pos].email); else var emailtext=document.createTextNode("Email: " + Contactos[pos].email);
+    if (Contactos[pos].email == "") var emailtext=document.createTextNode(Contactos[pos].email); else emailtext=document.createTextNode("Email: " + Contactos[pos].email);
     
     var telefonetext=document.createTextNode("Contacto: " + Contactos[pos].telefone);
-    if (Contactos[pos].tipo == "") var tipotext=document.createTextNode(Contactos[pos].tipo); else var tipotext=document.createTextNode("Tipo de Contacto: " + Contactos[pos].tipo);
-    if (Contactos[pos].DOB == "") var DOBtext=document.createTextNode(Contactos[pos].DOB); else var DOBtext=document.createTextNode("Data de Nascimento: " + Contactos[pos].DOB);
-    if (Contactos[pos].Facebook == "") var Facebooktext=document.createTextNode(Contactos[pos].Facebook); else var Facebooktext=document.createTextNode("Facebook: " + Contactos[pos].Facebook);
-    if (Contactos[pos].Google == "") var Googletext=document.createTextNode(Contactos[pos].Google); else var Googletext=document.createTextNode("Google+: " + Contactos[pos].Google);
-    if (Contactos[pos].LinkedIn == "") var LinkedIntext=document.createTextNode(Contactos[pos].LinkedIn); else var LinkedIntext=document.createTextNode("LinkedIn: " + Contactos[pos].LinkedIn);
-    if (Contactos[pos].Instagram == "") var Instagramtext=document.createTextNode(Contactos[pos].Instagram); else var Instagramtext=document.createTextNode("Instagram: " + Contactos[pos].Instagram);
-    if (Contactos[pos].OutraRede == "") var OutraRedetext=document.createTextNode(Contactos[pos].OutraRede); else var OutraRedetext=document.createTextNode("Outro: " + Contactos[pos].OutraRede);
-    if (Contactos[pos].Obs == "") var Obstext=document.createTextNode(Contactos[pos].Obs); else var Obstext=document.createTextNode("Observações: " + Contactos[pos].Obs);
+    if (Contactos[pos].tipo == "") var tipotext=document.createTextNode(Contactos[pos].tipo); else tipotext=document.createTextNode("Tipo de Contacto: " + Contactos[pos].tipo);
+    if (Contactos[pos].DOB == "") var DOBtext=document.createTextNode(Contactos[pos].DOB); else DOBtext=document.createTextNode("Data de Nascimento: " + Contactos[pos].DOB);
+    if (Contactos[pos].Facebook == "") var Facebooktext=document.createTextNode(Contactos[pos].Facebook); else Facebooktext=document.createTextNode("Facebook: " + Contactos[pos].Facebook);
+    if (Contactos[pos].Google == "") var Googletext=document.createTextNode(Contactos[pos].Google); else Googletext=document.createTextNode("Google+: " + Contactos[pos].Google);
+    if (Contactos[pos].LinkedIn == "") var LinkedIntext=document.createTextNode(Contactos[pos].LinkedIn); else LinkedIntext=document.createTextNode("LinkedIn: " + Contactos[pos].LinkedIn);
+    if (Contactos[pos].Instagram == "") var Instagramtext=document.createTextNode(Contactos[pos].Instagram); else Instagramtext=document.createTextNode("Instagram: " + Contactos[pos].Instagram);
+    if (Contactos[pos].OutraRede == "") var OutraRedetext=document.createTextNode(Contactos[pos].OutraRede); else OutraRedetext=document.createTextNode("Outro: " + Contactos[pos].OutraRede);
+    if (Contactos[pos].Obs == "") var Obstext=document.createTextNode(Contactos[pos].Obs); else Obstext=document.createTextNode("Observações: " + Contactos[pos].Obs);
     
-    if (Contactos[pos].Amigos == "sim") var Amigostext=document.createTextNode("Grupo: Amigos"); else var Amigostext=document.createTextNode("");
-    if (Contactos[pos].Trabalho == "sim") var Trabalhotext=document.createTextNode("Grupo: Trabalho"); else var Trabalhotext=document.createTextNode("");
-    if (Contactos[pos].Familia == "sim") var Familiatext=document.createTextNode("Grupo: Familia"); else var Familiatext=document.createTextNode("");
-    if (Contactos[pos].OutroGrupo == "sim") var OutroGrupotext=document.createTextNode("Grupo: Outro"); else var OutroGrupotext=document.createTextNode("");
+    if (Contactos[pos].Amigos == "sim") var Amigostext=document.createTextNode("Grupo: Amigos"); else Amigostext=document.createTextNode("");
+    if (Contactos[pos].Trabalho == "sim") var Trabalhotext=document.createTextNode("Grupo: Trabalho"); else Trabalhotext=document.createTextNode("");
+    if (Contactos[pos].Familia == "sim") var Familiatext=document.createTextNode("Grupo: Familia"); else Familiatext=document.createTextNode("");
+    if (Contactos[pos].OutroGrupo == "sim") var OutroGrupotext=document.createTextNode("Grupo: Outro"); else OutroGrupotext=document.createTextNode("");
     if (Contactos[pos].Fav == "sim"){
         var Favtext=document.createTextNode("Favorito");
-    }else var Favtext=document.createTextNode("");
+    }else Favtext=document.createTextNode("");
     
     var Espacotext = document.createTextNode("************************");
     
@@ -266,7 +257,10 @@ function ListarContacto(pos){
     artigo.appendChild(OutroGrupo);
     artigo.appendChild(Fav);
     
-    document.getElementById('Apresentar').appendChild(artigo);
+    localStorage.setItem('InputCampo', -1);
+    //localStorage.InputCampo = -1;
+    
+    //document.getElementById('Apresentar').appendChild(artigo);
         
     var btnremove = document.createElement('button');
     btnremove.innerHTML = 'Remover';
@@ -282,36 +276,29 @@ function ListarContacto(pos){
     btnfavorito.innerHTML = 'Favorito';
     btnfavorito.addEventListener('click', AdicionarFavoritos);
     artigo.appendChild(btnfavorito);
-    
-    
 
+    document.getElementById('Enviar').innerHTML="Voltar a pesquisar";
 }
-
+/*
 function PesquisarNome(nome){
-    
     Contactos.sort(OrdenarContactos);
     for (var i=0; i<=Contactos.length-1; i++){
         if (nome.value == Contactos[i].nome){
-            //flag = 1;
-            
             if(i == posicao) return false;
             else{
                 posicao=i;
-            ListarContacto(i);
-            return true;
-        }
+                ListarContacto(i);
+                return true;
+            }
         }
     }
     return false;
- 
 }
-
-/*
-(adicionar no inicio do codigo: var ContactosVistos=[];) 
+*/
 
 function PesquisarNome(nome){
-    
     Contactos.sort(OrdenarContactos);
+    
     for (var i=0; i<=Contactos.length-1; i++){
         if (Contactos[i].nome.search(nome.value)!=-1){
             //flag = 1;
@@ -319,26 +306,26 @@ function PesquisarNome(nome){
             for(var j=0; j<=ContactosVistos.length-1; j++){
                 if(ContactosVistos[j].nome == Contactos[i].nome){
                     flagNomeListado=1;
+                    return true;
                 }
             }
             if(flagNomeListado==1) return false;
             else{
-            ContactosVistos.push({nome: Contactos[i].nome});
-            ListarContacto(i);
-            
+                //window.location.reload();
+                ContactosVistos.push({nome: Contactos[i].nome});
+                ListarContacto(i);
+                return true;
             }
             //return true;
         }
     }
     return false;
- 
 }
- */
 
 
 function PesquisarNumero(numero){
-    
     Contactos.sort(OrdenarContactos);
+    
     for (var i=0; i<=Contactos.length-1; i++){
         if (numero.value == Contactos[i].telefone){
             
@@ -351,7 +338,6 @@ function PesquisarNumero(numero){
         }
     }
     return false;
- 
 }
 
 function AbrirLocalStorage() {
@@ -376,10 +362,64 @@ function init(){
     SelectedCorFundo();
     var color = document.getElementById('cor');
     color.addEventListener('change', Alterar);
+    state = 0;
+    alert(state);
+    //if(VerificaCampos != true) window.location.reload();
+    
+    //if(localStorage.InputCampo != null && localStorage.InputCampo != -1){
+        
+        //VerificaCampos(localStorage.InputCampo);
+        
+    //}
     
     var btnEnviar = document.getElementById('Enviar');
-    btnEnviar.addEventListener('click', VerificaCampos);
+    btnEnviar.addEventListener('click', function(){
+        var InputCampo = document.getElementById('pesquisa');
+        //localStorage.InputCampo = InputCampo;
+        localStorage.setItem('InputCampo', InputCampo);
+        alert("local");
+        //if(localStorage.InputCampo != null){ // && localStorage.InputCampo.value != -1
+                //alert("if");
+                //VerificaCampos(localStorage.InputCampo);
+        //} // recebe o parametro do input Nome 
+        if(state == 0){
+            console.log("state == 0 : " +state);
+            alert("if");
+            if(localStorage.InputCampo != null && localStorage.InputCampo != -1){
+                //var inputpesquisa = document.getElementById('pesquisa');
+                alert("if");
+                VerificaCampos(localStorage.InputCampo);
+            } // recebe o parametro do input Nome 
+            
+            //localStorage.setItem('InputCampo', document.getElementById('pesquisa'))
+        }else if(state == 1){
+            
+            alert("else");
+            console.log("state == 1 : " +state);
+            
+            
+            var InputCampo = document.getElementById('pesquisa');
+            localStorage.setItem('InputCampo', InputCampo);
+            
+            
+            
+            window.location.reload();
+        }
+    });
     
+    //por causa dos states  tem qe ter 3 estados
+    //2 tentativa do enviar  tipo   asd d epois maria   --> maria
+    
+    /*
+    var campo = document.getElementById('pesquisa');
+    campo.addEventListener('change', function(){
+        if(state1 == 2){
+            window.location.reload();
+            state1 = 0;
+        }
+         
+    });
+    */
 }
 
 document.addEventListener('DOMContentLoaded', init);
