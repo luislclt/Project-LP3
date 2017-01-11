@@ -144,12 +144,14 @@ function ListarContacto (pos) {
     document.getElementById('Contacto').appendChild(artigo);
     
     console.log("Listado com Sucesso!");
+    localStorage.setItem('indice', -1);
     
 }
 
 function AbrirLocalStorage() {
     if (localStorage.contacto != null){
         Contactos = JSON.parse(localStorage.contacto);
+        indice=localStorage.indice;
         //console.log("storage -- ok");
     }else{
         var MenssagemErro=document.createTextNode("Impossível Listar Contactos");
@@ -174,7 +176,7 @@ function init(){
         var color = document.getElementById('cor');
         color.addEventListener('change', Alterar);
 
-        ListarContacto(Contactos.length-1);
+        ListarContacto(indice);
         
         
     }else window.location.href="index.html";
