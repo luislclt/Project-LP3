@@ -68,6 +68,7 @@ function ListarContacto (pos) {
         
     var nome=document.createElement("p");
     var email=document.createElement("p");
+    var pais=document.createElement("p");
     var telefone=document.createElement("p");
     var tipo=document.createElement("p");
     var DOB=document.createElement("p");
@@ -87,6 +88,7 @@ function ListarContacto (pos) {
     
     var nomet=document.createTextNode(Contactos[pos].nome);
     var emailt=document.createTextNode(Contactos[pos].email);
+    var paist=document.createTextNode(Contactos[pos].pais);
     var telefonet=document.createTextNode(Contactos[pos].telefone);
     var tipot=document.createTextNode(Contactos[pos].tipo);
     var DOBt=document.createTextNode(Contactos[pos].DOB);
@@ -110,6 +112,7 @@ function ListarContacto (pos) {
         
     nome.appendChild(nomet);
     email.appendChild(emailt);
+    pais.appendChild(paist);
     telefone.appendChild(telefonet);
     tipo.appendChild(tipot);
     DOB.appendChild(DOBt);
@@ -126,6 +129,7 @@ function ListarContacto (pos) {
     
     artigo.appendChild(nome);
     artigo.appendChild(email);
+    artigo.appendChild(pais);
     artigo.appendChild(telefone);
     artigo.appendChild(tipo);
     artigo.appendChild(DOB);

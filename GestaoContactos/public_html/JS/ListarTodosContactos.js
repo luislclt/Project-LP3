@@ -161,6 +161,7 @@ function ListarContactos(){
         var artigo=document.createElement("article");
         var nome=document.createElement("p");
         var email=document.createElement("p");
+        var pais=document.createElement("p");
         var telefone=document.createElement("p");
         var tipo=document.createElement("p");
         var DOB=document.createElement("p");
@@ -186,6 +187,7 @@ function ListarContactos(){
         
         var nometext=document.createTextNode("Nome: " + Contactos[i].nome);
         if (Contactos[i].email == "") var emailtext=document.createTextNode(Contactos[i].email); else var emailtext=document.createTextNode("Email: " + Contactos[i].email);
+        var paistext=document.createTextNode("Pais: " + Contactos[i].pais);
         var telefonetext=document.createTextNode("Contacto: " + Contactos[i].telefone);
         if (Contactos[i].tipo == "") var tipotext=document.createTextNode(Contactos[i].tipo); else var tipotext=document.createTextNode("Tipo de Contacto: " + Contactos[i].tipo);
         if (Contactos[i].DOB == "") var DOBtext=document.createTextNode(Contactos[i].DOB); else var DOBtext=document.createTextNode("Data de Nascimento: " + Contactos[i].DOB);
@@ -217,6 +219,7 @@ function ListarContactos(){
         
         nome.appendChild(nometext);
         email.appendChild(emailtext);
+        pais.appendChild(paistext);
         telefone.appendChild(telefonetext);
         tipo.appendChild(tipotext);
         DOB.appendChild(DOBtext);
@@ -235,6 +238,7 @@ function ListarContactos(){
          
         artigo.appendChild(nome);
         artigo.appendChild(email);
+        artigo.appendChild(pais);
         artigo.appendChild(telefone);
         artigo.appendChild(tipo);
         artigo.appendChild(DOB);
