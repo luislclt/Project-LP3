@@ -124,6 +124,12 @@ function editarContacto(){
     window.location.href="Editar.html";
 }
 
+function mostarContacto(){
+    var x = this.parentNode.getElementsByTagName("p")[0].getAttribute("id"); 
+    var indice = ObterIndice(Contactos,x);
+    guardarLocalStorageContact(indice);
+}
+
 function AdicionarFavoritos() {
     
     var x = this.parentNode.getElementsByTagName("p")[0].getAttribute("id"); 
@@ -170,7 +176,7 @@ function ListarContactos(){
         var outroGrupo=document.createElement("p");
         var Fav=document.createElement("p");
         var Espaco=document.createElement("p");
-        var btnfavorito = document.createElement('input');     
+        var btnfavorito = document.createElement('input');
         btnfavorito.type="image";
         btnfavorito.addEventListener('click', AdicionarFavoritos);
         var paragrafo=document.createElement("p");   
@@ -189,7 +195,7 @@ function ListarContactos(){
         if (Contactos[i].OutraRede == "") var OutraRedetext=document.createTextNode(Contactos[i].OutraRede); else var OutraRedetext=document.createTextNode("Outro: " + Contactos[i].OutraRede);
         if (Contactos[i].Obs == "") var Obstext=document.createTextNode(Contactos[i].Obs); else var Obstext=document.createTextNode("Observações: " + Contactos[i].Obs);
         
-        
+        if (Contactos[pos].tipo == "P") var tipot=document.createTextNode("Pessoal"); else if (Contactos[pos].tipo == "W") var tipot=document.createTextNode("Work"); else if (Contactos[pos].tipo == "O") var tipot=document.createTextNode("Other");
         if (Contactos[i].Amigos == "sim") var Amigostext=document.createTextNode("Grupo: Amigos"); else var Amigostext=document.createTextNode("");
         if (Contactos[i].Trabalho == "sim") var Trabalhotext=document.createTextNode("Grupo: Trabalho"); else var Trabalhotext=document.createTextNode("");
         if (Contactos[i].Familia == "sim") var Familiatext=document.createTextNode("Grupo: Familia"); else var Familiatext=document.createTextNode("");
@@ -241,17 +247,30 @@ function ListarContactos(){
         
         document.getElementById('Contactos').appendChild(artigo);
         
-        var btnremove = document.createElement('button');
-        btnremove.innerHTML = 'Remover';
+        var btnremove = document.createElement('input');
+        btnremove.type="image";
+        btnremove.src="Images/remover.png";
+        btnremove.width="68"; 
+        btnremove.height="48";
         btnremove.addEventListener('click', removerContacto);
         artigo.appendChild(btnremove);
         
-        var btnedita = document.createElement('button');
-        btnedita.innerHTML = 'Editar';
+        var btnedita = document.createElement('input');
+        btnedita.type="image";
+        btnedita.src="Images/edit.png";
+        btnedita.width="68"; 
+        btnedita.height="48";
         btnedita.addEventListener('click', editarContacto);
         artigo.appendChild(btnedita);
         
-        artigo.appendChild(Espaco);
+        var btnmostrar = document.createElement('input');
+        btnmostrar.type="image";
+        btnmostrar.src="Images/mostrar.png";
+        btnmostrar.width="68"; 
+        btnmostrar.height="48";
+        btnmostrar.addEventListener('click', mostarContacto);
+        artigo.appendChild(btnmostrar);
+        
     }
 }
 
