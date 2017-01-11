@@ -97,7 +97,7 @@ function ListarContacto (pos) {
     var OutraRedet=document.createTextNode(Contactos[pos].OutraRede);
     var Obst=document.createTextNode(Contactos[pos].Obs);
     
-    
+    if (Contactos[pos].tipo == "P") var tipot=document.createTextNode("Pessoal"); else if (Contactos[pos].tipo == "W") var tipot=document.createTextNode("Work"); else if (Contactos[pos].tipo == "O") var tipot=document.createTextNode("Other");
     if (Contactos[pos].Amigos == "sim") var Amigost=document.createTextNode("Amigos"); else var Amigost=document.createTextNode("");
     if (Contactos[pos].Trabalho == "sim") var Trabalhot=document.createTextNode("Trabalho"); else var Trabalhot=document.createTextNode("");
     if (Contactos[pos].Familia == "sim") var Familiat=document.createTextNode("Familia"); else var Familiat=document.createTextNode("");

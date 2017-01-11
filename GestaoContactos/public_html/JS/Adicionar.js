@@ -90,22 +90,38 @@ function AdicionarContacto() {
         }
     }
     
+    var facebook = document.getElementById('Facebook');
+    var google = document.getElementById('Google');
+    var linkedIn = document.getElementById('LinkedIn');
+    var instagram = document.getElementById('Instagram');
+    var outrarede = document.getElementById('OutraRede');
+        
+    if(facebook.value==="" && google.value==="" && linkedIn.value==="" && instagram.value==="" && outrarede.value===""){
+        console.log("Tem de inserir uma rede social!");
+        alert("Tem de inserir uma rede social!");
+        aux=1;
+    }
+        
+    
+    var amigos = document.getElementById('Amigos');
+    var trabalho = document.getElementById('Trabalho');
+    var familia = document.getElementById('Familia');
+    var outroGrupo = document.getElementById('OutroGrupo');
+    
+    if(amigos.checked===false && trabalho.checked===false && familia.checked===false && outroGrupo.checked===false){
+        console.log("Tem de selecionar algum grupo!");
+        alert("Tem de selecionar algum grupo!");
+        aux=1;
+    }
+    
     if (aux == 0){
         
         var email = document.getElementById('Email');
         var pais = document.getElementById('Pais');
         var tipo = document.getElementById('Tipo');
         var DOB = document.getElementById('DOB');
-        var facebook = document.getElementById('Facebook');
-        var google = document.getElementById('Google');
-        var linkedIn = document.getElementById('LinkedIn');
-        var instagram = document.getElementById('Instagram');
-        var outrarede = document.getElementById('OutraRede');
+        
         var obs = document.getElementById('Obs');
-        var amigos = document.getElementById('Amigos');
-        var trabalho = document.getElementById('Trabalho');
-        var familia = document.getElementById('Familia');
-        var outroGrupo = document.getElementById('OutroGrupo');
         var fav = document.getElementById('Fav');
         
         if (amigos.checked) amigos = "sim"; else amigos = "nao";
@@ -200,6 +216,7 @@ function VerificaCampos(){ // verifica se os campos estao vazios
     var inputNome = document.getElementById('Nome'); // recebe o parametro do input Nome 
     var inputNumero = document.getElementById('Numero'); // recebe o parametro do input Numero
     var inputEmail = document.getElementById('Email'); // recebe o parametro do input Email
+   
     
     /*while(flag == 0 || flag == 1 || flag == 2){
         alert("2 - flag=0");

@@ -170,6 +170,7 @@ function ListarContactos(){
         var Instagram=document.createElement("p");
         var OutraRede=document.createElement("p");
         var Obs=document.createElement("p");
+        var grupo=document.createElement("p");
         var amigos=document.createElement("p");
         var trabalho=document.createElement("p");
         var familia=document.createElement("p");
@@ -195,11 +196,15 @@ function ListarContactos(){
         if (Contactos[i].OutraRede == "") var OutraRedetext=document.createTextNode(Contactos[i].OutraRede); else var OutraRedetext=document.createTextNode("Outro: " + Contactos[i].OutraRede);
         if (Contactos[i].Obs == "") var Obstext=document.createTextNode(Contactos[i].Obs); else var Obstext=document.createTextNode("Observações: " + Contactos[i].Obs);
         
-        if (Contactos[pos].tipo == "P") var tipot=document.createTextNode("Pessoal"); else if (Contactos[pos].tipo == "W") var tipot=document.createTextNode("Work"); else if (Contactos[pos].tipo == "O") var tipot=document.createTextNode("Other");
-        if (Contactos[i].Amigos == "sim") var Amigostext=document.createTextNode("Grupo: Amigos"); else var Amigostext=document.createTextNode("");
-        if (Contactos[i].Trabalho == "sim") var Trabalhotext=document.createTextNode("Grupo: Trabalho"); else var Trabalhotext=document.createTextNode("");
-        if (Contactos[i].Familia == "sim") var Familiatext=document.createTextNode("Grupo: Familia"); else var Familiatext=document.createTextNode("");
-        if (Contactos[i].OutroGrupo == "sim") var OutroGrupotext=document.createTextNode("Grupo: Outro"); else var OutroGrupotext=document.createTextNode("");
+        if (Contactos[i].tipo == "P") var tipotext=document.createTextNode("Pessoal"); else if (Contactos[i].tipo == "W") var tipotext=document.createTextNode("Work"); else if (Contactos[i].tipo == "O") var tipotext=document.createTextNode("Other");
+        
+        if(Contactos[i].Amigos == "sim" && Contactos[i].Trabalho == "sim" || Contactos[i].Amigos == "sim" && Contactos[i].Familia == "sim" || Contactos[i].Amigos == "sim" && Contactos[i].OutroGrupo == "sim" || Contactos[i].Trabalho == "sim" && Contactos[i].Familia == "sim" || Contactos[i].Trabalho == "sim" && Contactos[i].OutroGrupo == "sim" || Contactos[i].Familia == "sim" && Contactos[i].OutroGrupo == "sim") var grupotext=document.createTextNode("Grupos: ");
+        else var grupotext=document.createTextNode("Grupo: ");
+        
+        if (Contactos[i].Amigos == "sim") var Amigostext=document.createTextNode("Amigos"); else var Amigostext=document.createTextNode("");
+        if (Contactos[i].Trabalho == "sim") var Trabalhotext=document.createTextNode("Trabalho"); else var Trabalhotext=document.createTextNode("");
+        if (Contactos[i].Familia == "sim") var Familiatext=document.createTextNode("Familia"); else var Familiatext=document.createTextNode("");
+        if (Contactos[i].OutroGrupo == "sim") var OutroGrupotext=document.createTextNode("Outro"); else var OutroGrupotext=document.createTextNode("");
         if(Contactos[i].Fav == "sim"){
             btnfavorito.src="Images/estrelaOn.png";
         }else{
@@ -220,6 +225,7 @@ function ListarContactos(){
         Instagram.appendChild(Instagramtext);
         OutraRede.appendChild(OutraRedetext);
         Obs.appendChild(Obstext);
+        grupo.appendChild(grupotext);
         amigos.appendChild(Amigostext);
         trabalho.appendChild(Trabalhotext);
         familia.appendChild(Familiatext);
@@ -237,6 +243,7 @@ function ListarContactos(){
         artigo.appendChild(Instagram);
         artigo.appendChild(OutraRede);
         artigo.appendChild(Obs);
+        artigo.appendChild(grupo);
         artigo.appendChild(amigos);
         artigo.appendChild(trabalho);
         artigo.appendChild(familia);

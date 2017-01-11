@@ -57,9 +57,9 @@ and open the template in the editor.
             <p>
                 <label for="Tipo">Tipo: </label>
                     <select id="Tipo" name="Tipo" >
-                       <option value="Pessoal">Pessoal</option>
-                       <option value="Trabalho">Trabalho</option>
-                       <option value="Outro">Outro</option>
+                       <option value="P">Personal</option>
+                       <option value="W">Work</option>
+                       <option value="O">Other</option>
                     </select>
             </p>
             </div>
@@ -67,7 +67,7 @@ and open the template in the editor.
             <p>Redes Sociais: </p>
             <div>
                 <p>
-                    <label for="Facebook">Facebook: </label><input id="Facebook" type="text" name="Facebook" placeholder="facebook.com/exemplo">
+                    <label for="Facebook">Facebook: </label><input id="Facebook" type="text" value="F" name="Facebook" placeholder="facebook.com/exemplo">
                 </p>
                 <p>
                     <label for="Google">Google+: </label><input id="Google" type="text" name="Google" placeholder="plus.google.com/XXXXX">
@@ -86,10 +86,10 @@ and open the template in the editor.
                 <label for="Obs">Observações: </label><input id="Obs" type="text" name="Obs">
             </p>
             <form>
-                <input id="Amigos" type="checkbox" name="Grupo" value="Amigos" >Amigos<br>
-                <input id="Trabalho" type="checkbox" name="Grupo" value="Trabalho" >Trabalho<br>
-                <input id="Familia" type="checkbox" name="Grupo" value="Familia" >Familia<br>
-                <input id="OutroGrupo" type="checkbox" name="Grupo" value="Outro" >Outro
+                <input id="Amigos" type="checkbox" name="Grupo" value="FR" >Friend<span id = "inputGrupoInvalido" class="inputMessageErrorHidden"> Escolher um destes campo!</span><br>
+                <input id="Trabalho" type="checkbox" name="Grupo" value="T" >Work<span id = "inputGrupoInvalido" class="inputMessageErrorHidden"> Escolher um destes campo!</span><br>
+                <input id="Familia" type="checkbox" name="Grupo" value="FA" >Family<span id = "inputGrupoInvalido" class="inputMessageErrorHidden"> Escolher um destes campo!</span><br>
+                <input id="OutroGrupo" type="checkbox" name="Grupo" value="O" >Other<span id = "inputGrupoInvalido" class="inputMessageErrorHidden"> Escolher um destes campo!</span>
             </form>
 
             <form>
