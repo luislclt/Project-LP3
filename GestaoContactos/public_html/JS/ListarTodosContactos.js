@@ -202,10 +202,10 @@ function ListarContactos(){
         else if (Contactos[i].Amigos == "nao" && Contactos[i].Trabalho == "nao" && Contactos[i].Familia == "nao" && Contactos[i].OutroGrupo == "nao") var grupotext=document.createTextNode("");
         else var grupotext=document.createTextNode("Grupo: ");
         
-        if (Contactos[i].Amigos == "sim") var Amigostext=document.createTextNode("                  Amigos"); else var Amigostext=document.createTextNode("");
-        if (Contactos[i].Trabalho == "sim") var Trabalhotext=document.createTextNode("  Trabalho"); else var Trabalhotext=document.createTextNode("");
-        if (Contactos[i].Familia == "sim") var Familiatext=document.createTextNode("    Familia"); else var Familiatext=document.createTextNode("");
-        if (Contactos[i].OutroGrupo == "sim") var OutroGrupotext=document.createTextNode("  Outro"); else var OutroGrupotext=document.createTextNode("");
+        if (Contactos[i].Amigos == "sim") var Amigostext=document.createTextNode("Amigos"); else var Amigostext=document.createTextNode("");
+        if (Contactos[i].Trabalho == "sim") var Trabalhotext=document.createTextNode("Trabalho"); else var Trabalhotext=document.createTextNode("");
+        if (Contactos[i].Familia == "sim") var Familiatext=document.createTextNode("Familia"); else var Familiatext=document.createTextNode("");
+        if (Contactos[i].OutroGrupo == "sim") var OutroGrupotext=document.createTextNode("Outro"); else var OutroGrupotext=document.createTextNode("");
         if(Contactos[i].Fav == "sim"){
             btnfavorito.src="Images/estrelaOn.png";
         }else{
