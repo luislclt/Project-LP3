@@ -133,6 +133,9 @@ function AdicionarContacto() {
         Contactos.push({nome: nome.value, email: email.value, pais: pais.value, telefone: telefone.value, tipo: tipo.value, DOB: DOB.value, Facebook: facebook.value, Google: google.value, LinkedIn: linkedIn.value, Instagram: instagram.value, OutraRede: outrarede.value, Obs: obs.value, Amigos: amigos, Trabalho: trabalho, Familia: familia, OutroGrupo: outroGrupo, Fav: fav});
         alert("outra window -- ok");
         
+        var indice=Contactos.length-1;
+        
+        localStorage.setItem('indice',indice);
         window.location.href="ListarContacto.html";
         //ListarContacto(Contactos.length-1);
             
