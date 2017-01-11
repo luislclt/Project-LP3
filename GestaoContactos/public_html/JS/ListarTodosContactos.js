@@ -161,9 +161,21 @@ function ListarContactos(){
         var artigo=document.createElement("article");
         var nome=document.createElement("p");
         var email=document.createElement("p");
-        var pais=document.createElement("p");
-        var telefone=document.createElement("p");
-        var tipo=document.createElement("p");
+        var pais1=document.createElement("p");
+        var pais2=document.createElement("p");
+        var pais3=document.createElement("p");
+        var pais4=document.createElement("p");
+        var pais5=document.createElement("p");
+        var telefone1=document.createElement("p");
+        var telefone2=document.createElement("p");
+        var telefone3=document.createElement("p");
+        var telefone4=document.createElement("p");
+        var telefone5=document.createElement("p");
+        var tipo1=document.createElement("p");
+        var tipo2=document.createElement("p");
+        var tipo3=document.createElement("p");
+        var tipo4=document.createElement("p");
+        var tipo5=document.createElement("p");
         var DOB=document.createElement("p");
         var Facebook=document.createElement("p");
         var Google=document.createElement("p");
@@ -187,9 +199,91 @@ function ListarContactos(){
         
         var nometext=document.createTextNode("Nome: " + Contactos[i].nome);
         if (Contactos[i].email == "") var emailtext=document.createTextNode(Contactos[i].email); else var emailtext=document.createTextNode("Email: " + Contactos[i].email);
-        var paistext=document.createTextNode("Pais: " + Contactos[i].pais);
-        var telefonetext=document.createTextNode("Contacto: " + Contactos[i].telefone);
-        if (Contactos[i].tipo == "") var tipotext=document.createTextNode(Contactos[i].tipo); else var tipotext=document.createTextNode("Tipo de Contacto: " + Contactos[i].tipo);
+        
+        var pais1text=document.createTextNode("País: " + Contactos[i].pais1);
+        if(Contactos[i].telefone2 !== "") var pais2text=document.createTextNode("País: " + Contactos[i].pais2); else var pais2text=document.createTextNode("");
+        if(Contactos[i].telefone3 !== "") var pais3text=document.createTextNode("País: " + Contactos[i].pais3); else var pais3text=document.createTextNode("");
+        if(Contactos[i].telefone4 !== "") var pais4text=document.createTextNode("País: " + Contactos[i].pais4); else var pais4text=document.createTextNode("");
+        if(Contactos[i].telefone5 !== "") var pais5text=document.createTextNode("País: " + Contactos[i].pais5); else var pais5text=document.createTextNode("");
+        
+        var telefone1text=document.createTextNode("Contacto1: " + Contactos[i].telefone1);
+        if(Contactos[i].telefone2 !== "") var telefone2text=document.createTextNode("Contacto2: " + Contactos[i].telefone2); else var telefone2text=document.createTextNode("");
+        if(Contactos[i].telefone3 !== "") var telefone3text=document.createTextNode("Contacto3: " + Contactos[i].telefone3); else var telefone3text=document.createTextNode("");
+        if(Contactos[i].telefone4 !== "") var telefone4text=document.createTextNode("Contacto4: " + Contactos[i].telefone4); else var telefone4text=document.createTextNode("");
+        if(Contactos[i].telefone5 !== "") var telefone5text=document.createTextNode("Contacto5: " + Contactos[i].telefone5); else var telefone5text=document.createTextNode("");
+        
+        
+        
+        if (Contactos[i].tipo1 == "P") var tipo1text=document.createTextNode("Tipo: Pessoal"); else if (Contactos[i].tipo1 == "W") var tipo1text=document.createTextNode("Tipo: Work"); else if (Contactos[i].tipo1 == "O") var tipo1text=document.createTextNode("Tipo: Other");
+        if (Contactos[i].telefone2 != ""){
+            if (Contactos[i].tipo2 == "P"){
+                var tipo2text=document.createTextNode("Tipo: Pessoal");
+            }else{
+                if (Contactos[i].tipo2 == "W"){
+                    var tipo2text=document.createTextNode("Tipo: Work");
+                }else{
+                    if (Contactos[i].tipo2 == "O"){
+                        var tipo2text=document.createTextNode("Tipo: Other");
+                    }
+                }
+            }
+        }else{
+            var tipo2text=document.createTextNode("");
+        }
+
+
+        if (Contactos[i].telefone3 != ""){
+            if (Contactos[i].tipo3 == "P"){
+                var tipo3text=document.createTextNode("Tipo: Pessoal");
+            }else{
+                if (Contactos[i].tipo3 == "W"){
+                    var tipo3text=document.createTextNode("Tipo: Work");
+                }else{
+                    if (Contactos[i].tipo3 == "O"){
+                        var tipo3text=document.createTextNode("Tipo: Other");
+                    }
+                }
+            }
+        }else{
+            var tipo3text=document.createTextNode("");
+        }
+
+
+        if (Contactos[i].telefone4 != ""){
+            if (Contactos[i].tipo4 == "P"){
+                var tipo4text=document.createTextNode("Tipo: Pessoal");
+            }else{
+                if (Contactos[i].tipo4 == "W"){
+                    var tipo4text=document.createTextNode("Tipo: Work");
+                }else{
+                    if (Contactos[i].tipo4 == "O"){
+                        var tipo4text=document.createTextNode("Tipo: Other");
+                    }
+                }
+            }
+        }else{
+            var tipo4text=document.createTextNode("");
+        }
+
+
+        if (Contactos[i].telefone5 != ""){
+            if (Contactos[i].tipo5 == "P"){
+                var tipo5text=document.createTextNode("Tipo: Pessoal");
+            }else{
+                if (Contactos[i].tipo5 == "W"){
+                    var tipo5text=document.createTextNode("Tipo: Work");
+                }else{
+                    if (Contactos[i].tipo5 == "O"){
+                        var tipo5text=document.createTextNode("Tipo: Other");
+                    }
+                }
+            }
+        }else{
+            var tipo5text=document.createTextNode("");
+        }
+    
+    
+    
         if (Contactos[i].DOB == "") var DOBtext=document.createTextNode(Contactos[i].DOB); else var DOBtext=document.createTextNode("Data de Nascimento: " + Contactos[i].DOB);
         if (Contactos[i].Facebook == "") var Facebooktext=document.createTextNode(Contactos[i].Facebook); else var Facebooktext=document.createTextNode("Facebook: " + Contactos[i].Facebook);
         if (Contactos[i].Google == "") var Googletext=document.createTextNode(Contactos[i].Google); else var Googletext=document.createTextNode("Google+: " + Contactos[i].Google);
@@ -197,8 +291,6 @@ function ListarContactos(){
         if (Contactos[i].Instagram == "") var Instagramtext=document.createTextNode(Contactos[i].Instagram); else var Instagramtext=document.createTextNode("Instagram: " + Contactos[i].Instagram);
         if (Contactos[i].OutraRede == "") var OutraRedetext=document.createTextNode(Contactos[i].OutraRede); else var OutraRedetext=document.createTextNode("Outro: " + Contactos[i].OutraRede);
         if (Contactos[i].Obs == "") var Obstext=document.createTextNode(Contactos[i].Obs); else var Obstext=document.createTextNode("Observações: " + Contactos[i].Obs);
-        
-        if (Contactos[i].tipo == "P") var tipotext=document.createTextNode("Pessoal"); else if (Contactos[i].tipo == "W") var tipotext=document.createTextNode("Work"); else if (Contactos[i].tipo == "O") var tipotext=document.createTextNode("Other");
         
         if(Contactos[i].Amigos == "sim" && Contactos[i].Trabalho == "sim" || Contactos[i].Amigos == "sim" && Contactos[i].Familia == "sim" || Contactos[i].Amigos == "sim" && Contactos[i].OutroGrupo == "sim" || Contactos[i].Trabalho == "sim" && Contactos[i].Familia == "sim" || Contactos[i].Trabalho == "sim" && Contactos[i].OutroGrupo == "sim" || Contactos[i].Familia == "sim" && Contactos[i].OutroGrupo == "sim") var grupotext=document.createTextNode("Grupos: ");
         else if (Contactos[i].Amigos == "nao" && Contactos[i].Trabalho == "nao" && Contactos[i].Familia == "nao" && Contactos[i].OutroGrupo == "nao") var grupotext=document.createTextNode("");
@@ -219,9 +311,21 @@ function ListarContactos(){
         
         nome.appendChild(nometext);
         email.appendChild(emailtext);
-        pais.appendChild(paistext);
-        telefone.appendChild(telefonetext);
-        tipo.appendChild(tipotext);
+        pais1.appendChild(pais1text);
+        telefone1.appendChild(telefone1text);
+        tipo1.appendChild(tipo1text);
+        pais2.appendChild(pais2text);
+        telefone2.appendChild(telefone2text);
+        tipo2.appendChild(tipo2text);
+        pais3.appendChild(pais3text);
+        telefone3.appendChild(telefone3text);
+        tipo3.appendChild(tipo3text);
+        pais4.appendChild(pais4text);
+        telefone4.appendChild(telefone4text);
+        tipo4.appendChild(tipo4text);
+        pais5.appendChild(pais5text);
+        telefone5.appendChild(telefone5text);
+        tipo5.appendChild(tipo5text);
         DOB.appendChild(DOBtext);
         Facebook.appendChild(Facebooktext);
         Google.appendChild(Googletext);
@@ -238,9 +342,21 @@ function ListarContactos(){
          
         artigo.appendChild(nome);
         artigo.appendChild(email);
-        artigo.appendChild(pais);
-        artigo.appendChild(telefone);
-        artigo.appendChild(tipo);
+        artigo.appendChild(pais1);
+        artigo.appendChild(telefone1);
+        artigo.appendChild(tipo1);
+        artigo.appendChild(pais2);
+        artigo.appendChild(telefone2);
+        artigo.appendChild(tipo2);
+        artigo.appendChild(pais3);
+        artigo.appendChild(telefone3);
+        artigo.appendChild(tipo3);
+        artigo.appendChild(pais4);
+        artigo.appendChild(telefone4);
+        artigo.appendChild(tipo4);
+        artigo.appendChild(pais5);
+        artigo.appendChild(telefone5);
+        artigo.appendChild(tipo5);
         artigo.appendChild(DOB);
         artigo.appendChild(Facebook);
         artigo.appendChild(Google);

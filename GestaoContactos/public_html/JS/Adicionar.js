@@ -81,59 +81,89 @@ function AdicionarContacto() {
     
     alert("AdicionarContacto -- ok");
     
-    if (telefone2.value === telefone1.value && telefone2.value !== ""){
+    if (telefone2.value !== "" && telefone2.value === telefone1.value){
         console.log("Número igual ao de cima!");
         alert("Número igual ao de cima!");
         aux=1;
     }else{
-        alert("5");
-        if ((telefone3.value === telefone2.value || telefone3.value === telefone1.value) && telefone3.value !== ""){
-            console.log("Número igual ao de cima!");
-            alert("Número igual ao de cima!");
-            aux=1;
-        }else{
-            if ((telefone4.value === telefone3.value || telefone4.value === telefone2.value || telefone4.value === telefone1.value) && telefone4.value !== ""){
+        alert("telefone3!=");
+        if (telefone3.value !== ""){
+            if(telefone3.value === telefone2.value || telefone3.value === telefone1.value){
                 console.log("Número igual ao de cima!");
                 alert("Número igual ao de cima!");
                 aux=1;
             }else{
-                if ((telefone5.value === telefone4.value || telefone5.value === telefone3.value || telefone5.value === telefone2.value || telefone5.value === telefone1.value) && telefone5.value !== ""){
-                    console.log("Número igual ao de cima!");
-                    alert("Número igual ao de cima!");
-                     aux=1;
-                }else{
-                    for (var i=0; i<Contactos.length; i++){
-                        if (telefone1.value === Contactos[i].numero || telefone2.value === Contactos[i].numero || telefone3.value === Contactos[i].numero || telefone4.value === Contactos[i].numero || telefone5.value === Contactos[i].numero){
-                            console.log("Número já existe!");
-                            alert("Número já existe!");
-                            aux=1;
-                        }
-                        if (nome.value === Contactos[i].nome){
-                            console.log("Nome já existe!");
-                            alert("Nome já existe!");
-                            aux=1;
+                alert("telefone4!=");
+                if (telefone4.value !== ""){
+                    if (telefone4.value === telefone3.value || telefone4.value === telefone2.value || telefone4.value === telefone1.value){
+                        console.log("Número igual ao de cima!");
+                        alert("Número igual ao de cima!");
+                        aux=1;
+                    }else{
+                        alert("telefone5!=");
+                        if (telefone5.value !== ""){
+                            if (telefone5.value === telefone4.value || telefone5.value === telefone3.value || telefone5.value === telefone2.value || telefone5.value === telefone1.value){
+                                console.log("Número igual ao de cima!");
+                                alert("Número igual ao de cima!");
+                                aux=1;
+                            }else{
+                                for (var i=0; i<Contactos.length; i++){
+                                    alert("1");
+                                    if (telefone1.value === Contactos[i].telefone1 || telefone1.value === Contactos[i].telefone2 || telefone1.value === Contactos[i].telefone3 || telefone1.value === Contactos[i].telefone4 || telefone1.value === Contactos[i].telefone5){
+
+                                        console.log("Número já existe!");
+                                        alert("Número já existe!");
+                                        aux=1;
+                                    }alert("2");
+                                    if (telefone2.value === Contactos[i].telefone1 || telefone2.value === Contactos[i].telefone2 || telefone2.value === Contactos[i].telefone3 || telefone2.value === Contactos[i].telefone4 || telefone2.value === Contactos[i].telefone5){
+
+                                        console.log("Número já existe!");
+                                        alert("Número já existe!");
+                                        aux=1;
+                                    }alert("3");
+                                    if (telefone3.value === Contactos[i].telefone1 || telefone3.value === Contactos[i].telefone2 || telefone3.value === Contactos[i].telefone3 || telefone3.value === Contactos[i].telefone4 || telefone3.value === Contactos[i].telefone5){
+
+                                        console.log("Número já existe!");
+                                        alert("Número já existe!");
+                                        aux=1;
+                                    }alert("4");
+                                    if (telefone4.value === Contactos[i].telefone1 || telefone4.value === Contactos[i].telefone2 || telefone4.value === Contactos[i].telefone3 || telefone4.value === Contactos[i].telefone4 || telefone4.value === Contactos[i].telefone5){
+
+                                        console.log("Número já existe!");
+                                        alert("Número já existe!");
+                                        aux=1;
+                                    }alert("5");
+                                    if (telefone5.value === Contactos[i].telefone1 || telefone5.value === Contactos[i].telefone2 || telefone5.value === Contactos[i].telefone3 || telefone5.value === Contactos[i].telefone4 || telefone5.value === Contactos[i].telefone5){
+
+                                        console.log("Número já existe!");
+                                        alert("Número já existe!");
+                                        aux=1;
+                                    }
+                                    if (nome.value === Contactos[i].nome){
+                                        console.log("Nome já existe!");
+                                        alert("Nome já existe!");
+                                        aux=1;
+                                    }
+                                }
+                            }
                         }
                     }
                 }
             }
         }
     }
-    alert("6");
-    /**/
-    alert("7");
+    
     var facebook = document.getElementById('Facebook');
     var google = document.getElementById('Google');
     var linkedIn = document.getElementById('LinkedIn');
     var instagram = document.getElementById('Instagram');
     var outrarede = document.getElementById('OutraRede');
-        alert("8");
+    
     if(facebook.value==="" && google.value==="" && linkedIn.value==="" && instagram.value==="" && outrarede.value===""){
         console.log("Tem de inserir uma rede social!");
         alert("Tem de inserir uma rede social!");
         aux=1;
     }
-        
-    alert("2");
     
     var amigos = document.getElementById('Amigos');
     var trabalho = document.getElementById('Trabalho');
@@ -149,10 +179,21 @@ function AdicionarContacto() {
     if (aux == 0){
         
         var email = document.getElementById('Email');
-        var pais = document.getElementById('Pais');
-        var tipo = document.getElementById('Tipo');
-        var DOB = document.getElementById('DOB');
         
+        var pais1 = document.getElementById('Pais1');
+        var pais2 = document.getElementById('Pais2');
+        var pais3 = document.getElementById('Pais3');
+        var pais4 = document.getElementById('Pais4');
+        var pais5 = document.getElementById('Pais5');
+        
+        
+        var tipo1 = document.getElementById('Tipo1');
+        var tipo2 = document.getElementById('Tipo2');
+        var tipo3 = document.getElementById('Tipo3');
+        var tipo4 = document.getElementById('Tipo4');
+        var tipo5 = document.getElementById('Tipo5');
+        
+        var DOB = document.getElementById('DOB');
         var obs = document.getElementById('Obs');
         var fav = document.getElementById('Fav');
         
@@ -162,21 +203,19 @@ function AdicionarContacto() {
         if (outroGrupo.checked) outroGrupo = "sim"; else outroGrupo = "nao";
         if (fav.checked) fav = "sim"; else fav = "nao";
         
-        Contactos.push({nome: nome.value, email: email.value, pais: pais.value, telefone1: telefone1.value, telefone2: telefone2.value, telefone3: telefone3.value, telefone4: telefone4.value, telefone5: telefone5.value, tipo: tipo.value, DOB: DOB.value, Facebook: facebook.value, Google: google.value, LinkedIn: linkedIn.value, Instagram: instagram.value, OutraRede: outrarede.value, Obs: obs.value, Amigos: amigos, Trabalho: trabalho, Familia: familia, OutroGrupo: outroGrupo, Fav: fav});
+        Contactos.push({nome: nome.value, email: email.value, pais1: pais1.value, telefone1: telefone1.value, tipo1: tipo1.value, pais2: pais2.value, telefone2: telefone2.value, tipo2: tipo2.value, pais3: pais3.value, telefone3: telefone3.value, tipo3: tipo3.value, pais4: pais4.value, telefone4: telefone4.value, tipo4: tipo4.value, pais5: pais5.value, telefone5: telefone5.value, tipo5: tipo5.value, DOB: DOB.value, Facebook: facebook.value, Google: google.value, LinkedIn: linkedIn.value, Instagram: instagram.value, OutraRede: outrarede.value, Obs: obs.value, Amigos: amigos, Trabalho: trabalho, Familia: familia, OutroGrupo: outroGrupo, Fav: fav});
         alert("outra window -- ok");
         
         var indice=Contactos.length-1;
         
         localStorage.setItem('indice',indice);
         window.location.href="ListarContacto.html";
-        //ListarContacto(Contactos.length-1);
             
         guardarLocalStorage();
         
     }else{
         var MenssagemErro=document.createTextNode("Impossível adicionar Contactos");
         var Erro = document.getElementById("Erro");
-        //window.location.reload();
         Erro.appendChild(MenssagemErro); // Escreve MenssagemErro no <div>
         console.log(Erro);
         aux==0;
