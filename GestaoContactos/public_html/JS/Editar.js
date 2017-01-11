@@ -64,12 +64,13 @@ function SelectedCorFundo(){
 
 function ListarContacto(pos){
     
-    var artigo=document.createElement("article");
-    
     document.getElementById('Nome').value=Contactos[pos].nome;
     document.getElementById('Email').value=Contactos[pos].email;
-    document.getElementById('Numero').value=Contactos[pos].telefone;
-    document.getElementById('Tipo').value=Contactos[pos].tipo;
+    document.getElementById('Numero1').value=Contactos[pos].telefone1;
+    document.getElementById('Numero2').value=Contactos[pos].telefone2;
+    document.getElementById('Numero3').value=Contactos[pos].telefone3;
+    document.getElementById('Numero4').value=Contactos[pos].telefone4;
+    document.getElementById('Numero5').value=Contactos[pos].telefone5;
     document.getElementById('DOB').value=Contactos[pos].DOB;
     document.getElementById('Facebook').value=Contactos[pos].Facebook;
     document.getElementById('Google').value=Contactos[pos].Google;
@@ -78,36 +79,221 @@ function ListarContacto(pos){
     document.getElementById('OutraRede').value=Contactos[pos].OutraRede;
     document.getElementById('Obs').value=Contactos[pos].Obs;
     
-    if(Contactos[pos].pais=="+351"){
-        document.getElementById('Portugal').selected="selected";
+    if(Contactos[pos].pais1=="Portugal"){
+        document.getElementById('Portugal1').selected="selected";
         
-    }else if(Contactos[pos].pais=="+34"){
-        document.getElementById('Espanha').selected="selected";
+    }else if(Contactos[pos].pais1=="Espanha"){
+        document.getElementById('Espanha1').selected="selected";
         
-    }else if(Contactos[pos].pais=="+55"){
-        document.getElementById('Brazil').selected="selected";
+    }else if(Contactos[pos].pais1=="Brazil"){
+        document.getElementById('Brazil1').selected="selected";
         
-    }else if(Contactos[pos].pais=="+33"){
-        document.getElementById('frança').selected="selected";
+    }else if(Contactos[pos].pais1=="França"){
+        document.getElementById('França1').selected="selected";
         
-    }else if(Contactos[pos].pais=="+41"){
-        document.getElementById('Suica').selected="selected";
+    }else if(Contactos[pos].pais1=="Suiça"){
+        document.getElementById('Suiça1').selected="selected";
         
-    }else if(Contactos[pos].pais=="+49"){
-        document.getElementById('Alemanha').selected="selected";
+    }else if(Contactos[pos].pais1=="Alemanha"){
+        document.getElementById('Alemanha1').selected="selected";
         
-    }else if(Contactos[pos].pais=="+44"){
-        document.getElementById('Inglaterra').selected="selected";
+    }else if(Contactos[pos].pais1=="Inglaterra"){
+        document.getElementById('Inglaterra1').selected="selected";
         
-    }else if(Contactos[pos].pais=="+1"){
-        document.getElementById('EstadosUnidos').selected="selected";
+    }else if(Contactos[pos].pais1=="Estados Unidos"){
+        document.getElementById('EstadosUnidos1').selected="selected";
         
-    }else if(Contactos[pos].pais=="+31"){
-        document.getElementById('Holanda').selected="selected";
+    }else if(Contactos[pos].pais1=="Holanda"){
+        document.getElementById('Holanda1').selected="selected";
         
-    }else if(Contactos[pos].pais=="+244"){
-        document.getElementById('Angola').selected="selected";
+    }else if(Contactos[pos].pais1=="Angola"){
+        document.getElementById('Angola1').selected="selected";
     }
+    
+    if(Contactos[pos].pais2=="Portugal"){
+        document.getElementById('Portugal2').selected="selected";
+        
+    }else if(Contactos[pos].pais2=="Espanha"){
+        document.getElementById('Espanha2').selected="selected";
+        
+    }else if(Contactos[pos].pais2=="Brazil"){
+        document.getElementById('Brazil2').selected="selected";
+        
+    }else if(Contactos[pos].pais2=="França"){
+        document.getElementById('França2').selected="selected";
+        
+    }else if(Contactos[pos].pais2=="Suiça"){
+        document.getElementById('Suiça2').selected="selected";
+        
+    }else if(Contactos[pos].pais2=="Alemanha"){
+        document.getElementById('Alemanha2').selected="selected";
+        
+    }else if(Contactos[pos].pais2=="Inglaterra"){
+        document.getElementById('Inglaterra2').selected="selected";
+        
+    }else if(Contactos[pos].pais2=="EstadosUnidos"){
+        document.getElementById('EstadosUnidos2').selected="selected";
+        
+    }else if(Contactos[pos].pais2=="Holanda"){
+        document.getElementById('Holanda2').selected="selected";
+        
+    }else if(Contactos[pos].pais2=="Angola"){
+        document.getElementById('Angola2').selected="selected";
+    }
+    
+    if(Contactos[pos].pais3=="Portugal"){
+        document.getElementById('Portugal3').selected="selected";
+        
+    }else if(Contactos[pos].pais3=="Espanha"){
+        document.getElementById('Espanha3').selected="selected";
+        
+    }else if(Contactos[pos].pais3=="Brazil"){
+        document.getElementById('Brazil3').selected="selected";
+        
+    }else if(Contactos[pos].pais3=="França"){
+        document.getElementById('França3').selected="selected";
+        
+    }else if(Contactos[pos].pais3=="Suiça"){
+        document.getElementById('Suiça3').selected="selected";
+        
+    }else if(Contactos[pos].pais3=="Alemanha"){
+        document.getElementById('Alemanha3').selected="selected";
+        
+    }else if(Contactos[pos].pais3=="Inglaterra"){
+        document.getElementById('Inglaterra3').selected="selected";
+        
+    }else if(Contactos[pos].pais3=="Estados Unidos"){
+        document.getElementById('EstadosUnidos3').selected="selected";
+        
+    }else if(Contactos[pos].pais3=="Holanda"){
+        document.getElementById('Holanda3').selected="selected";
+        
+    }else if(Contactos[pos].pais3=="Angola"){
+        document.getElementById('Angola3').selected="selected";
+    }
+    
+    if(Contactos[pos].pais4=="Portugal"){
+        document.getElementById('Portugal4').selected="selected";
+        
+    }else if(Contactos[pos].pais4=="Espanha"){
+        document.getElementById('Espanha4').selected="selected";
+        
+    }else if(Contactos[pos].pais4=="Brazil"){
+        document.getElementById('Brazil4').selected="selected";
+        
+    }else if(Contactos[pos].pais4=="França"){
+        document.getElementById('França4').selected="selected";
+        
+    }else if(Contactos[pos].pais4=="Suiça"){
+        document.getElementById('Suiça4').selected="selected";
+        
+    }else if(Contactos[pos].pais4=="Alemanha"){
+        document.getElementById('Alemanha4').selected="selected";
+        
+    }else if(Contactos[pos].pais4=="Inglaterra"){
+        document.getElementById('Inglaterra4').selected="selected";
+        
+    }else if(Contactos[pos].pais4=="Estados Unidos"){
+        document.getElementById('EstadosUnidos4').selected="selected";
+        
+    }else if(Contactos[pos].pais4=="Holanda"){
+        document.getElementById('Holanda4').selected="selected";
+        
+    }else if(Contactos[pos].pais4=="Angola"){
+        document.getElementById('Angola4').selected="selected";
+    }
+    
+    if(Contactos[pos].pais5=="Portugal"){
+        document.getElementById('Portugal5').selected="selected";
+        
+    }else if(Contactos[pos].pais5=="Espanha"){
+        document.getElementById('Espanha5').selected="selected";
+        
+    }else if(Contactos[pos].pais5=="Brazil"){
+        document.getElementById('Brazil5').selected="selected";
+        
+    }else if(Contactos[pos].pais5=="França"){
+        document.getElementById('França5').selected="selected";
+        
+    }else if(Contactos[pos].pais5=="Suiça"){
+        document.getElementById('Suiça5').selected="selected";
+        
+    }else if(Contactos[pos].pais5=="Alemanha"){
+        document.getElementById('Alemanha5').selected="selected";
+        
+    }else if(Contactos[pos].pais5=="Inglaterra"){
+        document.getElementById('Inglaterra5').selected="selected";
+        
+    }else if(Contactos[pos].pais5=="Estados Unidos"){
+        document.getElementById('EstadosUnidos5').selected="selected";
+        
+    }else if(Contactos[pos].pais5=="Holanda"){
+        document.getElementById('Holanda5').selected="selected";
+        
+    }else if(Contactos[pos].pais5=="Angola"){
+        document.getElementById('Angola5').selected="selected";
+    }
+    
+    
+    
+    
+    if(Contactos[pos].tipo1=="Personal"){
+        document.getElementById('P1').selected="selected";
+        
+    }else if(Contactos[pos].tipo1=="Work"){
+        document.getElementById('W1').selected="selected";
+        
+    }else if(Contactos[pos].tipo1=="Other"){
+        document.getElementById('O1').selected="selected";
+        
+    }
+    
+    
+    if(Contactos[pos].tipo1=="Personal"){
+        document.getElementById('P2').selected="selected";
+        
+    }else if(Contactos[pos].tipo1=="Work"){
+        document.getElementById('W2').selected="selected";
+        
+    }else if(Contactos[pos].tipo1=="Other"){
+        document.getElementById('O2').selected="selected";
+        
+    }
+    
+    
+    if(Contactos[pos].tipo1=="Personal"){
+        document.getElementById('P3').selected="selected";
+        
+    }else if(Contactos[pos].tipo1=="Work"){
+        document.getElementById('W3').selected="selected";
+        
+    }else if(Contactos[pos].tipo1=="Other"){
+        document.getElementById('O3').selected="selected";
+        
+    }
+    
+    if(Contactos[pos].tipo1=="Personal"){
+        document.getElementById('P4').selected="selected";
+        
+    }else if(Contactos[pos].tipo1=="Work"){
+        document.getElementById('W4').selected="selected";
+        
+    }else if(Contactos[pos].tipo1=="Other"){
+        document.getElementById('O4').selected="selected";
+        
+    }
+    
+    if(Contactos[pos].tipo1=="Personal"){
+        document.getElementById('P5').selected="selected";
+        
+    }else if(Contactos[pos].tipo1=="Work"){
+        document.getElementById('W5').selected="selected";
+        
+    }else if(Contactos[pos].tipo1=="Other"){
+        document.getElementById('O5').selected="selected";
+        
+    }
+    
         
     if (Contactos[pos].Amigos == "sim") document.getElementById('Amigos').checked=true; else document.getElementById('Amigos').checked=false;
     if (Contactos[pos].Trabalho == "sim") document.getElementById('Trabalho').checked=true; else document.getElementById('Trabalho').checked=false;
