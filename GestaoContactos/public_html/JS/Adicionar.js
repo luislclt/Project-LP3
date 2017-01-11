@@ -72,36 +72,68 @@ function guardarLocalStorage(){
 function AdicionarContacto() {
     
     var nome = document.getElementById('Nome');
-    var telefone = document.getElementById('Numero');
+    var telefone1 = document.getElementById('Numero1');
+    var telefone2 = document.getElementById('Numero2');
+    var telefone3 = document.getElementById('Numero3');
+    var telefone4 = document.getElementById('Numero4');
+    var telefone5 = document.getElementById('Numero5');
     var aux=0;
     
     alert("AdicionarContacto -- ok");
     
-    for (var i=0; i<Contactos.length; i++){
-        if (telefone.value === Contactos[i].numero){
-            console.log("Número já existe!");
-            alert("Número já existe!");
+    if (telefone2.value === telefone1.value && telefone2.value !== ""){
+        console.log("Número igual ao de cima!");
+        alert("Número igual ao de cima!");
+        aux=1;
+    }else{
+        alert("5");
+        if ((telefone3.value === telefone2.value || telefone3.value === telefone1.value) && telefone3.value !== ""){
+            console.log("Número igual ao de cima!");
+            alert("Número igual ao de cima!");
             aux=1;
-        }
-        if (nome.value === Contactos[i].nome){
-            console.log("Nome já existe!");
-            alert("Nome já existe!");
-            aux=1;
+        }else{
+            if ((telefone4.value === telefone3.value || telefone4.value === telefone2.value || telefone4.value === telefone1.value) && telefone4.value !== ""){
+                console.log("Número igual ao de cima!");
+                alert("Número igual ao de cima!");
+                aux=1;
+            }else{
+                if ((telefone5.value === telefone4.value || telefone5.value === telefone3.value || telefone5.value === telefone2.value || telefone5.value === telefone1.value) && telefone5.value !== ""){
+                    console.log("Número igual ao de cima!");
+                    alert("Número igual ao de cima!");
+                     aux=1;
+                }else{
+                    for (var i=0; i<Contactos.length; i++){
+                        if (telefone1.value === Contactos[i].numero || telefone2.value === Contactos[i].numero || telefone3.value === Contactos[i].numero || telefone4.value === Contactos[i].numero || telefone5.value === Contactos[i].numero){
+                            console.log("Número já existe!");
+                            alert("Número já existe!");
+                            aux=1;
+                        }
+                        if (nome.value === Contactos[i].nome){
+                            console.log("Nome já existe!");
+                            alert("Nome já existe!");
+                            aux=1;
+                        }
+                    }
+                }
+            }
         }
     }
-    
+    alert("6");
+    /**/
+    alert("7");
     var facebook = document.getElementById('Facebook');
     var google = document.getElementById('Google');
     var linkedIn = document.getElementById('LinkedIn');
     var instagram = document.getElementById('Instagram');
     var outrarede = document.getElementById('OutraRede');
-        
+        alert("8");
     if(facebook.value==="" && google.value==="" && linkedIn.value==="" && instagram.value==="" && outrarede.value===""){
         console.log("Tem de inserir uma rede social!");
         alert("Tem de inserir uma rede social!");
         aux=1;
     }
         
+    alert("2");
     
     var amigos = document.getElementById('Amigos');
     var trabalho = document.getElementById('Trabalho');
@@ -130,7 +162,7 @@ function AdicionarContacto() {
         if (outroGrupo.checked) outroGrupo = "sim"; else outroGrupo = "nao";
         if (fav.checked) fav = "sim"; else fav = "nao";
         
-        Contactos.push({nome: nome.value, email: email.value, pais: pais.value, telefone: telefone.value, tipo: tipo.value, DOB: DOB.value, Facebook: facebook.value, Google: google.value, LinkedIn: linkedIn.value, Instagram: instagram.value, OutraRede: outrarede.value, Obs: obs.value, Amigos: amigos, Trabalho: trabalho, Familia: familia, OutroGrupo: outroGrupo, Fav: fav});
+        Contactos.push({nome: nome.value, email: email.value, pais: pais.value, telefone1: telefone1.value, telefone2: telefone2.value, telefone3: telefone3.value, telefone4: telefone4.value, telefone5: telefone5.value, tipo: tipo.value, DOB: DOB.value, Facebook: facebook.value, Google: google.value, LinkedIn: linkedIn.value, Instagram: instagram.value, OutraRede: outrarede.value, Obs: obs.value, Amigos: amigos, Trabalho: trabalho, Familia: familia, OutroGrupo: outroGrupo, Fav: fav});
         alert("outra window -- ok");
         
         var indice=Contactos.length-1;
@@ -144,8 +176,10 @@ function AdicionarContacto() {
     }else{
         var MenssagemErro=document.createTextNode("Impossível adicionar Contactos");
         var Erro = document.getElementById("Erro");
+        //window.location.reload();
         Erro.appendChild(MenssagemErro); // Escreve MenssagemErro no <div>
         console.log(Erro);
+        aux==0;
     }
 }
 
@@ -217,23 +251,11 @@ function validarCampoEmail(inputEmail) {
 function VerificaCampos(){ // verifica se os campos estao vazios
     var flag = 0;
     var inputNome = document.getElementById('Nome'); // recebe o parametro do input Nome 
-    var inputNumero = document.getElementById('Numero'); // recebe o parametro do input Numero
+    var inputNumero = document.getElementById('Numero1'); // recebe o parametro do input Numero
     var inputEmail = document.getElementById('Email'); // recebe o parametro do input Email
    
     
-    /*while(flag == 0 || flag == 1 || flag == 2){
-        alert("2 - flag=0");
-        if (validarCampoNome(inputNome)===true) flag++, alert("2 - flag=1"); // flag = 1
-        
-        else if (validarCampoNumero(inputNumero)===true) flag++, alert("2 - flag=2"); // flag = 2
-        
-        else if (validarCampoNumero(inputEmail)===true) flag++, alert("2 - flag=3"); // flag = 3
-        else flag = -1; // sai do ciclo mas sem sucesso
-        
-    }*/
-    
     if (validarCampoNome(inputNome)===true && validarCampoEmail(inputEmail)===true && validarCampoNumero(inputNumero)===true){
-    //if(flag == 2){   
         alert("valida -- ok");
         AbrirLocalStorage();
         AdicionarContacto();
