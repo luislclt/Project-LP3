@@ -199,12 +199,13 @@ function ListarContactos(){
         if (Contactos[i].tipo == "P") var tipotext=document.createTextNode("Pessoal"); else if (Contactos[i].tipo == "W") var tipotext=document.createTextNode("Work"); else if (Contactos[i].tipo == "O") var tipotext=document.createTextNode("Other");
         
         if(Contactos[i].Amigos == "sim" && Contactos[i].Trabalho == "sim" || Contactos[i].Amigos == "sim" && Contactos[i].Familia == "sim" || Contactos[i].Amigos == "sim" && Contactos[i].OutroGrupo == "sim" || Contactos[i].Trabalho == "sim" && Contactos[i].Familia == "sim" || Contactos[i].Trabalho == "sim" && Contactos[i].OutroGrupo == "sim" || Contactos[i].Familia == "sim" && Contactos[i].OutroGrupo == "sim") var grupotext=document.createTextNode("Grupos: ");
+        else if (Contactos[i].Amigos == "nao" && Contactos[i].Trabalho == "nao" && Contactos[i].Familia == "nao" && Contactos[i].OutroGrupo == "nao") var grupotext=document.createTextNode("");
         else var grupotext=document.createTextNode("Grupo: ");
         
-        if (Contactos[i].Amigos == "sim") var Amigostext=document.createTextNode("Amigos"); else var Amigostext=document.createTextNode("");
-        if (Contactos[i].Trabalho == "sim") var Trabalhotext=document.createTextNode("Trabalho"); else var Trabalhotext=document.createTextNode("");
-        if (Contactos[i].Familia == "sim") var Familiatext=document.createTextNode("Familia"); else var Familiatext=document.createTextNode("");
-        if (Contactos[i].OutroGrupo == "sim") var OutroGrupotext=document.createTextNode("Outro"); else var OutroGrupotext=document.createTextNode("");
+        if (Contactos[i].Amigos == "sim") var Amigostext=document.createTextNode("                  Amigos"); else var Amigostext=document.createTextNode("");
+        if (Contactos[i].Trabalho == "sim") var Trabalhotext=document.createTextNode("  Trabalho"); else var Trabalhotext=document.createTextNode("");
+        if (Contactos[i].Familia == "sim") var Familiatext=document.createTextNode("    Familia"); else var Familiatext=document.createTextNode("");
+        if (Contactos[i].OutroGrupo == "sim") var OutroGrupotext=document.createTextNode("  Outro"); else var OutroGrupotext=document.createTextNode("");
         if(Contactos[i].Fav == "sim"){
             btnfavorito.src="Images/estrelaOn.png";
         }else{
