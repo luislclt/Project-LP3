@@ -128,6 +128,7 @@ function mostarContacto(){
     var x = this.parentNode.getElementsByTagName("p")[0].getAttribute("id"); 
     var indice = ObterIndice(Contactos,x);
     guardarLocalStorageContact(indice);
+    window.location.href="ListarContacto.html";
 }
 
 function AdicionarFavoritos() {
@@ -378,7 +379,7 @@ function ListarContactos(){
         var btnremove = document.createElement('input');
         btnremove.type="image";
         btnremove.src="Images/remover.png";
-        btnremove.width="68"; 
+        btnremove.width="88"; 
         btnremove.height="48";
         btnremove.addEventListener('click', removerContacto);
         artigo.appendChild(btnremove);
@@ -386,7 +387,7 @@ function ListarContactos(){
         var btnedita = document.createElement('input');
         btnedita.type="image";
         btnedita.src="Images/edit.png";
-        btnedita.width="68"; 
+        btnedita.width="88"; 
         btnedita.height="48";
         btnedita.addEventListener('click', editarContacto);
         artigo.appendChild(btnedita);
@@ -394,7 +395,7 @@ function ListarContactos(){
         var btnmostrar = document.createElement('input');
         btnmostrar.type="image";
         btnmostrar.src="Images/mostrar.png";
-        btnmostrar.width="68"; 
+        btnmostrar.width="88"; 
         btnmostrar.height="48";
         btnmostrar.addEventListener('click', mostarContacto);
         artigo.appendChild(btnmostrar);
