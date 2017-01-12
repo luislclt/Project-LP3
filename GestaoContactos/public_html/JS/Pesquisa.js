@@ -144,7 +144,11 @@ function VerificaCampos(inputpesquisa){ // verifica se os campos estao vazios
     
     if (validarCampoNome(inputpesquisa)===true){
         AbrirLocalStorage();
-        var resultadonome = PesquisarNome(inputpesquisa);
+        Contactos.sort(OrdenarContactos);
+        for (var i=0; i<=Contactos.length-1; i++){
+            
+            var resultadonome = PesquisarNome(inputpesquisa, i);
+        }
         if(resultadonome === true){
             
             state++;
@@ -322,28 +326,26 @@ function PesquisarNome(nome){
 }
 */
 
-function PesquisarNome(nome){
-    Contactos.sort(OrdenarContactos);
-    
-    for (var i=0; i<=Contactos.length-1; i++){
-        if (Contactos[i].nome.search(nome.value)!=-1){
-            //flag = 1;
-            var flagNomeListado=0;
-            for(var j=0; j<=ContactosVistos.length-1; j++){
-                if(ContactosVistos[j].nome == Contactos[i].nome){
-                    flagNomeListado=1;
-                    return true;
-                }
-            }
-            if(flagNomeListado==1) return false;
-            else{
-                //window.location.reload();
-                ContactosVistos.push({nome: Contactos[i].nome});
-                ListarContacto(i);
+function PesquisarNome(nome,i){
+    var re = new RegExp(nome);
+    var name=JSON.stringify(Contactos[i].nome);
+    if (name.match(re)==nome){
+        //flag = 1;
+        var flagNomeListado=0;
+        for(var j=0; j<=ContactosVistos.length-1; j++){
+            if(ContactosVistos[j].nome == Contactos[i].nome){
+                flagNomeListado=1;
                 return true;
             }
-            //return true;
         }
+        if(flagNomeListado==1) return false;
+        else{
+            //window.location.reload();
+            ContactosVistos.push({nome: Contactos[i].nome});
+            ListarContacto(i);
+            return true;
+        }
+        //return true;
     }
     return false;
 }
@@ -402,7 +404,7 @@ function init(){
     btnEnviar.addEventListener('click', function(){
         var InputCampo = document.getElementById('pesquisa');
         //localStorage.InputCampo = InputCampo;
-        localStorage.setItem('InputCampo', InputCampo);
+        localStorage.setItem('InputCampo', InputCampo.value);
         alert("local");
         //if(localStorage.InputCampo != null){ // && localStorage.InputCampo.value != -1
                 //alert("if");
@@ -425,7 +427,7 @@ function init(){
             
             
             var InputCampo = document.getElementById('pesquisa');
-            localStorage.setItem('InputCampo', InputCampo);
+            localStorage.setItem('InputCampo', InputCampo.value);
             
             
             
