@@ -161,7 +161,7 @@ function ListarContactos(){
         
         var artigo=document.createElement("article");
         var nome=document.createElement("p");
-        var email=document.createElement("p");
+      /*var email=document.createElement("p");
         var pais1=document.createElement("p");
         var pais2=document.createElement("p");
         var pais3=document.createElement("p");
@@ -189,7 +189,7 @@ function ListarContactos(){
         var trabalho=document.createElement("p");
         var familia=document.createElement("p");
         var outroGrupo=document.createElement("p");
-        var Fav=document.createElement("p");
+       */var Fav=document.createElement("p");
         var Espaco=document.createElement("p");
         var btnfavorito = document.createElement('input');
         btnfavorito.type="image";
@@ -199,7 +199,7 @@ function ListarContactos(){
         nome.id=Contactos[i].nome;
         
         var nometext=document.createTextNode("Nome: " + Contactos[i].nome);
-        if (Contactos[i].email == "") var emailtext=document.createTextNode(Contactos[i].email); else var emailtext=document.createTextNode("Email: " + Contactos[i].email);
+        /*if (Contactos[i].email == "") var emailtext=document.createTextNode(Contactos[i].email); else var emailtext=document.createTextNode("Email: " + Contactos[i].email);
         
         var pais1text=document.createTextNode("País: " + Contactos[i].pais1);
         if(Contactos[i].telefone2 !== "") var pais2text=document.createTextNode("País: " + Contactos[i].pais2); else var pais2text=document.createTextNode("");
@@ -301,17 +301,16 @@ function ListarContactos(){
         if (Contactos[i].Trabalho == "sim") var Trabalhotext=document.createTextNode("Trabalho"); else var Trabalhotext=document.createTextNode("");
         if (Contactos[i].Familia == "sim") var Familiatext=document.createTextNode("Familia"); else var Familiatext=document.createTextNode("");
         if (Contactos[i].OutroGrupo == "sim") var OutroGrupotext=document.createTextNode("Outro"); else var OutroGrupotext=document.createTextNode("");
-        if(Contactos[i].Fav == "sim"){
+      */if(Contactos[i].Fav == "sim"){
             btnfavorito.src="Images/estrelaOn.png";
         }else{
             btnfavorito.src="Images/estrelaOff.png";
         }
         
-        
         var Espacotext = document.createTextNode("************************");
         
         nome.appendChild(nometext);
-        email.appendChild(emailtext);
+      /*email.appendChild(emailtext);
         pais1.appendChild(pais1text);
         telefone1.appendChild(telefone1text);
         tipo1.appendChild(tipo1text);
@@ -340,9 +339,10 @@ function ListarContactos(){
         familia.appendChild(Familiatext);
         outroGrupo.appendChild(OutroGrupotext);
         Espaco.appendChild(Espacotext);
+         */
          
         artigo.appendChild(nome);
-        artigo.appendChild(email);
+      /*artigo.appendChild(email);
         artigo.appendChild(pais1);
         artigo.appendChild(telefone1);
         artigo.appendChild(tipo1);
@@ -369,7 +369,7 @@ function ListarContactos(){
         artigo.appendChild(amigos);
         artigo.appendChild(trabalho);
         artigo.appendChild(familia);
-        artigo.appendChild(outroGrupo);
+        artigo.appendChild(outroGrupo);*/
         artigo.appendChild(btnfavorito);
         artigo.appendChild(paragrafo);
         

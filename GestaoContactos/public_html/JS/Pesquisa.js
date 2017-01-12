@@ -104,6 +104,8 @@ function editarContacto(){
     var x = this.parentNode.getElementsByTagName("p")[0].getAttribute("id"); 
     var indice = ObterIndice(Contactos,x);
     guardarLocalStorageContact(indice);
+    state=0;
+    localStorage.setItem('state', state);
     window.location.href="Editar.html";
 }
 
@@ -144,6 +146,7 @@ function VerificaCampos(inputpesquisa){ // verifica se os campos estao vazios
     
     if (validarCampoNome(inputpesquisa)===true){
         AbrirLocalStorage();
+        cont=0;
         Contactos.sort(OrdenarContactos);
         for (var i=0; i<=Contactos.length-1; i++){
             
@@ -204,13 +207,20 @@ function myFunction() {
     }
 }
 
+function mostarContacto(){
+    var x = this.parentNode.getElementsByTagName("p")[0].getAttribute("id"); 
+    var indice = ObterIndice(Contactos,x);
+    guardarLocalStorageContact(indice);
+    window.location.href="ListarContacto.html";
+}
 
 function ListarContacto(pos){
     //window.location.reload();
     var artigo=document.getElementById("contacto");
-
+    var artigo1=document.createElement("article");
+    
     var nome=document.createElement("p");
-    var email=document.createElement("p");
+  /*var email=document.createElement("p");
     var telefone=document.createElement("p");
     var tipo=document.createElement("p");
     var DOB=document.createElement("p");
@@ -224,13 +234,13 @@ function ListarContacto(pos){
     var Trabalho=document.createElement("p");
     var Familia=document.createElement("p");
     var OutroGrupo=document.createElement("p");
-    var Fav=document.createElement("p");
+    var Fav=document.createElement("p");*/
     var Espaco=document.createElement("p");
     
-    //nome.id=Contactos[pos].nome;
+    nome.id=Contactos[pos].nome;
         
     var nometext=document.createTextNode("Nome: " + Contactos[pos].nome);
-    if (Contactos[pos].email == "") var emailtext=document.createTextNode(Contactos[pos].email); else emailtext=document.createTextNode("Email: " + Contactos[pos].email);
+    /*if (Contactos[pos].email == "") var emailtext=document.createTextNode(Contactos[pos].email); else emailtext=document.createTextNode("Email: " + Contactos[pos].email);
     
     var telefonetext=document.createTextNode("Contacto: " + Contactos[pos].telefone);
     if (Contactos[pos].tipo == "") var tipotext=document.createTextNode(Contactos[pos].tipo); else tipotext=document.createTextNode("Tipo de Contacto: " + Contactos[pos].tipo);
@@ -248,12 +258,12 @@ function ListarContacto(pos){
     if (Contactos[pos].OutroGrupo == "sim") var OutroGrupotext=document.createTextNode("Grupo: Outro"); else OutroGrupotext=document.createTextNode("");
     if (Contactos[pos].Fav == "sim"){
         var Favtext=document.createTextNode("Favorito");
-    }else Favtext=document.createTextNode("");
+    }else Favtext=document.createTextNode("");*/
     
     var Espacotext = document.createTextNode("************************");
     
     nome.appendChild(nometext);
-    email.appendChild(emailtext);
+  /*email.appendChild(emailtext);
     telefone.appendChild(telefonetext);
     tipo.appendChild(tipotext);
     DOB.appendChild(DOBtext);
@@ -267,47 +277,58 @@ function ListarContacto(pos){
     Trabalho.appendChild(Trabalhotext);
     Familia.appendChild(Familiatext);
     OutroGrupo.appendChild(OutroGrupotext);
-    Fav.appendChild(Favtext);
+    Fav.appendChild(Favtext);*/
     Espaco.appendChild(Espacotext);
     
-    artigo.appendChild(nome);
-    artigo.appendChild(email);
-    artigo.appendChild(telefone);
-    artigo.appendChild(tipo);
-    artigo.appendChild(DOB);
-    artigo.appendChild(Facebook);
-    artigo.appendChild(Google);
-    artigo.appendChild(LinkedIn);
-    artigo.appendChild(Instagram);
-    artigo.appendChild(OutraRede);
-    artigo.appendChild(Obs);
-    artigo.appendChild(Amigos);
-    artigo.appendChild(Trabalho);
-    artigo.appendChild(Familia);
-    artigo.appendChild(OutroGrupo);
-    artigo.appendChild(Fav);
+    artigo1.appendChild(nome);
+ /* artigo1.appendChild(email);
+    artigo1.appendChild(telefone);
+    artigo1.appendChild(tipo);
+    artigo1.appendChild(DOB);
+    artigo1.appendChild(Facebook);
+    artigo1.appendChild(Google);
+    artigo1.appendChild(LinkedIn);
+    artigo1.appendChild(Instagram);
+    artigo1.appendChild(OutraRede);
+    artigo1.appendChild(Obs);
+    artigo1.appendChild(Amigos);
+    artigo1.appendChild(Trabalho);
+    artigo1.appendChild(Familia);
+    artigo1.appendChild(OutroGrupo);
+    artigo1.appendChild(Fav);
+    artigo1.appendChild(Fav);*/
+    artigo.appendChild(artigo1);
     
     localStorage.setItem('InputCampo', -1);
     //localStorage.InputCampo = -1;
     
     //document.getElementById('Apresentar').appendChild(artigo);
         
-    var btnremove = document.createElement('button');
-    btnremove.innerHTML = 'Remover';
-    btnremove.addEventListener('click', removerContacto);
-    artigo.appendChild(btnremove);
+    var btnremove = document.createElement('input');
+        btnremove.type="image";
+        btnremove.src="Images/remover.png";
+        btnremove.width="88"; 
+        btnremove.height="48";
+        btnremove.addEventListener('click', removerContacto);
+        artigo1.appendChild(btnremove);
         
-    var btnedita = document.createElement('button');
-    btnedita.innerHTML = 'Editar';
-    btnedita.addEventListener('click', editarContacto);
-    artigo.appendChild(btnedita);
-        
-    var btnfavorito = document.createElement('button');
-    btnfavorito.innerHTML = 'Favorito';
-    btnfavorito.addEventListener('click', AdicionarFavoritos);
-    artigo.appendChild(btnfavorito);
+    var btnedita = document.createElement('input');
+        btnedita.type="image";
+        btnedita.src="Images/edit.png";
+        btnedita.width="88"; 
+        btnedita.height="48";
+        btnedita.addEventListener('click', editarContacto);
+        artigo.appendChild(btnedita);
+    artigo1.appendChild(btnedita);
+    
+    var btnmostrar = document.createElement('input');
+        btnmostrar.type="image";
+        btnmostrar.src="Images/mostrar.png";
+        btnmostrar.width="88"; 
+        btnmostrar.height="48";
+        btnmostrar.addEventListener('click', mostarContacto);
+        artigo1.appendChild(btnmostrar);
 
-    document.getElementById('Enviar').innerHTML="Voltar a pesquisar";
 }
 /*
 function PesquisarNome(nome){
@@ -331,21 +352,10 @@ function PesquisarNome(nome,i){
     var name=JSON.stringify(Contactos[i].nome);
     if (name.match(re)==nome){
         //flag = 1;
-        var flagNomeListado=0;
-        for(var j=0; j<=ContactosVistos.length-1; j++){
-            if(ContactosVistos[j].nome == Contactos[i].nome){
-                flagNomeListado=1;
-                return true;
-            }
-        }
-        if(flagNomeListado==1) return false;
-        else{
-            //window.location.reload();
-            ContactosVistos.push({nome: Contactos[i].nome});
-            ListarContacto(i);
-            return true;
-        }
-        //return true;
+        ContactosVistos.push({nome: Contactos[i].nome});
+        ListarContacto(i);
+        cont++;
+        return true;
     }
     return false;
 }
@@ -369,7 +379,7 @@ function PesquisarNumero(numero){
 }
 
 function AbrirLocalStorage() {
-    if (localStorage.contacto != null){
+    if (localStorage.contacto != null ){
         Contactos = JSON.parse(localStorage.contacto);
     }else{
         var vazio=document.createTextNode("Não existem Contactos");
@@ -386,11 +396,13 @@ function AbrirLocalStorage() {
 }
 
 function init(){
+    state = 0;
+    cont=0;
     AbrirLocalStorage();
     SelectedCorFundo();
     var color = document.getElementById('cor');
     color.addEventListener('change', Alterar);
-    state = 0;
+    
     alert(state);
     //if(VerificaCampos != true) window.location.reload();
     
@@ -399,6 +411,7 @@ function init(){
         //VerificaCampos(localStorage.InputCampo);
         
     //}
+
     
     var btnEnviar = document.getElementById('Enviar');
     btnEnviar.addEventListener('click', function(){
@@ -406,33 +419,42 @@ function init(){
         //localStorage.InputCampo = InputCampo;
         localStorage.setItem('InputCampo', InputCampo.value);
         alert("local");
+        
         //if(localStorage.InputCampo != null){ // && localStorage.InputCampo.value != -1
                 //alert("if");
                 //VerificaCampos(localStorage.InputCampo);
         //} // recebe o parametro do input Nome 
-        if(state == 0){
+            if(state == 0 && InputCampo.value!=""){
             console.log("state == 0 : " +state);
             alert("if");
             if(localStorage.InputCampo != null && localStorage.InputCampo != -1){
                 //var inputpesquisa = document.getElementById('pesquisa');
                 alert("if");
                 VerificaCampos(localStorage.InputCampo);
+                state++;
             } // recebe o parametro do input Nome 
             
             //localStorage.setItem('InputCampo', document.getElementById('pesquisa'))
-        }else if(state == 1){
-            
-            alert("else");
-            console.log("state == 1 : " +state);
-            
-            
-            var InputCampo = document.getElementById('pesquisa');
-            localStorage.setItem('InputCampo', InputCampo.value);
-            
-            
-            
-            window.location.reload();
-        }
+            }else if(state > 0){
+                var parent=document.getElementById("contacto");
+                var remove=document.getElementsByTagName('article');
+                cont++;
+                for(i=cont;i>1;i--){
+                    parent.removeChild(remove[cont]);
+                    cont--;
+                }
+                alert("else");
+                console.log("state == 1 : " +state);
+                VerificaCampos(localStorage.InputCampo);
+
+                //var InputCampo = document.getElementById('pesquisa');
+                //localStorage.setItem('InputCampo', InputCampo.value);
+
+
+
+                //window.location.reload();
+            }
+        
     });
     
     //por causa dos states  tem qe ter 3 estados
