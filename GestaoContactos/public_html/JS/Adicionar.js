@@ -64,10 +64,54 @@ function SelectedCorFundo(){
 }
 
 
+
+
+/*
+function saveToLocalDatabase(text) {    
+    if (typeof (localStorage) !== "undefined")   {
+        alert(text);        
+        var finaltext = "";        
+        finaltext = finaltext + "<?xml version="+'"'+"1.0"+'"'+" encoding="+'"'+"utf-8"+'"'+" ?>"
+                              + "<Contacts xmlns:tp="+'"'+"http://xml.netbeans.org/schema/TP.AvC"+'"'+">" 
+                              + text
+                              + "</Contacts>";  
+        localStorage.setItem('XML', finaltext);
+        alert(finaltext);
+    }else {
+        alert("Sorry, your browser does not support web storage...");
+    }
+    
+}
+*/
+/*
+function load(){
+    if(typeof(localStorage) !== "undefined") {
+        //Contactos = JSON.parse(localStorage.contacto);
+        loadDataFromDatabase(localStorage.getItem('XML'));
+        //var xml = JSON.parse(localStorage.XML);
+            alert("Carregado com sucesso!");
+    }else {
+            alert("Não existe informação!");
+    }
+}
+*/
+
+
+function guardarLocalStorage1(text){
+     var finaltext = "asd";        
+        finaltext = finaltext + "<?xml version="+'"'+"1.0"+'"'+" encoding="+'"'+"utf-8"+'"'+" ?>"
+                              + "<Contacts xmlns:tp="+'"'+"http://xml.netbeans.org/schema/TP.AvC"+'"'+">" 
+                              + text
+                              + "</Contacts>";
+    localStorage.setItem('contacto', finaltext); //guardar os albuns
+}
+
+
+/*
 function guardarLocalStorage(){
     var s = JSON.stringify(Contactos);
     localStorage.setItem('contacto', s); //guardar os albuns
-}
+}*/
 
 function AdicionarContacto() {
     
@@ -208,10 +252,50 @@ function AdicionarContacto() {
         
         var indice=Contactos.length-1;
         
+        
+        
+        
+        var xml = "";
+    
+        for(var i = 0; i<Contactos.length;i++){
+            
+            xml = xml + "<Contact>"
+                      + "<Name>" + Contactos[i].nome + "</Name>"
+                      + "<Email>" + Contactos[i].email + "</Email>"
+                      + "<Telephone>"
+                        + "<Country>" + Contactos[i].pais1 + "</Country>"
+                        + "<PhoneNumber>" + Contactos[i].telefone1 + "</PhoneNumber>"
+                        + "<Telephone Type="+'"'+ Contactos[i].tipo1+'"'+">"
+                        + "<Country>" + Contactos[i].pais2 + "</Country>"
+                        + "<PhoneNumber>" + Contactos[i].telefone2 + "</PhoneNumber>"
+                        + "<Telephone Type="+'"'+ Contactos[i].tipo2+'"'+">"
+                        + "<Country>" + Contactos[i].pais3 + "</Country>"
+                        + "<PhoneNumber>" + Contactos[i].telefone3 + "</PhoneNumber>"
+                        + "<Telephone Type="+'"'+ Contactos[i].tipo3+'"'+">"
+                        + "<Country>" + Contactos[i].pais4 + "</Country>"
+                        + "<PhoneNumber>" + Contactos[i].telefone4 + "</PhoneNumber>"
+                        + "<Telephone Type="+'"'+ Contactos[i].tipo+'"'+">"
+                        + "<Country>" + Contactos[i].pais5 + "</Country>"
+                        + "<PhoneNumber>" + Contactos[i].telefone5 + "</PhoneNumber>"
+                        + "<Telephone Type="+'"'+ Contactos[i].tipo5+'"'+">"
+                      + "</Telephone>"
+                      + "<BirthDate>" + Contactos[i].DOB + "</BirthDate>"
+                      + "<SocialNetwork Type="+'"'+ Contactos[i]['typesocial']+'"'+">"+Contactos[i]['social']+"</SocialNetwork>"
+                      + "<Obs>" + Contactos[i].obs + "</Obs>"
+                      + "<Contact Group="+'"'+ Contactos[i].Amigos+'"'+Contactos[i].Familia+'"'+Contactos[i].Trabalho+'"'+Contactos[i].OutroGrupo+'"'+'"'+" IsFavorite="+'"'+ Contactos[i].Fav+'"'+">"
+                    + "</Contact>";
+        }
+        
+        //saveToLocalDatabase(xml);
+        //limpar();
+        
+        
+        guardarLocalStorage1(xml);
+        
         localStorage.setItem('indice',indice);
         window.location.href="ListarContacto.html";
             
-        guardarLocalStorage();
+        //guardarLocalStorage();
         
     }else{
         var MenssagemErro=document.createTextNode("Impossível adicionar Contactos");
@@ -219,6 +303,20 @@ function AdicionarContacto() {
         Erro.appendChild(MenssagemErro); // Escreve MenssagemErro no <div>
         console.log(Erro);
         aux==0;
+    }
+}
+
+function AbrirLocalStorage1() {
+    if (localStorage.contacto != null){
+        var xml = localStorage.getItem('contacto');
+        
+        //fundo = localStorage.fundo;
+        console.log("storage -- ok");
+    }else{
+        var MenssagemErro=document.createTextNode("Impossível adicionar Contactos");
+        var Erro = document.getElementById("Erro");
+        Erro.appendChild(MenssagemErro); // Escreve MenssagemErro no <div>
+        console.log(Erro);
     }
 }
 
@@ -297,6 +395,7 @@ function VerificaCampos(){ // verifica se os campos estao vazios
     if (validarCampoNome(inputNome)===true && validarCampoEmail(inputEmail)===true && validarCampoNumero(inputNumero)===true){
         alert("valida -- ok");
         AbrirLocalStorage();
+        //load();
         AdicionarContacto();
     }
 }
@@ -309,6 +408,7 @@ function MudaEstrela(){
 function init(){
     
     AbrirLocalStorage();
+    //load();
     SelectedCorFundo();
     var color = document.getElementById('cor');
     color.addEventListener('change', Alterar);
