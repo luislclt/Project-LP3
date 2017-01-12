@@ -175,6 +175,32 @@ function ListarContacto(pos){
     window.location.href="ListarContacto.html";
 }
 */
+
+function ShowFilterList() {
+    for (var i=0; i<Contactos.length; i++){
+        
+    }
+}
+
+function myFunction() {
+    var input, filter, ul, li, a, i;
+    input = document.getElementById('myInput');
+    filter = input.value.toUpperCase();
+    ul = document.getElementById("myUL");
+    //li = ul.getElementsByTagName('li');
+
+    // Loop through all list items, and hide those who don't match the search query
+    for (i = 0; i < Contactos.length; i++) {
+        a = Contactos[i].getElementsByTagName("a")[0];
+        if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
+            Contactos[i].style.display = "";
+        } else {
+            Contactos[i].style.display = "none";
+        }
+    }
+}
+
+
 function ListarContacto(pos){
     //window.location.reload();
     var artigo=document.getElementById("contacto");
