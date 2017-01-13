@@ -10,29 +10,23 @@ var CorFundo;
 
 function Alterar(){
     var cor = document.getElementById('cor');
-    //var link = document.getElementById('link');
     
     if (cor.value == 'cornsilk'){
         CorFundo ='cornsilk';
         document.getElementsByTagName("body")[0].style.background="-webkit-linear-gradient(left, #FFF8DC, #A0522D)";
-        //link.href="styles/cornsilk.css";
         
     }else if(cor.value == 'bisque'){
         CorFundo ='bisque';
         document.getElementsByTagName("body")[0].style.background="-webkit-linear-gradient(left, #FFE4C4, #FFA54F)";
-        //link.href="styles/bisque.css";
         
     }else if(cor.value == 'burlywood'){
         CorFundo ='burlywood';
         document.getElementsByTagName("body")[0].style.background="-webkit-linear-gradient(left, #FFD39B, #8B7355)";
-        //link.href="styles/burlywood.css";
         
     }else if(cor.value == 'peachpuff'){
         CorFundo ='peachpuff';
         document.getElementsByTagName("body")[0].style.background="-webkit-linear-gradient(left, #FFDAB9, #D2691E)";
-        //link.href="styles/peachpuff.css";
     }
-    //guardarLocalStorage();
     localStorage.setItem('fundo', CorFundo);
 }
 
@@ -43,75 +37,129 @@ function SelectedCorFundo(){
     if (CorFundo == 'cornsilk'){
         document.getElementById(CorFundo).selected="selected";
         document.getElementsByTagName("body")[0].style.background="-webkit-linear-gradient(left, #FFF8DC, #A0522D)";
-        //link.href="styles/cornsilk.css";
         
     }else if(CorFundo == 'bisque'){
         document.getElementById(CorFundo).selected="selected";
         document.getElementsByTagName("body")[0].style.background="-webkit-linear-gradient(left, #FFE4C4, #FFA54F)";
-        //link.href="styles/bisque.css";
         
     }else if(CorFundo == 'burlywood'){
         document.getElementById(CorFundo).selected="selected";
         document.getElementsByTagName("body")[0].style.background="-webkit-linear-gradient(left, #FFD39B, #8B7355)";
-        //link.href="styles/burlywood.css";
         
     }else if(CorFundo == 'peachpuff'){
         document.getElementById(CorFundo).selected="selected";
         document.getElementsByTagName("body")[0].style.background="-webkit-linear-gradient(left, #FFDAB9, #D2691E)";
-        //link.href="styles/peachpuff.css";
         
     }
 }
 
+function AbrirLocalStorageCor() {
+    if(localStorage.fundo != null){
+        CorFundo = localStorage.fundo;
+    }else{
+        CorFundo = 'cornsilk'; //DEFAULT
+    }
+}
 
-
-
-/*
-function saveToLocalDatabase(text) {    
+function GuardarContactos(text) {    
     if (typeof (localStorage) !== "undefined")   {
-        alert(text);        
+        //alert(text);        
         var finaltext = "";        
         finaltext = finaltext + "<?xml version="+'"'+"1.0"+'"'+" encoding="+'"'+"utf-8"+'"'+" ?>"
                               + "<Contacts xmlns:tp="+'"'+"http://xml.netbeans.org/schema/TP.AvC"+'"'+">" 
                               + text
                               + "</Contacts>";  
-        localStorage.setItem('XML', finaltext);
-        alert(finaltext);
+        localStorage.setItem('Contacto', finaltext);
+        //alert(finaltext);
     }else {
         alert("Sorry, your browser does not support web storage...");
     }
     
 }
-*/
-/*
-function load(){
+
+function CarregarContactos(){
     if(typeof(localStorage) !== "undefined") {
         //Contactos = JSON.parse(localStorage.contacto);
-        loadDataFromDatabase(localStorage.getItem('XML'));
+        loadDataFromDatabase(localStorage.getItem('Contacto'));
         //var xml = JSON.parse(localStorage.XML);
             alert("Carregado com sucesso!");
     }else {
             alert("Não existe informação!");
     }
 }
-*/
 
-
-function guardarLocalStorage1(text){
-     var finaltext = "asd";        
-        finaltext = finaltext + "<?xml version="+'"'+"1.0"+'"'+" encoding="+'"'+"utf-8"+'"'+" ?>"
-                              + "<Contacts xmlns:tp="+'"'+"http://xml.netbeans.org/schema/TP.AvC"+'"'+">" 
-                              + text
-                              + "</Contacts>";
-    localStorage.setItem('contacto', finaltext); //guardar os albuns
+function loadDataFromDatabase(xml) {
+    
+    // Limpar o array
+    /*while(Contactos.length){
+        Contactos.pop();
+    }*/
+    
+    alert("Isto é o xml loadDataFromDatabase: \n"+xml);
+    parser = new DOMParser();
+    xmlDoc = parser.parseFromString(xml, "text/xml");  
+    
+    var tag_contactos = xmlDoc.getElementsByTagName("Contact");
+    alert(tag_contactos.length);
+    
+    var tag_nome = xmlDoc.getElementsByTagName("Name");      
+    var tag_email = xmlDoc.getElementsByTagName("Email");
+    
+    var tag_pais = xmlDoc.getElementsByTagName("Country"); 
+    var tag_numero_telefone = xmlDoc.getElementsByTagName("PhoneNumber");  
+    var tag_tipo_telefone = xmlDoc.getElementsByTagName("Telephone");  // Telephone -> Type 
+    /*var tag_pais = xmlDoc.getElementsByTagName("Country"); 
+    var tag_numero_telefone = xmlDoc.getElementsByTagName("PhoneNumber");  
+    var tag_tipo_telefone = xmlDoc.getElementsByTagName("Telephone");  // Telephone -> Type 
+    var tag_pais = xmlDoc.getElementsByTagName("Country"); 
+    var tag_numero_telefone = xmlDoc.getElementsByTagName("PhoneNumber");  
+    var tag_tipo_telefone = xmlDoc.getElementsByTagName("Telephone");  // Telephone -> Type 
+    var tag_pais = xmlDoc.getElementsByTagName("Country"); 
+    var tag_numero_telefone = xmlDoc.getElementsByTagName("PhoneNumber");  
+    var tag_tipo_telefone = xmlDoc.getElementsByTagName("Telephone");  // Telephone -> Type 
+    var tag_pais = xmlDoc.getElementsByTagName("Country"); 
+    var tag_numero_telefone = xmlDoc.getElementsByTagName("PhoneNumber");  
+    var tag_tipo_telefone = xmlDoc.getElementsByTagName("Telephone");  // Telephone -> Type 
+    */
+    var tag_anos = xmlDoc.getElementsByTagName("BirthDate");
+    //var tag_social = xmlDoc.getElementsByTagName("SocialNetwork"); // SocialNetwork -> Type
+    var tag_obser = xmlDoc.getElementsByTagName("Obs");
+    var tag_grupo_numero = xmlDoc.getElementsByTagName("Contact");  // Contact -> Group
+    var tag_favorito = xmlDoc.getElementsByTagName("Contact");  // Contact -> IsFavorite
+     
+    
+    for(var i=0;i<tag_nome.length;i++){
+        
+        alert("Existem "+ tag_nome.length + " contactos...");
+        
+        alert("Nome: " + tag_nome[i].childNodes[0].nodeValue);
+        alert("Email: " + tag_email[i].childNodes[0].nodeValue);
+        alert("Telefone: " + tag_numero_telefone[i].childNodes[0].nodeValue);
+        alert("Tipo de telefone: " + tag_tipo_telefone[i].getAttribute('Type'));
+        alert("Pais: " + tag_pais[i].childNodes[0].nodeValue);
+        alert("Grupo de telefone: " + tag_grupo_numero[i].childNodes[0].nodeValue); //tag_grupo_numero[i].getAttribute('Group')
+        alert("Favorito: " + tag_favorito[i].childNodes[0].nodeValue); //tag_favorito[i].getAttribute('IsFavorite')
+        //alert(tag_social[i].childNodes[0].nodeValue);
+        //alert("Tipo da rede social: " + tag_social[i].getAttribute('Type'));
+        //alert(tag_anos[i].childNodes[0].nodeValue);
+        //alert(tag_obser[i].childNodes[0].nodeValue);
+        
+        // Vai guardar tudo o que leu do xml num array 
+        Contactos.push({ grupo: tag_grupo_numero[i].getAttribute('Group'),
+                         favorite: tag_favorito[i].getAttribute('IsFavorite'),
+                         name: tag_nome[i].childNodes[0].nodeValue,
+                         number: tag_numero_telefone[i].childNodes[0].nodeValue,
+                         email: tag_email[i].childNodes[0].nodeValue,
+                         typephone: tag_tipo_telefone[i].getAttribute('Type'),
+                         country: tag_pais[i].childNodes[0].nodeValue,
+                         //social: tag_social[i].childNodes[0].nodeValue,
+                         //typesocial: tag_social[i].getAttribute('Type'),
+                         //birthdate: tag_anos[i].childNodes[0].nodeValue,
+                         //observa: tag_obser[i].childNodes[0].nodeValue
+                       });
+    }
 }
 
-
-/*
-function guardarLocalStorage(){
-    var s = JSON.stringify(Contactos);
-    localStorage.setItem('contacto', s); //guardar os albuns
-}*/
 
 function AdicionarContacto() {
     
@@ -258,10 +306,10 @@ function AdicionarContacto() {
         var xml = "";
     
         for(var i = 0; i<Contactos.length;i++){
-            
+            id = i;
             xml = xml + "<Contact>"
                       + "<Name>" + Contactos[i].nome + "</Name>"
-                      + "<Email>" + Contactos[i].email + "</Email>"
+                      + "<Email>" + Contactos[i].email.valueOf() + "</Email>"
                       + "<Telephone>"
                         + "<Country>" + Contactos[i].pais1 + "</Country>"
                         + "<PhoneNumber>" + Contactos[i].telefone1 + "</PhoneNumber>"
@@ -280,19 +328,20 @@ function AdicionarContacto() {
                         + "<Telephone Type="+'"'+ Contactos[i].tipo5+'"'+">"
                       + "</Telephone>"
                       + "<BirthDate>" + Contactos[i].DOB + "</BirthDate>"
-                      + "<SocialNetwork Type="+'"'+ Contactos[i]['typesocial']+'"'+">"+Contactos[i]['social']+"</SocialNetwork>"
+                      //+ "<SocialNetwork Type="+'"'+ Contactos[i]['typesocial']+'"'+">"+Contactos[i]['social']+"</SocialNetwork>"
                       + "<Obs>" + Contactos[i].obs + "</Obs>"
                       + "<Contact Group="+'"'+ Contactos[i].Amigos+'"'+Contactos[i].Familia+'"'+Contactos[i].Trabalho+'"'+Contactos[i].OutroGrupo+'"'+'"'+" IsFavorite="+'"'+ Contactos[i].Fav+'"'+">"
                     + "</Contact>";
         }
         
-        //saveToLocalDatabase(xml);
+        alert("Isto é o XML: "+xml+" posiçao: "+i);
+        GuardarContactos(xml);
         //limpar();
         
         
-        guardarLocalStorage1(xml);
+        //guardarLocalStorage1(xml);
         
-        localStorage.setItem('indice',indice);
+        //localStorage.setItem('indice',indice);
         window.location.href="ListarContacto.html";
             
         //guardarLocalStorage();
@@ -305,39 +354,6 @@ function AdicionarContacto() {
         aux==0;
     }
 }
-
-function AbrirLocalStorage1() {
-    if (localStorage.contacto != null){
-        var xml = localStorage.getItem('contacto');
-        
-        //fundo = localStorage.fundo;
-        console.log("storage -- ok");
-    }else{
-        var MenssagemErro=document.createTextNode("Impossível adicionar Contactos");
-        var Erro = document.getElementById("Erro");
-        Erro.appendChild(MenssagemErro); // Escreve MenssagemErro no <div>
-        console.log(Erro);
-    }
-}
-
-function AbrirLocalStorage() {
-    if (localStorage.contacto != null){
-        Contactos = JSON.parse(localStorage.contacto);
-        //fundo = localStorage.fundo;
-        console.log("storage -- ok");
-    }else{
-        var MenssagemErro=document.createTextNode("Impossível adicionar Contactos");
-        var Erro = document.getElementById("Erro");
-        Erro.appendChild(MenssagemErro); // Escreve MenssagemErro no <div>
-        console.log(Erro);
-    }
-    if(localStorage.fundo != null){
-        CorFundo = localStorage.fundo;
-    }else{
-        CorFundo = 'cornsilk'; //DEFAULT
-    }
-}
-
 
 function validarCampoNumero(inputNumero){ // verifica se o Campo Nome esta vazio
     if (inputNumero.value === ""){ // Esta Vazio
@@ -394,8 +410,7 @@ function VerificaCampos(){ // verifica se os campos estao vazios
     
     if (validarCampoNome(inputNome)===true && validarCampoEmail(inputEmail)===true && validarCampoNumero(inputNumero)===true){
         alert("valida -- ok");
-        AbrirLocalStorage();
-        //load();
+        CarregarContactos();
         AdicionarContacto();
     }
 }
@@ -407,8 +422,7 @@ function MudaEstrela(){
 
 function init(){
     
-    AbrirLocalStorage();
-    //load();
+    AbrirLocalStorageCor();
     SelectedCorFundo();
     var color = document.getElementById('cor');
     color.addEventListener('change', Alterar);

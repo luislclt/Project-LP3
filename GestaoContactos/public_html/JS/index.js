@@ -25,29 +25,23 @@ var CorFundo;
  */
 function Alterar(){
     var cor = document.getElementById('cor');
-    //var link = document.getElementById('link');
     
     if (cor.value == 'cornsilk'){
         CorFundo ='cornsilk';
         document.getElementsByTagName("body")[0].style.background="-webkit-linear-gradient(left, #FFF8DC, #A0522D)";
-        //link.href="styles/cornsilk.css";
         
     }else if(cor.value == 'bisque'){
         CorFundo ='bisque';
         document.getElementsByTagName("body")[0].style.background="-webkit-linear-gradient(left, #FFE4C4, #FFA54F)";
-        //link.href="styles/bisque.css";
         
     }else if(cor.value == 'burlywood'){
         CorFundo ='burlywood';
         document.getElementsByTagName("body")[0].style.background="-webkit-linear-gradient(left, #FFD39B, #8B7355)";
-        //link.href="styles/burlywood.css";
         
     }else if(cor.value == 'peachpuff'){
         CorFundo ='peachpuff';
         document.getElementsByTagName("body")[0].style.background="-webkit-linear-gradient(left, #FFDAB9, #D2691E)";
-        //link.href="styles/peachpuff.css";
     }
-    //guardarLocalStorage();
     localStorage.setItem('fundo', CorFundo);
 }
 
@@ -58,36 +52,23 @@ function SelectedCorFundo(){
     if (CorFundo == 'cornsilk'){
         document.getElementById(CorFundo).selected="selected";
         document.getElementsByTagName("body")[0].style.background="-webkit-linear-gradient(left, #FFF8DC, #A0522D)";
-        //link.href="styles/cornsilk.css";
         
     }else if(CorFundo == 'bisque'){
         document.getElementById(CorFundo).selected="selected";
         document.getElementsByTagName("body")[0].style.background="-webkit-linear-gradient(left, #FFE4C4, #FFA54F)";
-        //link.href="styles/bisque.css";
         
     }else if(CorFundo == 'burlywood'){
         document.getElementById(CorFundo).selected="selected";
         document.getElementsByTagName("body")[0].style.background="-webkit-linear-gradient(left, #FFD39B, #8B7355)";
-        //link.href="styles/burlywood.css";
         
     }else if(CorFundo == 'peachpuff'){
         document.getElementById(CorFundo).selected="selected";
         document.getElementsByTagName("body")[0].style.background="-webkit-linear-gradient(left, #FFDAB9, #D2691E)";
-        //link.href="styles/peachpuff.css";
         
     }
 }
 
-function guardarLocalStorage(){
-    var s = JSON.stringify(Contactos);
-    localStorage.setItem('contacto', s);              //guardar os albuns
-    localStorage.setItem('fundo', CorFundo);
-}
-
-function AbrirLocalStorage() {
-    if (localStorage.contacto != null){
-        Contactos = JSON.parse(localStorage.contacto);
-    }
+function AbrirLocalStorageCor() {
     if(localStorage.fundo != null){
         CorFundo = localStorage.fundo;
     }else{
@@ -97,12 +78,10 @@ function AbrirLocalStorage() {
 
 function init(){
     
-    AbrirLocalStorage();
+    AbrirLocalStorageCor();
     SelectedCorFundo();
     var color = document.getElementById('cor');
     color.addEventListener('change', Alterar);
-    
-    guardarLocalStorage(); // Guardar Contactos & corFundo Default
     
 }
 
