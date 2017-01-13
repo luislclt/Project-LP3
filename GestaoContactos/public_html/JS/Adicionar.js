@@ -99,7 +99,7 @@ function loadDataFromDatabase(xml) {
     parser = new DOMParser();
     xmlDoc = parser.parseFromString(xml, "text/xml");  
     
-    var tag_contactos = xmlDoc.getElementsByTagName("Contact");
+    var tag_contactos = xmlDoc.ge;
     alert(tag_contactos.length);
     
     var tag_nome = xmlDoc.getElementsByTagName("Name");      
