@@ -64,7 +64,7 @@ footer {
     color: black;
     padding-bottom: 5px;
     text-align: left;
-    position: absolute;
+    position: fixed;
     bottom:0px;
     margin-left: 50%;
     width: 600px;
@@ -104,48 +104,12 @@ nav#menu > ul> li > p >a:hover, nav#menu > ul> li > p >a:focus, nav#menu > ul> l
     transform: scale(1.1) rotate(4deg);  
 }
 
-.button {
-    display: inline-block;
-    text-align: center;
-    vertical-align: middle;
-    padding: 9px 13px;
-    border: 0px solid #5e5e5e;
-    border-radius: 7px;
-    background: #989898;
-    background: -webkit-gradient(linear, left top, left bottom, from(#989898), to(#5e5e5e));
-    background: -moz-linear-gradient(top, #989898, #5e5e5e);
-    background: linear-gradient(to bottom, #989898, #5e5e5e);
-    text-shadow: #3b3b3b 1px 1px 1px;
-    font: normal normal bold 16px arial;
-    color: #ffffff;
-    text-decoration: none;
+input[id="Enviar"]{
+    position: absolute;
+    padding-top: 1px;
+    padding-left: 4px
 }
-button[id="Enviar"]:hover,
-button[id="Enviar"]:focus {
-    border: 0px solid #757575;
-    background: #b6b6b6;
-    background: -webkit-gradient(linear, left top, left bottom, from(#b6b6b6), to(#717171));
-    background: -moz-linear-gradient(top, #b6b6b6, #717171);
-    background: linear-gradient(to bottom, #b6b6b6, #717171);
-    color: #ffffff;
-    text-decoration: none;
-}
-button[id="Enviar"]:active {
-    background: #5e5e5e;
-    background: -webkit-gradient(linear, left top, left bottom, from(#5e5e5e), to(#5e5e5e));
-    background: -moz-linear-gradient(top, #5e5e5e, #5e5e5e);
-    background: linear-gradient(to bottom, #5e5e5e, #5e5e5e);
-}
-button[id="Enviar"]:before{
-    content:  "\0000a0";
-    display: inline-block;
-    height: 24px;
-    width: 24px;
-    line-height: 24px;
-    margin: 0 4px -6px -4px;
-    position: relative;
-    top: 0px;
-    left: 0px;
-    background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAABvUlEQVRIie2TMWsUURSFvxtEXmGRwkKshv0RNm6KkAULf4SNMk2YmXYbxRSxnTeQQtYytRAUUWEtUlotsUuxprBMkUqCLDkWexcGnNmdNYKFnmbgvTvnu/dyHvzX35atKogx3gYGQA+YASeSjoui+H4tQFVVNyU9B3bN7NbiXBLAN2CY5/nhbwHc/I13fggcSJoAwcz6wBDoA8+AvTzPWwE3mg698wGQmtmrLMsWVz+Ad2VZfjSzkQM+A+87T+A7/wq8lvSoKIrGH6uqCpK+AOeS7hdFcdVUt9FwNvCdH7SZA2RZdgmMzOyemd1pq2sC9AB850tlZhP3SNYBzPwbVgGA4KmatRU0AU4k4WlZKklbwCVw2hkg6RjPeVmWjSkDiDHeBR4Db0MIF50B/kKHQN/MRlVV/bIqNz8ys01glKZpm3/7S44xPmWe8ynztEyY73zLO980MySdATt5nk87TVDTHvAQOAdeAB8kHQG7wCfggZsnwDjGmKw1wUJlWW54zhPmaTkNIVykaUqMsQeMzSyRNPVJztYCrJJ3Pjaznk+0XYcsW1EnudlObV1P6vfXBtQg28A+8PJPeP5D+gnyM7HOHXRqXAAAAABJRU5ErkJggg==") no-repeat left center transparent;
-    background-size: 100% 100%;
+
+nav#menu {
+      position: fixed;
 }

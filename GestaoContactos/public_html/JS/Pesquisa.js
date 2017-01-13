@@ -125,7 +125,8 @@ function AdicionarFavoritos() {
 }
 
 function validarCampoNumero(inputNumero){ // verifica se o Campo Nome esta vazio
-    if (inputNumero.value === ""){ // Esta Vazio
+    k=inputNumero.replace(/"/g, '');
+    if (inputNumero === "" || isNaN(k)==true){ // Esta Vazio
         return false; // Nao Aceita esta Campo
     }else{
         return true; // Aceitou este Campo
@@ -133,7 +134,7 @@ function validarCampoNumero(inputNumero){ // verifica se o Campo Nome esta vazio
 }
 
 function validarCampoNome(inputNome){ // verifica se o Campo Nome esta vazio
-    if (inputNome.value === ""){ // Esta Vazio
+    if (inputNome === ""){ // Esta Vazio
         return false; // Nao Aceita esta Campo
     }else{
         return true; // Aceitou este Campo
@@ -144,31 +145,32 @@ function VerificaCampos(inputpesquisa){ // verifica se os campos estao vazios
     //window.location.reload();
     //if(localStorage.InputCampo == null || localStorage.InputCampo == -1) inputpesquisa = document.getElementById('pesquisa'); // recebe o parametro do input Nome 
     
-    if (validarCampoNome(inputpesquisa)===true){
-        AbrirLocalStorage();
-        cont=0;
-        Contactos.sort(OrdenarContactos);
-        for (var i=0; i<=Contactos.length-1; i++){
-            
-            var resultadonome = PesquisarNome(inputpesquisa, i);
-        }
-        if(resultadonome === true){
-            
-            state++;
-            console.log("state++ "+state);
-        }
-        
-        //if(resultadonome === false) state1++;
-    }else{
-        if (validarCampoNumero(inputpesquisa)===true){
+    if (validarCampoNumero(inputpesquisa)===true){
             AbrirLocalStorage();
-            var resultadonumero = PesquisarNumero(inputpesquisa);
+            Contactos.sort(OrdenarContactos);
+            for (var i=0; i<=Contactos.length-1; i++){
+                var resultadonumero = PesquisarNumero(inputpesquisa,i);
+            }
             if(resultadonumero === true){
                 state++;
                 console.log("state++ "+state);
             }
             //if(resultadonumero === false) state1++;
-        }
+        }else{
+            if (validarCampoNome(inputpesquisa)===true){
+            AbrirLocalStorage();
+            cont=0;
+            Contactos.sort(OrdenarContactos);
+            for (var i=0; i<=Contactos.length-1; i++){
+
+                var resultadonome = PesquisarNome(inputpesquisa, i);
+            }
+            if(resultadonome === true){
+
+                state++;
+                console.log("state++ "+state);
+            }
+        }    
     }
     if(resultadonome===false && resultadonumero=== false){
         alert("Este Contacto não existe!");
@@ -262,20 +264,20 @@ function PesquisarNome(nome,i){
 }
 
 
-function PesquisarNumero(numero){
+function PesquisarNumero(numero,i){
     Contactos.sort(OrdenarContactos);
-    
-    for (var i=0; i<=Contactos.length-1; i++){
-        if (numero.value == Contactos[i].telefone){
+    var number1=JSON.stringify(Contactos[i].telefone1);
+    var number2=JSON.stringify(Contactos[i].telefone2);
+    var number3=JSON.stringify(Contactos[i].telefone3);
+    var number4=JSON.stringify(Contactos[i].telefone4);
+    var number5=JSON.stringify(Contactos[i].telefone5);
+    var re = new RegExp(numero);
+        if (number1.match(re) == numero || number2.match(re) == numero || number3.match(re) == numero || number4.match(re) == numero || number5.match(re) == numero){
             
-            if(i == posicao) return false;
-            else{
-                posicao=i;
             ListarContacto(i);
+            cont++;
             return true;
         }
-        }
-    }
     return false;
 }
 
@@ -305,6 +307,7 @@ function init(){
     color.addEventListener('change', Alterar);
     
     var btnEnviar = document.getElementById('Enviar');
+    
     btnEnviar.addEventListener('click', function(){
     var InputCampo = document.getElementById('pesquisa');
     localStorage.setItem('InputCampo', InputCampo.value);
