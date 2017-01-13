@@ -197,7 +197,6 @@ function ListarContacto(pos){
     var artigo1=document.createElement("article");
     
     var nome=document.createElement("p");
-    var telefone=document.createElement("p");
     var pais1=document.createElement("p");
     var telefone1=document.createElement("p");
     var Espaco=document.createElement("p");

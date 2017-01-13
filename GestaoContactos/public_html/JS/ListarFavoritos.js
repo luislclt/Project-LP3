@@ -96,10 +96,13 @@ function ListarContactos () {
     
     for (var i=0; i<=Contactos.length-1;i++){
         if(Contactos[i].Fav == "sim"){
+            
             var artigo=document.createElement("article");
         
             var nome=document.createElement("p");
-            var email=document.createElement("p");
+            var pais1=document.createElement("p");
+            var telefone1=document.createElement("p");
+          /*var email=document.createElement("p");
             var telefone=document.createElement("p");
             var tipo=document.createElement("p");
             var DOB=document.createElement("p");
@@ -112,13 +115,15 @@ function ListarContactos () {
             var amigos=document.createElement("p");
             var trabalho=document.createElement("p");
             var familia=document.createElement("p");
-            var outroGrupo=document.createElement("p");
+            var outroGrupo=document.createElement("p");*/
             var Espaco=document.createElement("p");
 
             nome.id=Contactos[i].nome;
 
             var nomet=document.createTextNode(Contactos[i].nome);
-            var emailt=document.createTextNode(Contactos[i].email);
+            var pais1t=document.createTextNode("País: " + Contactos[i].pais1);
+            var telefone1t=document.createTextNode("Contacto: " + Contactos[i].telefone1);
+          /*var emailt=document.createTextNode(Contactos[i].email);
             var telefonet=document.createTextNode(Contactos[i].telefone);
             var tipot=document.createTextNode(Contactos[i].tipo);
             var DOBt=document.createTextNode(Contactos[i].DOB);
@@ -133,11 +138,13 @@ function ListarContactos () {
             if (Contactos[i].Trabalho == "sim") var Trabalhot=document.createTextNode("Trabalho"); else var Trabalhot=document.createTextNode("");
             if (Contactos[i].Familia == "sim") var Familiat=document.createTextNode("Familia"); else var Familiat=document.createTextNode("");
             if (Contactos[i].OutroGrupo == "sim") var OutroGrupot=document.createTextNode("Outro"); else var OutroGrupot=document.createTextNode("");
-            
+            */
             var Espacot=document.createTextNode("************************");
             
             nome.appendChild(nomet);
-            email.appendChild(emailt);
+            pais1.appendChild(pais1t);
+            telefone1.appendChild(telefone1t);
+          /*email.appendChild(emailt);
             telefone.appendChild(telefonet);
             tipo.appendChild(tipot);
             DOB.appendChild(DOBt);
@@ -150,11 +157,13 @@ function ListarContactos () {
             amigos.appendChild(Amigost);
             trabalho.appendChild(Trabalhot);
             familia.appendChild(Familiat);
-            outroGrupo.appendChild(OutroGrupot);
+            outroGrupo.appendChild(OutroGrupot);*/
             Espaco.appendChild(Espacot);
 
             artigo.appendChild(nome);
-            artigo.appendChild(email);
+            artigo.appendChild(pais1);
+            artigo.appendChild(telefone1);
+           /*artigo.appendChild(email);
             artigo.appendChild(telefone);
             artigo.appendChild(tipo);
             artigo.appendChild(DOB);
@@ -167,7 +176,7 @@ function ListarContactos () {
             artigo.appendChild(amigos);
             artigo.appendChild(trabalho);
             artigo.appendChild(familia);
-            artigo.appendChild(outroGrupo);
+            artigo.appendChild(outroGrupo);*/
 
             document.getElementById('Contactos').appendChild(artigo);
 
