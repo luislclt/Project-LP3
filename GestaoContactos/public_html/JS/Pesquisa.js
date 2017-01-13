@@ -183,30 +183,6 @@ function ListarContacto(pos){
 }
 */
 
-function ShowFilterList() {
-    for (var i=0; i<Contactos.length; i++){
-        
-    }
-}
-
-function myFunction() {
-    var input, filter, ul, li, a, i;
-    input = document.getElementById('myInput');
-    filter = input.value.toUpperCase();
-    ul = document.getElementById("myUL");
-    //li = ul.getElementsByTagName('li');
-
-    // Loop through all list items, and hide those who don't match the search query
-    for (i = 0; i < Contactos.length; i++) {
-        a = Contactos[i].getElementsByTagName("a")[0];
-        if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
-            Contactos[i].style.display = "";
-        } else {
-            Contactos[i].style.display = "none";
-        }
-    }
-}
-
 function mostarContacto(){
     var x = this.parentNode.getElementsByTagName("p")[0].getAttribute("id"); 
     var indice = ObterIndice(Contactos,x);
@@ -215,7 +191,6 @@ function mostarContacto(){
 }
 
 function ListarContacto(pos){
-    //window.location.reload();
     var artigo=document.getElementById("contacto");
     var artigo1=document.createElement("article");
     
@@ -223,95 +198,28 @@ function ListarContacto(pos){
     var telefone=document.createElement("p");
     var pais1=document.createElement("p");
     var telefone1=document.createElement("p");
-  /*var email=document.createElement("p");
-    var telefone=document.createElement("p");
-    var tipo=document.createElement("p");
-    var DOB=document.createElement("p");
-    var Facebook=document.createElement("p");
-    var Google=document.createElement("p");
-    var LinkedIn=document.createElement("p");
-    var Instagram=document.createElement("p");
-    var OutraRede=document.createElement("p");
-    var Obs=document.createElement("p");
-    var Amigos=document.createElement("p");
-    var Trabalho=document.createElement("p");
-    var Familia=document.createElement("p");
-    var OutroGrupo=document.createElement("p");
-    var Fav=document.createElement("p");*/
     var Espaco=document.createElement("p");
     
     nome.id=Contactos[pos].nome;
     
     var paist=document.createTextNode(Contactos[pos].pais);
     var nometext=document.createTextNode("Nome: " + Contactos[pos].nome);
-    /*if (Contactos[pos].email == "") var emailtext=document.createTextNode(Contactos[pos].email); else emailtext=document.createTextNode("Email: " + Contactos[pos].email);*/
-    
     var pais1t=document.createTextNode("País: " + Contactos[pos].pais1);
-    var telefone1t=document.createTextNode("Contacto: " + Contactos[pos].telefone1);/*
-    if (Contactos[pos].tipo == "") var tipotext=document.createTextNode(Contactos[pos].tipo); else tipotext=document.createTextNode("Tipo de Contacto: " + Contactos[pos].tipo);
-    if (Contactos[pos].DOB == "") var DOBtext=document.createTextNode(Contactos[pos].DOB); else DOBtext=document.createTextNode("Data de Nascimento: " + Contactos[pos].DOB);
-    if (Contactos[pos].Facebook == "") var Facebooktext=document.createTextNode(Contactos[pos].Facebook); else Facebooktext=document.createTextNode("Facebook: " + Contactos[pos].Facebook);
-    if (Contactos[pos].Google == "") var Googletext=document.createTextNode(Contactos[pos].Google); else Googletext=document.createTextNode("Google+: " + Contactos[pos].Google);
-    if (Contactos[pos].LinkedIn == "") var LinkedIntext=document.createTextNode(Contactos[pos].LinkedIn); else LinkedIntext=document.createTextNode("LinkedIn: " + Contactos[pos].LinkedIn);
-    if (Contactos[pos].Instagram == "") var Instagramtext=document.createTextNode(Contactos[pos].Instagram); else Instagramtext=document.createTextNode("Instagram: " + Contactos[pos].Instagram);
-    if (Contactos[pos].OutraRede == "") var OutraRedetext=document.createTextNode(Contactos[pos].OutraRede); else OutraRedetext=document.createTextNode("Outro: " + Contactos[pos].OutraRede);
-    if (Contactos[pos].Obs == "") var Obstext=document.createTextNode(Contactos[pos].Obs); else Obstext=document.createTextNode("Observações: " + Contactos[pos].Obs);
-    
-    if (Contactos[pos].Amigos == "sim") var Amigostext=document.createTextNode("Grupo: Amigos"); else Amigostext=document.createTextNode("");
-    if (Contactos[pos].Trabalho == "sim") var Trabalhotext=document.createTextNode("Grupo: Trabalho"); else Trabalhotext=document.createTextNode("");
-    if (Contactos[pos].Familia == "sim") var Familiatext=document.createTextNode("Grupo: Familia"); else Familiatext=document.createTextNode("");
-    if (Contactos[pos].OutroGrupo == "sim") var OutroGrupotext=document.createTextNode("Grupo: Outro"); else OutroGrupotext=document.createTextNode("");
-    if (Contactos[pos].Fav == "sim"){
-        var Favtext=document.createTextNode("Favorito");
-    }else Favtext=document.createTextNode("");*/
-    
+    var telefone1t=document.createTextNode("Contacto: " + Contactos[pos].telefone1);
     var Espacotext = document.createTextNode("************************");
     
     nome.appendChild(nometext);
     pais1.appendChild(pais1t);
     telefone1.appendChild(telefone1t);
-  /*email.appendChild(emailtext);
-    ;
-    tipo.appendChild(tipotext);
-    DOB.appendChild(DOBtext);
-    Facebook.appendChild(Facebooktext);
-    Google.appendChild(Googletext);
-    LinkedIn.appendChild(LinkedIntext);
-    Instagram.appendChild(Instagramtext);
-    OutraRede.appendChild(OutraRedetext);
-    Obs.appendChild(Obstext);
-    Amigos.appendChild(Amigostext);
-    Trabalho.appendChild(Trabalhotext);
-    Familia.appendChild(Familiatext);
-    OutroGrupo.appendChild(OutroGrupotext);
-    Fav.appendChild(Favtext);*/
     Espaco.appendChild(Espacotext);
     
     artigo1.appendChild(nome);
     artigo1.appendChild(pais1);
     artigo1.appendChild(telefone1);
- /* artigo1.appendChild(email);
     
-    artigo1.appendChild(tipo);
-    artigo1.appendChild(DOB);
-    artigo1.appendChild(Facebook);
-    artigo1.appendChild(Google);
-    artigo1.appendChild(LinkedIn);
-    artigo1.appendChild(Instagram);
-    artigo1.appendChild(OutraRede);
-    artigo1.appendChild(Obs);
-    artigo1.appendChild(Amigos);
-    artigo1.appendChild(Trabalho);
-    artigo1.appendChild(Familia);
-    artigo1.appendChild(OutroGrupo);
-    artigo1.appendChild(Fav);
-    artigo1.appendChild(Fav);*/
     artigo.appendChild(artigo1);
     
     localStorage.setItem('InputCampo', -1);
-    //localStorage.InputCampo = -1;
-    
-    //document.getElementById('Apresentar').appendChild(artigo);
         
     var btnremove = document.createElement('input');
         btnremove.type="image";
@@ -339,22 +247,6 @@ function ListarContacto(pos){
         artigo1.appendChild(btnmostrar);
 
 }
-/*
-function PesquisarNome(nome){
-    Contactos.sort(OrdenarContactos);
-    for (var i=0; i<=Contactos.length-1; i++){
-        if (nome.value == Contactos[i].nome){
-            if(i == posicao) return false;
-            else{
-                posicao=i;
-                ListarContacto(i);
-                return true;
-            }
-        }
-    }
-    return false;
-}
-*/
 
 function PesquisarNome(nome,i){
     var re = new RegExp(nome);
@@ -412,73 +304,32 @@ function init(){
     var color = document.getElementById('cor');
     color.addEventListener('change', Alterar);
     
-    alert(state);
-    //if(VerificaCampos != true) window.location.reload();
-    
-    //if(localStorage.InputCampo != null && localStorage.InputCampo != -1){
-        
-        //VerificaCampos(localStorage.InputCampo);
-        
-    //}
-
-    
     var btnEnviar = document.getElementById('Enviar');
     btnEnviar.addEventListener('click', function(){
-        var InputCampo = document.getElementById('pesquisa');
-        //localStorage.InputCampo = InputCampo;
-        localStorage.setItem('InputCampo', InputCampo.value);
-        alert("local");
-        
-        //if(localStorage.InputCampo != null){ // && localStorage.InputCampo.value != -1
-                //alert("if");
-                //VerificaCampos(localStorage.InputCampo);
-        //} // recebe o parametro do input Nome 
-            if(state == 0 && InputCampo.value!=""){
-            console.log("state == 0 : " +state);
+    var InputCampo = document.getElementById('pesquisa');
+    localStorage.setItem('InputCampo', InputCampo.value);
+    alert("local");
+ 
+    if(state == 0 && InputCampo.value!=""){
+        console.log("state == 0 : " +state);
+        if(localStorage.InputCampo != null && localStorage.InputCampo != -1){
+            //var inputpesquisa = document.getElementById('pesquisa');
             alert("if");
-            if(localStorage.InputCampo != null && localStorage.InputCampo != -1){
-                //var inputpesquisa = document.getElementById('pesquisa');
-                alert("if");
-                VerificaCampos(localStorage.InputCampo);
-                state++;
-            } // recebe o parametro do input Nome 
-            
-            //localStorage.setItem('InputCampo', document.getElementById('pesquisa'))
-            }else if(state > 0){
-                var parent=document.getElementById("contacto");
-                var remove=document.getElementsByTagName('article');
-                cont++;
-                for(i=cont;i>1;i--){
-                    parent.removeChild(remove[cont]);
-                    cont--;
-                }
-                alert("else");
-                console.log("state == 1 : " +state);
-                VerificaCampos(localStorage.InputCampo);
-
-                //var InputCampo = document.getElementById('pesquisa');
-                //localStorage.setItem('InputCampo', InputCampo.value);
-
-
-
-                //window.location.reload();
-            }
-        
-    });
-    
-    //por causa dos states  tem qe ter 3 estados
-    //2 tentativa do enviar  tipo   asd d epois maria   --> maria
-    
-    /*
-    var campo = document.getElementById('pesquisa');
-    campo.addEventListener('change', function(){
-        if(state1 == 2){
-            window.location.reload();
-            state1 = 0;
+            VerificaCampos(localStorage.InputCampo);
+            state++;
+        } // recebe o parametro do input Nome 
+    }else if(state > 0){
+        var parent=document.getElementById("contacto");
+        var remove=document.getElementsByTagName('article');
+        cont++;
+        for(i=cont;i>1;i--){
+            parent.removeChild(remove[cont]);
+            cont--;
         }
-         
+        console.log("state == 1 : " +state);
+        VerificaCampos(localStorage.InputCampo);
+        }
     });
-    */
 }
 
 document.addEventListener('DOMContentLoaded', init);
