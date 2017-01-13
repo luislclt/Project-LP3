@@ -220,6 +220,9 @@ function ListarContacto(pos){
     var artigo1=document.createElement("article");
     
     var nome=document.createElement("p");
+    var telefone=document.createElement("p");
+    var pais1=document.createElement("p");
+    var telefone1=document.createElement("p");
   /*var email=document.createElement("p");
     var telefone=document.createElement("p");
     var tipo=document.createElement("p");
@@ -238,11 +241,13 @@ function ListarContacto(pos){
     var Espaco=document.createElement("p");
     
     nome.id=Contactos[pos].nome;
-        
-    var nometext=document.createTextNode("Nome: " + Contactos[pos].nome);
-    /*if (Contactos[pos].email == "") var emailtext=document.createTextNode(Contactos[pos].email); else emailtext=document.createTextNode("Email: " + Contactos[pos].email);
     
-    var telefonetext=document.createTextNode("Contacto: " + Contactos[pos].telefone);
+    var paist=document.createTextNode(Contactos[pos].pais);
+    var nometext=document.createTextNode("Nome: " + Contactos[pos].nome);
+    /*if (Contactos[pos].email == "") var emailtext=document.createTextNode(Contactos[pos].email); else emailtext=document.createTextNode("Email: " + Contactos[pos].email);*/
+    
+    var pais1t=document.createTextNode("País: " + Contactos[pos].pais1);
+    var telefone1t=document.createTextNode("Contacto: " + Contactos[pos].telefone1);/*
     if (Contactos[pos].tipo == "") var tipotext=document.createTextNode(Contactos[pos].tipo); else tipotext=document.createTextNode("Tipo de Contacto: " + Contactos[pos].tipo);
     if (Contactos[pos].DOB == "") var DOBtext=document.createTextNode(Contactos[pos].DOB); else DOBtext=document.createTextNode("Data de Nascimento: " + Contactos[pos].DOB);
     if (Contactos[pos].Facebook == "") var Facebooktext=document.createTextNode(Contactos[pos].Facebook); else Facebooktext=document.createTextNode("Facebook: " + Contactos[pos].Facebook);
@@ -263,8 +268,10 @@ function ListarContacto(pos){
     var Espacotext = document.createTextNode("************************");
     
     nome.appendChild(nometext);
+    pais1.appendChild(pais1t);
+    telefone1.appendChild(telefone1t);
   /*email.appendChild(emailtext);
-    telefone.appendChild(telefonetext);
+    ;
     tipo.appendChild(tipotext);
     DOB.appendChild(DOBtext);
     Facebook.appendChild(Facebooktext);
@@ -281,8 +288,10 @@ function ListarContacto(pos){
     Espaco.appendChild(Espacotext);
     
     artigo1.appendChild(nome);
+    artigo1.appendChild(pais1);
+    artigo1.appendChild(telefone1);
  /* artigo1.appendChild(email);
-    artigo1.appendChild(telefone);
+    
     artigo1.appendChild(tipo);
     artigo1.appendChild(DOB);
     artigo1.appendChild(Facebook);
