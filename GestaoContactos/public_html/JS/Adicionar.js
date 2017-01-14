@@ -100,6 +100,7 @@ function loadDataFromDatabase(xml) {
     xmlDoc = parser.parseFromString(xml, "text/xml");  
     
     var tag_contactos = xmlDoc.getElementsByTagName("Contact");
+    //var tag_killme = tag_contactos[0].childNodes;
     alert(tag_contactos.length);
     
    // var tag_nome = tag_contactos;      
@@ -131,7 +132,7 @@ function loadDataFromDatabase(xml) {
     for(var i=0;i<tag_contactos.length;i++){
         var tag_nome = tag_contactos[0].childNodes[0];
         var tag_email = tag_contactos[0].childNodes[1];
-        if(tag_email.nodeName=="Email"){
+        if(tag_email.nodeName=="Email" && tag_email.nodeName!=null){
             alert("Email: " + tag_email.childNodes[0].nodevalue);
         }else{
             var tag_tipo_telefone1 = tag_contactos[i].childNodes[1].childNodes[2].getAttribute('Type');
@@ -141,7 +142,7 @@ function loadDataFromDatabase(xml) {
             var tag_pais1 = tag_contactos[i].childNodes[1].childNodes[0].childNodes[0];
             alert("Pais: " + tag_pais1.nodeValue);
             
-            if(tag_contactos[i].childNodes[1].childNodes[3].nodeName=="Telephone" ){
+            if(tag_contactos[i].childNodes[1].childNodes[3].nodeName=="Telephone" && tag_contactos[i].childNodes[1].childNodes[3].nodeName!=null){
                 var tel2 = tag_contactos[i].childNodes[1].childNodes[3];
                 var tag_tipo_telefone2 = tel2.childNodes[2].getAttribute('Type');
                 alert("tipo telefone: " + tag_tipo_telefone2.valueOf());
@@ -161,14 +162,14 @@ function loadDataFromDatabase(xml) {
         //alert(tag_obser[i].childNodes[0].nodeValue);
         
         // Vai guardar tudo o que leu do xml num array 
-        if(telefone2[i]!=undefined && telefone3[i]!=undefined && telefone4[i]!=undefined && telefone5[i]!=undefined){
-            Contactos.push({ grupo: '"' + tag_grupo_numero[i].getAttribute('Group') + '"',
-                         Fav: '"' + tag_favorito[i].getAttribute('IsFavorite') + '"',
-                         nome: '"' + tag_nome[i].childNodes[0].nodeValue + '"',
-                         telefone1: '"' + tag_numero_telefone[i].childNodes[0].nodeValue + '"',
+       // if(telefone2[i]!=undefined && telefone3[i]!=undefined && telefone4[i]!=undefined && telefone5[i]!=undefined){
+            Contactos.push({ //grupo: '"' + tag_grupo_numero[i].getAttribute('Group') + '"',
+                         //Fav: '"' + tag_favorito[i].getAttribute('IsFavorite') + '"',
+                         nome: '"' + tag_contactos[0].childNodes[0].nodeValue + '"',
+                         telefone1: '"' + tag_numero_telefone1.nodeValue + '"',
                        //email: '"' + tag_email[i].childNodes[0].nodeValue + '"',
-                         tipo1: '"' + tag_tipo_telefone[i].getAttribute('Type') + '"',
-                         pais1: '"' + tag_pais[i].childNodes[0].nodeValue + '"',
+                         tipo1: '"' + tag_tipo_telefone1.valueOf() + '"',
+                         pais1: '"' + tag_pais1.nodeValue + '"',
                        /*telefone2: "",
                          tipo2: "",
                          pais2: "",
@@ -187,8 +188,8 @@ function loadDataFromDatabase(xml) {
                          //observa: tag_obser[i].childNodes[0].nodeValue,
                        });
             var ultimapos=Contactos.lenght-1;           
-            if(tag_email[i]!=undefined){
-                Contactos[ultimapos].email='"' + tag_nome[i].childNodes[0].nodeValue + '"';
+           /*if(tag_email.nodeName=="Email"){
+                Contactos[ultimapos].email='"' + tag_email = tag_contactos[0].childNodes[1].nodeValue + '"';
             }
             if(telefone2[i]!=undefined){
                 Contactos[ultimapos].telefone2= '"' + tag_numero_telefone[i].childNodes[1].nodeValue + '"';
@@ -197,7 +198,8 @@ function loadDataFromDatabase(xml) {
                 Contactos[ultimapos].tipo2= "";
                 Contactos[ultimapos].pais2= "";
             }
-        }else{
+        }
+        /*else{
             if(tag_email[i]!=undefined && telefone2[i]!=undefined && telefone3[i]!=undefined && telefone4[i]!=undefined && telefone5[i]!=undefined)
             Contactos.push({ grupo: '"' + tag_grupo_numero[i].getAttribute('Group') + '"',
                          Fav: '"' + tag_favorito[i].getAttribute('IsFavorite') + '"',
@@ -223,7 +225,7 @@ function loadDataFromDatabase(xml) {
                          //birthdate: tag_anos[i].childNodes[0].nodeValue,
                          //observa: tag_obser[i].childNodes[0].nodeValue
                        });
-        }
+        }*/
         
     }
 }
@@ -376,65 +378,65 @@ function AdicionarContacto() {
         id = i;
         xml = xml     + "<Contact>"
                       + "<Name>" + Contactos[i].nome + "</Name>"
-                      if(Contactos[i].email!=""){
+                      if(Contactos[i].email!="" && Contactos[i].email!=undefined){
                         xml = xml + "<Email>" + Contactos[i].email.valueOf() + "</Email>" 
                       }
                       xml = xml  +  "<Telephone>"
                         + "<Country>" + Contactos[i].pais1 + "</Country>"
                         + "<PhoneNumber>" + Contactos[i].telefone1 + "</PhoneNumber>"
-                        + "<Telephone Type="+'"'+ Contactos[i].tipo1+'"'+">"
+                        + "<Telephone Type="+'"'+ Contactos[i].tipo1+'"'+"></Telephone>"
                       + "</Telephone>"
-                      if(Contactos[i].telefone2!=""){
+                      if(Contactos[i].telefone2!="" && Contactos[i].telefone2!=undefined){
                           xml = xml + "<Telephone>"
                           + "<Country>" + Contactos[i].pais2 + "</Country>"
                           + "<PhoneNumber>" + Contactos[i].telefone2 + "</PhoneNumber>"
-                          + "<Telephone Type="+'"'+ Contactos[i].tipo2+'"'+">"
+                          + "<Telephone Type="+'"'+ Contactos[i].tipo2+'"'+"></Telephone>"
                         + "</Telephone>"   
                       }
-                      if(Contactos[i].telefone3!=""){
+                      if(Contactos[i].telefone3!="" && Contactos[i].telefone3!=undefined){
                           xml = xml + "<Telephone>"
                           + "<Country>" + Contactos[i].pais3 + "</Country>"
                           + "<PhoneNumber>" + Contactos[i].telefone3 + "</PhoneNumber>"
-                          + "<Telephone Type="+'"'+ Contactos[i].tipo3+'"'+">"
+                          + "<Telephone Type="+'"'+ Contactos[i].tipo3+'"'+"></Telephone>"
                         + "</Telephone>"  
                       }
-                      if(Contactos[i].telefone4!=""){
+                      if(Contactos[i].telefone4!="" && Contactos[i].telefone4!=undefined){
                           xml = xml + "<Telephone>"
                           + "<Country>" + Contactos[i].pais4 + "</Country>"
                           + "<PhoneNumber>" + Contactos[i].telefone4 + "</PhoneNumber>"
-                          + "<Telephone Type="+'"'+ Contactos[i].tipo4+'"'+">"
+                          + "<Telephone Type="+'"'+ Contactos[i].tipo4+'"'+"></Telephone>"
                         + "</Telephone>"  
                       }
-                      if(Contactos[i].telefone5!=""){
+                      if(Contactos[i].telefone5!="" && Contactos[i].telefone5!=undefined){
                          xml = xml + "<Telephone>"
                          + "<Country>" + Contactos[i].pais5 + "</Country>"
                          + "<PhoneNumber>" + Contactos[i].telefone5 + "</PhoneNumber>"
-                         + "<Telephone Type="+'"'+ Contactos[i].tipo5+'"'+">"
+                         + "<Telephone Type="+'"'+ Contactos[i].tipo5+'"'+"></Telephone>"
                         + "</Telephone>" 
                       }
-                      xml = xml  + "<BirthDate>" + Contactos[i].DOB.valueOf() + "</BirthDate>"
-                    if(Contactos[i].Facebook!=""){
+                      //xml = xml  + "<BirthDate>" + Contactos[i].DOB.valueOf() + "</BirthDate>"
+                    if(Contactos[i].Facebook!="" && Contactos[i].Facebook!=undefined){
                         xml = xml + "<SocialNetwork Type="+'"F"'+">" + Contactos[i].Facebook + "</SocialNetwork>"
                       }
-                      if(Contactos[i].Google!=""){
+                      if(Contactos[i].Google!="" && Contactos[i].Google!=undefined){
                         xml = xml + "<SocialNetwork Type="+'"G"'+">" + Contactos[i].Google + "</SocialNetwork>"
                       }
-                      if(Contactos[i].LinkedIn!=""){
+                      if(Contactos[i].LinkedIn!="" && Contactos[i].LinkedIn!=undefined){
                         xml = xml + "<SocialNetwork Type="+'"L"'+">" + Contactos[i].LinkedIn + "</SocialNetwork>"
                       }
-                      if(Contactos[i].Instagram!=""){
+                      if(Contactos[i].Instagram!="" && Contactos[i].Instagram!=undefined){
                         xml = xml + "<SocialNetwork Type="+'"I"'+">" + Contactos[i].Instagram + "</SocialNetwork>"
                       }
-                      if(Contactos[i].OutraRede!=""){
+                      if(Contactos[i].OutraRede!="" && Contactos[i].OutraRede!=undefined){
                         xml = xml + "<SocialNetwork Type="+'"O"'+">" + Contactos[i].OutraRede + "</SocialNetwork>"
                       }
                       //+ "<SocialNetwork Type="+'"'+ Contactos[i]['typesocial']+'"'+">"+Contactos[i]['social']+"</SocialNetwork>" 
-                      if(Contactos[i].Obs!=""){
+                      if(Contactos[i].Obs!="" && Contactos[i].Obs!=undefined){
                           xml = xml + "<Obs>" + Contactos[i].Obs + "</Obs>"
                       }
                     
-                      xml = xml  + "<Contact Group="+'"'+ Contactos[i].Amigos+'"'+Contactos[i].Familia+'"'+Contactos[i].Trabalho+'"'+Contactos[i].OutroGrupo+'"'+'"'+" IsFavorite="+'"'+ Contactos[i].Fav+'"'+">"
-                                 + "</Contact>";
+                      //xml = xml  + "<Contact Group="+'"'+ Contactos[i].Amigos+'"'+Contactos[i].Familia+'"'+Contactos[i].Trabalho+'"'+Contactos[i].OutroGrupo+'"'+'"'+" IsFavorite="+'"'+ Contactos[i].Fav+'"'+"></Contact>"
+                            xml = xml     + "</Contact>";
         }
         
         alert("Isto é o XML: "+xml+" posiçao: "+i);
