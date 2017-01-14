@@ -103,12 +103,7 @@ function loadDataFromDatabase(xml) {
     //var tag_killme = tag_contactos[0].childNodes;
     alert(tag_contactos.length);
     
-   // var tag_nome = tag_contactos;      
-    var tag_email = xmlDoc.getElementsByTagName("Email");
-    
-    var tag_pais = xmlDoc.getElementsByTagName("Country"); 
-    var tag_numero_telefone = xmlDoc.getElementsByTagName("PhoneNumber");  
-    var tag_tipo_telefone = xmlDoc.getElementsByTagName("Telephone");  // Telephone -> Type 
+   // var tag_nome = tag_contactos;
     /*var tag_pais = xmlDoc.getElementsByTagName("Country"); 
     var tag_numero_telefone = xmlDoc.getElementsByTagName("PhoneNumber");  
     var tag_tipo_telefone = xmlDoc.getElementsByTagName("Telephone");  // Telephone -> Type 
@@ -161,7 +156,45 @@ function loadDataFromDatabase(xml) {
                 alert("Telefone: " + tag_numero_telefone2.nodeValue);
                 var tag_pais2 = tel2.childNodes[0].childNodes[0];
                 alert("Pais: " + tag_pais2.nodeValue);
-              
+                
+                if(tag_contactos[i].childNodes[1].childNodes[4]!=undefined && tag_contactos[i].childNodes[1].childNodes[4].nodeName=="Telephone" ){
+                    var tel3 = tag_contactos[i].childNodes[1].childNodes[4];
+                    var tag_tipo_telefone3 = tel3.childNodes[2].getAttribute('Type');
+                    alert("tipo telefone: " + tag_tipo_telefone3.valueOf());
+                    var tag_numero_telefone3 = tel3.childNodes[1].childNodes[0];
+                    alert("Telefone: " + tag_numero_telefone3.nodeValue);
+                    var tag_pais3 = tel3.childNodes[0].childNodes[0];
+                    alert("Pais: " + tag_pais3.nodeValue);
+                    
+                    if(tag_contactos[i].childNodes[1].childNodes[5]!=undefined && tag_contactos[i].childNodes[1].childNodes[5].nodeName=="Telephone" ){
+                        var tel4 = tag_contactos[i].childNodes[1].childNodes[5];
+                        var tag_tipo_telefone4 = tel4.childNodes[2].getAttribute('Type');
+                        alert("tipo telefone: " + tag_tipo_telefone4.valueOf());
+                        var tag_numero_telefone4 = tel4.childNodes[1].childNodes[0];
+                        alert("Telefone: " + tag_numero_telefone4.nodeValue);
+                        var tag_pais4 = tel4.childNodes[0].childNodes[0];
+                        alert("Pais: " + tag_pais4.nodeValue);
+                        
+                        if(tag_contactos[i].childNodes[1].childNodes[6]!=undefined && tag_contactos[i].childNodes[1].childNodes[6].nodeName=="Telephone" ){
+                            var tel5 = tag_contactos[i].childNodes[1].childNodes[6];
+                            var tag_tipo_telefone5 = tel5.childNodes[2].getAttribute('Type');
+                            alert("tipo telefone: " + tag_tipo_telefone5.valueOf());
+                            var tag_numero_telefone5 = tel5.childNodes[1].childNodes[0];
+                            alert("Telefone: " + tag_numero_telefone5.nodeValue);
+                            var tag_pais5 = tel5.childNodes[0].childNodes[0];
+                            alert("Pais: " + tag_pais5.nodeValue);
+                        
+                        }else{
+                            
+                        }
+                        
+                    }else{
+                        
+                    }
+                    
+                }else{
+                    
+                }
             }else{
                 var tag_anos = tag_contactos[i].childNodes[2].childNodes[0];
                 alert("DOB: " + tag_anos.nodeValue);
@@ -198,13 +231,13 @@ function loadDataFromDatabase(xml) {
         
         // Vai guardar tudo o que leu do xml num array 
        // if(telefone2[i]!=undefined && telefone3[i]!=undefined && telefone4[i]!=undefined && telefone5[i]!=undefined){
-            Contactos.push({ //grupo: '"' + tag_grupo_numero[i].getAttribute('Group') + '"',
+            //Contactos.push({ //grupo: '"' + tag_grupo_numero[i].getAttribute('Group') + '"',
                          //Fav: '"' + tag_favorito[i].getAttribute('IsFavorite') + '"',
-                         nome: '"' + tag_contactos[0].childNodes[0].nodeValue + '"',
-                         telefone1: '"' + tag_numero_telefone1.nodeValue + '"',
+                         //nome: '"' + tag_contactos[0].childNodes[0].nodeValue + '"',
+                         //telefone1: '"' + tag_numero_telefone1.nodeValue + '"',
                        //email: '"' + tag_email[i].childNodes[0].nodeValue + '"',
-                         tipo1: '"' + tag_tipo_telefone1.valueOf() + '"',
-                         pais1: '"' + tag_pais1.nodeValue + '"',
+                         //tipo1: '"' + tag_tipo_telefone1.valueOf() + '"',
+                         //pais1: '"' + tag_pais1.nodeValue + '"',
                        /*telefone2: "",
                          tipo2: "",
                          pais2: "",
@@ -221,8 +254,8 @@ function loadDataFromDatabase(xml) {
                          //typesocial: tag_social[i].getAttribute('Type'),
                          //birthdate: tag_anos[i].childNodes[0].nodeValue,
                          //observa: tag_obser[i].childNodes[0].nodeValue,
-                       });
-            var ultimapos=Contactos.lenght-1;           
+                     // });
+           // var ultimapos=Contactos.lenght-1;           
            /*if(tag_email.nodeName=="Email"){
                 Contactos[ultimapos].email='"' + tag_email = tag_contactos[0].childNodes[1].nodeValue + '"';
             }
@@ -409,7 +442,7 @@ function AdicionarContacto() {
         
         var xml = "";
         
-        for(var i = 0; i<indice;i++){
+        for(var i = 0; i<Contactos.length;i++){
         id = i;
         xml = xml     + "<Contact Group="+'"' + Contactos[i].Amigos + Contactos[i].Familia + Contactos[i].Trabalho + Contactos[i].OutroGrupo+'" '+  "IsFavorite="+'"'+ Contactos[i].Fav+'"'+">"
                       + "<Name>" + Contactos[i].nome + "</Name>"
