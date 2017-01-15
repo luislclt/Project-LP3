@@ -2716,7 +2716,12 @@ function AdicionarContacto() {
                          + "<Telephone Type="+'"'+ Contactos[i].tipo5+'"'+"></Telephone>"
                         + "</Telephone>" 
                       }
-                        xml = xml  + "<BirthDate>" + Contactos[i].DOB + "</BirthDate>"
+                      if(Contactos[i].DOB!=""){
+                          xml = xml  + "<BirthDate>" + Contactos[i].DOB + "</BirthDate>"
+                      }
+                      else{
+                         xml = xml  + "<BirthDate>" + Date().getFullYear() + "-" + Date().getMonth() + "-" + Date().getDate() + "</BirthDate>" 
+                      }
                     if(Contactos[i].Facebook!="" && Contactos[i].Facebook!=undefined){
                         xml = xml + "<SocialNetwork Type="+'"F"'+">" + Contactos[i].Facebook + "</SocialNetwork>"
                       }
@@ -2748,6 +2753,7 @@ function AdicionarContacto() {
         //guardarLocalStorage1(xml);
         
         //localStorage.setItem('indice',indice);
+        localStorage.setItem('indice',indice);
         window.location.href="ListarContacto.html";
             
         //guardarLocalStorage();
