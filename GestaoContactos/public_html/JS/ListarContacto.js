@@ -140,11 +140,13 @@ function AdicionarFavoritos() {
         Contactos[indice].Fav = "nao";
         btnfavorito.src="Images/estrelaOff.png";
         console.log("Removido dos Favoritos com Sucesso!");
+        localStorage.setItem('indice', indice);
         window.location.reload();
     }else{
         Contactos[indice].Fav = "sim";
         btnfavorito.src="Images/estrelaOn.png";
         console.log("Adicionado aos Favoritos com Sucesso!");
+        localStorage.setItem('indice', indice);
         window.location.reload();
     }   
     ClientesparaXML();
@@ -2223,27 +2225,6 @@ function SelectedCorFundo(){
         //link.href="styles/peachpuff.css";
         
     }
-}
-
-function AdicionarFavoritos() {
-    
-    var x = this.parentNode.getElementsByTagName("p")[0].getAttribute("id"); 
-    var indice = ObterIndice(Contactos,x);
-    var btnfavorito = document.createElement('input');
-    if (Contactos[indice].Fav == "sim") {
-        Contactos[indice].Fav = "nao";
-        btnfavorito.src="Images/estrelaOff.png";
-        console.log("Removido dos Favoritos com Sucesso!");
-        localStorage.setItem('indice', indice);
-        window.location.reload();
-    }else{
-        Contactos[indice].Fav = "sim";
-        btnfavorito.src="Images/estrelaOn.png";
-        console.log("Adicionado aos Favoritos com Sucesso!");
-        localStorage.setItem('indice', indice);
-        window.location.reload();
-    }   
-    ClientesparaXML();
 }
 
 function ListarContacto (pos) {
