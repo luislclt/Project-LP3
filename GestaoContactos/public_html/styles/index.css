@@ -91,3 +91,10 @@ img{
     margin-bottom: 5%;
     width: 200px;
 }
+
+video{
+    position: absolute;
+    padding-left: 25%;
+    float: left;
+    padding-bottom: 145px;
+}

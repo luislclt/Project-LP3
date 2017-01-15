@@ -2407,6 +2407,8 @@ function init(){
     color.addEventListener('change', Alterar);
     
     var btnEnviar = document.getElementById('Enviar');
+    btnEnviar.type="image";
+    btnEnviar.src="Images/Enviar.png";
     btnEnviar.addEventListener('click', VerificaCampos);
     
     var btnEstrela = document.getElementById("estrela");
