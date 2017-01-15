@@ -129,6 +129,118 @@ function loadDataFromDatabase(xml) {
         alert("nome: " + tag_nome.childNodes[0].nodeValue);
         Contactos.push({nome: tag_nome.childNodes[0].nodeValue, Fav: tag_contactos[i].getAttribute('IsFavorite')});
         var ultimapos=Contactos.length-1;
+        
+        if(tag_contactos[i].getAttribute('Group')=="naonaonaonao"){
+            Contactos[ultimapos].Amigos = "nao";
+            Contactos[ultimapos].Familia = "nao";
+            Contactos[ultimapos].Trabalho = "nao";
+            Contactos[ultimapos].OutroGrupo = "nao";
+        }else{
+            if(tag_contactos[i].getAttribute('Group')=="simnaonaonao"){
+                Contactos[ultimapos].Amigos = "sim";
+                Contactos[ultimapos].Familia = "nao";
+                Contactos[ultimapos].Trabalho = "nao";
+                Contactos[ultimapos].OutroGrupo = "nao";
+            }else{
+                if(tag_contactos[i].getAttribute('Group')=="naosimnaonao"){
+                    Contactos[ultimapos].Amigos = "nao";
+                    Contactos[ultimapos].Familia = "sim";
+                    Contactos[ultimapos].Trabalho = "nao";
+                    Contactos[ultimapos].OutroGrupo = "nao";
+                }else{
+                    if(tag_contactos[i].getAttribute('Group')=="simsimnaonao"){
+                        Contactos[ultimapos].Amigos = "sim";
+                        Contactos[ultimapos].Familia = "sim";
+                        Contactos[ultimapos].Trabalho = "nao";
+                        Contactos[ultimapos].OutroGrupo = "nao"   
+                    }else{
+                        if(tag_contactos[i].getAttribute('Group')=="naonaosimnao"){
+                            Contactos[ultimapos].Amigos = "nao";
+                            Contactos[ultimapos].Familia = "nao";
+                            Contactos[ultimapos].Trabalho = "sim";
+                            Contactos[ultimapos].OutroGrupo = "nao"
+                        }else{
+                            if(tag_contactos[i].getAttribute('Group')=="simnaosimnao"){
+                                Contactos[ultimapos].Amigos = "sim";
+                                Contactos[ultimapos].Familia = "nao";
+                                Contactos[ultimapos].Trabalho = "sim";
+                                Contactos[ultimapos].OutroGrupo = "nao";
+                            }else{
+                                if(tag_contactos[i].getAttribute('Group')=="naosimsimnao"){
+                                    Contactos[ultimapos].Amigos = "nao";
+                                    Contactos[ultimapos].Familia = "sim";
+                                    Contactos[ultimapos].Trabalho = "sim";
+                                    Contactos[ultimapos].OutroGrupo = "nao";
+                                }else{
+                                    if(tag_contactos[i].getAttribute('Group')=="simsimsimnao"){
+                                        Contactos[ultimapos].Amigos = "sim";
+                                        Contactos[ultimapos].Familia = "sim";
+                                        Contactos[ultimapos].Trabalho = "sim";
+                                        Contactos[ultimapos].OutroGrupo = "nao"
+                                    }else{
+                                        if(tag_contactos[i].getAttribute('Group')=="naonaonaosim"){
+                                            Contactos[ultimapos].Amigos = "nao";
+                                            Contactos[ultimapos].Familia = "nao";
+                                            Contactos[ultimapos].Trabalho = "nao";
+                                            Contactos[ultimapos].OutroGrupo = "sim";
+                                        }else{
+                                            if(tag_contactos[i].getAttribute('Group')=="simnaonaosim"){
+                                                Contactos[ultimapos].Amigos = "sim";
+                                                Contactos[ultimapos].Familia = "nao";
+                                                Contactos[ultimapos].Trabalho = "nao";
+                                                Contactos[ultimapos].OutroGrupo = "sim";
+                                            }else{
+                                                if(tag_contactos[i].getAttribute('Group')=="naosimnaosim"){
+                                                    Contactos[ultimapos].Amigos = "nao";
+                                                    Contactos[ultimapos].Familia = "sim";
+                                                    Contactos[ultimapos].Trabalho = "nao";
+                                                    Contactos[ultimapos].OutroGrupo = "sim";
+                                                }else{
+                                                    if(tag_contactos[i].getAttribute('Group')=="simsimnaosim"){
+                                                        Contactos[ultimapos].Amigos = "sim";
+                                                        Contactos[ultimapos].Familia = "sim";
+                                                        Contactos[ultimapos].Trabalho = "nao";
+                                                        Contactos[ultimapos].OutroGrupo = "sim"   
+                                                    }else{
+                                                        if(tag_contactos[i].getAttribute('Group')=="naonaosimsim"){
+                                                            Contactos[ultimapos].Amigos = "nao";
+                                                            Contactos[ultimapos].Familia = "nao";
+                                                            Contactos[ultimapos].Trabalho = "sim";
+                                                            Contactos[ultimapos].OutroGrupo = "sim"
+                                                        }else{
+                                                            if(tag_contactos[i].getAttribute('Group')=="simnaosimsim"){
+                                                                Contactos[ultimapos].Amigos = "sim";
+                                                                Contactos[ultimapos].Familia = "nao";
+                                                                Contactos[ultimapos].Trabalho = "sim";
+                                                                Contactos[ultimapos].OutroGrupo = "sim";
+                                                            }else{
+                                                                if(tag_contactos[i].getAttribute('Group')=="naosimsimsim"){
+                                                                    Contactos[ultimapos].Amigos = "nao";
+                                                                    Contactos[ultimapos].Familia = "sim";
+                                                                    Contactos[ultimapos].Trabalho = "sim";
+                                                                    Contactos[ultimapos].OutroGrupo = "sim";
+                                                                }else{
+                                                                    if(tag_contactos[i].getAttribute('Group')=="simsimsimsim"){
+                                                                        Contactos[ultimapos].Amigos = "sim";
+                                                                        Contactos[ultimapos].Familia = "sim";
+                                                                        Contactos[ultimapos].Trabalho = "sim";
+                                                                        Contactos[ultimapos].OutroGrupo = "sim";
+                                                                    }    
+                                                                }        
+                                                            }            
+                                                        }                
+                                                    }                    
+                                                }                        
+                                            }
+                                        }    
+                                    }
+                                }        
+                            }            
+                        }   
+                    }
+                }
+            }
+        }
         alert("fav: "+ tag_contactos[i].getAttribute('IsFavorite'));
         var tag_email = tag_contactos[i].childNodes[1];
         if(tag_email!=undefined && tag_email.nodeName=="Email"){
@@ -387,9 +499,9 @@ function loadDataFromDatabase(xml) {
                                             Contactos[ultimapos].LinkedIn= tag_contactos[i].childNodes[6].childNodes[0].nodeValue;
 
                                            if(tag_contactos[i].childNodes[7]!=undefined && tag_contactos[i].childNodes[7].nodeName=="SocialNetwork"){
-                                               if(tag_contactos[i].childNodes[8].getAttribute('Type')=="I"){
-                                                   alert("Instagram: " + tag_contactos[i].childNodes[8].childNodes[0].nodeValue);
-                                                   Contactos[ultimapos].Instagram= tag_contactos[i].childNodes[8].childNodes[0].nodeValue;
+                                               if(tag_contactos[i].childNodes[7].getAttribute('Type')=="I"){
+                                                   alert("Instagram: " + tag_contactos[i].childNodes[7].childNodes[0].nodeValue);
+                                                   Contactos[ultimapos].Instagram= tag_contactos[i].childNodes[7].childNodes[0].nodeValue;
 
                                                    if(tag_contactos[i].childNodes[8]!=undefined && tag_contactos[i].childNodes[8].nodeName=="SocialNetwork"){
                                                        if(tag_contactos[i].childNodes[8].getAttribute('Type')=="O"){
@@ -452,9 +564,10 @@ function loadDataFromDatabase(xml) {
                                 if(tag_contactos[i].childNodes[6]!=undefined && tag_contactos[i].childNodes[6].nodeName=="Obs"){
                                     alert("Obs: " + tag_contactos[i].childNodes[6].childNodes[0].nodeValue);
                                     Contactos[ultimapos].OBS= tag_contactos[i].childNodes[6].childNodes[0].nodeValue;
+                                    
                                 }
                             }
-                        }
+                        } 
                         
                     }else{
                         if(tag_contactos[i].childNodes[5]!=undefined && tag_contactos[i].childNodes[5].nodeName=="SocialNetwork"){
@@ -491,7 +604,7 @@ function loadDataFromDatabase(xml) {
                                                     }else{
                                                         if(tag_contactos[i].childNodes[8].getAttribute('Type')=="O"){
                                                             alert("OutraRede: " + tag_contactos[i].childNodes[8].childNodes[0].nodeValue);
-                                                            Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[7].childNodes[0].nodeValue;
+                                                            Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[8].childNodes[0].nodeValue;
                                                             if(tag_contactos[i].childNodes[9]!=undefined && tag_contactos[i].childNodes[9].nodeName=="Obs"){
                                                                 alert("Obs: " + tag_contactos[i].childNodes[9].childNodes[0].nodeValue);
                                                                 Contactos[ultimapos].OBS= tag_contactos[i].childNodes[9].childNodes[0].nodeValue;
@@ -605,7 +718,7 @@ function loadDataFromDatabase(xml) {
                                                         if(tag_contactos[i].childNodes[8].getAttribute('Type')=="O"){
                                                             alert("OutraRede: " + tag_contactos[i].childNodes[8].childNodes[0].nodeValue);
                                                             Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[8].childNodes[0].nodeValue;
-                                                            if(tag_contactos[i].childNodes[9]!=undefined && tag_contactos[i].childNodes[8].nodeName=="Obs"){
+                                                            if(tag_contactos[i].childNodes[9]!=undefined && tag_contactos[i].childNodes[9].nodeName=="Obs"){
                                                                 alert("Obs: " + tag_contactos[i].childNodes[9].childNodes[0].nodeValue);
                                                                 Contactos[ultimapos].OBS= tag_contactos[i].childNodes[9].childNodes[0].nodeValue;
                                                             }
@@ -614,7 +727,7 @@ function loadDataFromDatabase(xml) {
                                                 }else{
                                                     if(tag_contactos[i].childNodes[7].getAttribute('Type')=="O"){
                                                         alert("OutraRede: " + tag_contactos[i].childNodes[7].childNodes[0].nodeValue);
-                                                        Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[6].childNodes[0].nodeValue;
+                                                        Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[7].childNodes[0].nodeValue;
                                                         if(tag_contactos[i].childNodes[8]!=undefined && tag_contactos[i].childNodes[8].nodeName=="Obs"){
                                                             alert("Obs: " + tag_contactos[i].childNodes[8].childNodes[0].nodeValue);
                                                             Contactos[ultimapos].OBS= tag_contactos[i].childNodes[8].childNodes[0].nodeValue;
@@ -656,9 +769,9 @@ function loadDataFromDatabase(xml) {
                                         Contactos[ultimapos].LinkedIn= tag_contactos[i].childNodes[5].childNodes[0].nodeValue;
 
                                        if(tag_contactos[i].childNodes[6]!=undefined && tag_contactos[i].childNodes[6].nodeName=="SocialNetwork"){
-                                           if(tag_contactos[i].childNodes[7].getAttribute('Type')=="I"){
-                                               alert("Instagram: " + tag_contactos[i].childNodes[7].childNodes[0].nodeValue);
-                                               Contactos[ultimapos].Instagram= tag_contactos[i].childNodes[7].childNodes[0].nodeValue;
+                                           if(tag_contactos[i].childNodes[6].getAttribute('Type')=="I"){
+                                               alert("Instagram: " + tag_contactos[i].childNodes[6].childNodes[0].nodeValue);
+                                               Contactos[ultimapos].Instagram= tag_contactos[i].childNodes[6].childNodes[0].nodeValue;
 
                                                if(tag_contactos[i].childNodes[7]!=undefined && tag_contactos[i].childNodes[7].nodeName=="SocialNetwork"){
                                                    if(tag_contactos[i].childNodes[7].getAttribute('Type')=="O"){
@@ -786,9 +899,9 @@ function loadDataFromDatabase(xml) {
                                                 if(tag_contactos[i].childNodes[6].getAttribute('Type')=="O"){
                                                     alert("OutraRede: " + tag_contactos[i].childNodes[6].childNodes[0].nodeValue);
                                                     Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[6].childNodes[0].nodeValue;
-                                                    if(tag_contactos[i].childNodes[5]!=undefined && tag_contactos[i].childNodes[5].nodeName=="Obs"){
-                                                        alert("Obs: " + tag_contactos[i].childNodes[5].childNodes[0].nodeValue);
-                                                        Contactos[ultimapos].OBS= tag_contactos[i].childNodes[5].childNodes[0].nodeValue;
+                                                    if(tag_contactos[i].childNodes[7]!=undefined && tag_contactos[i].childNodes[7].nodeName=="Obs"){
+                                                        alert("Obs: " + tag_contactos[i].childNodes[7].childNodes[0].nodeValue);
+                                                        Contactos[ultimapos].OBS= tag_contactos[i].childNodes[7].childNodes[0].nodeValue;
                                                     }    
                                                 }
                                             }
@@ -809,9 +922,9 @@ function loadDataFromDatabase(xml) {
                                                    if(tag_contactos[i].childNodes[7].getAttribute('Type')=="O"){
                                                        alert("OutraRede: " + tag_contactos[i].childNodes[7].childNodes[0].nodeValue);
                                                        Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[7].childNodes[0].nodeValue;
-                                                       if(tag_contactos[i].childNodes[6]!=undefined && tag_contactos[i].childNodes[6].nodeName=="Obs"){
-                                                            alert("Obs: " + tag_contactos[i].childNodes[6].childNodes[0].nodeValue);
-                                                            Contactos[ultimapos].OBS= tag_contactos[i].childNodes[6].childNodes[0].nodeValue;
+                                                       if(tag_contactos[i].childNodes[8]!=undefined && tag_contactos[i].childNodes[8].nodeName=="Obs"){
+                                                            alert("Obs: " + tag_contactos[i].childNodes[8].childNodes[0].nodeValue);
+                                                            Contactos[ultimapos].OBS= tag_contactos[i].childNodes[8].childNodes[0].nodeValue;
                                                         }    
                                                    }
                                                }
@@ -882,7 +995,7 @@ function loadDataFromDatabase(xml) {
                                             }else{
                                                 if(tag_contactos[i].childNodes[6].getAttribute('Type')=="O"){
                                                     alert("OutraRede: " + tag_contactos[i].childNodes[6].childNodes[0].nodeValue);
-                                                    Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[5].childNodes[0].nodeValue;
+                                                    Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[6].childNodes[0].nodeValue;
                                                     if(tag_contactos[i].childNodes[7]!=undefined && tag_contactos[i].childNodes[7].nodeName=="Obs"){
                                                         alert("Obs: " + tag_contactos[i].childNodes[7].childNodes[0].nodeValue);
                                                         Contactos[ultimapos].OBS= tag_contactos[i].childNodes[7].childNodes[0].nodeValue;
@@ -924,9 +1037,9 @@ function loadDataFromDatabase(xml) {
                                     Contactos[ultimapos].LinkedIn= tag_contactos[i].childNodes[4].childNodes[0].nodeValue;
 
                                    if(tag_contactos[i].childNodes[5]!=undefined && tag_contactos[i].childNodes[5].nodeName=="SocialNetwork"){
-                                       if(tag_contactos[i].childNodes[6].getAttribute('Type')=="I"){
-                                           alert("Instagram: " + tag_contactos[i].childNodes[6].childNodes[0].nodeValue);
-                                           Contactos[ultimapos].Instagram= tag_contactos[i].childNodes[6].childNodes[0].nodeValue;
+                                       if(tag_contactos[i].childNodes[5].getAttribute('Type')=="I"){
+                                           alert("Instagram: " + tag_contactos[i].childNodes[5].childNodes[0].nodeValue);
+                                           Contactos[ultimapos].Instagram= tag_contactos[i].childNodes[5].childNodes[0].nodeValue;
 
                                            if(tag_contactos[i].childNodes[6]!=undefined && tag_contactos[i].childNodes[6].nodeName=="SocialNetwork"){
                                                if(tag_contactos[i].childNodes[6].getAttribute('Type')=="O"){
@@ -981,10 +1094,7 @@ function loadDataFromDatabase(xml) {
                         if(tag_contactos[i].childNodes[5]!=undefined && tag_contactos[i].childNodes[5].nodeName=="Obs"){
                             alert("Obs: " + tag_contactos[i].childNodes[5].childNodes[0].nodeValue);
                             Contactos[ultimapos].OBS= tag_contactos[i].childNodes[5].childNodes[0].nodeValue;
-                        }else{
-
                         }
-                        //adidionar os outros
                     }else{
                         if(tag_contactos[i].childNodes[4]!=undefined && tag_contactos[i].childNodes[4].nodeName=="Obs"){
                             alert("Obs: " + tag_contactos[i].childNodes[4].childNodes[0].nodeValue);
@@ -1028,7 +1138,7 @@ function loadDataFromDatabase(xml) {
                                                 if(tag_contactos[i].childNodes[6].getAttribute('Type')=="O"){
                                                     alert("OutraRede: " + tag_contactos[i].childNodes[6].childNodes[0].nodeValue);
                                                     Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[6].childNodes[0].nodeValue;
-                                                    if(tag_contactos[i].childNodes[7]!=undefined && tag_contactos[i].childNodes[4].nodeName=="Obs"){
+                                                    if(tag_contactos[i].childNodes[7]!=undefined && tag_contactos[i].childNodes[7].nodeName=="Obs"){
                                                         alert("Obs: " + tag_contactos[i].childNodes[7].childNodes[0].nodeValue);
                                                         Contactos[ultimapos].OBS= tag_contactos[i].childNodes[7].childNodes[0].nodeValue;
                                                     }    
