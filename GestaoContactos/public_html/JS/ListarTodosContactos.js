@@ -19,6 +19,93 @@ function CarregarContactos(){
     }
 }
 
+function GuardarContactos(text) {    
+    if (typeof (localStorage) !== "undefined")   {
+        //alert(text);        
+        var finaltext = "";        
+        finaltext = finaltext + "<?xml version="+'"'+"1.0"+'"'+" encoding="+'"'+"utf-8"+'"'+" ?>"
+                              + "<Contacts xmlns:tp="+'"'+"http://xml.netbeans.org/schema/TP.AvC"+'"'+">" 
+                              + text
+                              + "</Contacts>";  
+        localStorage.setItem('Contacto', finaltext);
+        //alert(finaltext);
+    }else {
+        alert("Sorry, your browser does not support web storage...");
+    }
+    
+}
+
+function ClientesparaXML(){
+    var xml = "";
+        
+    for(var i = 0; i<Contactos.length;i++){
+    id = i;
+    xml = xml     + "<Contact Group="+'"' + Contactos[i].Amigos + Contactos[i].Familia + Contactos[i].Trabalho + Contactos[i].OutroGrupo+'" '+  "IsFavorite="+'"'+ Contactos[i].Fav+'"'+">"
+                  + "<Name>" + Contactos[i].nome + "</Name>"
+                  if(Contactos[i].email!="" && Contactos[i].email!=undefined){
+                    xml = xml + "<Email>" + Contactos[i].email.valueOf() + "</Email>" 
+                  }
+                  xml = xml  +  "<Telephone>"
+                    + "<Country>" + Contactos[i].pais1 + "</Country>"
+                    + "<PhoneNumber>" + Contactos[i].telefone1 + "</PhoneNumber>"
+                    + "<Telephone Type="+'"'+ Contactos[i].tipo1+'"'+"></Telephone>"
+                  + "</Telephone>"
+                  if(Contactos[i].telefone2!="" && Contactos[i].telefone2!=undefined){
+                      xml = xml + "<Telephone>"
+                      + "<Country>" + Contactos[i].pais2 + "</Country>"
+                      + "<PhoneNumber>" + Contactos[i].telefone2 + "</PhoneNumber>"
+                      + "<Telephone Type="+'"'+ Contactos[i].tipo2+'"'+"></Telephone>"
+                    + "</Telephone>"   
+                  }
+                  if(Contactos[i].telefone3!="" && Contactos[i].telefone3!=undefined){
+                      xml = xml + "<Telephone>"
+                      + "<Country>" + Contactos[i].pais3 + "</Country>"
+                      + "<PhoneNumber>" + Contactos[i].telefone3 + "</PhoneNumber>"
+                      + "<Telephone Type="+'"'+ Contactos[i].tipo3+'"'+"></Telephone>"
+                    + "</Telephone>"  
+                  }
+                  if(Contactos[i].telefone4!="" && Contactos[i].telefone4!=undefined){
+                      xml = xml + "<Telephone>"
+                      + "<Country>" + Contactos[i].pais4 + "</Country>"
+                      + "<PhoneNumber>" + Contactos[i].telefone4 + "</PhoneNumber>"
+                      + "<Telephone Type="+'"'+ Contactos[i].tipo4+'"'+"></Telephone>"
+                    + "</Telephone>"  
+                  }
+                  if(Contactos[i].telefone5!="" && Contactos[i].telefone5!=undefined){
+                     xml = xml + "<Telephone>"
+                     + "<Country>" + Contactos[i].pais5 + "</Country>"
+                     + "<PhoneNumber>" + Contactos[i].telefone5 + "</PhoneNumber>"
+                     + "<Telephone Type="+'"'+ Contactos[i].tipo5+'"'+"></Telephone>"
+                    + "</Telephone>" 
+                  }
+                    xml = xml  + "<BirthDate>" + Contactos[i].DOB + "</BirthDate>"
+                if(Contactos[i].Facebook!="" && Contactos[i].Facebook!=undefined){
+                    xml = xml + "<SocialNetwork Type="+'"F"'+">" + Contactos[i].Facebook + "</SocialNetwork>"
+                  }
+                  if(Contactos[i].Google!="" && Contactos[i].Google!=undefined){
+                    xml = xml + "<SocialNetwork Type="+'"G"'+">" + Contactos[i].Google + "</SocialNetwork>"
+                  }
+                  if(Contactos[i].LinkedIn!="" && Contactos[i].LinkedIn!=undefined){
+                    xml = xml + "<SocialNetwork Type="+'"L"'+">" + Contactos[i].LinkedIn + "</SocialNetwork>"
+                  }
+                  if(Contactos[i].Instagram!="" && Contactos[i].Instagram!=undefined){
+                    xml = xml + "<SocialNetwork Type="+'"I"'+">" + Contactos[i].Instagram + "</SocialNetwork>"
+                  }
+                  if(Contactos[i].OutraRede!="" && Contactos[i].OutraRede!=undefined){
+                    xml = xml + "<SocialNetwork Type="+'"O"'+">" + Contactos[i].OutraRede + "</SocialNetwork>"
+                  }
+                  //+ "<SocialNetwork Type="+'"'+ Contactos[i]['typesocial']+'"'+">"+Contactos[i]['social']+"</SocialNetwork>" 
+                  if(Contactos[i].Obs!="" && Contactos[i].Obs!=undefined){
+                      xml = xml + "<Obs>" + Contactos[i].Obs + "</Obs>"
+                  }
+
+                  xml = xml  + "</Contact>";
+    }
+
+    alert("Isto é o XML: "+xml+" posiçao: "+i);
+    GuardarContactos(xml);
+}
+
 function loadDataFromDatabase(xml) {
     
     // Limpar o array
@@ -37,7 +124,6 @@ function loadDataFromDatabase(xml) {
  
     for(var i=0;i<tag_contactos.length;i++){
         var tag_nome = tag_contactos[i].childNodes[0];
-        alert("nome: " + tag_nome.childNodes[0].nodeValue);
         Contactos.push({nome: tag_nome.childNodes[0].nodeValue, Fav: tag_contactos[i].getAttribute('IsFavorite')});
         var ultimapos=Contactos.length-1;
         
@@ -152,18 +238,13 @@ function loadDataFromDatabase(xml) {
                 }
             }
         }
-        alert("fav: "+ tag_contactos[i].getAttribute('IsFavorite'));
         var tag_email = tag_contactos[i].childNodes[1];
         if(tag_email!=undefined && tag_email.nodeName=="Email"){
-            alert("Email: " + tag_email.childNodes[0].nodeValue);
             Contactos[ultimapos].email= tag_email.childNodes[0].nodeValue;
             var tel1 = tag_contactos[i].childNodes[2]
             var tag_tipo_telefone1 = tel1.childNodes[2].getAttribute('Type');
-            alert("tipo telefone: " + tag_tipo_telefone1.valueOf());
             var tag_numero_telefone1 = tel1.childNodes[1].childNodes[0];
-            alert("Telefone: " + tag_numero_telefone1.nodeValue);
             var tag_pais1 = tel1.childNodes[0].childNodes[0];
-            alert("Pais: " + tag_pais1.nodeValue);
             
             Contactos[ultimapos].telefone1= tag_numero_telefone1.nodeValue;
             Contactos[ultimapos].pais1= tag_pais1.nodeValue;
@@ -172,11 +253,8 @@ function loadDataFromDatabase(xml) {
             if(tag_contactos[i].childNodes[3]!=undefined && tag_contactos[i].childNodes[3].nodeName=="Telephone" ){
                 var tel2 = tag_contactos[i].childNodes[3];///////////////////
                 var tag_tipo_telefone2 = tel2.childNodes[2].getAttribute('Type');
-                alert("tipo telefone: " + tag_tipo_telefone2.valueOf());
                 var tag_numero_telefone2 = tel2.childNodes[1].childNodes[0];
-                alert("Telefone: " + tag_numero_telefone2.nodeValue);
                 var tag_pais2 = tel2.childNodes[0].childNodes[0];
-                alert("Pais: " + tag_pais2.nodeValue);
                 
                 Contactos[ultimapos].telefone2= tag_numero_telefone2.nodeValue;
                 Contactos[ultimapos].pais2= tag_pais2.nodeValue;
@@ -185,11 +263,8 @@ function loadDataFromDatabase(xml) {
                 if(tag_contactos[i].childNodes[4]!=undefined && tag_contactos[i].childNodes[4].nodeName=="Telephone" ){
                     var tel3 = tag_contactos[i].childNodes[4];
                     var tag_tipo_telefone3 = tel3.childNodes[2].getAttribute('Type');
-                    alert("tipo telefone: " + tag_tipo_telefone3.valueOf());
                     var tag_numero_telefone3 = tel3.childNodes[1].childNodes[0];
-                    alert("Telefone: " + tag_numero_telefone3.nodeValue);
                     var tag_pais3 = tel3.childNodes[0].childNodes[0];
-                    alert("Pais: " + tag_pais3.nodeValue);
                     
                     Contactos[ultimapos].telefone3= tag_numero_telefone3.nodeValue;
                     Contactos[ultimapos].pais3= tag_pais3.nodeValue;
@@ -198,11 +273,8 @@ function loadDataFromDatabase(xml) {
                     if(tag_contactos[i].childNodes[5]!=undefined && tag_contactos[i].childNodes[5].nodeName=="Telephone" ){
                         var tel4 = tag_contactos[i].childNodes[5];
                         var tag_tipo_telefone4 = tel4.childNodes[2].getAttribute('Type');
-                        alert("tipo telefone: " + tag_tipo_telefone4.valueOf());
                         var tag_numero_telefone4 = tel4.childNodes[1].childNodes[0];
-                        alert("Telefone: " + tag_numero_telefone4.nodeValue);
                         var tag_pais4 = tel4.childNodes[0].childNodes[0];
-                        alert("Pais: " + tag_pais4.nodeValue);
                         
                         Contactos[ultimapos].telefone4= tag_numero_telefone4.nodeValue;
                         Contactos[ultimapos].pais4= tag_pais4.nodeValue;
@@ -211,11 +283,8 @@ function loadDataFromDatabase(xml) {
                         if(tag_contactos[i].childNodes[6]!=undefined && tag_contactos[i].childNodes[6].nodeName=="Telephone" ){
                             var tel5 = tag_contactos[i].childNodes[6];
                             var tag_tipo_telefone5 = tel5.childNodes[2].getAttribute('Type');
-                            alert("tipo telefone: " + tag_tipo_telefone5.valueOf());
                             var tag_numero_telefone5 = tel5.childNodes[1].childNodes[0];
-                            alert("Telefone: " + tag_numero_telefone5.nodeValue);
                             var tag_pais5 = tel5.childNodes[0].childNodes[0];
-                            alert("Pais: " + tag_pais5.nodeValue);
                             
                             Contactos[ultimapos].telefone5= tag_numero_telefone5.nodeValue;
                             Contactos[ultimapos].pais5= tag_pais5.nodeValue;
@@ -223,46 +292,37 @@ function loadDataFromDatabase(xml) {
                         
                         }else{
                             var tag_anos = tag_contactos[i].childNodes[6].childNodes[0];
-                            alert("DOB: " + tag_anos.nodeValue);
                             Contactos[ultimapos].DOB= tag_anos.nodeValue;
                             
                             if(tag_contactos[i].childNodes[7]!=undefined && tag_contactos[i].childNodes[7].nodeName=="SocialNetwork"){
                                 if(tag_contactos[i].childNodes[7].getAttribute('Type')=="F"){
-                                    alert("facebook: " + tag_contactos[i].childNodes[7].childNodes[0].nodeValue);
                                     Contactos[ultimapos].Facebook= tag_contactos[i].childNodes[7].childNodes[0].nodeValue;
 
                                     if(tag_contactos[i].childNodes[8]!=undefined && tag_contactos[i].childNodes[8].nodeName=="SocialNetwork"){
                                         if(tag_contactos[i].childNodes[8].getAttribute('Type')=="G"){
-                                            alert("google: " + tag_contactos[i].childNodes[8].childNodes[0].nodeValue);
                                             Contactos[ultimapos].Google= tag_contactos[i].childNodes[8].childNodes[0].nodeValue;  
 
                                             if(tag_contactos[i].childNodes[9]!=undefined && tag_contactos[i].childNodes[9].nodeName=="SocialNetwork"){
                                                 if(tag_contactos[i].childNodes[9].getAttribute('Type')=="L"){
-                                                     alert("LinkedIn: " + tag_contactos[i].childNodes[9].childNodes[0].nodeValue);
                                                      Contactos[ultimapos].LinkedIn= tag_contactos[i].childNodes[9].childNodes[0].nodeValue;
 
                                                     if(tag_contactos[i].childNodes[10]!=undefined && tag_contactos[i].childNodes[10].nodeName=="SocialNetwork"){
                                                         if(tag_contactos[i].childNodes[10].getAttribute('Type')=="I"){
-                                                            alert("Instagram: " + tag_contactos[i].childNodes[10].childNodes[0].nodeValue);
                                                             Contactos[ultimapos].Instagram= tag_contactos[i].childNodes[10].childNodes[0].nodeValue;
 
                                                             if(tag_contactos[i].childNodes[11]!=undefined && tag_contactos[i].childNodes[11].nodeName=="SocialNetwork"){
                                                                 if(tag_contactos[i].childNodes[11].getAttribute('Type')=="O"){
-                                                                    alert("OutraRede: " + tag_contactos[i].childNodes[11].childNodes[0].nodeValue);
                                                                     Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[11].childNodes[0].nodeValue;
 
                                                                     if(tag_contactos[i].childNodes[12]!=undefined && tag_contactos[i].childNodes[12].nodeName=="Obs"){
-                                                                        alert("Obs: " + tag_contactos[i].childNodes[12].childNodes[0].nodeValue);
                                                                         Contactos[ultimapos].OBS= tag_contactos[i].childNodes[12].childNodes[0].nodeValue;
                                                                     }    
                                                                 }
                                                             }
                                                         }else{
                                                             if(tag_contactos[i].childNodes[10].getAttribute('Type')=="O"){
-                                                                alert("OutraRede: " + tag_contactos[i].childNodes[10].childNodes[0].nodeValue);
                                                                 Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[10].childNodes[0].nodeValue;
                                                                 if(tag_contactos[i].childNodes[11]!=undefined && tag_contactos[i].childNodes[11].nodeName=="Obs"){
-                                                                    alert("Obs: " + tag_contactos[i].childNodes[11].childNodes[0].nodeValue);
                                                                     Contactos[ultimapos].OBS= tag_contactos[i].childNodes[11].childNodes[0].nodeValue;
                                                                 }    
                                                             }
@@ -270,25 +330,20 @@ function loadDataFromDatabase(xml) {
                                                     }
                                                 }else{
                                                     if(tag_contactos[i].childNodes[9].getAttribute('Type')=="I"){
-                                                        alert("Instagram: " + tag_contactos[i].childNodes[9].childNodes[0].nodeValue);
                                                         Contactos[ultimapos].Instagram= tag_contactos[i].childNodes[9].childNodes[0].nodeValue;
 
                                                         if(tag_contactos[i].childNodes[10]!=undefined && tag_contactos[i].childNodes[10].nodeName=="SocialNetwork"){
                                                             if(tag_contactos[i].childNodes[10].getAttribute('Type')=="O"){
-                                                                alert("OutraRede: " + tag_contactos[i].childNodes[10].childNodes[0].nodeValue);
                                                                 Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[10].childNodes[0].nodeValue;
                                                                 if(tag_contactos[i].childNodes[11]!=undefined && tag_contactos[i].childNodes[11].nodeName=="Obs"){
-                                                                    alert("Obs: " + tag_contactos[i].childNodes[11].childNodes[0].nodeValue);
                                                                     Contactos[ultimapos].OBS= tag_contactos[i].childNodes[11].childNodes[0].nodeValue;
                                                                 }    
                                                             }
                                                         }
                                                     }else{
                                                         if(tag_contactos[i].childNodes[9].getAttribute('Type')=="O"){
-                                                            alert("OutraRede: " + tag_contactos[i].childNodes[9].childNodes[0].nodeValue);
                                                             Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[9].childNodes[0].nodeValue;
                                                             if(tag_contactos[i].childNodes[8]!=undefined && tag_contactos[i].childNodes[8].nodeName=="Obs"){
-                                                                alert("Obs: " + tag_contactos[i].childNodes[8].childNodes[0].nodeValue);
                                                                 Contactos[ultimapos].OBS= tag_contactos[i].childNodes[8].childNodes[0].nodeValue;
                                                             }    
                                                         }
@@ -298,30 +353,24 @@ function loadDataFromDatabase(xml) {
 
                                         }else{
                                             if(tag_contactos[i].childNodes[8].getAttribute('Type')=="L"){
-                                                alert("LinkedIn: " + tag_contactos[i].childNodes[8].childNodes[0].nodeValue);
                                                 Contactos[ultimapos].LinkedIn= tag_contactos[i].childNodes[8].childNodes[0].nodeValue;
 
                                                if(tag_contactos[i].childNodes[9]!=undefined && tag_contactos[i].childNodes[9].nodeName=="SocialNetwork"){
                                                    if(tag_contactos[i].childNodes[9].getAttribute('Type')=="I"){
-                                                       alert("Instagram: " + tag_contactos[i].childNodes[9].childNodes[0].nodeValue);
                                                        Contactos[ultimapos].Instagram= tag_contactos[i].childNodes[9].childNodes[0].nodeValue;
 
                                                        if(tag_contactos[i].childNodes[10]!=undefined && tag_contactos[i].childNodes[10].nodeName=="SocialNetwork"){
                                                            if(tag_contactos[i].childNodes[10].getAttribute('Type')=="O"){
-                                                               alert("OutraRede: " + tag_contactos[i].childNodes[10].childNodes[0].nodeValue);
                                                                Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[10].childNodes[0].nodeValue;
                                                                if(tag_contactos[i].childNodes[11]!=undefined && tag_contactos[i].childNodes[11].nodeName=="Obs"){
-                                                                    alert("Obs: " + tag_contactos[i].childNodes[11].childNodes[0].nodeValue);
                                                                     Contactos[ultimapos].OBS= tag_contactos[i].childNodes[11].childNodes[0].nodeValue;
                                                                 }    
                                                            }
                                                        }
                                                    }else{
                                                        if(tag_contactos[i].childNodes[9].getAttribute('Type')=="O"){
-                                                           alert("OutraRede: " + tag_contactos[i].childNodes[9].childNodes[0].nodeValue);
                                                            Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[9].childNodes[0].nodeValue;
                                                            if(tag_contactos[i].childNodes[10]!=undefined && tag_contactos[i].childNodes[10].nodeName=="Obs"){
-                                                                alert("Obs: " + tag_contactos[i].childNodes[10].childNodes[0].nodeValue);
                                                                 Contactos[ultimapos].OBS= tag_contactos[i].childNodes[10].childNodes[0].nodeValue;
                                                             }    
                                                        }
@@ -329,25 +378,20 @@ function loadDataFromDatabase(xml) {
                                                }
                                            }else{
                                                if(tag_contactos[i].childNodes[8].getAttribute('Type')=="I"){
-                                                   alert("Instagram: " + tag_contactos[i].childNodes[8].childNodes[0].nodeValue);
                                                    Contactos[ultimapos].Instagram= tag_contactos[i].childNodes[8].childNodes[0].nodeValue;
 
                                                    if(tag_contactos[i].childNodes[9]!=undefined && tag_contactos[i].childNodes[9].nodeName=="SocialNetwork"){
                                                        if(tag_contactos[i].childNodes[9].getAttribute('Type')=="O"){
-                                                           alert("OutraRede: " + tag_contactos[i].childNodes[9].childNodes[0].nodeValue);
                                                            Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[9].childNodes[0].nodeValue;
                                                            if(tag_contactos[i].childNodes[10]!=undefined && tag_contactos[i].childNodes[10].nodeName=="Obs"){
-                                                                alert("Obs: " + tag_contactos[i].childNodes[10].childNodes[0].nodeValue);
                                                                 Contactos[ultimapos].OBS= tag_contactos[i].childNodes[10].childNodes[0].nodeValue;
                                                             }
                                                        }
                                                    }
                                                }else{
                                                    if(tag_contactos[i].childNodes[8].getAttribute('Type')=="O"){
-                                                       alert("OutraRede: " + tag_contactos[i].childNodes[8].childNodes[0].nodeValue);
                                                        Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[8].childNodes[0].nodeValue;
                                                        if(tag_contactos[i].childNodes[9]!=undefined && tag_contactos[i].childNodes[9].nodeName=="Obs"){
-                                                            alert("Obs: " + tag_contactos[i].childNodes[9].childNodes[0].nodeValue);
                                                             Contactos[ultimapos].OBS= tag_contactos[i].childNodes[9].childNodes[0].nodeValue;
                                                         }
                                                     }
@@ -357,35 +401,28 @@ function loadDataFromDatabase(xml) {
                                     }       
                                 }else{
                                     if(tag_contactos[i].childNodes[7].getAttribute('Type')=="G"){
-                                        alert("google: " + tag_contactos[i].childNodes[7].childNodes[0].nodeValue);
                                         Contactos[ultimapos].Google= tag_contactos[i].childNodes[7].childNodes[0].nodeValue;  
 
                                         if(tag_contactos[i].childNodes[8]!=undefined && tag_contactos[i].childNodes[8].nodeName=="SocialNetwork"){
                                             if(tag_contactos[i].childNodes[8].getAttribute('Type')=="L"){
-                                                 alert("LinkedIn: " + tag_contactos[i].childNodes[8].childNodes[0].nodeValue);
                                                  Contactos[ultimapos].LinkedIn= tag_contactos[i].childNodes[8].childNodes[0].nodeValue;
 
                                                 if(tag_contactos[i].childNodes[9]!=undefined && tag_contactos[i].childNodes[9].nodeName=="SocialNetwork"){
                                                     if(tag_contactos[i].childNodes[9].getAttribute('Type')=="I"){
-                                                        alert("Instagram: " + tag_contactos[i].childNodes[9].childNodes[0].nodeValue);
                                                         Contactos[ultimapos].Instagram= tag_contactos[i].childNodes[9].childNodes[0].nodeValue;
 
                                                         if(tag_contactos[i].childNodes[10]!=undefined && tag_contactos[i].childNodes[10].nodeName=="SocialNetwork"){
                                                             if(tag_contactos[i].childNodes[10].getAttribute('Type')=="O"){
-                                                                alert("OutraRede: " + tag_contactos[i].childNodes[10].childNodes[0].nodeValue);
                                                                 Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[10].childNodes[0].nodeValue;
                                                                 if(tag_contactos[i].childNodes[11]!=undefined && tag_contactos[i].childNodes[11].nodeName=="Obs"){
-                                                                    alert("Obs: " + tag_contactos[i].childNodes[11].childNodes[0].nodeValue);
                                                                     Contactos[ultimapos].OBS= tag_contactos[i].childNodes[11].childNodes[0].nodeValue;
                                                                 }
                                                             }
                                                         }
                                                     }else{
                                                         if(tag_contactos[i].childNodes[9].getAttribute('Type')=="O"){
-                                                            alert("OutraRede: " + tag_contactos[i].childNodes[9].childNodes[0].nodeValue);
                                                             Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[9].childNodes[0].nodeValue;
                                                             if(tag_contactos[i].childNodes[10]!=undefined && tag_contactos[i].childNodes[10].nodeName=="Obs"){
-                                                                alert("Obs: " + tag_contactos[i].childNodes[10].childNodes[0].nodeValue);
                                                                 Contactos[ultimapos].OBS= tag_contactos[i].childNodes[10].childNodes[0].nodeValue;
                                                             }
                                                         }
@@ -393,25 +430,20 @@ function loadDataFromDatabase(xml) {
                                                 }
                                             }else{
                                                 if(tag_contactos[i].childNodes[8].getAttribute('Type')=="I"){
-                                                    alert("Instagram: " + tag_contactos[i].childNodes[8].childNodes[0].nodeValue);
                                                     Contactos[ultimapos].Instagram= tag_contactos[i].childNodes[8].childNodes[0].nodeValue;
 
                                                     if(tag_contactos[i].childNodes[9]!=undefined && tag_contactos[i].childNodes[9].nodeName=="SocialNetwork"){
                                                         if(tag_contactos[i].childNodes[9].getAttribute('Type')=="O"){
-                                                            alert("OutraRede: " + tag_contactos[i].childNodes[9].childNodes[0].nodeValue);
                                                             Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[9].childNodes[0].nodeValue;
                                                             if(tag_contactos[i].childNodes[10]!=undefined && tag_contactos[i].childNodes[10].nodeName=="Obs"){
-                                                                alert("Obs: " + tag_contactos[i].childNodes[10].childNodes[0].nodeValue);
                                                                 Contactos[ultimapos].OBS= tag_contactos[i].childNodes[10].childNodes[0].nodeValue;
                                                             }
                                                         }
                                                     }
                                                 }else{
                                                     if(tag_contactos[i].childNodes[8].getAttribute('Type')=="O"){
-                                                        alert("OutraRede: " + tag_contactos[i].childNodes[8].childNodes[0].nodeValue);
                                                         Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[8].childNodes[0].nodeValue;
                                                         if(tag_contactos[i].childNodes[9]!=undefined && tag_contactos[i].childNodes[9].nodeName=="Obs"){
-                                                            alert("Obs: " + tag_contactos[i].childNodes[9].childNodes[0].nodeValue);
                                                             Contactos[ultimapos].OBS= tag_contactos[i].childNodes[9].childNodes[0].nodeValue;
                                                         }
                                                     }
@@ -421,30 +453,24 @@ function loadDataFromDatabase(xml) {
 
                                     }else{
                                         if(tag_contactos[i].childNodes[7].getAttribute('Type')=="L"){
-                                            alert("LinkedIn: " + tag_contactos[i].childNodes[7].childNodes[0].nodeValue);
                                             Contactos[ultimapos].LinkedIn= tag_contactos[i].childNodes[7].childNodes[0].nodeValue;
 
                                            if(tag_contactos[i].childNodes[8]!=undefined && tag_contactos[i].childNodes[8].nodeName=="SocialNetwork"){
                                                if(tag_contactos[i].childNodes[8].getAttribute('Type')=="I"){
-                                                   alert("Instagram: " + tag_contactos[i].childNodes[8].childNodes[0].nodeValue);
                                                    Contactos[ultimapos].Instagram= tag_contactos[i].childNodes[8].childNodes[0].nodeValue;
 
                                                    if(tag_contactos[i].childNodes[9]!=undefined && tag_contactos[i].childNodes[9].nodeName=="SocialNetwork"){
                                                        if(tag_contactos[i].childNodes[9].getAttribute('Type')=="O"){
-                                                           alert("OutraRede: " + tag_contactos[i].childNodes[9].childNodes[0].nodeValue);
                                                            Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[9].childNodes[0].nodeValue;
                                                            if(tag_contactos[i].childNodes[10]!=undefined && tag_contactos[i].childNodes[10].nodeName=="Obs"){
-                                                                alert("Obs: " + tag_contactos[i].childNodes[10].childNodes[0].nodeValue);
                                                                 Contactos[ultimapos].OBS= tag_contactos[i].childNodes[10].childNodes[0].nodeValue;
                                                             }
                                                        }
                                                    }
                                                }else{
                                                    if(tag_contactos[i].childNodes[8].getAttribute('Type')=="O"){
-                                                       alert("OutraRede: " + tag_contactos[i].childNodes[8].childNodes[0].nodeValue);
                                                        Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[8].childNodes[0].nodeValue;
                                                        if(tag_contactos[i].childNodes[9]!=undefined && tag_contactos[i].childNodes[9].nodeName=="Obs"){
-                                                            alert("Obs: " + tag_contactos[i].childNodes[9].childNodes[0].nodeValue);
                                                             Contactos[ultimapos].OBS= tag_contactos[i].childNodes[9].childNodes[0].nodeValue;
                                                         }
                                                    }
@@ -452,25 +478,20 @@ function loadDataFromDatabase(xml) {
                                            }
                                        }else{
                                            if(tag_contactos[i].childNodes[7].getAttribute('Type')=="I"){
-                                               alert("Instagram: " + tag_contactos[i].childNodes[7].childNodes[0].nodeValue);
                                                Contactos[ultimapos].Instagram= tag_contactos[i].childNodes[7].childNodes[0].nodeValue;
 
                                                if(tag_contactos[i].childNodes[8]!=undefined && tag_contactos[i].childNodes[8].nodeName=="SocialNetwork"){
                                                    if(tag_contactos[i].childNodes[8].getAttribute('Type')=="O"){
-                                                       alert("OutraRede: " + tag_contactos[i].childNodes[8].childNodes[0].nodeValue);
                                                        Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[8].childNodes[0].nodeValue;
                                                        if(tag_contactos[i].childNodes[9]!=undefined && tag_contactos[i].childNodes[9].nodeName=="Obs"){
-                                                            alert("Obs: " + tag_contactos[i].childNodes[9].childNodes[0].nodeValue);
                                                             Contactos[ultimapos].OBS= tag_contactos[i].childNodes[9].childNodes[0].nodeValue;
                                                         }
                                                    }
                                                }
                                            }else{
                                                if(tag_contactos[i].childNodes[7].getAttribute('Type')=="O"){
-                                                   alert("OutraRede: " + tag_contactos[i].childNodes[7].childNodes[0].nodeValue);
                                                    Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[7].childNodes[0].nodeValue;
                                                    if(tag_contactos[i].childNodes[8]!=undefined && tag_contactos[i].childNodes[8].nodeName=="Obs"){
-                                                        alert("Obs: " + tag_contactos[i].childNodes[8].childNodes[0].nodeValue);
                                                         Contactos[ultimapos].OBS= tag_contactos[i].childNodes[8].childNodes[0].nodeValue;
                                                     }
                                                }
@@ -480,7 +501,6 @@ function loadDataFromDatabase(xml) {
                                 }
 
                                 if(tag_contactos[i].childNodes[8]!=undefined && tag_contactos[i].childNodes[8].nodeName=="Obs"){
-                                    alert("Obs: " + tag_contactos[i].childNodes[8].childNodes[0].nodeValue);
                                     Contactos[ultimapos].OBS= tag_contactos[i].childNodes[8].childNodes[0].nodeValue;
                                 }else{
 
@@ -488,7 +508,6 @@ function loadDataFromDatabase(xml) {
                                 //adidionar os outros
                             }else{
                                 if(tag_contactos[i].childNodes[7]!=undefined && tag_contactos[i].childNodes[7].nodeName=="Obs"){
-                                    alert("Obs: " + tag_contactos[i].childNodes[7].childNodes[0].nodeValue);
                                     Contactos[ultimapos].OBS= tag_contactos[i].childNodes[7].childNodes[0].nodeValue;
                                     
                                 }
@@ -497,45 +516,36 @@ function loadDataFromDatabase(xml) {
                         
                     }else{
                         var tag_anos = tag_contactos[i].childNodes[5].childNodes[0];
-                        alert("DOB: " + tag_anos.nodeValue);
                         Contactos[ultimapos].DOB= tag_anos.nodeValue;
                         if(tag_contactos[i].childNodes[6]!=undefined && tag_contactos[i].childNodes[6].nodeName=="SocialNetwork"){
                             if(tag_contactos[i].childNodes[6].getAttribute('Type')=="F"){
-                                alert("facebook: " + tag_contactos[i].childNodes[6].childNodes[0].nodeValue);
                                 Contactos[ultimapos].Facebook= tag_contactos[i].childNodes[6].childNodes[0].nodeValue;
 
                                 if(tag_contactos[i].childNodes[7]!=undefined && tag_contactos[i].childNodes[7].nodeName=="SocialNetwork"){
                                     if(tag_contactos[i].childNodes[7].getAttribute('Type')=="G"){
-                                        alert("google: " + tag_contactos[i].childNodes[7].childNodes[0].nodeValue);
                                         Contactos[ultimapos].Google= tag_contactos[i].childNodes[7].childNodes[0].nodeValue;  
 
                                         if(tag_contactos[i].childNodes[8]!=undefined && tag_contactos[i].childNodes[8].nodeName=="SocialNetwork"){
                                             if(tag_contactos[i].childNodes[8].getAttribute('Type')=="L"){
-                                                 alert("LinkedIn: " + tag_contactos[i].childNodes[8].childNodes[0].nodeValue);
                                                  Contactos[ultimapos].LinkedIn= tag_contactos[i].childNodes[8].childNodes[0].nodeValue;
 
                                                 if(tag_contactos[i].childNodes[9]!=undefined && tag_contactos[i].childNodes[9].nodeName=="SocialNetwork"){
                                                     if(tag_contactos[i].childNodes[9].getAttribute('Type')=="I"){
-                                                        alert("Instagram: " + tag_contactos[i].childNodes[9].childNodes[0].nodeValue);
                                                         Contactos[ultimapos].Instagram= tag_contactos[i].childNodes[9].childNodes[0].nodeValue;
 
                                                         if(tag_contactos[i].childNodes[10]!=undefined && tag_contactos[i].childNodes[10].nodeName=="SocialNetwork"){
                                                             if(tag_contactos[i].childNodes[10].getAttribute('Type')=="O"){
-                                                                alert("OutraRede: " + tag_contactos[i].childNodes[10].childNodes[0].nodeValue);
                                                                 Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[10].childNodes[0].nodeValue;
 
                                                                 if(tag_contactos[i].childNodes[11]!=undefined && tag_contactos[i].childNodes[11].nodeName=="Obs"){
-                                                                    alert("Obs: " + tag_contactos[i].childNodes[11].childNodes[0].nodeValue);
                                                                     Contactos[ultimapos].OBS= tag_contactos[i].childNodes[11].childNodes[0].nodeValue;
                                                                 }    
                                                             }
                                                         }
                                                     }else{
                                                         if(tag_contactos[i].childNodes[9].getAttribute('Type')=="O"){
-                                                            alert("OutraRede: " + tag_contactos[i].childNodes[9].childNodes[0].nodeValue);
                                                             Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[9].childNodes[0].nodeValue;
                                                             if(tag_contactos[i].childNodes[10]!=undefined && tag_contactos[i].childNodes[10].nodeName=="Obs"){
-                                                                alert("Obs: " + tag_contactos[i].childNodes[10].childNodes[0].nodeValue);
                                                                 Contactos[ultimapos].OBS= tag_contactos[i].childNodes[10].childNodes[0].nodeValue;
                                                             }    
                                                         }
@@ -543,25 +553,20 @@ function loadDataFromDatabase(xml) {
                                                 }
                                             }else{
                                                 if(tag_contactos[i].childNodes[8].getAttribute('Type')=="I"){
-                                                    alert("Instagram: " + tag_contactos[i].childNodes[8].childNodes[0].nodeValue);
                                                     Contactos[ultimapos].Instagram= tag_contactos[i].childNodes[8].childNodes[0].nodeValue;
 
                                                     if(tag_contactos[i].childNodes[9]!=undefined && tag_contactos[i].childNodes[9].nodeName=="SocialNetwork"){
                                                         if(tag_contactos[i].childNodes[9].getAttribute('Type')=="O"){
-                                                            alert("OutraRede: " + tag_contactos[i].childNodes[9].childNodes[0].nodeValue);
                                                             Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[9].childNodes[0].nodeValue;
                                                             if(tag_contactos[i].childNodes[10]!=undefined && tag_contactos[i].childNodes[10].nodeName=="Obs"){
-                                                                alert("Obs: " + tag_contactos[i].childNodes[10].childNodes[0].nodeValue);
                                                                 Contactos[ultimapos].OBS= tag_contactos[i].childNodes[10].childNodes[0].nodeValue;
                                                             }    
                                                         }
                                                     }
                                                 }else{
                                                     if(tag_contactos[i].childNodes[8].getAttribute('Type')=="O"){
-                                                        alert("OutraRede: " + tag_contactos[i].childNodes[8].childNodes[0].nodeValue);
                                                         Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[8].childNodes[0].nodeValue;
                                                         if(tag_contactos[i].childNodes[9]!=undefined && tag_contactos[i].childNodes[9].nodeName=="Obs"){
-                                                            alert("Obs: " + tag_contactos[i].childNodes[9].childNodes[0].nodeValue);
                                                             Contactos[ultimapos].OBS= tag_contactos[i].childNodes[9].childNodes[0].nodeValue;
                                                         }    
                                                     }
@@ -571,30 +576,24 @@ function loadDataFromDatabase(xml) {
 
                                     }else{
                                         if(tag_contactos[i].childNodes[7].getAttribute('Type')=="L"){
-                                            alert("LinkedIn: " + tag_contactos[i].childNodes[7].childNodes[0].nodeValue);
                                             Contactos[ultimapos].LinkedIn= tag_contactos[i].childNodes[7].childNodes[0].nodeValue;
 
                                            if(tag_contactos[i].childNodes[8]!=undefined && tag_contactos[i].childNodes[8].nodeName=="SocialNetwork"){
                                                if(tag_contactos[i].childNodes[8].getAttribute('Type')=="I"){
-                                                   alert("Instagram: " + tag_contactos[i].childNodes[8].childNodes[0].nodeValue);
                                                    Contactos[ultimapos].Instagram= tag_contactos[i].childNodes[8].childNodes[0].nodeValue;
 
                                                    if(tag_contactos[i].childNodes[9]!=undefined && tag_contactos[i].childNodes[9].nodeName=="SocialNetwork"){
                                                        if(tag_contactos[i].childNodes[9].getAttribute('Type')=="O"){
-                                                           alert("OutraRede: " + tag_contactos[i].childNodes[9].childNodes[0].nodeValue);
                                                            Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[9].childNodes[0].nodeValue;
                                                            if(tag_contactos[i].childNodes[10]!=undefined && tag_contactos[i].childNodes[10].nodeName=="Obs"){
-                                                                alert("Obs: " + tag_contactos[i].childNodes[10].childNodes[0].nodeValue);
                                                                 Contactos[ultimapos].OBS= tag_contactos[i].childNodes[10].childNodes[0].nodeValue;
                                                             }    
                                                        }
                                                    }
                                                }else{
                                                    if(tag_contactos[i].childNodes[8].getAttribute('Type')=="O"){
-                                                       alert("OutraRede: " + tag_contactos[i].childNodes[8].childNodes[0].nodeValue);
                                                        Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[8].childNodes[0].nodeValue;
                                                        if(tag_contactos[i].childNodes[9]!=undefined && tag_contactos[i].childNodes[9].nodeName=="Obs"){
-                                                            alert("Obs: " + tag_contactos[i].childNodes[9].childNodes[0].nodeValue);
                                                             Contactos[ultimapos].OBS= tag_contactos[i].childNodes[9].childNodes[0].nodeValue;
                                                         }    
                                                    }
@@ -602,25 +601,20 @@ function loadDataFromDatabase(xml) {
                                            }
                                        }else{
                                            if(tag_contactos[i].childNodes[7].getAttribute('Type')=="I"){
-                                               alert("Instagram: " + tag_contactos[i].childNodes[7].childNodes[0].nodeValue);
                                                Contactos[ultimapos].Instagram= tag_contactos[i].childNodes[7].childNodes[0].nodeValue;
 
                                                if(tag_contactos[i].childNodes[8]!=undefined && tag_contactos[i].childNodes[8].nodeName=="SocialNetwork"){
                                                    if(tag_contactos[i].childNodes[8].getAttribute('Type')=="O"){
-                                                       alert("OutraRede: " + tag_contactos[i].childNodes[8].childNodes[0].nodeValue);
                                                        Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[8].childNodes[0].nodeValue;
                                                        if(tag_contactos[i].childNodes[9]!=undefined && tag_contactos[i].childNodes[9].nodeName=="Obs"){
-                                                            alert("Obs: " + tag_contactos[i].childNodes[9].childNodes[0].nodeValue);
                                                             Contactos[ultimapos].OBS= tag_contactos[i].childNodes[9].childNodes[0].nodeValue;
                                                         }
                                                    }
                                                }
                                            }else{
                                                if(tag_contactos[i].childNodes[7].getAttribute('Type')=="O"){
-                                                   alert("OutraRede: " + tag_contactos[i].childNodes[7].childNodes[0].nodeValue);
                                                    Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[7].childNodes[0].nodeValue;
                                                    if(tag_contactos[i].childNodes[8]!=undefined && tag_contactos[i].childNodes[8].nodeName=="Obs"){
-                                                        alert("Obs: " + tag_contactos[i].childNodes[8].childNodes[0].nodeValue);
                                                         Contactos[ultimapos].OBS= tag_contactos[i].childNodes[8].childNodes[0].nodeValue;
                                                     }
                                                 }
@@ -630,35 +624,28 @@ function loadDataFromDatabase(xml) {
                                 }       
                             }else{
                                 if(tag_contactos[i].childNodes[6].getAttribute('Type')=="G"){
-                                    alert("google: " + tag_contactos[i].childNodes[6].childNodes[0].nodeValue);
                                     Contactos[ultimapos].Google= tag_contactos[i].childNodes[6].childNodes[0].nodeValue;  
 
                                     if(tag_contactos[i].childNodes[7]!=undefined && tag_contactos[i].childNodes[7].nodeName=="SocialNetwork"){
                                         if(tag_contactos[i].childNodes[7].getAttribute('Type')=="L"){
-                                             alert("LinkedIn: " + tag_contactos[i].childNodes[7].childNodes[0].nodeValue);
                                              Contactos[ultimapos].LinkedIn= tag_contactos[i].childNodes[7].childNodes[0].nodeValue;
 
                                             if(tag_contactos[i].childNodes[8]!=undefined && tag_contactos[i].childNodes[8].nodeName=="SocialNetwork"){
                                                 if(tag_contactos[i].childNodes[8].getAttribute('Type')=="I"){
-                                                    alert("Instagram: " + tag_contactos[i].childNodes[8].childNodes[0].nodeValue);
                                                     Contactos[ultimapos].Instagram= tag_contactos[i].childNodes[8].childNodes[0].nodeValue;
 
                                                     if(tag_contactos[i].childNodes[9]!=undefined && tag_contactos[i].childNodes[9].nodeName=="SocialNetwork"){
                                                         if(tag_contactos[i].childNodes[9].getAttribute('Type')=="O"){
-                                                            alert("OutraRede: " + tag_contactos[i].childNodes[9].childNodes[0].nodeValue);
                                                             Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[9].childNodes[0].nodeValue;
                                                             if(tag_contactos[i].childNodes[10]!=undefined && tag_contactos[i].childNodes[10].nodeName=="Obs"){
-                                                                alert("Obs: " + tag_contactos[i].childNodes[10].childNodes[0].nodeValue);
                                                                 Contactos[ultimapos].OBS= tag_contactos[i].childNodes[10].childNodes[0].nodeValue;
                                                             }
                                                         }
                                                     }
                                                 }else{
                                                     if(tag_contactos[i].childNodes[8].getAttribute('Type')=="O"){
-                                                        alert("OutraRede: " + tag_contactos[i].childNodes[8].childNodes[0].nodeValue);
                                                         Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[8].childNodes[0].nodeValue;
                                                         if(tag_contactos[i].childNodes[9]!=undefined && tag_contactos[i].childNodes[9].nodeName=="Obs"){
-                                                            alert("Obs: " + tag_contactos[i].childNodes[9].childNodes[0].nodeValue);
                                                             Contactos[ultimapos].OBS= tag_contactos[i].childNodes[9].childNodes[0].nodeValue;
                                                         }
                                                     }
@@ -666,25 +653,20 @@ function loadDataFromDatabase(xml) {
                                             }
                                         }else{
                                             if(tag_contactos[i].childNodes[7].getAttribute('Type')=="I"){
-                                                alert("Instagram: " + tag_contactos[i].childNodes[7].childNodes[0].nodeValue);
                                                 Contactos[ultimapos].Instagram= tag_contactos[i].childNodes[7].childNodes[0].nodeValue;
 
                                                 if(tag_contactos[i].childNodes[8]!=undefined && tag_contactos[i].childNodes[8].nodeName=="SocialNetwork"){
                                                     if(tag_contactos[i].childNodes[8].getAttribute('Type')=="O"){
-                                                        alert("OutraRede: " + tag_contactos[i].childNodes[8].childNodes[0].nodeValue);
                                                         Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[8].childNodes[0].nodeValue;
                                                         if(tag_contactos[i].childNodes[9]!=undefined && tag_contactos[i].childNodes[9].nodeName=="Obs"){
-                                                            alert("Obs: " + tag_contactos[i].childNodes[9].childNodes[0].nodeValue);
                                                             Contactos[ultimapos].OBS= tag_contactos[i].childNodes[9].childNodes[0].nodeValue;
                                                         }
                                                     }
                                                 }
                                             }else{
                                                 if(tag_contactos[i].childNodes[7].getAttribute('Type')=="O"){
-                                                    alert("OutraRede: " + tag_contactos[i].childNodes[7].childNodes[0].nodeValue);
                                                     Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[7].childNodes[0].nodeValue;
                                                     if(tag_contactos[i].childNodes[8]!=undefined && tag_contactos[i].childNodes[8].nodeName=="Obs"){
-                                                        alert("Obs: " + tag_contactos[i].childNodes[8].childNodes[0].nodeValue);
                                                         Contactos[ultimapos].OBS= tag_contactos[i].childNodes[8].childNodes[0].nodeValue;
                                                     }
                                                 }
@@ -694,30 +676,24 @@ function loadDataFromDatabase(xml) {
 
                                 }else{
                                     if(tag_contactos[i].childNodes[6].getAttribute('Type')=="L"){
-                                        alert("LinkedIn: " + tag_contactos[i].childNodes[6].childNodes[0].nodeValue);
                                         Contactos[ultimapos].LinkedIn= tag_contactos[i].childNodes[6].childNodes[0].nodeValue;
 
                                        if(tag_contactos[i].childNodes[7]!=undefined && tag_contactos[i].childNodes[7].nodeName=="SocialNetwork"){
                                            if(tag_contactos[i].childNodes[7].getAttribute('Type')=="I"){
-                                               alert("Instagram: " + tag_contactos[i].childNodes[7].childNodes[0].nodeValue);
                                                Contactos[ultimapos].Instagram= tag_contactos[i].childNodes[7].childNodes[0].nodeValue;
 
                                                if(tag_contactos[i].childNodes[8]!=undefined && tag_contactos[i].childNodes[8].nodeName=="SocialNetwork"){
                                                    if(tag_contactos[i].childNodes[8].getAttribute('Type')=="O"){
-                                                       alert("OutraRede: " + tag_contactos[i].childNodes[8].childNodes[0].nodeValue);
                                                        Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[8].childNodes[0].nodeValue;
                                                        if(tag_contactos[i].childNodes[9]!=undefined && tag_contactos[i].childNodes[9].nodeName=="Obs"){
-                                                            alert("Obs: " + tag_contactos[i].childNodes[9].childNodes[0].nodeValue);
                                                             Contactos[ultimapos].OBS= tag_contactos[i].childNodes[9].childNodes[0].nodeValue;
                                                         }
                                                    }
                                                }
                                            }else{
                                                if(tag_contactos[i].childNodes[7].getAttribute('Type')=="O"){
-                                                   alert("OutraRede: " + tag_contactos[i].childNodes[7].childNodes[0].nodeValue);
                                                    Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[7].childNodes[0].nodeValue;
                                                    if(tag_contactos[i].childNodes[8]!=undefined && tag_contactos[i].childNodes[8].nodeName=="Obs"){
-                                                        alert("Obs: " + tag_contactos[i].childNodes[8].childNodes[0].nodeValue);
                                                         Contactos[ultimapos].OBS= tag_contactos[i].childNodes[8].childNodes[0].nodeValue;
                                                     }
                                                }
@@ -725,25 +701,20 @@ function loadDataFromDatabase(xml) {
                                        }
                                    }else{
                                        if(tag_contactos[i].childNodes[6].getAttribute('Type')=="I"){
-                                           alert("Instagram: " + tag_contactos[i].childNodes[6].childNodes[0].nodeValue);
                                            Contactos[ultimapos].Instagram= tag_contactos[i].childNodes[6].childNodes[0].nodeValue;
 
                                            if(tag_contactos[i].childNodes[7]!=undefined && tag_contactos[i].childNodes[7].nodeName=="SocialNetwork"){
                                                if(tag_contactos[i].childNodes[7].getAttribute('Type')=="O"){
-                                                   alert("OutraRede: " + tag_contactos[i].childNodes[7].childNodes[0].nodeValue);
                                                    Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[7].childNodes[0].nodeValue;
                                                    if(tag_contactos[i].childNodes[8]!=undefined && tag_contactos[i].childNodes[8].nodeName=="Obs"){
-                                                        alert("Obs: " + tag_contactos[i].childNodes[8].childNodes[0].nodeValue);
                                                         Contactos[ultimapos].OBS= tag_contactos[i].childNodes[8].childNodes[0].nodeValue;
                                                     }
                                                }
                                            }
                                        }else{
                                            if(tag_contactos[i].childNodes[6].getAttribute('Type')=="O"){
-                                               alert("OutraRede: " + tag_contactos[i].childNodes[6].childNodes[0].nodeValue);
                                                Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[6].childNodes[0].nodeValue;
                                                if(tag_contactos[i].childNodes[7]!=undefined && tag_contactos[i].childNodes[7].nodeName=="Obs"){
-                                                    alert("Obs: " + tag_contactos[i].childNodes[7].childNodes[0].nodeValue);
                                                     Contactos[ultimapos].OBS= tag_contactos[i].childNodes[7].childNodes[0].nodeValue;
                                                 }
                                            }
@@ -753,7 +724,6 @@ function loadDataFromDatabase(xml) {
                             }
 
                             if(tag_contactos[i].childNodes[7]!=undefined && tag_contactos[i].childNodes[7].nodeName=="Obs"){
-                                alert("Obs: " + tag_contactos[i].childNodes[7].childNodes[0].nodeValue);
                                 Contactos[ultimapos].OBS= tag_contactos[i].childNodes[7].childNodes[0].nodeValue;
                             }else{
 
@@ -761,53 +731,43 @@ function loadDataFromDatabase(xml) {
                             //adidionar os outros
                         }else{
                             if(tag_contactos[i].childNodes[6]!=undefined && tag_contactos[i].childNodes[6].nodeName=="Obs"){
-                                alert("Obs: " + tag_contactos[i].childNodes[6].childNodes[0].nodeValue);
                                 Contactos[ultimapos].OBS= tag_contactos[i].childNodes[6].childNodes[0].nodeValue;
                             }
                         }
                     }
                 }else{
                     var tag_anos = tag_contactos[i].childNodes[4].childNodes[0];
-                    alert("DOB: " + tag_anos.nodeValue);
                     Contactos[ultimapos].DOB= tag_anos.nodeValue;
                     
                     if(tag_contactos[i].childNodes[5]!=undefined && tag_contactos[i].childNodes[5].nodeName=="SocialNetwork"){
                         if(tag_contactos[i].childNodes[5].getAttribute('Type')=="F"){
-                            alert("facebook: " + tag_contactos[i].childNodes[5].childNodes[0].nodeValue);
                             Contactos[ultimapos].Facebook= tag_contactos[i].childNodes[5].childNodes[0].nodeValue;
 
                             if(tag_contactos[i].childNodes[6]!=undefined && tag_contactos[i].childNodes[6].nodeName=="SocialNetwork"){
                                 if(tag_contactos[i].childNodes[6].getAttribute('Type')=="G"){
-                                    alert("google: " + tag_contactos[i].childNodes[6].childNodes[0].nodeValue);
                                     Contactos[ultimapos].Google= tag_contactos[i].childNodes[6].childNodes[0].nodeValue;  
 
                                     if(tag_contactos[i].childNodes[7]!=undefined && tag_contactos[i].childNodes[7].nodeName=="SocialNetwork"){
                                         if(tag_contactos[i].childNodes[7].getAttribute('Type')=="L"){
-                                             alert("LinkedIn: " + tag_contactos[i].childNodes[7].childNodes[0].nodeValue);
                                              Contactos[ultimapos].LinkedIn= tag_contactos[i].childNodes[7].childNodes[0].nodeValue;
 
                                             if(tag_contactos[i].childNodes[8]!=undefined && tag_contactos[i].childNodes[8].nodeName=="SocialNetwork"){
                                                 if(tag_contactos[i].childNodes[8].getAttribute('Type')=="I"){
-                                                    alert("Instagram: " + tag_contactos[i].childNodes[8].childNodes[0].nodeValue);
                                                     Contactos[ultimapos].Instagram= tag_contactos[i].childNodes[8].childNodes[0].nodeValue;
 
                                                     if(tag_contactos[i].childNodes[9]!=undefined && tag_contactos[i].childNodes[9].nodeName=="SocialNetwork"){
                                                         if(tag_contactos[i].childNodes[9].getAttribute('Type')=="O"){
-                                                            alert("OutraRede: " + tag_contactos[i].childNodes[9].childNodes[0].nodeValue);
                                                             Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[9].childNodes[0].nodeValue;
 
                                                             if(tag_contactos[i].childNodes[10]!=undefined && tag_contactos[i].childNodes[10].nodeName=="Obs"){
-                                                                alert("Obs: " + tag_contactos[i].childNodes[10].childNodes[0].nodeValue);
                                                                 Contactos[ultimapos].OBS= tag_contactos[i].childNodes[10].childNodes[0].nodeValue;
                                                             }    
                                                         }
                                                     }
                                                 }else{
                                                     if(tag_contactos[i].childNodes[8].getAttribute('Type')=="O"){
-                                                        alert("OutraRede: " + tag_contactos[i].childNodes[8].childNodes[0].nodeValue);
                                                         Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[8].childNodes[0].nodeValue;
                                                         if(tag_contactos[i].childNodes[9]!=undefined && tag_contactos[i].childNodes[9].nodeName=="Obs"){
-                                                            alert("Obs: " + tag_contactos[i].childNodes[9].childNodes[0].nodeValue);
                                                             Contactos[ultimapos].OBS= tag_contactos[i].childNodes[9].childNodes[0].nodeValue;
                                                         }    
                                                     }
@@ -815,25 +775,20 @@ function loadDataFromDatabase(xml) {
                                             }
                                         }else{
                                             if(tag_contactos[i].childNodes[7].getAttribute('Type')=="I"){
-                                                alert("Instagram: " + tag_contactos[i].childNodes[7].childNodes[0].nodeValue);
                                                 Contactos[ultimapos].Instagram= tag_contactos[i].childNodes[7].childNodes[0].nodeValue;
 
                                                 if(tag_contactos[i].childNodes[8]!=undefined && tag_contactos[i].childNodes[8].nodeName=="SocialNetwork"){
                                                     if(tag_contactos[i].childNodes[8].getAttribute('Type')=="O"){
-                                                        alert("OutraRede: " + tag_contactos[i].childNodes[8].childNodes[0].nodeValue);
                                                         Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[8].childNodes[0].nodeValue;
                                                         if(tag_contactos[i].childNodes[9]!=undefined && tag_contactos[i].childNodes[9].nodeName=="Obs"){
-                                                            alert("Obs: " + tag_contactos[i].childNodes[9].childNodes[0].nodeValue);
                                                             Contactos[ultimapos].OBS= tag_contactos[i].childNodes[9].childNodes[0].nodeValue;
                                                         }    
                                                     }
                                                 }
                                             }else{
                                                 if(tag_contactos[i].childNodes[7].getAttribute('Type')=="O"){
-                                                    alert("OutraRede: " + tag_contactos[i].childNodes[7].childNodes[0].nodeValue);
                                                     Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[7].childNodes[0].nodeValue;
                                                     if(tag_contactos[i].childNodes[8]!=undefined && tag_contactos[i].childNodes[8].nodeName=="Obs"){
-                                                        alert("Obs: " + tag_contactos[i].childNodes[8].childNodes[0].nodeValue);
                                                         Contactos[ultimapos].OBS= tag_contactos[i].childNodes[8].childNodes[0].nodeValue;
                                                     }    
                                                 }
@@ -843,30 +798,24 @@ function loadDataFromDatabase(xml) {
 
                                 }else{
                                     if(tag_contactos[i].childNodes[6].getAttribute('Type')=="L"){
-                                        alert("LinkedIn: " + tag_contactos[i].childNodes[6].childNodes[0].nodeValue);
                                         Contactos[ultimapos].LinkedIn= tag_contactos[i].childNodes[6].childNodes[0].nodeValue;
 
                                        if(tag_contactos[i].childNodes[7]!=undefined && tag_contactos[i].childNodes[7].nodeName=="SocialNetwork"){
                                            if(tag_contactos[i].childNodes[7].getAttribute('Type')=="I"){
-                                               alert("Instagram: " + tag_contactos[i].childNodes[7].childNodes[0].nodeValue);
                                                Contactos[ultimapos].Instagram= tag_contactos[i].childNodes[7].childNodes[0].nodeValue;
 
                                                if(tag_contactos[i].childNodes[8]!=undefined && tag_contactos[i].childNodes[8].nodeName=="SocialNetwork"){
                                                    if(tag_contactos[i].childNodes[8].getAttribute('Type')=="O"){
-                                                       alert("OutraRede: " + tag_contactos[i].childNodes[8].childNodes[0].nodeValue);
                                                        Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[8].childNodes[0].nodeValue;
                                                        if(tag_contactos[i].childNodes[9]!=undefined && tag_contactos[i].childNodes[9].nodeName=="Obs"){
-                                                            alert("Obs: " + tag_contactos[i].childNodes[9].childNodes[0].nodeValue);
                                                             Contactos[ultimapos].OBS= tag_contactos[i].childNodes[9].childNodes[0].nodeValue;
                                                         }    
                                                    }
                                                }
                                            }else{
                                                if(tag_contactos[i].childNodes[7].getAttribute('Type')=="O"){
-                                                   alert("OutraRede: " + tag_contactos[i].childNodes[7].childNodes[0].nodeValue);
                                                    Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[7].childNodes[0].nodeValue;
                                                    if(tag_contactos[i].childNodes[8]!=undefined && tag_contactos[i].childNodes[8].nodeName=="Obs"){
-                                                        alert("Obs: " + tag_contactos[i].childNodes[8].childNodes[0].nodeValue);
                                                         Contactos[ultimapos].OBS= tag_contactos[i].childNodes[8].childNodes[0].nodeValue;
                                                     }    
                                                }
@@ -874,25 +823,20 @@ function loadDataFromDatabase(xml) {
                                        }
                                    }else{
                                        if(tag_contactos[i].childNodes[6].getAttribute('Type')=="I"){
-                                           alert("Instagram: " + tag_contactos[i].childNodes[6].childNodes[0].nodeValue);
                                            Contactos[ultimapos].Instagram= tag_contactos[i].childNodes[6].childNodes[0].nodeValue;
 
                                            if(tag_contactos[i].childNodes[7]!=undefined && tag_contactos[i].childNodes[7].nodeName=="SocialNetwork"){
                                                if(tag_contactos[i].childNodes[7].getAttribute('Type')=="O"){
-                                                   alert("OutraRede: " + tag_contactos[i].childNodes[7].childNodes[0].nodeValue);
                                                    Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[7].childNodes[0].nodeValue;
                                                    if(tag_contactos[i].childNodes[8]!=undefined && tag_contactos[i].childNodes[8].nodeName=="Obs"){
-                                                        alert("Obs: " + tag_contactos[i].childNodes[8].childNodes[0].nodeValue);
                                                         Contactos[ultimapos].OBS= tag_contactos[i].childNodes[8].childNodes[0].nodeValue;
                                                     }
                                                }
                                            }
                                        }else{
                                            if(tag_contactos[i].childNodes[6].getAttribute('Type')=="O"){
-                                               alert("OutraRede: " + tag_contactos[i].childNodes[6].childNodes[0].nodeValue);
                                                Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[6].childNodes[0].nodeValue;
                                                if(tag_contactos[i].childNodes[7]!=undefined && tag_contactos[i].childNodes[7].nodeName=="Obs"){
-                                                    alert("Obs: " + tag_contactos[i].childNodes[7].childNodes[0].nodeValue);
                                                     Contactos[ultimapos].OBS= tag_contactos[i].childNodes[7].childNodes[0].nodeValue;
                                                 }
                                             }
@@ -902,35 +846,28 @@ function loadDataFromDatabase(xml) {
                             }       
                         }else{
                             if(tag_contactos[i].childNodes[5].getAttribute('Type')=="G"){
-                                alert("google: " + tag_contactos[i].childNodes[5].childNodes[0].nodeValue);
                                 Contactos[ultimapos].Google= tag_contactos[i].childNodes[5].childNodes[0].nodeValue;  
 
                                 if(tag_contactos[i].childNodes[6]!=undefined && tag_contactos[i].childNodes[6].nodeName=="SocialNetwork"){
                                     if(tag_contactos[i].childNodes[6].getAttribute('Type')=="L"){
-                                         alert("LinkedIn: " + tag_contactos[i].childNodes[6].childNodes[0].nodeValue);
                                          Contactos[ultimapos].LinkedIn= tag_contactos[i].childNodes[6].childNodes[0].nodeValue;
 
                                         if(tag_contactos[i].childNodes[7]!=undefined && tag_contactos[i].childNodes[7].nodeName=="SocialNetwork"){
                                             if(tag_contactos[i].childNodes[7].getAttribute('Type')=="I"){
-                                                alert("Instagram: " + tag_contactos[i].childNodes[7].childNodes[0].nodeValue);
                                                 Contactos[ultimapos].Instagram= tag_contactos[i].childNodes[7].childNodes[0].nodeValue;
 
                                                 if(tag_contactos[i].childNodes[8]!=undefined && tag_contactos[i].childNodes[8].nodeName=="SocialNetwork"){
                                                     if(tag_contactos[i].childNodes[8].getAttribute('Type')=="O"){
-                                                        alert("OutraRede: " + tag_contactos[i].childNodes[8].childNodes[0].nodeValue);
                                                         Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[8].childNodes[0].nodeValue;
                                                         if(tag_contactos[i].childNodes[9]!=undefined && tag_contactos[i].childNodes[9].nodeName=="Obs"){
-                                                            alert("Obs: " + tag_contactos[i].childNodes[9].childNodes[0].nodeValue);
                                                             Contactos[ultimapos].OBS= tag_contactos[i].childNodes[9].childNodes[0].nodeValue;
                                                         }
                                                     }
                                                 }
                                             }else{
                                                 if(tag_contactos[i].childNodes[7].getAttribute('Type')=="O"){
-                                                    alert("OutraRede: " + tag_contactos[i].childNodes[7].childNodes[0].nodeValue);
                                                     Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[7].childNodes[0].nodeValue;
                                                     if(tag_contactos[i].childNodes[8]!=undefined && tag_contactos[i].childNodes[8].nodeName=="Obs"){
-                                                        alert("Obs: " + tag_contactos[i].childNodes[8].childNodes[0].nodeValue);
                                                         Contactos[ultimapos].OBS= tag_contactos[i].childNodes[8].childNodes[0].nodeValue;
                                                     }
                                                 }
@@ -938,25 +875,20 @@ function loadDataFromDatabase(xml) {
                                         }
                                     }else{
                                         if(tag_contactos[i].childNodes[6].getAttribute('Type')=="I"){
-                                            alert("Instagram: " + tag_contactos[i].childNodes[6].childNodes[0].nodeValue);
                                             Contactos[ultimapos].Instagram= tag_contactos[i].childNodes[6].childNodes[0].nodeValue;
 
                                             if(tag_contactos[i].childNodes[7]!=undefined && tag_contactos[i].childNodes[7].nodeName=="SocialNetwork"){
                                                 if(tag_contactos[i].childNodes[7].getAttribute('Type')=="O"){
-                                                    alert("OutraRede: " + tag_contactos[i].childNodes[7].childNodes[0].nodeValue);
                                                     Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[7].childNodes[0].nodeValue;
                                                     if(tag_contactos[i].childNodes[8]!=undefined && tag_contactos[i].childNodes[8].nodeName=="Obs"){
-                                                        alert("Obs: " + tag_contactos[i].childNodes[8].childNodes[0].nodeValue);
                                                         Contactos[ultimapos].OBS= tag_contactos[i].childNodes[8].childNodes[0].nodeValue;
                                                     }
                                                 }
                                             }
                                         }else{
                                             if(tag_contactos[i].childNodes[6].getAttribute('Type')=="O"){
-                                                alert("OutraRede: " + tag_contactos[i].childNodes[6].childNodes[0].nodeValue);
                                                 Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[6].childNodes[0].nodeValue;
                                                 if(tag_contactos[i].childNodes[7]!=undefined && tag_contactos[i].childNodes[7].nodeName=="Obs"){
-                                                    alert("Obs: " + tag_contactos[i].childNodes[7].childNodes[0].nodeValue);
                                                     Contactos[ultimapos].OBS= tag_contactos[i].childNodes[7].childNodes[0].nodeValue;
                                                 }
                                             }
@@ -966,30 +898,24 @@ function loadDataFromDatabase(xml) {
 
                             }else{
                                 if(tag_contactos[i].childNodes[5].getAttribute('Type')=="L"){
-                                    alert("LinkedIn: " + tag_contactos[i].childNodes[5].childNodes[0].nodeValue);
                                     Contactos[ultimapos].LinkedIn= tag_contactos[i].childNodes[5].childNodes[0].nodeValue;
 
                                    if(tag_contactos[i].childNodes[6]!=undefined && tag_contactos[i].childNodes[6].nodeName=="SocialNetwork"){
                                        if(tag_contactos[i].childNodes[6].getAttribute('Type')=="I"){
-                                           alert("Instagram: " + tag_contactos[i].childNodes[6].childNodes[0].nodeValue);
                                            Contactos[ultimapos].Instagram= tag_contactos[i].childNodes[6].childNodes[0].nodeValue;
 
                                            if(tag_contactos[i].childNodes[7]!=undefined && tag_contactos[i].childNodes[7].nodeName=="SocialNetwork"){
                                                if(tag_contactos[i].childNodes[7].getAttribute('Type')=="O"){
-                                                   alert("OutraRede: " + tag_contactos[i].childNodes[7].childNodes[0].nodeValue);
                                                    Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[7].childNodes[0].nodeValue;
                                                    if(tag_contactos[i].childNodes[8]!=undefined && tag_contactos[i].childNodes[8].nodeName=="Obs"){
-                                                        alert("Obs: " + tag_contactos[i].childNodes[8].childNodes[0].nodeValue);
                                                         Contactos[ultimapos].OBS= tag_contactos[i].childNodes[8].childNodes[0].nodeValue;
                                                     }
                                                }
                                            }
                                        }else{
                                            if(tag_contactos[i].childNodes[6].getAttribute('Type')=="O"){
-                                               alert("OutraRede: " + tag_contactos[i].childNodes[6].childNodes[0].nodeValue);
                                                Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[6].childNodes[0].nodeValue;
                                                if(tag_contactos[i].childNodes[7]!=undefined && tag_contactos[i].childNodes[7].nodeName=="Obs"){
-                                                    alert("Obs: " + tag_contactos[i].childNodes[7].childNodes[0].nodeValue);
                                                     Contactos[ultimapos].OBS= tag_contactos[i].childNodes[7].childNodes[0].nodeValue;
                                                 }
                                            }
@@ -997,25 +923,20 @@ function loadDataFromDatabase(xml) {
                                    }
                                }else{
                                    if(tag_contactos[i].childNodes[5].getAttribute('Type')=="I"){
-                                       alert("Instagram: " + tag_contactos[i].childNodes[5].childNodes[0].nodeValue);
                                        Contactos[ultimapos].Instagram= tag_contactos[i].childNodes[5].childNodes[0].nodeValue;
 
                                        if(tag_contactos[i].childNodes[6]!=undefined && tag_contactos[i].childNodes[6].nodeName=="SocialNetwork"){
                                            if(tag_contactos[i].childNodes[6].getAttribute('Type')=="O"){
-                                               alert("OutraRede: " + tag_contactos[i].childNodes[6].childNodes[0].nodeValue);
                                                Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[6].childNodes[0].nodeValue;
                                                if(tag_contactos[i].childNodes[7]!=undefined && tag_contactos[i].childNodes[7].nodeName=="Obs"){
-                                                    alert("Obs: " + tag_contactos[i].childNodes[7].childNodes[0].nodeValue);
                                                     Contactos[ultimapos].OBS= tag_contactos[i].childNodes[7].childNodes[0].nodeValue;
                                                 }
                                            }
                                        }
                                    }else{
                                        if(tag_contactos[i].childNodes[5].getAttribute('Type')=="O"){
-                                           alert("OutraRede: " + tag_contactos[i].childNodes[5].childNodes[0].nodeValue);
                                            Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[5].childNodes[0].nodeValue;
                                            if(tag_contactos[i].childNodes[6]!=undefined && tag_contactos[i].childNodes[6].nodeName=="Obs"){
-                                                alert("Obs: " + tag_contactos[i].childNodes[6].childNodes[0].nodeValue);
                                                 Contactos[ultimapos].OBS= tag_contactos[i].childNodes[6].childNodes[0].nodeValue;
                                             }
                                        }
@@ -1025,58 +946,47 @@ function loadDataFromDatabase(xml) {
                         }
 
                         if(tag_contactos[i].childNodes[6]!=undefined && tag_contactos[i].childNodes[6].nodeName=="Obs"){
-                            alert("Obs: " + tag_contactos[i].childNodes[6].childNodes[0].nodeValue);
                             Contactos[ultimapos].OBS= tag_contactos[i].childNodes[6].childNodes[0].nodeValue;
                         }
                     }else{
                         if(tag_contactos[i].childNodes[5]!=undefined && tag_contactos[i].childNodes[5].nodeName=="Obs"){
-                            alert("Obs: " + tag_contactos[i].childNodes[5].childNodes[0].nodeValue);
                             Contactos[ultimapos].OBS= tag_contactos[i].childNodes[5].childNodes[0].nodeValue;
                         }
                     } 
                 }
             }else{
                 var tag_anos = tag_contactos[i].childNodes[3].childNodes[0];
-                alert("DOB: " + tag_anos.nodeValue);
                 Contactos[ultimapos].DOB= tag_anos.nodeValue;
                 
                 if(tag_contactos[i].childNodes[4]!=undefined && tag_contactos[i].childNodes[4].nodeName=="SocialNetwork"){
                     if(tag_contactos[i].childNodes[4].getAttribute('Type')=="F"){
-                        alert("facebook: " + tag_contactos[i].childNodes[4].childNodes[0].nodeValue);
                         Contactos[ultimapos].Facebook= tag_contactos[i].childNodes[4].childNodes[0].nodeValue;
                         
                         if(tag_contactos[i].childNodes[5]!=undefined && tag_contactos[i].childNodes[5].nodeName=="SocialNetwork"){
                             if(tag_contactos[i].childNodes[5].getAttribute('Type')=="G"){
-                                alert("google: " + tag_contactos[i].childNodes[5].childNodes[0].nodeValue);
                                 Contactos[ultimapos].Google= tag_contactos[i].childNodes[5].childNodes[0].nodeValue;  
                                 
                                 if(tag_contactos[i].childNodes[6]!=undefined && tag_contactos[i].childNodes[6].nodeName=="SocialNetwork"){
                                     if(tag_contactos[i].childNodes[6].getAttribute('Type')=="L"){
-                                         alert("LinkedIn: " + tag_contactos[i].childNodes[6].childNodes[0].nodeValue);
                                          Contactos[ultimapos].LinkedIn= tag_contactos[i].childNodes[6].childNodes[0].nodeValue;
                                          
                                         if(tag_contactos[i].childNodes[7]!=undefined && tag_contactos[i].childNodes[7].nodeName=="SocialNetwork"){
                                             if(tag_contactos[i].childNodes[7].getAttribute('Type')=="I"){
-                                                alert("Instagram: " + tag_contactos[i].childNodes[7].childNodes[0].nodeValue);
                                                 Contactos[ultimapos].Instagram= tag_contactos[i].childNodes[7].childNodes[0].nodeValue;
                                                 
                                                 if(tag_contactos[i].childNodes[8]!=undefined && tag_contactos[i].childNodes[8].nodeName=="SocialNetwork"){
                                                     if(tag_contactos[i].childNodes[8].getAttribute('Type')=="O"){
-                                                        alert("OutraRede: " + tag_contactos[i].childNodes[8].childNodes[0].nodeValue);
                                                         Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[8].childNodes[0].nodeValue;
                                                         
                                                         if(tag_contactos[i].childNodes[9]!=undefined && tag_contactos[i].childNodes[9].nodeName=="Obs"){
-                                                            alert("Obs: " + tag_contactos[i].childNodes[9].childNodes[0].nodeValue);
                                                             Contactos[ultimapos].OBS= tag_contactos[i].childNodes[9].childNodes[0].nodeValue;
                                                         }    
                                                     }
                                                 }
                                             }else{
                                                 if(tag_contactos[i].childNodes[7].getAttribute('Type')=="O"){
-                                                    alert("OutraRede: " + tag_contactos[i].childNodes[7].childNodes[0].nodeValue);
                                                     Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[7].childNodes[0].nodeValue;
                                                     if(tag_contactos[i].childNodes[8]!=undefined && tag_contactos[i].childNodes[8].nodeName=="Obs"){
-                                                        alert("Obs: " + tag_contactos[i].childNodes[8].childNodes[0].nodeValue);
                                                         Contactos[ultimapos].OBS= tag_contactos[i].childNodes[8].childNodes[0].nodeValue;
                                                     }    
                                                 }
@@ -1084,25 +994,20 @@ function loadDataFromDatabase(xml) {
                                         }
                                     }else{
                                         if(tag_contactos[i].childNodes[6].getAttribute('Type')=="I"){
-                                            alert("Instagram: " + tag_contactos[i].childNodes[6].childNodes[0].nodeValue);
                                             Contactos[ultimapos].Instagram= tag_contactos[i].childNodes[6].childNodes[0].nodeValue;
 
                                             if(tag_contactos[i].childNodes[7]!=undefined && tag_contactos[i].childNodes[7].nodeName=="SocialNetwork"){
                                                 if(tag_contactos[i].childNodes[7].getAttribute('Type')=="O"){
-                                                    alert("OutraRede: " + tag_contactos[i].childNodes[7].childNodes[0].nodeValue);
                                                     Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[7].childNodes[0].nodeValue;
                                                     if(tag_contactos[i].childNodes[8]!=undefined && tag_contactos[i].childNodes[8].nodeName=="Obs"){
-                                                        alert("Obs: " + tag_contactos[i].childNodes[8].childNodes[0].nodeValue);
                                                         Contactos[ultimapos].OBS= tag_contactos[i].childNodes[8].childNodes[0].nodeValue;
                                                     }    
                                                 }
                                             }
                                         }else{
                                             if(tag_contactos[i].childNodes[6].getAttribute('Type')=="O"){
-                                                alert("OutraRede: " + tag_contactos[i].childNodes[6].childNodes[0].nodeValue);
                                                 Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[6].childNodes[0].nodeValue;
                                                 if(tag_contactos[i].childNodes[7]!=undefined && tag_contactos[i].childNodes[7].nodeName=="Obs"){
-                                                    alert("Obs: " + tag_contactos[i].childNodes[7].childNodes[0].nodeValue);
                                                     Contactos[ultimapos].OBS= tag_contactos[i].childNodes[7].childNodes[0].nodeValue;
                                                 }    
                                             }
@@ -1112,30 +1017,24 @@ function loadDataFromDatabase(xml) {
                                 
                             }else{
                                 if(tag_contactos[i].childNodes[5].getAttribute('Type')=="L"){
-                                    alert("LinkedIn: " + tag_contactos[i].childNodes[5].childNodes[0].nodeValue);
                                     Contactos[ultimapos].LinkedIn= tag_contactos[i].childNodes[5].childNodes[0].nodeValue;
 
                                    if(tag_contactos[i].childNodes[6]!=undefined && tag_contactos[i].childNodes[6].nodeName=="SocialNetwork"){
                                        if(tag_contactos[i].childNodes[6].getAttribute('Type')=="I"){
-                                           alert("Instagram: " + tag_contactos[i].childNodes[6].childNodes[0].nodeValue);
                                            Contactos[ultimapos].Instagram= tag_contactos[i].childNodes[6].childNodes[0].nodeValue;
 
                                            if(tag_contactos[i].childNodes[7]!=undefined && tag_contactos[i].childNodes[7].nodeName=="SocialNetwork"){
                                                if(tag_contactos[i].childNodes[7].getAttribute('Type')=="O"){
-                                                   alert("OutraRede: " + tag_contactos[i].childNodes[7].childNodes[0].nodeValue);
                                                    Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[7].childNodes[0].nodeValue;
                                                    if(tag_contactos[i].childNodes[8]!=undefined && tag_contactos[i].childNodes[8].nodeName=="Obs"){
-                                                        alert("Obs: " + tag_contactos[i].childNodes[8].childNodes[0].nodeValue);
                                                         Contactos[ultimapos].OBS= tag_contactos[i].childNodes[8].childNodes[0].nodeValue;
                                                     }    
                                                }
                                            }
                                        }else{
                                            if(tag_contactos[i].childNodes[6].getAttribute('Type')=="O"){
-                                               alert("OutraRede: " + tag_contactos[i].childNodes[6].childNodes[0].nodeValue);
                                                Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[6].childNodes[0].nodeValue;
                                                if(tag_contactos[i].childNodes[7]!=undefined && tag_contactos[i].childNodes[7].nodeName=="Obs"){
-                                                    alert("Obs: " + tag_contactos[i].childNodes[7].childNodes[0].nodeValue);
                                                     Contactos[ultimapos].OBS= tag_contactos[i].childNodes[7].childNodes[0].nodeValue;
                                                 }    
                                            }
@@ -1143,25 +1042,20 @@ function loadDataFromDatabase(xml) {
                                    }
                                }else{
                                    if(tag_contactos[i].childNodes[5].getAttribute('Type')=="I"){
-                                       alert("Instagram: " + tag_contactos[i].childNodes[5].childNodes[0].nodeValue);
                                        Contactos[ultimapos].Instagram= tag_contactos[i].childNodes[5].childNodes[0].nodeValue;
 
                                        if(tag_contactos[i].childNodes[6]!=undefined && tag_contactos[i].childNodes[6].nodeName=="SocialNetwork"){
                                            if(tag_contactos[i].childNodes[6].getAttribute('Type')=="O"){
-                                               alert("OutraRede: " + tag_contactos[i].childNodes[6].childNodes[0].nodeValue);
                                                Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[6].childNodes[0].nodeValue;
                                                if(tag_contactos[i].childNodes[7]!=undefined && tag_contactos[i].childNodes[7].nodeName=="Obs"){
-                                                    alert("Obs: " + tag_contactos[i].childNodes[7].childNodes[0].nodeValue);
                                                     Contactos[ultimapos].OBS= tag_contactos[i].childNodes[7].childNodes[0].nodeValue;
                                                 }
                                            }
                                        }
                                    }else{
                                        if(tag_contactos[i].childNodes[5].getAttribute('Type')=="O"){
-                                           alert("OutraRede: " + tag_contactos[i].childNodes[5].childNodes[0].nodeValue);
                                            Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[5].childNodes[0].nodeValue;
                                            if(tag_contactos[i].childNodes[6]!=undefined && tag_contactos[i].childNodes[6].nodeName=="Obs"){
-                                                alert("Obs: " + tag_contactos[i].childNodes[6].childNodes[0].nodeValue);
                                                 Contactos[ultimapos].OBS= tag_contactos[i].childNodes[6].childNodes[0].nodeValue;
                                             }
                                         }
@@ -1171,35 +1065,28 @@ function loadDataFromDatabase(xml) {
                         }       
                     }else{
                         if(tag_contactos[i].childNodes[4].getAttribute('Type')=="G"){
-                            alert("google: " + tag_contactos[i].childNodes[4].childNodes[0].nodeValue);
                             Contactos[ultimapos].Google= tag_contactos[i].childNodes[4].childNodes[0].nodeValue;  
 
                             if(tag_contactos[i].childNodes[5]!=undefined && tag_contactos[i].childNodes[5].nodeName=="SocialNetwork"){
                                 if(tag_contactos[i].childNodes[5].getAttribute('Type')=="L"){
-                                     alert("LinkedIn: " + tag_contactos[i].childNodes[5].childNodes[0].nodeValue);
                                      Contactos[ultimapos].LinkedIn= tag_contactos[i].childNodes[5].childNodes[0].nodeValue;
 
                                     if(tag_contactos[i].childNodes[6]!=undefined && tag_contactos[i].childNodes[6].nodeName=="SocialNetwork"){
                                         if(tag_contactos[i].childNodes[6].getAttribute('Type')=="I"){
-                                            alert("Instagram: " + tag_contactos[i].childNodes[6].childNodes[0].nodeValue);
                                             Contactos[ultimapos].Instagram= tag_contactos[i].childNodes[6].childNodes[0].nodeValue;
 
                                             if(tag_contactos[i].childNodes[7]!=undefined && tag_contactos[i].childNodes[7].nodeName=="SocialNetwork"){
                                                 if(tag_contactos[i].childNodes[7].getAttribute('Type')=="O"){
-                                                    alert("OutraRede: " + tag_contactos[i].childNodes[7].childNodes[0].nodeValue);
                                                     Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[7].childNodes[0].nodeValue;
                                                     if(tag_contactos[i].childNodes[8]!=undefined && tag_contactos[i].childNodes[8].nodeName=="Obs"){
-                                                        alert("Obs: " + tag_contactos[i].childNodes[8].childNodes[0].nodeValue);
                                                         Contactos[ultimapos].OBS= tag_contactos[i].childNodes[8].childNodes[0].nodeValue;
                                                     }
                                                 }
                                             }
                                         }else{
                                             if(tag_contactos[i].childNodes[6].getAttribute('Type')=="O"){
-                                                alert("OutraRede: " + tag_contactos[i].childNodes[6].childNodes[0].nodeValue);
                                                 Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[6].childNodes[0].nodeValue;
                                                 if(tag_contactos[i].childNodes[7]!=undefined && tag_contactos[i].childNodes[7].nodeName=="Obs"){
-                                                    alert("Obs: " + tag_contactos[i].childNodes[7].childNodes[0].nodeValue);
                                                     Contactos[ultimapos].OBS= tag_contactos[i].childNodes[7].childNodes[0].nodeValue;
                                                 }
                                             }
@@ -1207,25 +1094,20 @@ function loadDataFromDatabase(xml) {
                                     }
                                 }else{
                                     if(tag_contactos[i].childNodes[5].getAttribute('Type')=="I"){
-                                        alert("Instagram: " + tag_contactos[i].childNodes[5].childNodes[0].nodeValue);
                                         Contactos[ultimapos].Instagram= tag_contactos[i].childNodes[5].childNodes[0].nodeValue;
 
                                         if(tag_contactos[i].childNodes[6]!=undefined && tag_contactos[i].childNodes[6].nodeName=="SocialNetwork"){
                                             if(tag_contactos[i].childNodes[6].getAttribute('Type')=="O"){
-                                                alert("OutraRede: " + tag_contactos[i].childNodes[6].childNodes[0].nodeValue);
                                                 Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[6].childNodes[0].nodeValue;
                                                 if(tag_contactos[i].childNodes[7]!=undefined && tag_contactos[i].childNodes[7].nodeName=="Obs"){
-                                                    alert("Obs: " + tag_contactos[i].childNodes[7].childNodes[0].nodeValue);
                                                     Contactos[ultimapos].OBS= tag_contactos[i].childNodes[7].childNodes[0].nodeValue;
                                                 }
                                             }
                                         }
                                     }else{
                                         if(tag_contactos[i].childNodes[5].getAttribute('Type')=="O"){
-                                            alert("OutraRede: " + tag_contactos[i].childNodes[5].childNodes[0].nodeValue);
                                             Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[5].childNodes[0].nodeValue;
                                             if(tag_contactos[i].childNodes[6]!=undefined && tag_contactos[i].childNodes[6].nodeName=="Obs"){
-                                                alert("Obs: " + tag_contactos[i].childNodes[6].childNodes[0].nodeValue);
                                                 Contactos[ultimapos].OBS= tag_contactos[i].childNodes[6].childNodes[0].nodeValue;
                                             }
                                         }
@@ -1235,30 +1117,24 @@ function loadDataFromDatabase(xml) {
 
                         }else{
                             if(tag_contactos[i].childNodes[4].getAttribute('Type')=="L"){
-                                alert("LinkedIn: " + tag_contactos[i].childNodes[4].childNodes[0].nodeValue);
                                 Contactos[ultimapos].LinkedIn= tag_contactos[i].childNodes[4].childNodes[0].nodeValue;
 
                                if(tag_contactos[i].childNodes[5]!=undefined && tag_contactos[i].childNodes[5].nodeName=="SocialNetwork"){
                                    if(tag_contactos[i].childNodes[5].getAttribute('Type')=="I"){
-                                       alert("Instagram: " + tag_contactos[i].childNodes[5].childNodes[0].nodeValue);
                                        Contactos[ultimapos].Instagram= tag_contactos[i].childNodes[5].childNodes[0].nodeValue;
 
                                        if(tag_contactos[i].childNodes[6]!=undefined && tag_contactos[i].childNodes[6].nodeName=="SocialNetwork"){
                                            if(tag_contactos[i].childNodes[6].getAttribute('Type')=="O"){
-                                               alert("OutraRede: " + tag_contactos[i].childNodes[6].childNodes[0].nodeValue);
                                                Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[6].childNodes[0].nodeValue;
                                                if(tag_contactos[i].childNodes[7]!=undefined && tag_contactos[i].childNodes[7].nodeName=="Obs"){
-                                                    alert("Obs: " + tag_contactos[i].childNodes[7].childNodes[0].nodeValue);
                                                     Contactos[ultimapos].OBS= tag_contactos[i].childNodes[7].childNodes[0].nodeValue;
                                                 }
                                            }
                                        }
                                    }else{
                                        if(tag_contactos[i].childNodes[5].getAttribute('Type')=="O"){
-                                           alert("OutraRede: " + tag_contactos[i].childNodes[5].childNodes[0].nodeValue);
                                            Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[5].childNodes[0].nodeValue;
                                            if(tag_contactos[i].childNodes[6]!=undefined && tag_contactos[i].childNodes[6].nodeName=="Obs"){
-                                                alert("Obs: " + tag_contactos[i].childNodes[6].childNodes[0].nodeValue);
                                                 Contactos[ultimapos].OBS= tag_contactos[i].childNodes[6].childNodes[0].nodeValue;
                                             }
                                        }
@@ -1266,25 +1142,20 @@ function loadDataFromDatabase(xml) {
                                }
                            }else{
                                if(tag_contactos[i].childNodes[4].getAttribute('Type')=="I"){
-                                   alert("Instagram: " + tag_contactos[i].childNodes[4].childNodes[0].nodeValue);
                                    Contactos[ultimapos].Instagram= tag_contactos[i].childNodes[4].childNodes[0].nodeValue;
 
                                    if(tag_contactos[i].childNodes[5]!=undefined && tag_contactos[i].childNodes[5].nodeName=="SocialNetwork"){
                                        if(tag_contactos[i].childNodes[5].getAttribute('Type')=="O"){
-                                           alert("OutraRede: " + tag_contactos[i].childNodes[5].childNodes[0].nodeValue);
                                            Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[5].childNodes[0].nodeValue;
                                            if(tag_contactos[i].childNodes[6]!=undefined && tag_contactos[i].childNodes[6].nodeName=="Obs"){
-                                                alert("Obs: " + tag_contactos[i].childNodes[6].childNodes[0].nodeValue);
                                                 Contactos[ultimapos].OBS= tag_contactos[i].childNodes[6].childNodes[0].nodeValue;
                                             }
                                        }
                                    }
                                }else{
                                    if(tag_contactos[i].childNodes[4].getAttribute('Type')=="O"){
-                                       alert("OutraRede: " + tag_contactos[i].childNodes[4].childNodes[0].nodeValue);
                                        Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[4].childNodes[0].nodeValue;
                                        if(tag_contactos[i].childNodes[5]!=undefined && tag_contactos[i].childNodes[5].nodeName=="Obs"){
-                                            alert("Obs: " + tag_contactos[i].childNodes[5].childNodes[0].nodeValue);
                                             Contactos[ultimapos].OBS= tag_contactos[i].childNodes[5].childNodes[0].nodeValue;
                                         }
                                    }
@@ -1294,7 +1165,6 @@ function loadDataFromDatabase(xml) {
                     }
                     
                     if(tag_contactos[i].childNodes[5]!=undefined && tag_contactos[i].childNodes[5].nodeName=="Obs"){
-                        alert("Obs: " + tag_contactos[i].childNodes[5].childNodes[0].nodeValue);
                         Contactos[ultimapos].OBS= tag_contactos[i].childNodes[5].childNodes[0].nodeValue;
                     }else{
                         
@@ -1302,7 +1172,6 @@ function loadDataFromDatabase(xml) {
                     //adidionar os outros
                 }else{
                     if(tag_contactos[i].childNodes[4]!=undefined && tag_contactos[i].childNodes[4].nodeName=="Obs"){
-                        alert("Obs: " + tag_contactos[i].childNodes[4].childNodes[0].nodeValue);
                         Contactos[ultimapos].OBS= tag_contactos[i].childNodes[4].childNodes[0].nodeValue;
                     }
                 }
@@ -1310,11 +1179,8 @@ function loadDataFromDatabase(xml) {
         }else{
             var tel1 = tag_contactos[i].childNodes[1]
             var tag_tipo_telefone1 = tel1.childNodes[2].getAttribute('Type');
-            alert("tipo telefone: " + tag_tipo_telefone1.valueOf());
             var tag_numero_telefone1 = tel1.childNodes[1].childNodes[0];
-            alert("Telefone: " + tag_numero_telefone1.nodeValue);
             var tag_pais1 = tel1.childNodes[0].childNodes[0];
-            alert("Pais: " + tag_pais1.nodeValue);
             
             Contactos[ultimapos].telefone1= tag_numero_telefone1.nodeValue;
             Contactos[ultimapos].pais1= tag_pais1.nodeValue;
@@ -1323,11 +1189,8 @@ function loadDataFromDatabase(xml) {
             if(tag_contactos[i].childNodes[2]!=undefined && tag_contactos[i].childNodes[2].nodeName=="Telephone" ){
                 var tel2 = tag_contactos[i].childNodes[2];
                 var tag_tipo_telefone2 = tel2.childNodes[2].getAttribute('Type');
-                alert("tipo telefone: " + tag_tipo_telefone2.valueOf());
                 var tag_numero_telefone2 = tel2.childNodes[1].childNodes[0];
-                alert("Telefone: " + tag_numero_telefone2.nodeValue);
                 var tag_pais2 = tel2.childNodes[0].childNodes[0];
-                alert("Pais: " + tag_pais2.nodeValue);
                 
                 Contactos[ultimapos].telefone2= tag_numero_telefone2.nodeValue;
                 Contactos[ultimapos].pais2= tag_pais2.nodeValue;
@@ -1336,11 +1199,8 @@ function loadDataFromDatabase(xml) {
                 if(tag_contactos[i].childNodes[3]!=undefined && tag_contactos[i].childNodes[3].nodeName=="Telephone" ){
                     var tel3 = tag_contactos[i].childNodes[3];
                     var tag_tipo_telefone3 = tel3.childNodes[2].getAttribute('Type');
-                    alert("tipo telefone: " + tag_tipo_telefone3.valueOf());
                     var tag_numero_telefone3 = tel3.childNodes[1].childNodes[0];
-                    alert("Telefone: " + tag_numero_telefone3.nodeValue);
                     var tag_pais3 = tel3.childNodes[0].childNodes[0];
-                    alert("Pais: " + tag_pais3.nodeValue);
                     
                     Contactos[ultimapos].telefone3= tag_numero_telefone3.nodeValue;
                     Contactos[ultimapos].pais3= tag_pais3.nodeValue;
@@ -1349,11 +1209,8 @@ function loadDataFromDatabase(xml) {
                     if(tag_contactos[i].childNodes[4]!=undefined && tag_contactos[i].childNodes[4].nodeName=="Telephone" ){
                         var tel4 = tag_contactos[i].childNodes[4];
                         var tag_tipo_telefone4 = tel4.childNodes[2].getAttribute('Type');
-                        alert("tipo telefone: " + tag_tipo_telefone4.valueOf());
                         var tag_numero_telefone4 = tel4.childNodes[1].childNodes[0];
-                        alert("Telefone: " + tag_numero_telefone4.nodeValue);
                         var tag_pais4 = tel4.childNodes[0].childNodes[0];
-                        alert("Pais: " + tag_pais4.nodeValue);
                         
                         Contactos[ultimapos].telefone4= tag_numero_telefone4.nodeValue;
                         Contactos[ultimapos].pais4= tag_pais4.nodeValue;
@@ -1362,11 +1219,8 @@ function loadDataFromDatabase(xml) {
                         if(tag_contactos[i].childNodes[5]!=undefined && tag_contactos[i].childNodes[5].nodeName=="Telephone" ){
                             var tel5 = tag_contactos[i].childNodes[5];
                             var tag_tipo_telefone5 = tel5.childNodes[2].getAttribute('Type');
-                            alert("tipo telefone: " + tag_tipo_telefone5.valueOf());
-                            var tag_numero_telefone5 = tel5.childNodes[1].childNodes[0];
-                            alert("Telefone: " + tag_numero_telefone5.nodeValue);
+                            var tag_numero_telefone5 = tel5.childNodes[1].childNodes[0];    
                             var tag_pais5 = tel5.childNodes[0].childNodes[0];
-                            alert("Pais: " + tag_pais5.nodeValue);
                             
                             Contactos[ultimapos].telefone5= tag_numero_telefone5.nodeValue;
                             Contactos[ultimapos].pais5= tag_pais5.nodeValue;
@@ -1374,46 +1228,37 @@ function loadDataFromDatabase(xml) {
                         
                         }else{
                             var tag_anos = tag_contactos[i].childNodes[5].childNodes[0];
-                            alert("DOB: " + tag_anos.nodeValue);
                             Contactos[ultimapos].DOB= tag_anos.nodeValue;
                             
                             if(tag_contactos[i].childNodes[6]!=undefined && tag_contactos[i].childNodes[6].nodeName=="SocialNetwork"){
                                 if(tag_contactos[i].childNodes[6].getAttribute('Type')=="F"){
-                                    alert("facebook: " + tag_contactos[i].childNodes[6].childNodes[0].nodeValue);
                                     Contactos[ultimapos].Facebook= tag_contactos[i].childNodes[6].childNodes[0].nodeValue;
 
                                     if(tag_contactos[i].childNodes[7]!=undefined && tag_contactos[i].childNodes[7].nodeName=="SocialNetwork"){
                                         if(tag_contactos[i].childNodes[7].getAttribute('Type')=="G"){
-                                            alert("google: " + tag_contactos[i].childNodes[7].childNodes[0].nodeValue);
                                             Contactos[ultimapos].Google= tag_contactos[i].childNodes[7].childNodes[0].nodeValue;  
 
                                             if(tag_contactos[i].childNodes[8]!=undefined && tag_contactos[i].childNodes[8].nodeName=="SocialNetwork"){
                                                 if(tag_contactos[i].childNodes[8].getAttribute('Type')=="L"){
-                                                     alert("LinkedIn: " + tag_contactos[i].childNodes[8].childNodes[0].nodeValue);
                                                      Contactos[ultimapos].LinkedIn= tag_contactos[i].childNodes[8].childNodes[0].nodeValue;
 
                                                     if(tag_contactos[i].childNodes[9]!=undefined && tag_contactos[i].childNodes[9].nodeName=="SocialNetwork"){
                                                         if(tag_contactos[i].childNodes[9].getAttribute('Type')=="I"){
-                                                            alert("Instagram: " + tag_contactos[i].childNodes[9].childNodes[0].nodeValue);
                                                             Contactos[ultimapos].Instagram= tag_contactos[i].childNodes[9].childNodes[0].nodeValue;
 
                                                             if(tag_contactos[i].childNodes[10]!=undefined && tag_contactos[i].childNodes[10].nodeName=="SocialNetwork"){
                                                                 if(tag_contactos[i].childNodes[10].getAttribute('Type')=="O"){
-                                                                    alert("OutraRede: " + tag_contactos[i].childNodes[10].childNodes[0].nodeValue);
                                                                     Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[10].childNodes[0].nodeValue;
 
                                                                     if(tag_contactos[i].childNodes[11]!=undefined && tag_contactos[i].childNodes[11].nodeName=="Obs"){
-                                                                        alert("Obs: " + tag_contactos[i].childNodes[11].childNodes[0].nodeValue);
                                                                         Contactos[ultimapos].OBS= tag_contactos[i].childNodes[11].childNodes[0].nodeValue;
                                                                     }    
                                                                 }
                                                             }
                                                         }else{
                                                             if(tag_contactos[i].childNodes[9].getAttribute('Type')=="O"){
-                                                                alert("OutraRede: " + tag_contactos[i].childNodes[9].childNodes[0].nodeValue);
                                                                 Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[9].childNodes[0].nodeValue;
                                                                 if(tag_contactos[i].childNodes[10]!=undefined && tag_contactos[i].childNodes[10].nodeName=="Obs"){
-                                                                    alert("Obs: " + tag_contactos[i].childNodes[10].childNodes[0].nodeValue);
                                                                     Contactos[ultimapos].OBS= tag_contactos[i].childNodes[10].childNodes[0].nodeValue;
                                                                 }    
                                                             }
@@ -1421,25 +1266,20 @@ function loadDataFromDatabase(xml) {
                                                     }
                                                 }else{
                                                     if(tag_contactos[i].childNodes[8].getAttribute('Type')=="I"){
-                                                        alert("Instagram: " + tag_contactos[i].childNodes[8].childNodes[0].nodeValue);
                                                         Contactos[ultimapos].Instagram= tag_contactos[i].childNodes[8].childNodes[0].nodeValue;
 
                                                         if(tag_contactos[i].childNodes[9]!=undefined && tag_contactos[i].childNodes[9].nodeName=="SocialNetwork"){
                                                             if(tag_contactos[i].childNodes[9].getAttribute('Type')=="O"){
-                                                                alert("OutraRede: " + tag_contactos[i].childNodes[9].childNodes[0].nodeValue);
                                                                 Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[9].childNodes[0].nodeValue;
                                                                 if(tag_contactos[i].childNodes[10]!=undefined && tag_contactos[i].childNodes[10].nodeName=="Obs"){
-                                                                    alert("Obs: " + tag_contactos[i].childNodes[10].childNodes[0].nodeValue);
                                                                     Contactos[ultimapos].OBS= tag_contactos[i].childNodes[10].childNodes[0].nodeValue;
                                                                 }    
                                                             }
                                                         }
                                                     }else{
                                                         if(tag_contactos[i].childNodes[8].getAttribute('Type')=="O"){
-                                                            alert("OutraRede: " + tag_contactos[i].childNodes[8].childNodes[0].nodeValue);
                                                             Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[8].childNodes[0].nodeValue;
                                                             if(tag_contactos[i].childNodes[9]!=undefined && tag_contactos[i].childNodes[9].nodeName=="Obs"){
-                                                                alert("Obs: " + tag_contactos[i].childNodes[9].childNodes[0].nodeValue);
                                                                 Contactos[ultimapos].OBS= tag_contactos[i].childNodes[9].childNodes[0].nodeValue;
                                                             }    
                                                         }
@@ -1449,30 +1289,24 @@ function loadDataFromDatabase(xml) {
 
                                         }else{
                                             if(tag_contactos[i].childNodes[7].getAttribute('Type')=="L"){
-                                                alert("LinkedIn: " + tag_contactos[i].childNodes[7].childNodes[0].nodeValue);
                                                 Contactos[ultimapos].LinkedIn= tag_contactos[i].childNodes[7].childNodes[0].nodeValue;
 
                                                if(tag_contactos[i].childNodes[8]!=undefined && tag_contactos[i].childNodes[8].nodeName=="SocialNetwork"){
                                                    if(tag_contactos[i].childNodes[8].getAttribute('Type')=="I"){
-                                                       alert("Instagram: " + tag_contactos[i].childNodes[8].childNodes[0].nodeValue);
                                                        Contactos[ultimapos].Instagram= tag_contactos[i].childNodes[8].childNodes[0].nodeValue;
 
                                                        if(tag_contactos[i].childNodes[9]!=undefined && tag_contactos[i].childNodes[9].nodeName=="SocialNetwork"){
                                                            if(tag_contactos[i].childNodes[9].getAttribute('Type')=="O"){
-                                                               alert("OutraRede: " + tag_contactos[i].childNodes[9].childNodes[0].nodeValue);
                                                                Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[9].childNodes[0].nodeValue;
                                                                if(tag_contactos[i].childNodes[10]!=undefined && tag_contactos[i].childNodes[10].nodeName=="Obs"){
-                                                                    alert("Obs: " + tag_contactos[i].childNodes[10].childNodes[0].nodeValue);
                                                                     Contactos[ultimapos].OBS= tag_contactos[i].childNodes[10].childNodes[0].nodeValue;
                                                                 }    
                                                            }
                                                        }
                                                    }else{
                                                        if(tag_contactos[i].childNodes[8].getAttribute('Type')=="O"){
-                                                           alert("OutraRede: " + tag_contactos[i].childNodes[8].childNodes[0].nodeValue);
                                                            Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[8].childNodes[0].nodeValue;
                                                            if(tag_contactos[i].childNodes[9]!=undefined && tag_contactos[i].childNodes[9].nodeName=="Obs"){
-                                                                alert("Obs: " + tag_contactos[i].childNodes[9].childNodes[0].nodeValue);
                                                                 Contactos[ultimapos].OBS= tag_contactos[i].childNodes[9].childNodes[0].nodeValue;
                                                             }    
                                                        }
@@ -1480,25 +1314,20 @@ function loadDataFromDatabase(xml) {
                                                }
                                            }else{
                                                if(tag_contactos[i].childNodes[7].getAttribute('Type')=="I"){
-                                                   alert("Instagram: " + tag_contactos[i].childNodes[7].childNodes[0].nodeValue);
                                                    Contactos[ultimapos].Instagram= tag_contactos[i].childNodes[7].childNodes[0].nodeValue;
 
                                                    if(tag_contactos[i].childNodes[8]!=undefined && tag_contactos[i].childNodes[8].nodeName=="SocialNetwork"){
                                                        if(tag_contactos[i].childNodes[8].getAttribute('Type')=="O"){
-                                                           alert("OutraRede: " + tag_contactos[i].childNodes[8].childNodes[0].nodeValue);
                                                            Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[8].childNodes[0].nodeValue;
                                                            if(tag_contactos[i].childNodes[9]!=undefined && tag_contactos[i].childNodes[9].nodeName=="Obs"){
-                                                                alert("Obs: " + tag_contactos[i].childNodes[9].childNodes[0].nodeValue);
                                                                 Contactos[ultimapos].OBS= tag_contactos[i].childNodes[9].childNodes[0].nodeValue;
                                                             }
                                                        }
                                                    }
                                                }else{
                                                    if(tag_contactos[i].childNodes[7].getAttribute('Type')=="O"){
-                                                       alert("OutraRede: " + tag_contactos[i].childNodes[7].childNodes[0].nodeValue);
                                                        Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[7].childNodes[0].nodeValue;
                                                        if(tag_contactos[i].childNodes[8]!=undefined && tag_contactos[i].childNodes[8].nodeName=="Obs"){
-                                                            alert("Obs: " + tag_contactos[i].childNodes[8].childNodes[0].nodeValue);
                                                             Contactos[ultimapos].OBS= tag_contactos[i].childNodes[8].childNodes[0].nodeValue;
                                                         }
                                                     }
@@ -1508,35 +1337,28 @@ function loadDataFromDatabase(xml) {
                                     }       
                                 }else{
                                     if(tag_contactos[i].childNodes[6].getAttribute('Type')=="G"){
-                                        alert("google: " + tag_contactos[i].childNodes[6].childNodes[0].nodeValue);
                                         Contactos[ultimapos].Google= tag_contactos[i].childNodes[6].childNodes[0].nodeValue;  
 
                                         if(tag_contactos[i].childNodes[7]!=undefined && tag_contactos[i].childNodes[7].nodeName=="SocialNetwork"){
                                             if(tag_contactos[i].childNodes[7].getAttribute('Type')=="L"){
-                                                 alert("LinkedIn: " + tag_contactos[i].childNodes[7].childNodes[0].nodeValue);
                                                  Contactos[ultimapos].LinkedIn= tag_contactos[i].childNodes[7].childNodes[0].nodeValue;
 
                                                 if(tag_contactos[i].childNodes[8]!=undefined && tag_contactos[i].childNodes[8].nodeName=="SocialNetwork"){
                                                     if(tag_contactos[i].childNodes[8].getAttribute('Type')=="I"){
-                                                        alert("Instagram: " + tag_contactos[i].childNodes[8].childNodes[0].nodeValue);
                                                         Contactos[ultimapos].Instagram= tag_contactos[i].childNodes[8].childNodes[0].nodeValue;
 
                                                         if(tag_contactos[i].childNodes[9]!=undefined && tag_contactos[i].childNodes[9].nodeName=="SocialNetwork"){
                                                             if(tag_contactos[i].childNodes[9].getAttribute('Type')=="O"){
-                                                                alert("OutraRede: " + tag_contactos[i].childNodes[9].childNodes[0].nodeValue);
                                                                 Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[9].childNodes[0].nodeValue;
                                                                 if(tag_contactos[i].childNodes[10]!=undefined && tag_contactos[i].childNodes[10].nodeName=="Obs"){
-                                                                    alert("Obs: " + tag_contactos[i].childNodes[10].childNodes[0].nodeValue);
                                                                     Contactos[ultimapos].OBS= tag_contactos[i].childNodes[10].childNodes[0].nodeValue;
                                                                 }
                                                             }
                                                         }
                                                     }else{
                                                         if(tag_contactos[i].childNodes[8].getAttribute('Type')=="O"){
-                                                            alert("OutraRede: " + tag_contactos[i].childNodes[8].childNodes[0].nodeValue);
                                                             Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[8].childNodes[0].nodeValue;
                                                             if(tag_contactos[i].childNodes[9]!=undefined && tag_contactos[i].childNodes[9].nodeName=="Obs"){
-                                                                alert("Obs: " + tag_contactos[i].childNodes[9].childNodes[0].nodeValue);
                                                                 Contactos[ultimapos].OBS= tag_contactos[i].childNodes[9].childNodes[0].nodeValue;
                                                             }
                                                         }
@@ -1544,25 +1366,20 @@ function loadDataFromDatabase(xml) {
                                                 }
                                             }else{
                                                 if(tag_contactos[i].childNodes[7].getAttribute('Type')=="I"){
-                                                    alert("Instagram: " + tag_contactos[i].childNodes[7].childNodes[0].nodeValue);
                                                     Contactos[ultimapos].Instagram= tag_contactos[i].childNodes[7].childNodes[0].nodeValue;
 
                                                     if(tag_contactos[i].childNodes[8]!=undefined && tag_contactos[i].childNodes[8].nodeName=="SocialNetwork"){
                                                         if(tag_contactos[i].childNodes[8].getAttribute('Type')=="O"){
-                                                            alert("OutraRede: " + tag_contactos[i].childNodes[8].childNodes[0].nodeValue);
                                                             Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[8].childNodes[0].nodeValue;
                                                             if(tag_contactos[i].childNodes[9]!=undefined && tag_contactos[i].childNodes[9].nodeName=="Obs"){
-                                                                alert("Obs: " + tag_contactos[i].childNodes[9].childNodes[0].nodeValue);
                                                                 Contactos[ultimapos].OBS= tag_contactos[i].childNodes[9].childNodes[0].nodeValue;
                                                             }
                                                         }
                                                     }
                                                 }else{
                                                     if(tag_contactos[i].childNodes[7].getAttribute('Type')=="O"){
-                                                        alert("OutraRede: " + tag_contactos[i].childNodes[7].childNodes[0].nodeValue);
                                                         Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[7].childNodes[0].nodeValue;
                                                         if(tag_contactos[i].childNodes[8]!=undefined && tag_contactos[i].childNodes[8].nodeName=="Obs"){
-                                                            alert("Obs: " + tag_contactos[i].childNodes[8].childNodes[0].nodeValue);
                                                             Contactos[ultimapos].OBS= tag_contactos[i].childNodes[8].childNodes[0].nodeValue;
                                                         }
                                                     }
@@ -1572,30 +1389,24 @@ function loadDataFromDatabase(xml) {
 
                                     }else{
                                         if(tag_contactos[i].childNodes[6].getAttribute('Type')=="L"){
-                                            alert("LinkedIn: " + tag_contactos[i].childNodes[6].childNodes[0].nodeValue);
                                             Contactos[ultimapos].LinkedIn= tag_contactos[i].childNodes[6].childNodes[0].nodeValue;
 
                                            if(tag_contactos[i].childNodes[7]!=undefined && tag_contactos[i].childNodes[7].nodeName=="SocialNetwork"){
                                                if(tag_contactos[i].childNodes[7].getAttribute('Type')=="I"){
-                                                   alert("Instagram: " + tag_contactos[i].childNodes[7].childNodes[0].nodeValue);
                                                    Contactos[ultimapos].Instagram= tag_contactos[i].childNodes[7].childNodes[0].nodeValue;
 
                                                    if(tag_contactos[i].childNodes[8]!=undefined && tag_contactos[i].childNodes[8].nodeName=="SocialNetwork"){
                                                        if(tag_contactos[i].childNodes[8].getAttribute('Type')=="O"){
-                                                           alert("OutraRede: " + tag_contactos[i].childNodes[8].childNodes[0].nodeValue);
                                                            Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[8].childNodes[0].nodeValue;
                                                            if(tag_contactos[i].childNodes[9]!=undefined && tag_contactos[i].childNodes[9].nodeName=="Obs"){
-                                                                alert("Obs: " + tag_contactos[i].childNodes[9].childNodes[0].nodeValue);
                                                                 Contactos[ultimapos].OBS= tag_contactos[i].childNodes[9].childNodes[0].nodeValue;
                                                             }
                                                        }
                                                    }
                                                }else{
                                                    if(tag_contactos[i].childNodes[7].getAttribute('Type')=="O"){
-                                                       alert("OutraRede: " + tag_contactos[i].childNodes[7].childNodes[0].nodeValue);
                                                        Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[7].childNodes[0].nodeValue;
                                                        if(tag_contactos[i].childNodes[8]!=undefined && tag_contactos[i].childNodes[8].nodeName=="Obs"){
-                                                            alert("Obs: " + tag_contactos[i].childNodes[8].childNodes[0].nodeValue);
                                                             Contactos[ultimapos].OBS= tag_contactos[i].childNodes[8].childNodes[0].nodeValue;
                                                         }
                                                    }
@@ -1603,25 +1414,20 @@ function loadDataFromDatabase(xml) {
                                            }
                                        }else{
                                            if(tag_contactos[i].childNodes[6].getAttribute('Type')=="I"){
-                                               alert("Instagram: " + tag_contactos[i].childNodes[6].childNodes[0].nodeValue);
                                                Contactos[ultimapos].Instagram= tag_contactos[i].childNodes[6].childNodes[0].nodeValue;
 
                                                if(tag_contactos[i].childNodes[7]!=undefined && tag_contactos[i].childNodes[7].nodeName=="SocialNetwork"){
                                                    if(tag_contactos[i].childNodes[7].getAttribute('Type')=="O"){
-                                                       alert("OutraRede: " + tag_contactos[i].childNodes[7].childNodes[0].nodeValue);
                                                        Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[7].childNodes[0].nodeValue;
                                                        if(tag_contactos[i].childNodes[8]!=undefined && tag_contactos[i].childNodes[8].nodeName=="Obs"){
-                                                            alert("Obs: " + tag_contactos[i].childNodes[8].childNodes[0].nodeValue);
                                                             Contactos[ultimapos].OBS= tag_contactos[i].childNodes[8].childNodes[0].nodeValue;
                                                         }
                                                    }
                                                }
                                            }else{
                                                if(tag_contactos[i].childNodes[6].getAttribute('Type')=="O"){
-                                                   alert("OutraRede: " + tag_contactos[i].childNodes[6].childNodes[0].nodeValue);
                                                    Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[6].childNodes[0].nodeValue;
                                                    if(tag_contactos[i].childNodes[7]!=undefined && tag_contactos[i].childNodes[7].nodeName=="Obs"){
-                                                        alert("Obs: " + tag_contactos[i].childNodes[7].childNodes[0].nodeValue);
                                                         Contactos[ultimapos].OBS= tag_contactos[i].childNodes[7].childNodes[0].nodeValue;
                                                     }
                                                }
@@ -1631,7 +1437,6 @@ function loadDataFromDatabase(xml) {
                                 }
 
                                 if(tag_contactos[i].childNodes[7]!=undefined && tag_contactos[i].childNodes[7].nodeName=="Obs"){
-                                    alert("Obs: " + tag_contactos[i].childNodes[7].childNodes[0].nodeValue);
                                     Contactos[ultimapos].OBS= tag_contactos[i].childNodes[7].childNodes[0].nodeValue;
                                 }else{
 
@@ -1639,7 +1444,6 @@ function loadDataFromDatabase(xml) {
                                 //adidionar os outros
                             }else{
                                 if(tag_contactos[i].childNodes[6]!=undefined && tag_contactos[i].childNodes[6].nodeName=="Obs"){
-                                    alert("Obs: " + tag_contactos[i].childNodes[6].childNodes[0].nodeValue);
                                     Contactos[ultimapos].OBS= tag_contactos[i].childNodes[6].childNodes[0].nodeValue;
                                     
                                 }
@@ -1648,46 +1452,37 @@ function loadDataFromDatabase(xml) {
                         
                     }else{
                         var tag_anos = tag_contactos[i].childNodes[4].childNodes[0];
-                        alert("DOB: " + tag_anos.nodeValue);
                         Contactos[ultimapos].DOB= tag_anos.nodeValue;
                         
                         if(tag_contactos[i].childNodes[5]!=undefined && tag_contactos[i].childNodes[5].nodeName=="SocialNetwork"){
                             if(tag_contactos[i].childNodes[5].getAttribute('Type')=="F"){
-                                alert("facebook: " + tag_contactos[i].childNodes[5].childNodes[0].nodeValue);
                                 Contactos[ultimapos].Facebook= tag_contactos[i].childNodes[5].childNodes[0].nodeValue;
 
                                 if(tag_contactos[i].childNodes[6]!=undefined && tag_contactos[i].childNodes[6].nodeName=="SocialNetwork"){
                                     if(tag_contactos[i].childNodes[6].getAttribute('Type')=="G"){
-                                        alert("google: " + tag_contactos[i].childNodes[6].childNodes[0].nodeValue);
                                         Contactos[ultimapos].Google= tag_contactos[i].childNodes[6].childNodes[0].nodeValue;  
 
                                         if(tag_contactos[i].childNodes[7]!=undefined && tag_contactos[i].childNodes[7].nodeName=="SocialNetwork"){
                                             if(tag_contactos[i].childNodes[7].getAttribute('Type')=="L"){
-                                                 alert("LinkedIn: " + tag_contactos[i].childNodes[7].childNodes[0].nodeValue);
                                                  Contactos[ultimapos].LinkedIn= tag_contactos[i].childNodes[7].childNodes[0].nodeValue;
 
                                                 if(tag_contactos[i].childNodes[8]!=undefined && tag_contactos[i].childNodes[8].nodeName=="SocialNetwork"){
                                                     if(tag_contactos[i].childNodes[8].getAttribute('Type')=="I"){
-                                                        alert("Instagram: " + tag_contactos[i].childNodes[8].childNodes[0].nodeValue);
                                                         Contactos[ultimapos].Instagram= tag_contactos[i].childNodes[8].childNodes[0].nodeValue;
 
                                                         if(tag_contactos[i].childNodes[9]!=undefined && tag_contactos[i].childNodes[9].nodeName=="SocialNetwork"){
                                                             if(tag_contactos[i].childNodes[9].getAttribute('Type')=="O"){
-                                                                alert("OutraRede: " + tag_contactos[i].childNodes[9].childNodes[0].nodeValue);
                                                                 Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[9].childNodes[0].nodeValue;
 
                                                                 if(tag_contactos[i].childNodes[10]!=undefined && tag_contactos[i].childNodes[10].nodeName=="Obs"){
-                                                                    alert("Obs: " + tag_contactos[i].childNodes[10].childNodes[0].nodeValue);
                                                                     Contactos[ultimapos].OBS= tag_contactos[i].childNodes[10].childNodes[0].nodeValue;
                                                                 }    
                                                             }
                                                         }
                                                     }else{
                                                         if(tag_contactos[i].childNodes[8].getAttribute('Type')=="O"){
-                                                            alert("OutraRede: " + tag_contactos[i].childNodes[8].childNodes[0].nodeValue);
                                                             Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[8].childNodes[0].nodeValue;
                                                             if(tag_contactos[i].childNodes[9]!=undefined && tag_contactos[i].childNodes[9].nodeName=="Obs"){
-                                                                alert("Obs: " + tag_contactos[i].childNodes[9].childNodes[0].nodeValue);
                                                                 Contactos[ultimapos].OBS= tag_contactos[i].childNodes[9].childNodes[0].nodeValue;
                                                             }    
                                                         }
@@ -1695,25 +1490,20 @@ function loadDataFromDatabase(xml) {
                                                 }
                                             }else{
                                                 if(tag_contactos[i].childNodes[7].getAttribute('Type')=="I"){
-                                                    alert("Instagram: " + tag_contactos[i].childNodes[7].childNodes[0].nodeValue);
                                                     Contactos[ultimapos].Instagram= tag_contactos[i].childNodes[7].childNodes[0].nodeValue;
 
                                                     if(tag_contactos[i].childNodes[8]!=undefined && tag_contactos[i].childNodes[8].nodeName=="SocialNetwork"){
                                                         if(tag_contactos[i].childNodes[8].getAttribute('Type')=="O"){
-                                                            alert("OutraRede: " + tag_contactos[i].childNodes[8].childNodes[0].nodeValue);
                                                             Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[8].childNodes[0].nodeValue;
                                                             if(tag_contactos[i].childNodes[9]!=undefined && tag_contactos[i].childNodes[9].nodeName=="Obs"){
-                                                                alert("Obs: " + tag_contactos[i].childNodes[9].childNodes[0].nodeValue);
                                                                 Contactos[ultimapos].OBS= tag_contactos[i].childNodes[9].childNodes[0].nodeValue;
                                                             }    
                                                         }
                                                     }
                                                 }else{
                                                     if(tag_contactos[i].childNodes[7].getAttribute('Type')=="O"){
-                                                        alert("OutraRede: " + tag_contactos[i].childNodes[7].childNodes[0].nodeValue);
                                                         Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[7].childNodes[0].nodeValue;
                                                         if(tag_contactos[i].childNodes[8]!=undefined && tag_contactos[i].childNodes[8].nodeName=="Obs"){
-                                                            alert("Obs: " + tag_contactos[i].childNodes[8].childNodes[0].nodeValue);
                                                             Contactos[ultimapos].OBS= tag_contactos[i].childNodes[8].childNodes[0].nodeValue;
                                                         }    
                                                     }
@@ -1723,30 +1513,24 @@ function loadDataFromDatabase(xml) {
 
                                     }else{
                                         if(tag_contactos[i].childNodes[6].getAttribute('Type')=="L"){
-                                            alert("LinkedIn: " + tag_contactos[i].childNodes[6].childNodes[0].nodeValue);
                                             Contactos[ultimapos].LinkedIn= tag_contactos[i].childNodes[6].childNodes[0].nodeValue;
 
                                            if(tag_contactos[i].childNodes[7]!=undefined && tag_contactos[i].childNodes[7].nodeName=="SocialNetwork"){
                                                if(tag_contactos[i].childNodes[7].getAttribute('Type')=="I"){
-                                                   alert("Instagram: " + tag_contactos[i].childNodes[7].childNodes[0].nodeValue);
                                                    Contactos[ultimapos].Instagram= tag_contactos[i].childNodes[7].childNodes[0].nodeValue;
 
                                                    if(tag_contactos[i].childNodes[8]!=undefined && tag_contactos[i].childNodes[8].nodeName=="SocialNetwork"){
                                                        if(tag_contactos[i].childNodes[8].getAttribute('Type')=="O"){
-                                                           alert("OutraRede: " + tag_contactos[i].childNodes[8].childNodes[0].nodeValue);
                                                            Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[8].childNodes[0].nodeValue;
                                                            if(tag_contactos[i].childNodes[7]!=undefined && tag_contactos[i].childNodes[7].nodeName=="Obs"){
-                                                                alert("Obs: " + tag_contactos[i].childNodes[7].childNodes[0].nodeValue);
                                                                 Contactos[ultimapos].OBS= tag_contactos[i].childNodes[7].childNodes[0].nodeValue;
                                                             }    
                                                        }
                                                    }
                                                }else{
                                                    if(tag_contactos[i].childNodes[7].getAttribute('Type')=="O"){
-                                                       alert("OutraRede: " + tag_contactos[i].childNodes[7].childNodes[0].nodeValue);
                                                        Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[7].childNodes[0].nodeValue;
                                                        if(tag_contactos[i].childNodes[8]!=undefined && tag_contactos[i].childNodes[8].nodeName=="Obs"){
-                                                            alert("Obs: " + tag_contactos[i].childNodes[8].childNodes[0].nodeValue);
                                                             Contactos[ultimapos].OBS= tag_contactos[i].childNodes[8].childNodes[0].nodeValue;
                                                         }    
                                                    }
@@ -1754,25 +1538,20 @@ function loadDataFromDatabase(xml) {
                                            }
                                        }else{
                                            if(tag_contactos[i].childNodes[6].getAttribute('Type')=="I"){
-                                               alert("Instagram: " + tag_contactos[i].childNodes[6].childNodes[0].nodeValue);
                                                Contactos[ultimapos].Instagram= tag_contactos[i].childNodes[6].childNodes[0].nodeValue;
 
                                                if(tag_contactos[i].childNodes[7]!=undefined && tag_contactos[i].childNodes[7].nodeName=="SocialNetwork"){
                                                    if(tag_contactos[i].childNodes[7].getAttribute('Type')=="O"){
-                                                       alert("OutraRede: " + tag_contactos[i].childNodes[7].childNodes[0].nodeValue);
                                                        Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[7].childNodes[0].nodeValue;
                                                        if(tag_contactos[i].childNodes[8]!=undefined && tag_contactos[i].childNodes[8].nodeName=="Obs"){
-                                                            alert("Obs: " + tag_contactos[i].childNodes[8].childNodes[0].nodeValue);
                                                             Contactos[ultimapos].OBS= tag_contactos[i].childNodes[8].childNodes[0].nodeValue;
                                                         }
                                                    }
                                                }
                                            }else{
                                                if(tag_contactos[i].childNodes[6].getAttribute('Type')=="O"){
-                                                   alert("OutraRede: " + tag_contactos[i].childNodes[6].childNodes[0].nodeValue);
                                                    Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[6].childNodes[0].nodeValue;
                                                    if(tag_contactos[i].childNodes[7]!=undefined && tag_contactos[i].childNodes[7].nodeName=="Obs"){
-                                                        alert("Obs: " + tag_contactos[i].childNodes[7].childNodes[0].nodeValue);
                                                         Contactos[ultimapos].OBS= tag_contactos[i].childNodes[7].childNodes[0].nodeValue;
                                                     }
                                                 }
@@ -1782,35 +1561,28 @@ function loadDataFromDatabase(xml) {
                                 }       
                             }else{
                                 if(tag_contactos[i].childNodes[5].getAttribute('Type')=="G"){
-                                    alert("google: " + tag_contactos[i].childNodes[5].childNodes[0].nodeValue);
                                     Contactos[ultimapos].Google= tag_contactos[i].childNodes[5].childNodes[0].nodeValue;  
 
                                     if(tag_contactos[i].childNodes[6]!=undefined && tag_contactos[i].childNodes[6].nodeName=="SocialNetwork"){
                                         if(tag_contactos[i].childNodes[6].getAttribute('Type')=="L"){
-                                             alert("LinkedIn: " + tag_contactos[i].childNodes[6].childNodes[0].nodeValue);
                                              Contactos[ultimapos].LinkedIn= tag_contactos[i].childNodes[6].childNodes[0].nodeValue;
 
                                             if(tag_contactos[i].childNodes[7]!=undefined && tag_contactos[i].childNodes[7].nodeName=="SocialNetwork"){
                                                 if(tag_contactos[i].childNodes[7].getAttribute('Type')=="I"){
-                                                    alert("Instagram: " + tag_contactos[i].childNodes[7].childNodes[0].nodeValue);
                                                     Contactos[ultimapos].Instagram= tag_contactos[i].childNodes[7].childNodes[0].nodeValue;
 
                                                     if(tag_contactos[i].childNodes[8]!=undefined && tag_contactos[i].childNodes[8].nodeName=="SocialNetwork"){
                                                         if(tag_contactos[i].childNodes[8].getAttribute('Type')=="O"){
-                                                            alert("OutraRede: " + tag_contactos[i].childNodes[8].childNodes[0].nodeValue);
                                                             Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[8].childNodes[0].nodeValue;
                                                             if(tag_contactos[i].childNodes[9]!=undefined && tag_contactos[i].childNodes[9].nodeName=="Obs"){
-                                                                alert("Obs: " + tag_contactos[i].childNodes[9].childNodes[0].nodeValue);
                                                                 Contactos[ultimapos].OBS= tag_contactos[i].childNodes[9].childNodes[0].nodeValue;
                                                             }
                                                         }
                                                     }
                                                 }else{
                                                     if(tag_contactos[i].childNodes[7].getAttribute('Type')=="O"){
-                                                        alert("OutraRede: " + tag_contactos[i].childNodes[7].childNodes[0].nodeValue);
                                                         Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[7].childNodes[0].nodeValue;
                                                         if(tag_contactos[i].childNodes[8]!=undefined && tag_contactos[i].childNodes[8].nodeName=="Obs"){
-                                                            alert("Obs: " + tag_contactos[i].childNodes[8].childNodes[0].nodeValue);
                                                             Contactos[ultimapos].OBS= tag_contactos[i].childNodes[8].childNodes[0].nodeValue;
                                                         }
                                                     }
@@ -1818,25 +1590,20 @@ function loadDataFromDatabase(xml) {
                                             }
                                         }else{
                                             if(tag_contactos[i].childNodes[6].getAttribute('Type')=="I"){
-                                                alert("Instagram: " + tag_contactos[i].childNodes[6].childNodes[0].nodeValue);
                                                 Contactos[ultimapos].Instagram= tag_contactos[i].childNodes[6].childNodes[0].nodeValue;
 
                                                 if(tag_contactos[i].childNodes[7]!=undefined && tag_contactos[i].childNodes[7].nodeName=="SocialNetwork"){
                                                     if(tag_contactos[i].childNodes[7].getAttribute('Type')=="O"){
-                                                        alert("OutraRede: " + tag_contactos[i].childNodes[7].childNodes[0].nodeValue);
                                                         Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[7].childNodes[0].nodeValue;
                                                         if(tag_contactos[i].childNodes[8]!=undefined && tag_contactos[i].childNodes[8].nodeName=="Obs"){
-                                                            alert("Obs: " + tag_contactos[i].childNodes[8].childNodes[0].nodeValue);
                                                             Contactos[ultimapos].OBS= tag_contactos[i].childNodes[8].childNodes[0].nodeValue;
                                                         }
                                                     }
                                                 }
                                             }else{
                                                 if(tag_contactos[i].childNodes[6].getAttribute('Type')=="O"){
-                                                    alert("OutraRede: " + tag_contactos[i].childNodes[6].childNodes[0].nodeValue);
                                                     Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[6].childNodes[0].nodeValue;
                                                     if(tag_contactos[i].childNodes[7]!=undefined && tag_contactos[i].childNodes[7].nodeName=="Obs"){
-                                                        alert("Obs: " + tag_contactos[i].childNodes[7].childNodes[0].nodeValue);
                                                         Contactos[ultimapos].OBS= tag_contactos[i].childNodes[7].childNodes[0].nodeValue;
                                                     }
                                                 }
@@ -1846,30 +1613,24 @@ function loadDataFromDatabase(xml) {
 
                                 }else{
                                     if(tag_contactos[i].childNodes[5].getAttribute('Type')=="L"){
-                                        alert("LinkedIn: " + tag_contactos[i].childNodes[5].childNodes[0].nodeValue);
                                         Contactos[ultimapos].LinkedIn= tag_contactos[i].childNodes[5].childNodes[0].nodeValue;
 
                                        if(tag_contactos[i].childNodes[6]!=undefined && tag_contactos[i].childNodes[6].nodeName=="SocialNetwork"){
                                            if(tag_contactos[i].childNodes[6].getAttribute('Type')=="I"){
-                                               alert("Instagram: " + tag_contactos[i].childNodes[6].childNodes[0].nodeValue);
                                                Contactos[ultimapos].Instagram= tag_contactos[i].childNodes[6].childNodes[0].nodeValue;
 
                                                if(tag_contactos[i].childNodes[7]!=undefined && tag_contactos[i].childNodes[7].nodeName=="SocialNetwork"){
                                                    if(tag_contactos[i].childNodes[7].getAttribute('Type')=="O"){
-                                                       alert("OutraRede: " + tag_contactos[i].childNodes[7].childNodes[0].nodeValue);
                                                        Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[7].childNodes[0].nodeValue;
                                                        if(tag_contactos[i].childNodes[8]!=undefined && tag_contactos[i].childNodes[8].nodeName=="Obs"){
-                                                            alert("Obs: " + tag_contactos[i].childNodes[8].childNodes[0].nodeValue);
                                                             Contactos[ultimapos].OBS= tag_contactos[i].childNodes[8].childNodes[0].nodeValue;
                                                         }
                                                    }
                                                }
                                            }else{
                                                if(tag_contactos[i].childNodes[6].getAttribute('Type')=="O"){
-                                                   alert("OutraRede: " + tag_contactos[i].childNodes[6].childNodes[0].nodeValue);
                                                    Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[6].childNodes[0].nodeValue;
                                                    if(tag_contactos[i].childNodes[7]!=undefined && tag_contactos[i].childNodes[7].nodeName=="Obs"){
-                                                        alert("Obs: " + tag_contactos[i].childNodes[7].childNodes[0].nodeValue);
                                                         Contactos[ultimapos].OBS= tag_contactos[i].childNodes[7].childNodes[0].nodeValue;
                                                     }
                                                }
@@ -1877,25 +1638,20 @@ function loadDataFromDatabase(xml) {
                                        }
                                    }else{
                                        if(tag_contactos[i].childNodes[5].getAttribute('Type')=="I"){
-                                           alert("Instagram: " + tag_contactos[i].childNodes[5].childNodes[0].nodeValue);
                                            Contactos[ultimapos].Instagram= tag_contactos[i].childNodes[5].childNodes[0].nodeValue;
 
                                            if(tag_contactos[i].childNodes[6]!=undefined && tag_contactos[i].childNodes[6].nodeName=="SocialNetwork"){
                                                if(tag_contactos[i].childNodes[6].getAttribute('Type')=="O"){
-                                                   alert("OutraRede: " + tag_contactos[i].childNodes[6].childNodes[0].nodeValue);
                                                    Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[6].childNodes[0].nodeValue;
                                                    if(tag_contactos[i].childNodes[7]!=undefined && tag_contactos[i].childNodes[7].nodeName=="Obs"){
-                                                        alert("Obs: " + tag_contactos[i].childNodes[7].childNodes[0].nodeValue);
                                                         Contactos[ultimapos].OBS= tag_contactos[i].childNodes[7].childNodes[0].nodeValue;
                                                     }
                                                }
                                            }
                                        }else{
                                            if(tag_contactos[i].childNodes[5].getAttribute('Type')=="O"){
-                                               alert("OutraRede: " + tag_contactos[i].childNodes[5].childNodes[0].nodeValue);
                                                Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[5].childNodes[0].nodeValue;
                                                if(tag_contactos[i].childNodes[6]!=undefined && tag_contactos[i].childNodes[6].nodeName=="Obs"){
-                                                    alert("Obs: " + tag_contactos[i].childNodes[6].childNodes[0].nodeValue);
                                                     Contactos[ultimapos].OBS= tag_contactos[i].childNodes[6].childNodes[0].nodeValue;
                                                 }
                                            }
@@ -1905,7 +1661,6 @@ function loadDataFromDatabase(xml) {
                             }
 
                             if(tag_contactos[i].childNodes[6]!=undefined && tag_contactos[i].childNodes[6].nodeName=="Obs"){
-                                alert("Obs: " + tag_contactos[i].childNodes[6].childNodes[0].nodeValue);
                                 Contactos[ultimapos].OBS= tag_contactos[i].childNodes[6].childNodes[0].nodeValue;
                             }else{
 
@@ -1913,53 +1668,43 @@ function loadDataFromDatabase(xml) {
                             //adidionar os outros
                         }else{
                             if(tag_contactos[i].childNodes[5]!=undefined && tag_contactos[i].childNodes[5].nodeName=="Obs"){
-                                alert("Obs: " + tag_contactos[i].childNodes[5].childNodes[0].nodeValue);
                                 Contactos[ultimapos].OBS= tag_contactos[i].childNodes[5].childNodes[0].nodeValue;
                             }
                         }
                     }
                 }else{
                     var tag_anos = tag_contactos[i].childNodes[3].childNodes[0];
-                    alert("DOB: " + tag_anos.nodeValue);
                     Contactos[ultimapos].DOB= tag_anos.nodeValue;
                     
                     if(tag_contactos[i].childNodes[4]!=undefined && tag_contactos[i].childNodes[4].nodeName=="SocialNetwork"){
                         if(tag_contactos[i].childNodes[4].getAttribute('Type')=="F"){
-                            alert("facebook: " + tag_contactos[i].childNodes[4].childNodes[0].nodeValue);
                             Contactos[ultimapos].Facebook= tag_contactos[i].childNodes[4].childNodes[0].nodeValue;
 
                             if(tag_contactos[i].childNodes[5]!=undefined && tag_contactos[i].childNodes[5].nodeName=="SocialNetwork"){
                                 if(tag_contactos[i].childNodes[5].getAttribute('Type')=="G"){
-                                    alert("google: " + tag_contactos[i].childNodes[5].childNodes[0].nodeValue);
                                     Contactos[ultimapos].Google= tag_contactos[i].childNodes[5].childNodes[0].nodeValue;  
 
                                     if(tag_contactos[i].childNodes[6]!=undefined && tag_contactos[i].childNodes[6].nodeName=="SocialNetwork"){
                                         if(tag_contactos[i].childNodes[6].getAttribute('Type')=="L"){
-                                             alert("LinkedIn: " + tag_contactos[i].childNodes[6].childNodes[0].nodeValue);
                                              Contactos[ultimapos].LinkedIn= tag_contactos[i].childNodes[6].childNodes[0].nodeValue;
 
                                             if(tag_contactos[i].childNodes[7]!=undefined && tag_contactos[i].childNodes[7].nodeName=="SocialNetwork"){
                                                 if(tag_contactos[i].childNodes[7].getAttribute('Type')=="I"){
-                                                    alert("Instagram: " + tag_contactos[i].childNodes[7].childNodes[0].nodeValue);
                                                     Contactos[ultimapos].Instagram= tag_contactos[i].childNodes[7].childNodes[0].nodeValue;
 
                                                     if(tag_contactos[i].childNodes[8]!=undefined && tag_contactos[i].childNodes[8].nodeName=="SocialNetwork"){
                                                         if(tag_contactos[i].childNodes[8].getAttribute('Type')=="O"){
-                                                            alert("OutraRede: " + tag_contactos[i].childNodes[8].childNodes[0].nodeValue);
                                                             Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[8].childNodes[0].nodeValue;
 
                                                             if(tag_contactos[i].childNodes[9]!=undefined && tag_contactos[i].childNodes[9].nodeName=="Obs"){
-                                                                alert("Obs: " + tag_contactos[i].childNodes[9].childNodes[0].nodeValue);
                                                                 Contactos[ultimapos].OBS= tag_contactos[i].childNodes[9].childNodes[0].nodeValue;
                                                             }    
                                                         }
                                                     }
                                                 }else{
                                                     if(tag_contactos[i].childNodes[7].getAttribute('Type')=="O"){
-                                                        alert("OutraRede: " + tag_contactos[i].childNodes[7].childNodes[0].nodeValue);
                                                         Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[7].childNodes[0].nodeValue;
                                                         if(tag_contactos[i].childNodes[8]!=undefined && tag_contactos[i].childNodes[8].nodeName=="Obs"){
-                                                            alert("Obs: " + tag_contactos[i].childNodes[8].childNodes[0].nodeValue);
                                                             Contactos[ultimapos].OBS= tag_contactos[i].childNodes[8].childNodes[0].nodeValue;
                                                         }    
                                                     }
@@ -1967,25 +1712,20 @@ function loadDataFromDatabase(xml) {
                                             }
                                         }else{
                                             if(tag_contactos[i].childNodes[6].getAttribute('Type')=="I"){
-                                                alert("Instagram: " + tag_contactos[i].childNodes[6].childNodes[0].nodeValue);
                                                 Contactos[ultimapos].Instagram= tag_contactos[i].childNodes[6].childNodes[0].nodeValue;
 
                                                 if(tag_contactos[i].childNodes[7]!=undefined && tag_contactos[i].childNodes[7].nodeName=="SocialNetwork"){
                                                     if(tag_contactos[i].childNodes[7].getAttribute('Type')=="O"){
-                                                        alert("OutraRede: " + tag_contactos[i].childNodes[7].childNodes[0].nodeValue);
                                                         Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[7].childNodes[0].nodeValue;
                                                         if(tag_contactos[i].childNodes[8]!=undefined && tag_contactos[i].childNodes[8].nodeName=="Obs"){
-                                                            alert("Obs: " + tag_contactos[i].childNodes[8].childNodes[0].nodeValue);
                                                             Contactos[ultimapos].OBS= tag_contactos[i].childNodes[8].childNodes[0].nodeValue;
                                                         }    
                                                     }
                                                 }
                                             }else{
                                                 if(tag_contactos[i].childNodes[6].getAttribute('Type')=="O"){
-                                                    alert("OutraRede: " + tag_contactos[i].childNodes[6].childNodes[0].nodeValue);
                                                     Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[6].childNodes[0].nodeValue;
                                                     if(tag_contactos[i].childNodes[7]!=undefined && tag_contactos[i].childNodes[7].nodeName=="Obs"){
-                                                        alert("Obs: " + tag_contactos[i].childNodes[7].childNodes[0].nodeValue);
                                                         Contactos[ultimapos].OBS= tag_contactos[i].childNodes[7].childNodes[0].nodeValue;
                                                     }    
                                                 }
@@ -1995,30 +1735,24 @@ function loadDataFromDatabase(xml) {
 
                                 }else{
                                     if(tag_contactos[i].childNodes[5].getAttribute('Type')=="L"){
-                                        alert("LinkedIn: " + tag_contactos[i].childNodes[5].childNodes[0].nodeValue);
                                         Contactos[ultimapos].LinkedIn= tag_contactos[i].childNodes[5].childNodes[0].nodeValue;
 
                                        if(tag_contactos[i].childNodes[6]!=undefined && tag_contactos[i].childNodes[6].nodeName=="SocialNetwork"){
                                            if(tag_contactos[i].childNodes[6].getAttribute('Type')=="I"){
-                                               alert("Instagram: " + tag_contactos[i].childNodes[6].childNodes[0].nodeValue);
                                                Contactos[ultimapos].Instagram= tag_contactos[i].childNodes[6].childNodes[0].nodeValue;
 
                                                if(tag_contactos[i].childNodes[7]!=undefined && tag_contactos[i].childNodes[7].nodeName=="SocialNetwork"){
                                                    if(tag_contactos[i].childNodes[7].getAttribute('Type')=="O"){
-                                                       alert("OutraRede: " + tag_contactos[i].childNodes[7].childNodes[0].nodeValue);
                                                        Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[7].childNodes[0].nodeValue;
                                                        if(tag_contactos[i].childNodes[8]!=undefined && tag_contactos[i].childNodes[8].nodeName=="Obs"){
-                                                            alert("Obs: " + tag_contactos[i].childNodes[8].childNodes[0].nodeValue);
                                                             Contactos[ultimapos].OBS= tag_contactos[i].childNodes[8].childNodes[0].nodeValue;
                                                         }    
                                                    }
                                                }
                                            }else{
                                                if(tag_contactos[i].childNodes[6].getAttribute('Type')=="O"){
-                                                   alert("OutraRede: " + tag_contactos[i].childNodes[6].childNodes[0].nodeValue);
                                                    Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[6].childNodes[0].nodeValue;
                                                    if(tag_contactos[i].childNodes[7]!=undefined && tag_contactos[i].childNodes[7].nodeName=="Obs"){
-                                                        alert("Obs: " + tag_contactos[i].childNodes[7].childNodes[0].nodeValue);
                                                         Contactos[ultimapos].OBS= tag_contactos[i].childNodes[7].childNodes[0].nodeValue;
                                                     }    
                                                }
@@ -2026,25 +1760,20 @@ function loadDataFromDatabase(xml) {
                                        }
                                    }else{
                                        if(tag_contactos[i].childNodes[5].getAttribute('Type')=="I"){
-                                           alert("Instagram: " + tag_contactos[i].childNodes[5].childNodes[0].nodeValue);
                                            Contactos[ultimapos].Instagram= tag_contactos[i].childNodes[5].childNodes[0].nodeValue;
 
                                            if(tag_contactos[i].childNodes[6]!=undefined && tag_contactos[i].childNodes[6].nodeName=="SocialNetwork"){
                                                if(tag_contactos[i].childNodes[6].getAttribute('Type')=="O"){
-                                                   alert("OutraRede: " + tag_contactos[i].childNodes[6].childNodes[0].nodeValue);
                                                    Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[6].childNodes[0].nodeValue;
                                                    if(tag_contactos[i].childNodes[7]!=undefined && tag_contactos[i].childNodes[7].nodeName=="Obs"){
-                                                        alert("Obs: " + tag_contactos[i].childNodes[7].childNodes[0].nodeValue);
                                                         Contactos[ultimapos].OBS= tag_contactos[i].childNodes[7].childNodes[0].nodeValue;
                                                     }
                                                }
                                            }
                                        }else{
                                            if(tag_contactos[i].childNodes[5].getAttribute('Type')=="O"){
-                                               alert("OutraRede: " + tag_contactos[i].childNodes[5].childNodes[0].nodeValue);
                                                Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[5].childNodes[0].nodeValue;
                                                if(tag_contactos[i].childNodes[6]!=undefined && tag_contactos[i].childNodes[6].nodeName=="Obs"){
-                                                    alert("Obs: " + tag_contactos[i].childNodes[6].childNodes[0].nodeValue);
                                                     Contactos[ultimapos].OBS= tag_contactos[i].childNodes[6].childNodes[0].nodeValue;
                                                 }
                                             }
@@ -2054,35 +1783,28 @@ function loadDataFromDatabase(xml) {
                             }       
                         }else{
                             if(tag_contactos[i].childNodes[4].getAttribute('Type')=="G"){
-                                alert("google: " + tag_contactos[i].childNodes[4].childNodes[0].nodeValue);
                                 Contactos[ultimapos].Google= tag_contactos[i].childNodes[4].childNodes[0].nodeValue;  
 
                                 if(tag_contactos[i].childNodes[5]!=undefined && tag_contactos[i].childNodes[5].nodeName=="SocialNetwork"){
                                     if(tag_contactos[i].childNodes[5].getAttribute('Type')=="L"){
-                                         alert("LinkedIn: " + tag_contactos[i].childNodes[5].childNodes[0].nodeValue);
                                          Contactos[ultimapos].LinkedIn= tag_contactos[i].childNodes[5].childNodes[0].nodeValue;
 
                                         if(tag_contactos[i].childNodes[6]!=undefined && tag_contactos[i].childNodes[6].nodeName=="SocialNetwork"){
                                             if(tag_contactos[i].childNodes[6].getAttribute('Type')=="I"){
-                                                alert("Instagram: " + tag_contactos[i].childNodes[6].childNodes[0].nodeValue);
                                                 Contactos[ultimapos].Instagram= tag_contactos[i].childNodes[6].childNodes[0].nodeValue;
 
                                                 if(tag_contactos[i].childNodes[7]!=undefined && tag_contactos[i].childNodes[7].nodeName=="SocialNetwork"){
                                                     if(tag_contactos[i].childNodes[7].getAttribute('Type')=="O"){
-                                                        alert("OutraRede: " + tag_contactos[i].childNodes[7].childNodes[0].nodeValue);
                                                         Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[7].childNodes[0].nodeValue;
                                                         if(tag_contactos[i].childNodes[8]!=undefined && tag_contactos[i].childNodes[8].nodeName=="Obs"){
-                                                            alert("Obs: " + tag_contactos[i].childNodes[8].childNodes[0].nodeValue);
                                                             Contactos[ultimapos].OBS= tag_contactos[i].childNodes[8].childNodes[0].nodeValue;
                                                         }
                                                     }
                                                 }
                                             }else{
                                                 if(tag_contactos[i].childNodes[6].getAttribute('Type')=="O"){
-                                                    alert("OutraRede: " + tag_contactos[i].childNodes[6].childNodes[0].nodeValue);
                                                     Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[6].childNodes[0].nodeValue;
                                                     if(tag_contactos[i].childNodes[7]!=undefined && tag_contactos[i].childNodes[7].nodeName=="Obs"){
-                                                        alert("Obs: " + tag_contactos[i].childNodes[7].childNodes[0].nodeValue);
                                                         Contactos[ultimapos].OBS= tag_contactos[i].childNodes[7].childNodes[0].nodeValue;
                                                     }
                                                 }
@@ -2090,25 +1812,20 @@ function loadDataFromDatabase(xml) {
                                         }
                                     }else{
                                         if(tag_contactos[i].childNodes[5].getAttribute('Type')=="I"){
-                                            alert("Instagram: " + tag_contactos[i].childNodes[5].childNodes[0].nodeValue);
                                             Contactos[ultimapos].Instagram= tag_contactos[i].childNodes[5].childNodes[0].nodeValue;
 
                                             if(tag_contactos[i].childNodes[6]!=undefined && tag_contactos[i].childNodes[6].nodeName=="SocialNetwork"){
                                                 if(tag_contactos[i].childNodes[6].getAttribute('Type')=="O"){
-                                                    alert("OutraRede: " + tag_contactos[i].childNodes[6].childNodes[0].nodeValue);
                                                     Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[6].childNodes[0].nodeValue;
                                                     if(tag_contactos[i].childNodes[7]!=undefined && tag_contactos[i].childNodes[7].nodeName=="Obs"){
-                                                        alert("Obs: " + tag_contactos[i].childNodes[7].childNodes[0].nodeValue);
                                                         Contactos[ultimapos].OBS= tag_contactos[i].childNodes[7].childNodes[0].nodeValue;
                                                     }
                                                 }
                                             }
                                         }else{
                                             if(tag_contactos[i].childNodes[5].getAttribute('Type')=="O"){
-                                                alert("OutraRede: " + tag_contactos[i].childNodes[5].childNodes[0].nodeValue);
                                                 Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[5].childNodes[0].nodeValue;
                                                 if(tag_contactos[i].childNodes[6]!=undefined && tag_contactos[i].childNodes[6].nodeName=="Obs"){
-                                                    alert("Obs: " + tag_contactos[i].childNodes[6].childNodes[0].nodeValue);
                                                     Contactos[ultimapos].OBS= tag_contactos[i].childNodes[6].childNodes[0].nodeValue;
                                                 }
                                             }
@@ -2118,30 +1835,24 @@ function loadDataFromDatabase(xml) {
 
                             }else{
                                 if(tag_contactos[i].childNodes[4].getAttribute('Type')=="L"){
-                                    alert("LinkedIn: " + tag_contactos[i].childNodes[4].childNodes[0].nodeValue);
                                     Contactos[ultimapos].LinkedIn= tag_contactos[i].childNodes[4].childNodes[0].nodeValue;
 
                                    if(tag_contactos[i].childNodes[5]!=undefined && tag_contactos[i].childNodes[5].nodeName=="SocialNetwork"){
                                        if(tag_contactos[i].childNodes[5].getAttribute('Type')=="I"){
-                                           alert("Instagram: " + tag_contactos[i].childNodes[5].childNodes[0].nodeValue);
                                            Contactos[ultimapos].Instagram= tag_contactos[i].childNodes[5].childNodes[0].nodeValue;
 
                                            if(tag_contactos[i].childNodes[6]!=undefined && tag_contactos[i].childNodes[6].nodeName=="SocialNetwork"){
                                                if(tag_contactos[i].childNodes[6].getAttribute('Type')=="O"){
-                                                   alert("OutraRede: " + tag_contactos[i].childNodes[6].childNodes[0].nodeValue);
                                                    Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[6].childNodes[0].nodeValue;
                                                    if(tag_contactos[i].childNodes[7]!=undefined && tag_contactos[i].childNodes[7].nodeName=="Obs"){
-                                                        alert("Obs: " + tag_contactos[i].childNodes[7].childNodes[0].nodeValue);
                                                         Contactos[ultimapos].OBS= tag_contactos[i].childNodes[7].childNodes[0].nodeValue;
                                                     }
                                                }
                                            }
                                        }else{
                                            if(tag_contactos[i].childNodes[5].getAttribute('Type')=="O"){
-                                               alert("OutraRede: " + tag_contactos[i].childNodes[5].childNodes[0].nodeValue);
                                                Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[5].childNodes[0].nodeValue;
                                                if(tag_contactos[i].childNodes[6]!=undefined && tag_contactos[i].childNodes[6].nodeName=="Obs"){
-                                                    alert("Obs: " + tag_contactos[i].childNodes[6].childNodes[0].nodeValue);
                                                     Contactos[ultimapos].OBS= tag_contactos[i].childNodes[6].childNodes[0].nodeValue;
                                                 }
                                            }
@@ -2149,25 +1860,20 @@ function loadDataFromDatabase(xml) {
                                    }
                                }else{
                                    if(tag_contactos[i].childNodes[4].getAttribute('Type')=="I"){
-                                       alert("Instagram: " + tag_contactos[i].childNodes[4].childNodes[0].nodeValue);
                                        Contactos[ultimapos].Instagram= tag_contactos[i].childNodes[4].childNodes[0].nodeValue;
 
                                        if(tag_contactos[i].childNodes[5]!=undefined && tag_contactos[i].childNodes[5].nodeName=="SocialNetwork"){
                                            if(tag_contactos[i].childNodes[5].getAttribute('Type')=="O"){
-                                               alert("OutraRede: " + tag_contactos[i].childNodes[5].childNodes[0].nodeValue);
                                                Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[5].childNodes[0].nodeValue;
                                                if(tag_contactos[i].childNodes[6]!=undefined && tag_contactos[i].childNodes[6].nodeName=="Obs"){
-                                                    alert("Obs: " + tag_contactos[i].childNodes[6].childNodes[0].nodeValue);
                                                     Contactos[ultimapos].OBS= tag_contactos[i].childNodes[6].childNodes[0].nodeValue;
                                                 }
                                            }
                                        }
                                    }else{
                                        if(tag_contactos[i].childNodes[4].getAttribute('Type')=="O"){
-                                           alert("OutraRede: " + tag_contactos[i].childNodes[4].childNodes[0].nodeValue);
                                            Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[4].childNodes[0].nodeValue;
                                            if(tag_contactos[i].childNodes[5]!=undefined && tag_contactos[i].childNodes[5].nodeName=="Obs"){
-                                                alert("Obs: " + tag_contactos[i].childNodes[5].childNodes[0].nodeValue);
                                                 Contactos[ultimapos].OBS= tag_contactos[i].childNodes[5].childNodes[0].nodeValue;
                                             }
                                        }
@@ -2177,58 +1883,47 @@ function loadDataFromDatabase(xml) {
                         }
 
                         if(tag_contactos[i].childNodes[5]!=undefined && tag_contactos[i].childNodes[5].nodeName=="Obs"){
-                            alert("Obs: " + tag_contactos[i].childNodes[5].childNodes[0].nodeValue);
                             Contactos[ultimapos].OBS= tag_contactos[i].childNodes[5].childNodes[0].nodeValue;
                         }
                     }else{
                         if(tag_contactos[i].childNodes[4]!=undefined && tag_contactos[i].childNodes[4].nodeName=="Obs"){
-                            alert("Obs: " + tag_contactos[i].childNodes[4].childNodes[0].nodeValue);
                             Contactos[ultimapos].OBS= tag_contactos[i].childNodes[4].childNodes[0].nodeValue;
                         }
                     } 
                 }
             }else{
                 var tag_anos = tag_contactos[i].childNodes[2].childNodes[0];
-                alert("DOB: " + tag_anos.nodeValue);
                 Contactos[ultimapos].DOB= tag_anos.nodeValue;
                 
                 if(tag_contactos[i].childNodes[3]!=undefined && tag_contactos[i].childNodes[3].nodeName=="SocialNetwork"){
                     if(tag_contactos[i].childNodes[3].getAttribute('Type')=="F"){
-                        alert("facebook: " + tag_contactos[i].childNodes[3].childNodes[0].nodeValue);
                         Contactos[ultimapos].Facebook= tag_contactos[i].childNodes[3].childNodes[0].nodeValue;
                         
                         if(tag_contactos[i].childNodes[4]!=undefined && tag_contactos[i].childNodes[4].nodeName=="SocialNetwork"){
                             if(tag_contactos[i].childNodes[4].getAttribute('Type')=="G"){
-                                alert("google: " + tag_contactos[i].childNodes[4].childNodes[0].nodeValue);
                                 Contactos[ultimapos].Google= tag_contactos[i].childNodes[4].childNodes[0].nodeValue;  
                                 
                                 if(tag_contactos[i].childNodes[5]!=undefined && tag_contactos[i].childNodes[5].nodeName=="SocialNetwork"){
                                     if(tag_contactos[i].childNodes[5].getAttribute('Type')=="L"){
-                                         alert("LinkedIn: " + tag_contactos[i].childNodes[5].childNodes[0].nodeValue);
                                          Contactos[ultimapos].LinkedIn= tag_contactos[i].childNodes[5].childNodes[0].nodeValue;
                                          
                                         if(tag_contactos[i].childNodes[6]!=undefined && tag_contactos[i].childNodes[6].nodeName=="SocialNetwork"){
                                             if(tag_contactos[i].childNodes[6].getAttribute('Type')=="I"){
-                                                alert("Instagram: " + tag_contactos[i].childNodes[6].childNodes[0].nodeValue);
                                                 Contactos[ultimapos].Instagram= tag_contactos[i].childNodes[6].childNodes[0].nodeValue;
                                                 
                                                 if(tag_contactos[i].childNodes[7]!=undefined && tag_contactos[i].childNodes[7].nodeName=="SocialNetwork"){
                                                     if(tag_contactos[i].childNodes[7].getAttribute('Type')=="O"){
-                                                        alert("OutraRede: " + tag_contactos[i].childNodes[7].childNodes[0].nodeValue);
                                                         Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[7].childNodes[0].nodeValue;
                                                         
                                                         if(tag_contactos[i].childNodes[8]!=undefined && tag_contactos[i].childNodes[8].nodeName=="Obs"){
-                                                            alert("Obs: " + tag_contactos[i].childNodes[8].childNodes[0].nodeValue);
                                                             Contactos[ultimapos].OBS= tag_contactos[i].childNodes[8].childNodes[0].nodeValue;
                                                         }    
                                                     }
                                                 }
                                             }else{
                                                 if(tag_contactos[i].childNodes[6].getAttribute('Type')=="O"){
-                                                    alert("OutraRede: " + tag_contactos[i].childNodes[6].childNodes[0].nodeValue);
                                                     Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[6].childNodes[0].nodeValue;
                                                     if(tag_contactos[i].childNodes[7]!=undefined && tag_contactos[i].childNodes[7].nodeName=="Obs"){
-                                                        alert("Obs: " + tag_contactos[i].childNodes[7].childNodes[0].nodeValue);
                                                         Contactos[ultimapos].OBS= tag_contactos[i].childNodes[7].childNodes[0].nodeValue;
                                                     }    
                                                 }
@@ -2236,25 +1931,20 @@ function loadDataFromDatabase(xml) {
                                         }
                                     }else{
                                         if(tag_contactos[i].childNodes[5].getAttribute('Type')=="I"){
-                                            alert("Instagram: " + tag_contactos[i].childNodes[5].childNodes[0].nodeValue);
                                             Contactos[ultimapos].Instagram= tag_contactos[i].childNodes[5].childNodes[0].nodeValue;
 
                                             if(tag_contactos[i].childNodes[6]!=undefined && tag_contactos[i].childNodes[6].nodeName=="SocialNetwork"){
                                                 if(tag_contactos[i].childNodes[6].getAttribute('Type')=="O"){
-                                                    alert("OutraRede: " + tag_contactos[i].childNodes[6].childNodes[0].nodeValue);
                                                     Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[6].childNodes[0].nodeValue;
                                                     if(tag_contactos[i].childNodes[7]!=undefined && tag_contactos[i].childNodes[7].nodeName=="Obs"){
-                                                        alert("Obs: " + tag_contactos[i].childNodes[7].childNodes[0].nodeValue);
                                                         Contactos[ultimapos].OBS= tag_contactos[i].childNodes[7].childNodes[0].nodeValue;
                                                     }    
                                                 }
                                             }
                                         }else{
                                             if(tag_contactos[i].childNodes[5].getAttribute('Type')=="O"){
-                                                alert("OutraRede: " + tag_contactos[i].childNodes[5].childNodes[0].nodeValue);
                                                 Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[5].childNodes[0].nodeValue;
                                                 if(tag_contactos[i].childNodes[6]!=undefined && tag_contactos[i].childNodes[6].nodeName=="Obs"){
-                                                    alert("Obs: " + tag_contactos[i].childNodes[6].childNodes[0].nodeValue);
                                                     Contactos[ultimapos].OBS= tag_contactos[i].childNodes[6].childNodes[0].nodeValue;
                                                 }    
                                             }
@@ -2264,30 +1954,24 @@ function loadDataFromDatabase(xml) {
                                 
                             }else{
                                 if(tag_contactos[i].childNodes[4].getAttribute('Type')=="L"){
-                                    alert("LinkedIn: " + tag_contactos[i].childNodes[4].childNodes[0].nodeValue);
                                     Contactos[ultimapos].LinkedIn= tag_contactos[i].childNodes[4].childNodes[0].nodeValue;
 
                                    if(tag_contactos[i].childNodes[5]!=undefined && tag_contactos[i].childNodes[5].nodeName=="SocialNetwork"){
                                        if(tag_contactos[i].childNodes[5].getAttribute('Type')=="I"){
-                                           alert("Instagram: " + tag_contactos[i].childNodes[5].childNodes[0].nodeValue);
                                            Contactos[ultimapos].Instagram= tag_contactos[i].childNodes[5].childNodes[0].nodeValue;
 
                                            if(tag_contactos[i].childNodes[6]!=undefined && tag_contactos[i].childNodes[6].nodeName=="SocialNetwork"){
                                                if(tag_contactos[i].childNodes[6].getAttribute('Type')=="O"){
-                                                   alert("OutraRede: " + tag_contactos[i].childNodes[6].childNodes[0].nodeValue);
                                                    Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[6].childNodes[0].nodeValue;
                                                    if(tag_contactos[i].childNodes[7]!=undefined && tag_contactos[i].childNodes[7].nodeName=="Obs"){
-                                                        alert("Obs: " + tag_contactos[i].childNodes[7].childNodes[0].nodeValue);
                                                         Contactos[ultimapos].OBS= tag_contactos[i].childNodes[7].childNodes[0].nodeValue;
                                                     }    
                                                }
                                            }
                                        }else{
                                            if(tag_contactos[i].childNodes[5].getAttribute('Type')=="O"){
-                                               alert("OutraRede: " + tag_contactos[i].childNodes[5].childNodes[0].nodeValue);
                                                Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[5].childNodes[0].nodeValue;
                                                if(tag_contactos[i].childNodes[6]!=undefined && tag_contactos[i].childNodes[6].nodeName=="Obs"){
-                                                    alert("Obs: " + tag_contactos[i].childNodes[6].childNodes[0].nodeValue);
                                                     Contactos[ultimapos].OBS= tag_contactos[i].childNodes[6].childNodes[0].nodeValue;
                                                 }    
                                            }
@@ -2295,25 +1979,20 @@ function loadDataFromDatabase(xml) {
                                    }
                                }else{
                                    if(tag_contactos[i].childNodes[4].getAttribute('Type')=="I"){
-                                       alert("Instagram: " + tag_contactos[i].childNodes[4].childNodes[0].nodeValue);
                                        Contactos[ultimapos].Instagram= tag_contactos[i].childNodes[4].childNodes[0].nodeValue;
 
                                        if(tag_contactos[i].childNodes[5]!=undefined && tag_contactos[i].childNodes[5].nodeName=="SocialNetwork"){
                                            if(tag_contactos[i].childNodes[5].getAttribute('Type')=="O"){
-                                               alert("OutraRede: " + tag_contactos[i].childNodes[5].childNodes[0].nodeValue);
                                                Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[5].childNodes[0].nodeValue;
                                                if(tag_contactos[i].childNodes[6]!=undefined && tag_contactos[i].childNodes[6].nodeName=="Obs"){
-                                                    alert("Obs: " + tag_contactos[i].childNodes[6].childNodes[0].nodeValue);
                                                     Contactos[ultimapos].OBS= tag_contactos[i].childNodes[6].childNodes[0].nodeValue;
                                                 }
                                            }
                                        }
                                    }else{
                                        if(tag_contactos[i].childNodes[4].getAttribute('Type')=="O"){
-                                           alert("OutraRede: " + tag_contactos[i].childNodes[4].childNodes[0].nodeValue);
                                            Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[4].childNodes[0].nodeValue;
                                            if(tag_contactos[i].childNodes[5]!=undefined && tag_contactos[i].childNodes[5].nodeName=="Obs"){
-                                                alert("Obs: " + tag_contactos[i].childNodes[5].childNodes[0].nodeValue);
                                                 Contactos[ultimapos].OBS= tag_contactos[i].childNodes[5].childNodes[0].nodeValue;
                                             }
                                         }
@@ -2323,35 +2002,28 @@ function loadDataFromDatabase(xml) {
                         }       
                     }else{
                         if(tag_contactos[i].childNodes[3].getAttribute('Type')=="G"){
-                            alert("google: " + tag_contactos[i].childNodes[3].childNodes[0].nodeValue);
                             Contactos[ultimapos].Google= tag_contactos[i].childNodes[3].childNodes[0].nodeValue;  
 
                             if(tag_contactos[i].childNodes[4]!=undefined && tag_contactos[i].childNodes[4].nodeName=="SocialNetwork"){
                                 if(tag_contactos[i].childNodes[4].getAttribute('Type')=="L"){
-                                     alert("LinkedIn: " + tag_contactos[i].childNodes[4].childNodes[0].nodeValue);
                                      Contactos[ultimapos].LinkedIn= tag_contactos[i].childNodes[4].childNodes[0].nodeValue;
 
                                     if(tag_contactos[i].childNodes[5]!=undefined && tag_contactos[i].childNodes[5].nodeName=="SocialNetwork"){
                                         if(tag_contactos[i].childNodes[5].getAttribute('Type')=="I"){
-                                            alert("Instagram: " + tag_contactos[i].childNodes[5].childNodes[0].nodeValue);
                                             Contactos[ultimapos].Instagram= tag_contactos[i].childNodes[5].childNodes[0].nodeValue;
 
                                             if(tag_contactos[i].childNodes[6]!=undefined && tag_contactos[i].childNodes[6].nodeName=="SocialNetwork"){
                                                 if(tag_contactos[i].childNodes[6].getAttribute('Type')=="O"){
-                                                    alert("OutraRede: " + tag_contactos[i].childNodes[6].childNodes[0].nodeValue);
                                                     Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[6].childNodes[0].nodeValue;
                                                     if(tag_contactos[i].childNodes[7]!=undefined && tag_contactos[i].childNodes[7].nodeName=="Obs"){
-                                                        alert("Obs: " + tag_contactos[i].childNodes[7].childNodes[0].nodeValue);
                                                         Contactos[ultimapos].OBS= tag_contactos[i].childNodes[7].childNodes[0].nodeValue;
                                                     }
                                                 }
                                             }
                                         }else{
                                             if(tag_contactos[i].childNodes[5].getAttribute('Type')=="O"){
-                                                alert("OutraRede: " + tag_contactos[i].childNodes[5].childNodes[0].nodeValue);
                                                 Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[5].childNodes[0].nodeValue;
                                                 if(tag_contactos[i].childNodes[6]!=undefined && tag_contactos[i].childNodes[6].nodeName=="Obs"){
-                                                    alert("Obs: " + tag_contactos[i].childNodes[6].childNodes[0].nodeValue);
                                                     Contactos[ultimapos].OBS= tag_contactos[i].childNodes[6].childNodes[0].nodeValue;
                                                 }
                                             }
@@ -2359,25 +2031,20 @@ function loadDataFromDatabase(xml) {
                                     }
                                 }else{
                                     if(tag_contactos[i].childNodes[4].getAttribute('Type')=="I"){
-                                        alert("Instagram: " + tag_contactos[i].childNodes[4].childNodes[0].nodeValue);
                                         Contactos[ultimapos].Instagram= tag_contactos[i].childNodes[4].childNodes[0].nodeValue;
 
                                         if(tag_contactos[i].childNodes[5]!=undefined && tag_contactos[i].childNodes[5].nodeName=="SocialNetwork"){
                                             if(tag_contactos[i].childNodes[5].getAttribute('Type')=="O"){
-                                                alert("OutraRede: " + tag_contactos[i].childNodes[5].childNodes[0].nodeValue);
                                                 Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[5].childNodes[0].nodeValue;
                                                 if(tag_contactos[i].childNodes[6]!=undefined && tag_contactos[i].childNodes[6].nodeName=="Obs"){
-                                                    alert("Obs: " + tag_contactos[i].childNodes[6].childNodes[0].nodeValue);
                                                     Contactos[ultimapos].OBS= tag_contactos[i].childNodes[6].childNodes[0].nodeValue;
                                                 }
                                             }
                                         }
                                     }else{
                                         if(tag_contactos[i].childNodes[4].getAttribute('Type')=="O"){
-                                            alert("OutraRede: " + tag_contactos[i].childNodes[4].childNodes[0].nodeValue);
                                             Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[4].childNodes[0].nodeValue;
                                             if(tag_contactos[i].childNodes[5]!=undefined && tag_contactos[i].childNodes[5].nodeName=="Obs"){
-                                                alert("Obs: " + tag_contactos[i].childNodes[5].childNodes[0].nodeValue);
                                                 Contactos[ultimapos].OBS= tag_contactos[i].childNodes[5].childNodes[0].nodeValue;
                                             }
                                         }
@@ -2387,30 +2054,24 @@ function loadDataFromDatabase(xml) {
 
                         }else{
                             if(tag_contactos[i].childNodes[3].getAttribute('Type')=="L"){
-                                alert("LinkedIn: " + tag_contactos[i].childNodes[3].childNodes[0].nodeValue);
                                 Contactos[ultimapos].LinkedIn= tag_contactos[i].childNodes[3].childNodes[0].nodeValue;
 
                                if(tag_contactos[i].childNodes[4]!=undefined && tag_contactos[i].childNodes[4].nodeName=="SocialNetwork"){
                                    if(tag_contactos[i].childNodes[4].getAttribute('Type')=="I"){
-                                       alert("Instagram: " + tag_contactos[i].childNodes[4].childNodes[0].nodeValue);
                                        Contactos[ultimapos].Instagram= tag_contactos[i].childNodes[4].childNodes[0].nodeValue;
 
                                        if(tag_contactos[i].childNodes[5]!=undefined && tag_contactos[i].childNodes[5].nodeName=="SocialNetwork"){
                                            if(tag_contactos[i].childNodes[5].getAttribute('Type')=="O"){
-                                               alert("OutraRede: " + tag_contactos[i].childNodes[5].childNodes[0].nodeValue);
                                                Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[5].childNodes[0].nodeValue;
                                                if(tag_contactos[i].childNodes[6]!=undefined && tag_contactos[i].childNodes[6].nodeName=="Obs"){
-                                                    alert("Obs: " + tag_contactos[i].childNodes[6].childNodes[0].nodeValue);
                                                     Contactos[ultimapos].OBS= tag_contactos[i].childNodes[6].childNodes[0].nodeValue;
                                                 }
                                            }
                                        }
                                    }else{
                                        if(tag_contactos[i].childNodes[4].getAttribute('Type')=="O"){
-                                           alert("OutraRede: " + tag_contactos[i].childNodes[4].childNodes[0].nodeValue);
                                            Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[4].childNodes[0].nodeValue;
                                            if(tag_contactos[i].childNodes[5]!=undefined && tag_contactos[i].childNodes[5].nodeName=="Obs"){
-                                                alert("Obs: " + tag_contactos[i].childNodes[5].childNodes[0].nodeValue);
                                                 Contactos[ultimapos].OBS= tag_contactos[i].childNodes[5].childNodes[0].nodeValue;
                                             }
                                        }
@@ -2418,25 +2079,20 @@ function loadDataFromDatabase(xml) {
                                }
                            }else{
                                if(tag_contactos[i].childNodes[3].getAttribute('Type')=="I"){
-                                   alert("Instagram: " + tag_contactos[i].childNodes[3].childNodes[0].nodeValue);
                                    Contactos[ultimapos].Instagram= tag_contactos[i].childNodes[3].childNodes[0].nodeValue;
 
                                    if(tag_contactos[i].childNodes[4]!=undefined && tag_contactos[i].childNodes[4].nodeName=="SocialNetwork"){
                                        if(tag_contactos[i].childNodes[4].getAttribute('Type')=="O"){
-                                           alert("OutraRede: " + tag_contactos[i].childNodes[4].childNodes[0].nodeValue);
                                            Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[4].childNodes[0].nodeValue;
                                            if(tag_contactos[i].childNodes[5]!=undefined && tag_contactos[i].childNodes[5].nodeName=="Obs"){
-                                                alert("Obs: " + tag_contactos[i].childNodes[5].childNodes[0].nodeValue);
                                                 Contactos[ultimapos].OBS= tag_contactos[i].childNodes[5].childNodes[0].nodeValue;
                                             }
                                        }
                                    }
                                }else{
                                    if(tag_contactos[i].childNodes[3].getAttribute('Type')=="O"){
-                                       alert("OutraRede: " + tag_contactos[i].childNodes[3].childNodes[0].nodeValue);
                                        Contactos[ultimapos].OutraRede= tag_contactos[i].childNodes[3].childNodes[0].nodeValue;
                                        if(tag_contactos[i].childNodes[4]!=undefined && tag_contactos[i].childNodes[4].nodeName=="Obs"){
-                                            alert("Obs: " + tag_contactos[i].childNodes[4].childNodes[0].nodeValue);
                                             Contactos[ultimapos].OBS= tag_contactos[i].childNodes[4].childNodes[0].nodeValue;
                                         }
                                    }
@@ -2446,7 +2102,6 @@ function loadDataFromDatabase(xml) {
                     }
                     
                     if(tag_contactos[i].childNodes[4]!=undefined && tag_contactos[i].childNodes[4].nodeName=="Obs"){
-                        alert("Obs: " + tag_contactos[i].childNodes[4].childNodes[0].nodeValue);
                         Contactos[ultimapos].OBS= tag_contactos[i].childNodes[4].childNodes[0].nodeValue;
                     }else{
                         
@@ -2454,7 +2109,6 @@ function loadDataFromDatabase(xml) {
                     //adidionar os outros
                 }else{
                     if(tag_contactos[i].childNodes[3]!=undefined && tag_contactos[i].childNodes[3].nodeName=="Obs"){
-                        alert("Obs: " + tag_contactos[i].childNodes[3].childNodes[0].nodeValue);
                         Contactos[ultimapos].OBS= tag_contactos[i].childNodes[3].childNodes[0].nodeValue;
                     }
                 }
@@ -2555,6 +2209,7 @@ function removerContacto(){
         var indice = ObterIndice(Contactos,x);
         if (indice > -1) {
             Contactos.splice(indice, 1);
+            ClientesparaXML();
             window.location.reload();
         }else{
             var MenssagemErro=document.createTextNode("Erro ao remover Contacto!");
