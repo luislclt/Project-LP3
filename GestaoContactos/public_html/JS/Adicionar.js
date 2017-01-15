@@ -100,28 +100,8 @@ function loadDataFromDatabase(xml) {
     xmlDoc = parser.parseFromString(xml, "text/xml");  
     
     var tag_contactos = xmlDoc.getElementsByTagName("Contact");
-    //var tag_killme = tag_contactos[0].childNodes;
     alert(tag_contactos.length);
     
-   // var tag_nome = tag_contactos;
-    /*var tag_pais = xmlDoc.getElementsByTagName("Country"); 
-    var tag_numero_telefone = xmlDoc.getElementsByTagName("PhoneNumber");  
-    var tag_tipo_telefone = xmlDoc.getElementsByTagName("Telephone");  // Telephone -> Type 
-    var tag_pais = xmlDoc.getElementsByTagName("Country"); 
-    var tag_numero_telefone = xmlDoc.getElementsByTagName("PhoneNumber");  
-    var tag_tipo_telefone = xmlDoc.getElementsByTagName("Telephone");  // Telephone -> Type 
-    var tag_pais = xmlDoc.getElementsByTagName("Country"); 
-    var tag_numero_telefone = xmlDoc.getElementsByTagName("PhoneNumber");  
-    var tag_tipo_telefone = xmlDoc.getElementsByTagName("Telephone");  // Telephone -> Type 
-    var tag_pais = xmlDoc.getElementsByTagName("Country"); 
-    var tag_numero_telefone = xmlDoc.getElementsByTagName("PhoneNumber");  
-    var tag_tipo_telefone = xmlDoc.getElementsByTagName("Telephone");  // Telephone -> Type 
-    */
-    //var tag_anos = xmlDoc.getElementsByTagName("BirthDate");
-    //var tag_social = xmlDoc.getElementsByTagName("SocialNetwork"); // SocialNetwork -> Type
-    //var tag_obser = xmlDoc.getElementsByTagName("Obs");
-    //var tag_grupo_numero = xmlDoc.getElementsByTagName("Contact");  // Contact -> Group
-    //var tag_favorito = xmlDoc.getElementsByTagName("Contact");  // Contact -> IsFavorite
      
  
     for(var i=0;i<tag_contactos.length;i++){
