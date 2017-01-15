@@ -7,6 +7,149 @@
 var Contactos = [];
 var CorFundo;
 
+function GuardarContactos(text) {    
+    if (typeof (localStorage) !== "undefined")   {      
+        var finaltext = "";        
+        finaltext = finaltext + "<?xml version="+'"'+"1.0"+'"'+" encoding="+'"'+"utf-8"+'"'+" ?>"
+                              + "<Contacts xmlns:tp="+'"'+"http://xml.netbeans.org/schema/TP.AvC"+'"'+">" 
+                              + text
+                              + "</Contacts>";  
+        localStorage.setItem('Contacto', finaltext);
+    }else {
+        alert("Sorry, your browser does not support web storage...");
+    }
+    
+}
+
+function ClientesparaXML(){
+    var xml = "";
+        
+    for(var i = 0; i<Contactos.length;i++){
+    id = i;
+    xml = xml     + "<Contact Group="+'"' + Contactos[i].Amigos + Contactos[i].Familia + Contactos[i].Trabalho + Contactos[i].OutroGrupo+'" '+  "IsFavorite="+'"'+ Contactos[i].Fav+'"'+">"
+                  + "<Name>" + Contactos[i].nome + "</Name>"
+                  if(Contactos[i].email!="" && Contactos[i].email!=undefined){
+                    xml = xml + "<Email>" + Contactos[i].email.valueOf() + "</Email>" 
+                  }
+                  xml = xml  +  "<Telephone>"
+                    + "<Country>" + Contactos[i].pais1 + "</Country>"
+                    + "<PhoneNumber>" + Contactos[i].telefone1 + "</PhoneNumber>"
+                    + "<Telephone Type="+'"'+ Contactos[i].tipo1+'"'+"></Telephone>"
+                  + "</Telephone>"
+                  if(Contactos[i].telefone2!="" && Contactos[i].telefone2!=undefined){
+                      xml = xml + "<Telephone>"
+                      + "<Country>" + Contactos[i].pais2 + "</Country>"
+                      + "<PhoneNumber>" + Contactos[i].telefone2 + "</PhoneNumber>"
+                      + "<Telephone Type="+'"'+ Contactos[i].tipo2+'"'+"></Telephone>"
+                    + "</Telephone>"   
+                  }
+                  if(Contactos[i].telefone3!="" && Contactos[i].telefone3!=undefined){
+                      xml = xml + "<Telephone>"
+                      + "<Country>" + Contactos[i].pais3 + "</Country>"
+                      + "<PhoneNumber>" + Contactos[i].telefone3 + "</PhoneNumber>"
+                      + "<Telephone Type="+'"'+ Contactos[i].tipo3+'"'+"></Telephone>"
+                    + "</Telephone>"  
+                  }
+                  if(Contactos[i].telefone4!="" && Contactos[i].telefone4!=undefined){
+                      xml = xml + "<Telephone>"
+                      + "<Country>" + Contactos[i].pais4 + "</Country>"
+                      + "<PhoneNumber>" + Contactos[i].telefone4 + "</PhoneNumber>"
+                      + "<Telephone Type="+'"'+ Contactos[i].tipo4+'"'+"></Telephone>"
+                    + "</Telephone>"  
+                  }
+                  if(Contactos[i].telefone5!="" && Contactos[i].telefone5!=undefined){
+                     xml = xml + "<Telephone>"
+                     + "<Country>" + Contactos[i].pais5 + "</Country>"
+                     + "<PhoneNumber>" + Contactos[i].telefone5 + "</PhoneNumber>"
+                     + "<Telephone Type="+'"'+ Contactos[i].tipo5+'"'+"></Telephone>"
+                    + "</Telephone>" 
+                  }
+                    xml = xml  + "<BirthDate>" + Contactos[i].DOB + "</BirthDate>"
+                if(Contactos[i].Facebook!="" && Contactos[i].Facebook!=undefined){
+                    xml = xml + "<SocialNetwork Type="+'"F"'+">" + Contactos[i].Facebook + "</SocialNetwork>"
+                  }
+                  if(Contactos[i].Google!="" && Contactos[i].Google!=undefined){
+                    xml = xml + "<SocialNetwork Type="+'"G"'+">" + Contactos[i].Google + "</SocialNetwork>"
+                  }
+                  if(Contactos[i].LinkedIn!="" && Contactos[i].LinkedIn!=undefined){
+                    xml = xml + "<SocialNetwork Type="+'"L"'+">" + Contactos[i].LinkedIn + "</SocialNetwork>"
+                  }
+                  if(Contactos[i].Instagram!="" && Contactos[i].Instagram!=undefined){
+                    xml = xml + "<SocialNetwork Type="+'"I"'+">" + Contactos[i].Instagram + "</SocialNetwork>"
+                  }
+                  if(Contactos[i].OutraRede!="" && Contactos[i].OutraRede!=undefined){
+                    xml = xml + "<SocialNetwork Type="+'"O"'+">" + Contactos[i].OutraRede + "</SocialNetwork>"
+                  }
+                  //+ "<SocialNetwork Type="+'"'+ Contactos[i]['typesocial']+'"'+">"+Contactos[i]['social']+"</SocialNetwork>" 
+                  if(Contactos[i].Obs!="" && Contactos[i].Obs!=undefined){
+                      xml = xml + "<Obs>" + Contactos[i].Obs + "</Obs>"
+                  }
+
+                  xml = xml  + "</Contact>";
+    }
+
+    alert("Isto é o XML: "+xml+" posiçao: "+i);
+    GuardarContactos(xml);
+}
+
+function removerContacto(){
+    var conf=confirm ("Tem a certeza que deseja remover?"); // usa confirm
+    if(conf==true){
+        var x = this.parentNode.getElementsByTagName("p")[0].getAttribute("id"); 
+        var indice = ObterIndice(Contactos,x);
+        if (indice > -1) {
+            Contactos.splice(indice, 1);
+            ClientesparaXML();
+        }else{
+            var MenssagemErro=document.createTextNode("Erro ao remover Contacto!");
+            var Erro = document.getElementById("Erro");
+            Erro.appendChild(MenssagemErro); // Escreve MenssagemErro no <div>
+            console.log(Erro);
+        }
+    
+        //this.parentNode.remove();
+        ClientesparaXML();
+        window.location.href="ListarTodosContactos.html";
+    }
+    
+}
+
+function ObterIndice(array, value) {
+    for(var i = 0; i < array.length; i += 1) {
+        if(array[i].nome === value) {
+            return i; // retorna posicao
+        }
+    }
+    return -1; // nao encontrou value
+}
+
+function editarContacto(){
+    var x = this.parentNode.getElementsByTagName("p")[0].getAttribute("id"); 
+    var indice = ObterIndice(Contactos,x);
+    localStorage.setItem('indice',indice);
+    ClientesparaXML();
+    window.location.href="Editar.html";
+}
+
+function AdicionarFavoritos() {
+    
+    var x = this.parentNode.getElementsByTagName("p")[0].getAttribute("id"); 
+    var indice = ObterIndice(Contactos,x);
+    var btnfavorito = document.createElement('input');
+    if (Contactos[indice].Fav == "sim") {
+        Contactos[indice].Fav = "nao";
+        btnfavorito.src="Images/estrelaOff.png";
+        console.log("Removido dos Favoritos com Sucesso!");
+        window.location.reload();
+    }else{
+        Contactos[indice].Fav = "sim";
+        btnfavorito.src="Images/estrelaOn.png";
+        console.log("Adicionado aos Favoritos com Sucesso!");
+        window.location.reload();
+    }   
+    ClientesparaXML();
+}
+
 function CarregarContactos(){
     if(typeof(localStorage) !== "undefined") {
         loadDataFromDatabase(localStorage.getItem('Contacto'));
@@ -2082,6 +2225,27 @@ function SelectedCorFundo(){
     }
 }
 
+function AdicionarFavoritos() {
+    
+    var x = this.parentNode.getElementsByTagName("p")[0].getAttribute("id"); 
+    var indice = ObterIndice(Contactos,x);
+    var btnfavorito = document.createElement('input');
+    if (Contactos[indice].Fav == "sim") {
+        Contactos[indice].Fav = "nao";
+        btnfavorito.src="Images/estrelaOff.png";
+        console.log("Removido dos Favoritos com Sucesso!");
+        localStorage.setItem('indice', indice);
+        window.location.reload();
+    }else{
+        Contactos[indice].Fav = "sim";
+        btnfavorito.src="Images/estrelaOn.png";
+        console.log("Adicionado aos Favoritos com Sucesso!");
+        localStorage.setItem('indice', indice);
+        window.location.reload();
+    }   
+    ClientesparaXML();
+}
+
 function ListarContacto (pos) {
     
     var artigo=document.createElement("article");
@@ -2115,7 +2279,10 @@ function ListarContacto (pos) {
     var Trabalho=document.createElement("p");
     var Familia=document.createElement("p");
     var OutroGrupo=document.createElement("p");
-    var Fav=document.createElement("img");
+    var btnfavorito = document.createElement('input');
+    btnfavorito.type="image";
+    btnfavorito.addEventListener('click', AdicionarFavoritos);
+    var paragrafo=document.createElement("p");   
     
     nome.id=Contactos[pos].nome;
     
@@ -2215,6 +2382,12 @@ function ListarContacto (pos) {
         var tipo5t=document.createTextNode("");
     }
     
+    if(Contactos[pos].Fav == "sim"){
+        btnfavorito.src="Images/estrelaOn.png";
+    }else{
+        btnfavorito.src="Images/estrelaOff.png";
+    }
+    
     if (Contactos[pos].DOB == "") var DOBt=document.createTextNode(Contactos[pos].DOB); else var DOBt=document.createTextNode("Data de Nascimento: " + Contactos[pos].DOB);
     if (Contactos[pos].Facebook == "" || Contactos[pos].Facebook==undefined) var Facebookt=document.createTextNode(Contactos[pos].Facebook); else var Facebookt=document.createTextNode("Facebook: " + Contactos[pos].Facebook);
     if (Contactos[pos].Google == "" || Contactos[pos].Google==undefined) var Googlet=document.createTextNode(Contactos[pos].Google); else var Googlet=document.createTextNode("Google+: " + Contactos[pos].Google);
@@ -2235,12 +2408,7 @@ function ListarContacto (pos) {
     if (Contactos[pos].Trabalho == "sim") var Trabalhot=document.createTextNode("Trabalho"); else var Trabalhot=document.createTextNode("");
     if (Contactos[pos].Familia == "sim") var Familiat=document.createTextNode("Familia"); else var Familiat=document.createTextNode("");
     if (Contactos[pos].OutroGrupo == "sim") var OutroGrupot=document.createTextNode("Outro"); else var OutroGrupot=document.createTextNode("");
-    if (Contactos[pos].Fav == "sim"){
-        Fav.src="Images/estrelaOn.png";
-        
-    }else Fav.src="Images/estrelaOff.png";
-    
-        
+  
     nome.appendChild(nomet);
     email.appendChild(emailt);
     pais1.appendChild(pais1t);
@@ -2327,7 +2495,24 @@ function ListarContacto (pos) {
     artigo.appendChild(Trabalho);
     artigo.appendChild(Familia);
     artigo.appendChild(OutroGrupo);
-    artigo.appendChild(Fav);
+    artigo.appendChild(btnfavorito);
+    artigo.appendChild(paragrafo);
+    
+    var btnremove = document.createElement('input');
+    btnremove.type="image";
+    btnremove.src="Images/remover.png";
+    btnremove.width="88"; 
+    btnremove.height="48";
+    btnremove.addEventListener('click', removerContacto);
+    artigo.appendChild(btnremove);
+
+    var btnedita = document.createElement('input');
+    btnedita.type="image";
+    btnedita.src="Images/edit.png";
+    btnedita.width="88"; 
+    btnedita.height="48";
+    btnedita.addEventListener('click', editarContacto);
+    artigo.appendChild(btnedita);
     
     document.getElementById('Contacto').appendChild(artigo);
     

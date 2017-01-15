@@ -2299,32 +2299,27 @@ function ListarContacto(pos){
     var artigo1=document.createElement("article");
     
     var nome=document.createElement("p");
-    var pais1=document.createElement("p");
     var telefone1=document.createElement("p");
     var Espaco=document.createElement("p");
     
     nome.id=Contactos[pos].nome;
     
-    var paist=document.createTextNode(Contactos[pos].pais);
     var nometext=document.createTextNode("Nome: " + Contactos[pos].nome);
-    var pais1t=document.createTextNode("País: " + Contactos[pos].pais1);
     var telefone1t=document.createTextNode("Contacto: " + Contactos[pos].telefone1);
     var Espacotext = document.createTextNode("************************");
     
     nome.appendChild(nometext);
-    pais1.appendChild(pais1t);
     telefone1.appendChild(telefone1t);
     Espaco.appendChild(Espacotext);
     
     artigo1.appendChild(nome);
-    artigo1.appendChild(pais1);
     artigo1.appendChild(telefone1);
     
     artigo.appendChild(artigo1);
     
     localStorage.setItem('InputCampo', -1);
         
-    var btnremove = document.createElement('input');
+   /* var btnremove = document.createElement('input');
         btnremove.type="image";
         btnremove.src="Images/remover.png";
         btnremove.width="88"; 
@@ -2339,7 +2334,7 @@ function ListarContacto(pos){
         btnedita.height="48";
         btnedita.addEventListener('click', editarContacto);
         artigo.appendChild(btnedita);
-    artigo1.appendChild(btnedita);
+    artigo1.appendChild(btnedita); */
     
     var btnmostrar = document.createElement('input');
         btnmostrar.type="image";

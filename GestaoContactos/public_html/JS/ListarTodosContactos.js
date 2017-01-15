@@ -2208,7 +2208,7 @@ function removerContacto(){
         }
     
         //this.parentNode.remove();
-        guardarLocalStorage();
+        ClientesparaXML();
     }
     
 }
@@ -2238,13 +2238,16 @@ function AdicionarFavoritos() {
         Contactos[indice].Fav = "nao";
         btnfavorito.src="Images/estrelaOff.png";
         console.log("Removido dos Favoritos com Sucesso!");
+        guardarLocalStorageContact(indice);
         window.location.reload();
     }else{
         Contactos[indice].Fav = "sim";
         btnfavorito.src="Images/estrelaOn.png";
         console.log("Adicionado aos Favoritos com Sucesso!");
+        guardarLocalStorageContact(indice);
         window.location.reload();
-    }   
+    }
+    guardarLocalStorageContact(indice);
     ClientesparaXML();
 }
 
@@ -2256,6 +2259,7 @@ function ListarContactos(){
         
         var artigo=document.createElement("article");
         var nome=document.createElement("p");
+        var numero=document.createElement("p");
         var Fav=document.createElement("p");
         var Espaco=document.createElement("p");
         var btnfavorito = document.createElement('input');
@@ -2266,6 +2270,7 @@ function ListarContactos(){
         nome.id=Contactos[i].nome;
         
         var nometext=document.createTextNode("Nome: " + Contactos[i].nome);
+        var numerotext=document.createTextNode("Numero: "+ Contactos[i].telefone1);
 
         if(Contactos[i].Fav == "sim"){
             btnfavorito.src="Images/estrelaOn.png";
@@ -2273,11 +2278,11 @@ function ListarContactos(){
             btnfavorito.src="Images/estrelaOff.png";
         }
         
-        var Espacotext = document.createTextNode("************************");
-        
         nome.appendChild(nometext);
-         
+        numero.appendChild(numerotext);
+
         artigo.appendChild(nome);
+        artigo.appendChild(numero);
         artigo.appendChild(btnfavorito);
         artigo.appendChild(paragrafo);
         

@@ -44,8 +44,17 @@ body{
 
 div[id=conteudo]{
 
-    margin-left: 40%;
+    margin-left: 624px;
 }
+
+div[id=tel]{
+    padding-left: 30px;
+}
+
+div[id=rede]{
+    padding-left: 30px;
+}
+
 
 h1{
     color: darkslategray;
