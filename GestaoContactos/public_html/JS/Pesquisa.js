@@ -7,7 +7,6 @@
 var Contactos = [];
 var CorFundo;
 
-var ContactosVistos = [];
 var posicao;
 //var flag=0;
 
@@ -2250,6 +2249,7 @@ function VerificaCampos(inputpesquisa){ // verifica se os campos estao vazios
     //if(localStorage.InputCampo == null || localStorage.InputCampo == -1) inputpesquisa = document.getElementById('pesquisa'); // recebe o parametro do input Nome 
     
     if (validarCampoNumero(inputpesquisa)===true){
+            cont=0;
             Contactos.sort(OrdenarContactos);
             for (var i=0; i<=Contactos.length-1; i++){
                 var resultadonumero = PesquisarNumero(inputpesquisa,i);
@@ -2264,11 +2264,9 @@ function VerificaCampos(inputpesquisa){ // verifica se os campos estao vazios
             cont=0;
             Contactos.sort(OrdenarContactos);
             for (var i=0; i<=Contactos.length-1; i++){
-
                 var resultadonome = PesquisarNome(inputpesquisa, i);
             }
             if(resultadonome === true){
-
                 state++;
                 console.log("state++ "+state);
             }
@@ -2350,8 +2348,6 @@ function PesquisarNome(nome,i){
     var re = new RegExp(nome);
     var name=JSON.stringify(Contactos[i].nome);
     if (name.match(re)==nome){
-        //flag = 1;
-        ContactosVistos.push({nome: Contactos[i].nome});
         ListarContacto(i);
         cont++;
         return true;
@@ -2361,20 +2357,43 @@ function PesquisarNome(nome,i){
 
 
 function PesquisarNumero(numero,i){
-    Contactos.sort(OrdenarContactos);
     var number1=JSON.stringify(Contactos[i].telefone1);
     var number2=JSON.stringify(Contactos[i].telefone2);
     var number3=JSON.stringify(Contactos[i].telefone3);
     var number4=JSON.stringify(Contactos[i].telefone4);
     var number5=JSON.stringify(Contactos[i].telefone5);
     var re = new RegExp(numero);
-        if (number1.match(re) == numero || number2.match(re) == numero || number3.match(re) == numero || number4.match(re) == numero || number5.match(re) == numero){
-            
+    if (number1.match(re) == numero){
+        ListarContacto(i);
+        cont++;
+        return true;
+    }else{
+        if (number2!=undefined && number2.match(re) == numero){
             ListarContacto(i);
             cont++;
             return true;
+        }else{
+            if (number3!=undefined && number3.match(re) == numero){
+                ListarContacto(i);
+                cont++;
+                return true;
+            }else{
+                if (number4!=undefined && number4.match(re) == numero){
+                    ListarContacto(i);
+                    cont++;
+                    return true;
+                }else{
+                    if (number5!=undefined && number5.match(re) == numero){
+                        ListarContacto(i);
+                        cont++;
+                        return true;
+                    }else{
+                        return false;
+                    }
+                }
+            }
         }
-    return false;
+    } 
 }
 
 function AbrirLocalStorage() {
