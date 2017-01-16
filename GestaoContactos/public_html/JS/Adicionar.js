@@ -2271,7 +2271,8 @@ function AdicionarContacto() {
                           xml = xml  + "<BirthDate>" + Contactos[i].DOB + "</BirthDate>"
                       }
                       else{
-                         xml = xml  + "<BirthDate>" + Date().getFullYear() + "-" + Date().getMonth() + "-" + Date().getDate() + "</BirthDate>" 
+                         var d = new Date(); 
+                         xml = xml  + "<BirthDate>" + d.getFullYear() + "-" + d.getMonth() + "-" + d.getDate() + "</BirthDate>" 
                       }
                     if(Contactos[i].Facebook!="" && Contactos[i].Facebook!=undefined){
                         xml = xml + "<SocialNetwork Type="+'"F"'+">" + Contactos[i].Facebook + "</SocialNetwork>"
