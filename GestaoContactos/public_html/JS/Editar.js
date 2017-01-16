@@ -2417,11 +2417,6 @@ function ListarContacto(pos){
     }
 }
 
-function guardarLocalStorage(){
-    var s = JSON.stringify(Contactos);
-    localStorage.setItem('contacto', s); //Editar
-}
-
 function EditarContacto() {
        var nome = document.getElementById('Nome');
     var telefone1 = document.getElementById('Numero1');
