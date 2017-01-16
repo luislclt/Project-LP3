@@ -2367,7 +2367,6 @@ function VerificaCampos(){ // verifica se os campos estao vazios
    
     
     if (validarCampoNome(inputNome)===true && validarCampoEmail(inputEmail)===true && validarCampoNumero(inputNumero)===true){
-        CarregarContactos();
         AdicionarContacto();
     }
 }
@@ -2377,8 +2376,27 @@ function MudaEstrela(){
     if (fav.checked) document.getElementById("estrela").src="Images/estrelaOff.png"; else document.getElementById("estrela").src="Images/estrelaOn.png";
 }
 
+function AbrirLocalStorage(){
+    if (localStorage.Contacto != null){
+        CarregarContactos();
+        indice=localStorage.indice;
+    }else{
+        var MenssagemErro=document.createTextNode("Impossivel editar Contacto");
+        var Erro = document.getElementById("Erro");
+        Erro.appendChild(MenssagemErro); // Escreve MenssagemErro no <div>
+        console.log(Erro);
+    }
+    
+    if(localStorage.fundo != null){
+        CorFundo = localStorage.fundo;
+    }else{
+        CorFundo = 'cornsilk'; //DEFAULT
+    }
+}
+
 function init(){
     
+    AbrirLocalStorage();
     AbrirLocalStorageCor();
     SelectedCorFundo();
     var color = document.getElementById('cor');
