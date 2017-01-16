@@ -10,9 +10,9 @@ var CorFundo;
 function CarregarContactos(){
     if(typeof(localStorage) !== "undefined") {
         loadDataFromDatabase(localStorage.getItem('Contacto'));
-            alert("Carregado com sucesso!");
+            console.log("Carregado com sucesso!");
     }else {
-            alert("Não existe informação!");
+            console.log("Não existe informação!");
     }
 }
 
@@ -25,7 +25,7 @@ function GuardarContactos(text) {
                               + "</Contacts>";  
         localStorage.setItem('Contacto', finaltext);
     }else {
-        alert("Sorry, your browser does not support web storage...");
+        console.log("Sorry, your browser does not support web storage...");
     }
     
 }
@@ -96,26 +96,15 @@ function ClientesparaXML(){
 
                   xml = xml  + "</Contact>";
     }
-
-    alert("Isto é o XML: "+xml+" posiçao: "+i);
     GuardarContactos(xml);
 }
 
 function loadDataFromDatabase(xml) {
-    
-    // Limpar o array
-    /*while(Contactos.length){
-        Contactos.pop();
-    }*/
-    
-    alert("Isto é o xml loadDataFromDatabase: \n"+xml);
+
     parser = new DOMParser();
     xmlDoc = parser.parseFromString(xml, "text/xml");  
     
     var tag_contactos = xmlDoc.getElementsByTagName("Contact");
-    alert(tag_contactos.length);
-    
-     
  
     for(var i=0;i<tag_contactos.length;i++){
         var tag_nome = tag_contactos[i].childNodes[0];
@@ -2442,28 +2431,23 @@ function EditarContacto() {
     var telefone5 = document.getElementById('Numero5');
     var aux=0;
     
-    alert("AdicionarContacto -- ok");
-    
     if (telefone2.value !== "" && telefone2.value === telefone1.value){
         console.log("Número igual ao de cima!");
         alert("Número igual ao de cima!");
         aux=1;
     }else{
-        alert("telefone3!=");
         if (telefone3.value !== ""){
             if(telefone3.value === telefone2.value || telefone3.value === telefone1.value){
                 console.log("Número igual ao de cima!");
                 alert("Número igual ao de cima!");
                 aux=1;
             }else{
-                alert("telefone4!=");
                 if (telefone4.value !== ""){
                     if (telefone4.value === telefone3.value || telefone4.value === telefone2.value || telefone4.value === telefone1.value){
                         console.log("Número igual ao de cima!");
                         alert("Número igual ao de cima!");
                         aux=1;
                     }else{
-                        alert("telefone5!=");
                         if (telefone5.value !== ""){
                             if (telefone5.value === telefone4.value || telefone5.value === telefone3.value || telefone5.value === telefone2.value || telefone5.value === telefone1.value){
                                 console.log("Número igual ao de cima!");
@@ -2471,31 +2455,30 @@ function EditarContacto() {
                                 aux=1;
                             }else{
                                 for (var i=0; i<Contactos.length; i++){
-                                    alert("1");
                                     if (telefone1.value === Contactos[i].telefone1 || telefone1.value === Contactos[i].telefone2 || telefone1.value === Contactos[i].telefone3 || telefone1.value === Contactos[i].telefone4 || telefone1.value === Contactos[i].telefone5){
 
                                         console.log("Número já existe!");
                                         alert("Número já existe!");
                                         aux=1;
-                                    }alert("2");
+                                    }
                                     if (telefone2.value === Contactos[i].telefone1 || telefone2.value === Contactos[i].telefone2 || telefone2.value === Contactos[i].telefone3 || telefone2.value === Contactos[i].telefone4 || telefone2.value === Contactos[i].telefone5){
 
                                         console.log("Número já existe!");
                                         alert("Número já existe!");
                                         aux=1;
-                                    }alert("3");
+                                    }
                                     if (telefone3.value === Contactos[i].telefone1 || telefone3.value === Contactos[i].telefone2 || telefone3.value === Contactos[i].telefone3 || telefone3.value === Contactos[i].telefone4 || telefone3.value === Contactos[i].telefone5){
 
                                         console.log("Número já existe!");
                                         alert("Número já existe!");
                                         aux=1;
-                                    }alert("4");
+                                    }
                                     if (telefone4.value === Contactos[i].telefone1 || telefone4.value === Contactos[i].telefone2 || telefone4.value === Contactos[i].telefone3 || telefone4.value === Contactos[i].telefone4 || telefone4.value === Contactos[i].telefone5){
 
                                         console.log("Número já existe!");
                                         alert("Número já existe!");
                                         aux=1;
-                                    }alert("5");
+                                    }
                                     if (telefone5.value === Contactos[i].telefone1 || telefone5.value === Contactos[i].telefone2 || telefone5.value === Contactos[i].telefone3 || telefone5.value === Contactos[i].telefone4 || telefone5.value === Contactos[i].telefone5){
 
                                         console.log("Número já existe!");
@@ -2651,7 +2634,6 @@ function VerificaCampos(){ // verifica se os campos estao vazios
     
     if (validarCampoNome(inputNome)===true && validarCampoEmail(inputEmail)===true && validarCampoNumero(inputNumero)===true){
     //if(flag == 2){   
-        alert("valida -- ok");
         EditarContacto();
     }
 }

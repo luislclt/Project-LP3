@@ -19,7 +19,7 @@ function GuardarContactos(text) {
                               + "</Contacts>";  
         localStorage.setItem('Contacto', finaltext);
     }else {
-        alert("Sorry, your browser does not support web storage...");
+        console.log("Sorry, your browser does not support web storage...");
     }
     
 }
@@ -90,36 +90,25 @@ function ClientesparaXML(){
 
                   xml = xml  + "</Contact>";
     }
-
-    alert("Isto é o XML: "+xml+" posiçao: "+i);
     GuardarContactos(xml);
 }
 
 function CarregarContactos(){
     if(typeof(localStorage) !== "undefined") {
         loadDataFromDatabase(localStorage.getItem('Contacto'));
-            alert("Carregado com sucesso!");
+            console.log("Carregado com sucesso!");
     }else {
-            alert("Não existe informação!");
+            console.log("Não existe informação!");
     }
 }
 
 function loadDataFromDatabase(xml) {
-    
-    // Limpar o array
-    /*while(Contactos.length){
-        Contactos.pop();
-    }*/
-    
-    alert("Isto é o xml loadDataFromDatabase: \n"+xml);
+
     parser = new DOMParser();
     xmlDoc = parser.parseFromString(xml, "text/xml");  
     
     var tag_contactos = xmlDoc.getElementsByTagName("Contact");
-    alert(tag_contactos.length);
-    
-     
- 
+
     for(var i=0;i<tag_contactos.length;i++){
         var tag_nome = tag_contactos[i].childNodes[0];
         Contactos.push({nome: tag_nome.childNodes[0].nodeValue, Fav: tag_contactos[i].getAttribute('IsFavorite')});
@@ -2237,7 +2226,17 @@ function validarCampoNumero(inputNumero){ // verifica se o Campo Nome esta vazio
 }
 
 function validarCampoNome(inputNome){ // verifica se o Campo Nome esta vazio
-    if (inputNome === ""){ // Esta Vazio
+    var name=JSON.stringify(inputNome); 
+    if (inputNome === "" || name.match(/@/)== "@"){// Esta Vazio
+        return false; // Nao Aceita esta Campo
+    }else{
+        return true; // Aceitou este Campo
+    }
+}
+
+function validarCampoMail(inputMail){ // verifica se o Campo Nome esta vazio
+    var name=JSON.stringify(inputMail); 
+    if (inputMail == undefined || inputMail === "" || name.match(/@/)!= "@"){// Esta Vazio
         return false; // Nao Aceita esta Campo
     }else{
         return true; // Aceitou este Campo
@@ -2256,7 +2255,6 @@ function VerificaCampos(inputpesquisa){ // verifica se os campos estao vazios
             }
             if(resultadonumero === true){
                 state++;
-                console.log("state++ "+state);
             }
             //if(resultadonumero === false) state1++;
         }else{
@@ -2268,15 +2266,23 @@ function VerificaCampos(inputpesquisa){ // verifica se os campos estao vazios
             }
             if(resultadonome === true){
                 state++;
-                console.log("state++ "+state);
             }
-        }    
+        }else{
+            if(validarCampoMail(inputpesquisa)===true){
+                cont=0;
+                Contactos.sort(OrdenarContactos);
+                for (var i=0; i<=Contactos.length-1; i++){
+                    var resultadomail = PesquisarMail(inputpesquisa, i);
+                }
+                if(resultadomail === true){
+                    state++;
+                }
+            }
+        }  
     }
     if(resultadonome===false && resultadonumero=== false){
-        alert("Este Contacto não existe!");
-        state1++;
-        console.log("state message Error: "+state);
-        
+        console.log("Este Contacto não existe!");
+        state1++; 
     } 
 }
 /*
@@ -2355,6 +2361,22 @@ function PesquisarNome(nome,i){
     return false;
 }
 
+function PesquisarMail(mail,i){
+    if(Contactos[i].email!= undefined){
+        var re = new RegExp(mail);
+        var email=Contactos[i].email;
+        if (email.match(re)==mail){
+            ListarContacto(i);
+            cont++;
+            return true;
+        }
+        
+    }else{
+        return false;
+    }
+    
+}
+
 
 function PesquisarNumero(numero,i){
     var number1=JSON.stringify(Contactos[i].telefone1);
@@ -2402,7 +2424,7 @@ function AbrirLocalStorage() {
     }else{
         var vazio=document.createTextNode("Não existem Contactos");
         var erro= document.getElementById("Erro");
-        alert(erro);
+        console.log(erro);
         erro.appendChild(vazio);
     }
     if(localStorage.fundo != null){
@@ -2426,10 +2448,7 @@ function init(){
     btnEnviar.addEventListener('click', function(){
     var InputCampo = document.getElementById('pesquisa');
     localStorage.setItem('InputCampo', InputCampo.value);
-    alert("local");
-    alert(InputCampo.value);
     if(state == 0 && InputCampo.value!=""){
-        console.log("state == 0 : " +state);
         if(localStorage.InputCampo != null && localStorage.InputCampo != -1){
             //var inputpesquisa = document.getElementById('pesquisa');
             VerificaCampos(localStorage.InputCampo);
@@ -2443,7 +2462,6 @@ function init(){
             parent.removeChild(remove[cont]);
             cont--;
         }
-        console.log("state == 1 : " +state);
         VerificaCampos(localStorage.InputCampo);
         }
     });

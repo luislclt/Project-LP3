@@ -16,7 +16,7 @@ function GuardarContactos(text) {
                               + "</Contacts>";  
         localStorage.setItem('Contacto', finaltext);
     }else {
-        alert("Sorry, your browser does not support web storage...");
+        console.log("Sorry, your browser does not support web storage...");
     }
     
 }
@@ -87,8 +87,6 @@ function ClientesparaXML(){
 
                   xml = xml  + "</Contact>";
     }
-
-    alert("Isto é o XML: "+xml+" posiçao: "+i);
     GuardarContactos(xml);
 }
 
@@ -155,27 +153,18 @@ function AdicionarFavoritos() {
 function CarregarContactos(){
     if(typeof(localStorage) !== "undefined") {
         loadDataFromDatabase(localStorage.getItem('Contacto'));
-            alert("Carregado com sucesso!");
+            console.log("Carregado com sucesso!");
     }else {
-            alert("Não existe informação!");
+            console.log("Não existe informação!");
     }
 }
 
 function loadDataFromDatabase(xml) {
     
-    // Limpar o array
-    /*while(Contactos.length){
-        Contactos.pop();
-    }*/
-    
-    alert("Isto é o xml loadDataFromDatabase: \n"+xml);
     parser = new DOMParser();
     xmlDoc = parser.parseFromString(xml, "text/xml");  
     
     var tag_contactos = xmlDoc.getElementsByTagName("Contact");
-    alert(tag_contactos.length);
-    
-     
  
     for(var i=0;i<tag_contactos.length;i++){
         var tag_nome = tag_contactos[i].childNodes[0];
