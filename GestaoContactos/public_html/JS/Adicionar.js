@@ -2299,13 +2299,10 @@ function AdicionarContacto() {
         //limpar();
         
         
-        //guardarLocalStorage1(xml);
-        
         //localStorage.setItem('indice',indice);
         localStorage.setItem('indice',indice);
         window.location.href="ListarContacto.html";
             
-        //guardarLocalStorage();
         
     }else{
         var MenssagemErro=document.createTextNode("Impossível adicionar Contactos");

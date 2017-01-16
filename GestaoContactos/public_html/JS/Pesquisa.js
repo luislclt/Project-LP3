@@ -2148,11 +2148,6 @@ function SelectedCorFundo(){
     }
 }
 
-function guardarLocalStorage(){
-    var s = JSON.stringify(Contactos);
-    localStorage.setItem('contacto', s); //guardar
-}
-
 function guardarLocalStorageContact(indice){
     ClientesparaXML();
     localStorage.setItem('indice',indice);
@@ -2213,7 +2208,7 @@ function AdicionarFavoritos() {
         console.log("Adicionado aos Favoritos com Sucesso!");
         window.location.reload();
     }
-    guardarLocalStorage();
+    guardarLocalStorageContact(indice)
 }
 
 function validarCampoNumero(inputNumero){ // verifica se o Campo Nome esta vazio

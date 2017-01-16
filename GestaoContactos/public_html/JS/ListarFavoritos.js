@@ -2146,11 +2146,6 @@ function SelectedCorFundo(){
     }
 }
 
-function guardarLocalStorage(){
-    var s = JSON.stringify(Contactos);
-    localStorage.setItem('contacto', s);
-}
-
 function OrdenarFavoritos(a, b) {
     if(a.nome>b.nome){
          return 1;

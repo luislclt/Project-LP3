@@ -2185,7 +2185,6 @@ function Alterar(){
         document.getElementsByTagName("body")[0].style.background="-webkit-linear-gradient(left, #FFDAB9, #D2691E)";
         //link.href="styles/peachpuff.css";
     }
-    //guardarLocalStorage();
     localStorage.setItem('fundo', CorFundo);
 }
 
