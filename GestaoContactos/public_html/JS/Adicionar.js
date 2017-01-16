@@ -78,7 +78,7 @@ function GuardarContactos(text) {
 function CarregarContactos(){
     if(typeof(localStorage) !== "undefined") {
         //Contactos = JSON.parse(localStorage.contacto);
-        loadDataFromDatabase(localStorage.getItem('Contacto'));
+        LerContactos(localStorage.getItem('Contacto'));
         //var xml = JSON.parse(localStorage.XML);
             console.log("Carregado com sucesso!");
     }else {
@@ -86,7 +86,7 @@ function CarregarContactos(){
     }
 }
 
-function loadDataFromDatabase(xml) {
+function LerContactos(xml) {
 
     parser = new DOMParser();
     xmlDoc = parser.parseFromString(xml, "text/xml");  

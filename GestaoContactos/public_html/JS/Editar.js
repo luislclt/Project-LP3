@@ -9,7 +9,7 @@ var CorFundo;
       
 function CarregarContactos(){
     if(typeof(localStorage) !== "undefined") {
-        loadDataFromDatabase(localStorage.getItem('Contacto'));
+        LerContactos(localStorage.getItem('Contacto'));
             console.log("Carregado com sucesso!");
     }else {
             console.log("Não existe informação!");
@@ -99,7 +99,7 @@ function ClientesparaXML(){
     GuardarContactos(xml);
 }
 
-function loadDataFromDatabase(xml) {
+function LerContactos(xml) {
 
     parser = new DOMParser();
     xmlDoc = parser.parseFromString(xml, "text/xml");  
