@@ -2272,7 +2272,7 @@ function AdicionarContacto() {
                       }
                       else{
                          var d = new Date(); 
-                         xml = xml  + "<BirthDate>" + d.getFullYear() + "-" + d.getMonth() + "-" + d.getDate() + "</BirthDate>" 
+                         xml = xml  + "<BirthDate>" + d.getFullYear() + "-" + d.getMonth()+1 + "-" + d.getDate() + "</BirthDate>" 
                       }
                     if(Contactos[i].Facebook!="" && Contactos[i].Facebook!=undefined){
                         xml = xml + "<SocialNetwork Type="+'"F"'+">" + Contactos[i].Facebook + "</SocialNetwork>"
