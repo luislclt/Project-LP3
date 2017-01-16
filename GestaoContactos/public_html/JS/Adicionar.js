@@ -2379,7 +2379,6 @@ function MudaEstrela(){
 function AbrirLocalStorage(){
     if (localStorage.Contacto != null){
         CarregarContactos();
-        indice=localStorage.indice;
     }else{
         var MenssagemErro=document.createTextNode("Impossivel editar Contacto");
         var Erro = document.getElementById("Erro");
